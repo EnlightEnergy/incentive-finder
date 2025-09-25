@@ -1,5 +1,5 @@
 import { sql, relations } from "drizzle-orm";
-import { pgTable, text, varchar, integer, boolean, json, date, timestamp, decimal } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, boolean, json, jsonb, date, timestamp, decimal } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -11,8 +11,8 @@ export const programs = pgTable("programs", {
   name: varchar("name", { length: 400 }).notNull(),
   owner: varchar("owner", { length: 200 }).notNull(),
   url: varchar("url", { length: 600 }),
-  sectorTags: json("sector_tags").$type<string[]>().default([]),
-  techTags: json("tech_tags").$type<string[]>().default([]),
+  sectorTags: jsonb("sector_tags").$type<string[]>().default([]),
+  techTags: jsonb("tech_tags").$type<string[]>().default([]),
   incentiveType: varchar("incentive_type", { length: 60 }).notNull(), // 'Prescriptive', 'Custom', 'Tax Credit', 'Grant', 'On-Bill', 'Financing'
   status: varchar("status", { length: 30 }).default("open"), // 'open', 'paused', 'expired'
   startDate: date("start_date"),
@@ -35,8 +35,8 @@ export const programGeos = pgTable("program_geos", {
 export const eligibilityRules = pgTable("eligibility_rules", {
   id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
   programId: integer("program_id").references(() => programs.id, { onDelete: "cascade" }).notNull(),
-  buildingTypes: json("building_types").$type<string[]>().default([]),
-  naicsIncludes: json("naics_includes").$type<string[]>().default([]),
+  buildingTypes: jsonb("building_types").$type<string[]>().default([]),
+  naicsIncludes: jsonb("naics_includes").$type<string[]>().default([]),
   minProjectCost: integer("min_project_cost"),
   preApprovalRequired: boolean("pre_approval_required").default(false),
   tradeAllyRequired: boolean("trade_ally_required").default(false),
@@ -48,7 +48,7 @@ export const benefitStructures = pgTable("benefit_structures", {
   id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
   programId: integer("program_id").references(() => programs.id, { onDelete: "cascade" }).notNull(),
   unit: varchar("unit", { length: 40 }).notNull(), // '$/kWh_saved', '$/therm_saved', '$/fixture', '%_of_cost', '$/ton'
-  tierJson: json("tier_json").$type<Record<string, any>>().default({}),
+  tierJson: jsonb("tier_json").$type<Record<string, any>>().default({}),
   examplesText: text("examples_text"),
 });
 
@@ -58,7 +58,7 @@ export const documentation = pgTable("documentation", {
   programId: integer("program_id").references(() => programs.id, { onDelete: "cascade" }).notNull(),
   preAppLink: varchar("pre_app_link", { length: 600 }),
   finalAppLink: varchar("final_app_link", { length: 600 }),
-  formsLinks: json("forms_links").$type<string[]>().default([]),
+  formsLinks: jsonb("forms_links").$type<string[]>().default([]),
   mAndVRequirements: text("m_and_v_requirements"),
   inspectionRequirements: text("inspection_requirements"),
   notes: text("notes"),
@@ -78,7 +78,7 @@ export const leads = pgTable("leads", {
   sqft: integer("sqft"),
   hours: integer("hours"),
   baselineDesc: text("baseline_desc"),
-  utmJson: json("utm_json").$type<Record<string, any>>(),
+  utmJson: jsonb("utm_json").$type<Record<string, any>>(),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
   status: varchar("status", { length: 30 }).default("new"), // 'new', 'contacted', 'qualified', 'converted'
 });
@@ -90,7 +90,7 @@ export const ratesCache = pgTable("rates_cache", {
   tariffName: varchar("tariff_name", { length: 200 }),
   commodity: varchar("commodity", { length: 20 }).notNull(), // 'electric', 'gas'
   demandPricing: boolean("demand_pricing").default(false),
-  rateJson: json("rate_json").$type<Record<string, any>>().default({}),
+  rateJson: jsonb("rate_json").$type<Record<string, any>>().default({}),
   lastRefreshed: timestamp("last_refreshed").default(sql`CURRENT_TIMESTAMP`),
 });
 

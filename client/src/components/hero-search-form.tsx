@@ -14,10 +14,10 @@ interface HeroSearchFormProps {
 }
 
 const energyMeasures = [
-  { id: "Lighting", label: "LED Lighting" },
+  { id: "Lighting", label: "Lighting" },
   { id: "HVAC", label: "HVAC Systems" },
   { id: "Heat Pump Water Heaters", label: "Heat Pump Water Heaters" },
-  { id: "Controls", label: "Energy Management Controls" },
+  { id: "Motors", label: "Motors & VFDs" },
   { id: "Refrigeration", label: "Refrigeration" },
   { id: "Compressed Air", label: "Compressed Air Systems" },
   { id: "Envelope", label: "Building Envelope" },
@@ -75,14 +75,18 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="businessType">Business Type / NAICS Code</Label>
-                  <Input
-                    id="businessType"
-                    placeholder="e.g., Office Building, Manufacturing"
-                    value={businessType}
-                    onChange={(e) => setBusinessType(e.target.value)}
-                    data-testid="input-business-type"
-                  />
+                  <Label htmlFor="businessType">Business Type</Label>
+                  <Select value={businessType} onValueChange={setBusinessType}>
+                    <SelectTrigger data-testid="select-business-type">
+                      <SelectValue placeholder="Select business type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Commercial">Commercial</SelectItem>
+                      <SelectItem value="Industrial">Industrial</SelectItem>
+                      <SelectItem value="Small Business">Small Business</SelectItem>
+                      <SelectItem value="Residential">Residential</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div>
                   <Label htmlFor="location">Location / Address</Label>
