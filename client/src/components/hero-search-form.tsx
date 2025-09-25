@@ -105,10 +105,10 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                       <SelectValue placeholder="Auto-detected from address" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="sce">Southern California Edison (SCE)</SelectItem>
-                      <SelectItem value="pge">Pacific Gas & Electric (PG&E)</SelectItem>
-                      <SelectItem value="sdge">San Diego Gas & Electric (SDG&E)</SelectItem>
-                      <SelectItem value="ladwp">Los Angeles Department of Water & Power</SelectItem>
+                      <SelectItem value="Southern California Edison">Southern California Edison (SCE)</SelectItem>
+                      <SelectItem value="Pacific Gas & Electric">Pacific Gas & Electric (PG&E)</SelectItem>
+                      <SelectItem value="San Diego Gas & Electric">San Diego Gas & Electric (SDG&E)</SelectItem>
+                      <SelectItem value="Los Angeles Department of Water & Power">Los Angeles Department of Water & Power</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
