@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertLeadSchema, searchProgramsSchema, insertProgramSchema } from "@shared/schema";
 import { sendLeadNotification } from "./email";
+import { basicAuth } from "./auth";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -86,8 +87,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin API routes
-  app.get("/api/admin/programs", async (req, res) => {
+  // Admin API routes (protected with basic authentication)
+  app.get("/api/admin/programs", basicAuth, async (req, res) => {
     try {
       const params = searchProgramsSchema.parse({
         ...req.query,
@@ -103,7 +104,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/admin/programs", async (req, res) => {
+  app.post("/api/admin/programs", basicAuth, async (req, res) => {
     try {
       const programData = insertProgramSchema.parse(req.body);
       const program = await storage.createProgram(programData);
@@ -117,7 +118,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/admin/programs/:id", async (req, res) => {
+  app.put("/api/admin/programs/:id", basicAuth, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const programData = insertProgramSchema.partial().parse(req.body);
@@ -137,7 +138,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/admin/programs/:id/publish", async (req, res) => {
+  app.post("/api/admin/programs/:id/publish", basicAuth, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const success = await storage.publishProgram(id);
@@ -153,7 +154,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/admin/programs/:id", async (req, res) => {
+  app.delete("/api/admin/programs/:id", basicAuth, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const success = await storage.deleteProgram(id);
@@ -169,7 +170,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/admin/leads", async (req, res) => {
+  app.get("/api/admin/leads", basicAuth, async (req, res) => {
     try {
       const leads = await storage.getLeads();
       res.json(leads);
@@ -179,7 +180,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/admin/leads/:id/status", async (req, res) => {
+  app.put("/api/admin/leads/:id/status", basicAuth, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const { status } = req.body;
