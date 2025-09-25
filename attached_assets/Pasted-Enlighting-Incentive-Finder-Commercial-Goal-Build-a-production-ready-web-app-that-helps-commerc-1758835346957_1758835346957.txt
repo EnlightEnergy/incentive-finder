@@ -1,0 +1,120 @@
+Enlighting Incentive Finder” (Commercial)
+
+Goal: Build a production-ready web app that helps commercial facility managers instantly find stackable utility/state/federal incentives for efficiency projects, auto-estimates rebate value, and pushes them into a scheduled audit with Enlighting.
+
+0) Stack & DevOps
+	•	Stack: FastAPI (Python) + Postgres + React (Vite) on Replit. Use SQLAlchemy + Alembic migrations.
+	•	Infra: Single repo, Dockerfile, .env support, seed script, Makefile (make dev, make seed, make test).
+	•	Testing: Pytest for backend, Vitest for frontend. Minimum 80% coverage on core services.
+	•	Security: Input validation with Pydantic; rate-limit public APIs; API key for admin endpoints; CORS locked to production host.
+
+1) Data Sources & Sync (minimize manual work)
+	•	Primary content: Integrate the DSIRE API for incentive metadata (program, owner, geos, sectors, technologies, incentive type, links). Store a denormalized local copy with source_program_id, last_seen_at for diffing.  ￼
+	•	Augment: Ingest selected EnergyBot program pages (they cite DSIRE as source) to harvest plain-English incentive summaries, examples, prescriptive tables where available—store URLs and disclaimers. (Respect robots/ToS; prefer program owner links for authoritative data.)  ￼
+	•	Rates for ROI: Pull electric/gas rates via OpenEI Utility Rate Database API; cache by utility + tariff so calculators can show $ savings and paybacks aligned to actual rates.  ￼
+	•	Product eligibility: Link out to ENERGY STAR Rebate Finder for SKU-level checks where applicable; store product category + spec links.  ￼
+	•	Electrification/IRA context (optional badge): Expose an “IRA-eligible” flag and link to Rewiring America calculator/embed for public education (don’t duplicate their logic).  ￼
+	•	Note: The legacy NREL “energy incentives v2” DSIRE proxy is deprecated—do not rely on it.  ￼
+
+2) Data Model (Postgres)
+
+Create normalized tables plus a materialized view for fast search.
+
+Core tables
+	•	programs: id, source (dsire/utility/state/federal), source_program_id, name, owner (utility/agency), url, sector_tags (e.g., Commercial/Industrial/Muni), tech_tags (Lighting, HVAC, Heat Pump WH, Controls, Refrigeration, Compressed Air, Envelope, Solar, Storage), incentive_type (Prescriptive/Custom/Tax Credit/Grant/On-Bill/Financing), status (open/paused/expired), start_date, end_date, updated_at, last_seen_at.
+	•	program_geos: program_id, state, county, zip_prefix, utility_service_area (nullable).
+	•	eligibility_rules: program_id, building_types (office/warehouse/manufacturing/multifamily, etc.), naics_includes, min_project_cost, pre_approval_required (bool), trade_ally_required (bool), prevailing_wage_required (bool).
+	•	benefit_structures: program_id, unit ($/kWh_saved, $/therm_saved, $/fixture, %_of_cost, $/ton, caps & min/max), tier_json (store tiered rules), examples_text.
+	•	documentation: program_id, pre_app_link, final_app_link, forms_links[], m_and_v_requirements, inspection_requirements, notes.
+	•	rates_cache: utility_name, tariff_name, commodity (electric/gas), demand_pricing (bool), rate_json, last_refreshed.
+	•	leads: id, company, contact_name, email, phone, address, naics, utility, measure, sqft, hours, baseline_desc, created_at, utm_json, status.
+	•	quotes (optional): tie a lead to a calculator run and capture estimated incentive + payback snapshot.
+
+Materialized view
+	•	mv_program_search that flattens programs + geos + eligibility_rules for fast text+filter queries.
+
+3) Admin Back-Office (internal)
+	•	Secure /admin with login.
+	•	CRUD for programs; diff viewer highlights new/changed fields vs last pull.
+	•	“Publish/Hide” flag (avoid showing stale/paused programs).
+	•	One-click “Verify Links” checker.
+	•	Export CSV for a sales sprint.
+
+4) Public UX (lead-gen first, then insights)
+
+Hero Form (one screen, no reload):
+	•	Business Type / NAICS (typeahead with NAICS list)
+	•	Location/Address (autocomplete; geocode to ZIP + county)
+	•	Utility Name (auto-detected from address; allow override)
+	•	Energy Measure (multi-select: Lighting, HPWH, HVAC, Controls, Refrigeration, Compressed Air, Envelope, Solar, Storage)
+	•	Optional: Building SqFt, Operating Hours, Baseline Equipment (free text)
+
+Results Panel
+	•	Left: Eligible Programs (cards with program name, owner, incentive type, quick math: “est. up to $X or Y% of cost”, pre-approval badge, deadline, and “stackable” hints).
+	•	Right: Savings & Payback mini-calculator using OpenEI rates + simplified savings inputs (kWh/therm deltas or template defaults by measure).
+	•	CTA at top & bottom: “Book a Free Incentive Audit” (Calendly embed) + “Email me this report” (PDF with your branding).
+
+Filters/Sort
+	•	Program status (Open only default), incentive type, pre-approval required, measure tag, owner (utility/state/fed), geography.
+
+Program Detail Modal
+	•	Plain-English summary, eligibility bullets, caps/tier tables, deadlines, application steps, links, documents, risk flags (trade ally required, prevailing wage, M&V).
+	•	“We handle paperwork” micro-copy + audit CTA.
+
+Content cues borrowed from leaders
+	•	DSIRE’s breadth (federal → local → utility) and multi-filter approach.  ￼
+	•	EnergyBot’s program-specific pages with tiered examples and caps—surface those elements clearly.  ￼
+	•	OpenEI rates to make your ROI calc real, not hand-wavy.  ￼
+	•	ENERGY STAR finder for product-level eligibility checks (link out where relevant).  ￼
+
+5) Calculators (prescriptive + custom)
+	•	Prescriptive: Support units like $/fixture, $/ton, $/hp, $/kWh_saved, $/therm_saved, % of project cost, with min/max caps and tier ladders.
+	•	Custom: Let user enter est. annual kWh/therm savings → compute incentive using program’s $/kWh or $/therm and apply caps.
+	•	Stacking logic: Sum across programs; prevent double-counting if program notes prohibit stacking; show “Subject to implementing program rules” disclaimer.
+
+6) SEO & Lead Capture
+	•	SEO schema: Organization, Product/Service, FAQ; static pages per utility territory + measure (server-rendered for indexing).
+	•	Gated PDF: email gate for downloadable “Incentive Report” (your branding, program bullets, est. dollars, next steps).
+	•	Webhooks to HubSpot/Brevo; store UTM in leads.utm_json.
+	•	Quarterly “Incentive Market Report” auto-generated from DB (top new/changed programs).
+
+7) Compliance & Quality
+	•	Show source links and “last verified” timestamps on each program.
+	•	Inline disclaimers: incentives change; pre-approval is common; final amounts depend on verified savings and program funding.
+	•	Accessibility (WCAG AA), mobile-first, fast LCP.
+	•	Logging + error alerting (Sentry).
+
+8) Acceptance Criteria (ship-ready)
+	1.	User enters Business Type/NAICS, Address, Utility, Energy Measure → gets eligible programs in <2s from local DB.
+	2.	Each result shows owner, incentive type, est. value, deadlines, pre-approval, and link to official source.
+	3.	PDF report downloads and emails to user; lead saved to DB with UTM.
+	4.	Admin can review new/changed programs from DSIRE pull and publish with one click.
+	5.	OpenEI rate fetch works for at least 80% of CA utilities; cached 7 days.
+	6.	Unit tests cover parsers, calculators, stacking, and admin publish flow.
+
+9) Seed Content
+	•	Import initial CA programs (SCE, PG&E, LADWP, SoCalREN, SDG&E + municipal utilities) and a few out-of-state exemplars (Xcel MN, Dominion, PEPCO) to show variety.  ￼
+
+10) “Delight” Features (v1.1+)
+	•	“One-click pre-application”: collect project basics → auto-email your team a program-specific checklist.
+	•	Badges: “High ROI” (>$0.10/kWh or >30% of cost), “Time-Sensitive” (deadline <90 days), “Trade Ally Required”.
+	•	Compare Programs (side-by-side), inspired by ENERGY STAR’s compare experience.  ￼
+	•	Embedded rate card preview (OpenEI) for transparency.  ￼
+
+⸻
+
+Field inputs you asked for (plus the ones that close deals)
+
+Minimum customer-facing inputs:
+	•	Business Type/NAICS (typeahead)
+	•	Location/Address (ZIP) → auto-detect utility
+	•	Utility name (editable)
+	•	Energy measure (multi-select)
+
+High-leverage optional inputs:
+	•	Building square footage
+	•	Operating hours
+	•	Baseline equipment (e.g., “T8 32W x 400 fixtures”)
+	•	Planned upgrade (e.g., “LED high bay 150W x 250”)
+	•	Rough project cost (for %-of-cost caps)
+	•	Rate class (if known)

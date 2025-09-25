@@ -1,0 +1,635 @@
+#!/usr/bin/env bash
+# bootstrap_enlighting_incentive_finder.sh
+# One‑shot repo scaffold for Replit. Paste this whole script into the Replit shell as:
+#   bash <(curl -fsSL https://example.com/not-used)   # OR
+#   bash bootstrap_enlighting_incentive_finder.sh     # if you pasted it into a file
+# It creates a FastAPI + Postgres + React (Vite) project with Docker Compose.
+
+set -euo pipefail
+
+project_root="enlighting-incentive-finder"
+mkdir -p "$project_root" && cd "$project_root"
+
+############################################
+# Root files
+############################################
+cat > .gitignore << 'EOF'
+# Python
+__pycache__/
+*.pyc
+.env
+
+# Node
+node_modules/
+.dist/
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+EOF
+
+cat > docker-compose.yml << 'EOF'
+version: '3.9'
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: incentives
+    ports: ["5432:5432"]
+  api:
+    build: .
+    command: bash -lc "cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    env_file:
+      - backend/.env
+    depends_on: [db]
+    ports: ["8000:8000"]
+  web:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: bash -lc "npm i && npm run dev -- --host"
+    ports: ["5173:5173"]
+    depends_on: [api]
+EOF
+
+cat > Dockerfile << 'EOF'
+FROM python:3.11-slim AS api
+WORKDIR /app
+COPY backend /app/backend
+RUN pip install -r backend/requirements.txt
+EXPOSE 8000
+CMD ["bash","-lc","cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+EOF
+
+############################################
+# Backend
+############################################
+mkdir -p backend/app/{crud,routers,services,utils/pdf_templates}
+mkdir -p backend/alembic/versions
+
+cat > backend/requirements.txt << 'EOF'
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+sqlalchemy==2.0.35
+psycopg[binary]==3.2.1
+alembic==1.13.2
+pydantic==2.9.2
+httpx==0.27.2
+python-multipart==0.0.9
+jinja2==3.1.4
+weasyprint==62.3
+EOF
+
+cat > backend/.env.example << 'EOF'
+DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/incentives
+API_ADMIN_KEY=change-me
+APP_ENV=dev
+ORIGINS=http://localhost:5173
+OPEN_EI_API_KEY=
+DSIRE_API_KEY=
+COMPANY_NAME=Enlighting Energy
+COMPANY_EMAIL=hello@enlightingenergy.com
+COMPANY_PHONE=805-555-1212
+EOF
+
+cat > backend/Makefile << 'EOF'
+.PHONY: dev migrate seed
+
+dev:
+	uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+migrate:
+	alembic revision --autogenerate -m "init" && alembic upgrade head
+
+seed:
+	python -m scripts.seed_programs
+EOF
+
+cat > backend/app/__init__.py << 'EOF'
+# package marker
+EOF
+
+cat > backend/app/config.py << 'EOF'
+from pydantic import BaseSettings
+
+class Settings(BaseSettings):
+    DATABASE_URL: str
+    API_ADMIN_KEY: str
+    ORIGINS: str = "http://localhost:5173"
+    OPEN_EI_API_KEY: str | None = None
+    DSIRE_API_KEY: str | None = None
+    COMPANY_NAME: str
+    COMPANY_EMAIL: str
+    COMPANY_PHONE: str
+
+    class Config:
+        env_file = ".env"
+
+settings = Settings()
+EOF
+
+cat > backend/app/database.py << 'EOF'
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from .config import settings
+
+engine = create_engine(settings.DATABASE_URL, pool_pre_ping=True)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+EOF
+
+cat > backend/app/models.py << 'EOF'
+from sqlalchemy.orm import declarative_base, relationship, Mapped, mapped_column
+from sqlalchemy import String, Integer, Date, DateTime, Boolean, JSON, ForeignKey, Text
+import datetime as dt
+
+Base = declarative_base()
+
+class Program(Base):
+    __tablename__ = "programs"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    source: Mapped[str] = mapped_column(String(50))
+    source_program_id: Mapped[str] = mapped_column(String(120), index=True)
+    name: Mapped[str] = mapped_column(String(400))
+    owner: Mapped[str] = mapped_column(String(200))
+    url: Mapped[str] = mapped_column(String(600))
+    sector_tags: Mapped[list] = mapped_column(JSON)
+    tech_tags: Mapped[list] = mapped_column(JSON)
+    incentive_type: Mapped[str] = mapped_column(String(60))
+    status: Mapped[str] = mapped_column(String(30), default="open")
+    start_date: Mapped[dt.date | None] = mapped_column(Date, nullable=True)
+    end_date: Mapped[dt.date | None] = mapped_column(Date, nullable=True)
+    updated_at: Mapped[dt.datetime] = mapped_column(DateTime, default=dt.datetime.utcnow)
+    last_seen_at: Mapped[dt.datetime] = mapped_column(DateTime, default=dt.datetime.utcnow)
+    geos: Mapped[list["ProgramGeo"]] = relationship("ProgramGeo", back_populates="program", cascade="all, delete")
+    eligibility: Mapped[list["EligibilityRule"]] = relationship("EligibilityRule", back_populates="program", cascade="all, delete")
+    benefits: Mapped[list["BenefitStructure"]] = relationship("BenefitStructure", back_populates="program", cascade="all, delete")
+    docs: Mapped[list["Documentation"]] = relationship("Documentation", back_populates="program", cascade="all, delete")
+
+class ProgramGeo(Base):
+    __tablename__ = "program_geos"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    program_id: Mapped[int] = mapped_column(ForeignKey("programs.id"))
+    state: Mapped[str | None] = mapped_column(String(2))
+    county: Mapped[str | None] = mapped_column(String(120))
+    zip_prefix: Mapped[str | None] = mapped_column(String(5))
+    utility_service_area: Mapped[str | None] = mapped_column(String(200))
+    program: Mapped[Program] = relationship("Program", back_populates="geos")
+
+class EligibilityRule(Base):
+    __tablename__ = "eligibility_rules"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    program_id: Mapped[int] = mapped_column(ForeignKey("programs.id"))
+    building_types: Mapped[list] = mapped_column(JSON)
+    naics_includes: Mapped[list] = mapped_column(JSON)
+    min_project_cost: Mapped[int | None] = mapped_column(Integer)
+    pre_approval_required: Mapped[bool] = mapped_column(Boolean, default=False)
+    trade_ally_required: Mapped[bool] = mapped_column(Boolean, default=False)
+    prevailing_wage_required: Mapped[bool] = mapped_column(Boolean, default=False)
+    program: Mapped[Program] = relationship("Program", back_populates="eligibility")
+
+class BenefitStructure(Base):
+    __tablename__ = "benefit_structures"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    program_id: Mapped[int] = mapped_column(ForeignKey("programs.id"))
+    unit: Mapped[str] = mapped_column(String(40))  # $/kWh_saved, $/therm_saved, $/fixture, %_of_cost, $/ton
+    tier_json: Mapped[dict] = mapped_column(JSON)
+    examples_text: Mapped[str | None] = mapped_column(Text)
+    program: Mapped[Program] = relationship("BenefitStructure", back_populates="program")
+
+class Documentation(Base):
+    __tablename__ = "documentation"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    program_id: Mapped[int] = mapped_column(ForeignKey("programs.id"))
+    pre_app_link: Mapped[str | None] = mapped_column(String(600))
+    final_app_link: Mapped[str | None] = mapped_column(String(600))
+    forms_links: Mapped[list] = mapped_column(JSON)
+    m_and_v_requirements: Mapped[str | None] = mapped_column(Text)
+    inspection_requirements: Mapped[str | None] = mapped_column(Text)
+    notes: Mapped[str | None] = mapped_column(Text)
+    program: Mapped[Program] = relationship("Documentation", back_populates="program")
+
+class Lead(Base):
+    __tablename__ = "leads"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    company: Mapped[str] = mapped_column(String(200))
+    contact_name: Mapped[str] = mapped_column(String(200))
+    email: Mapped[str] = mapped_column(String(200))
+    phone: Mapped[str | None] = mapped_column(String(40))
+    address: Mapped[str | None] = mapped_column(String(300))
+    naics: Mapped[str | None] = mapped_column(String(10))
+    utility: Mapped[str | None] = mapped_column(String(200))
+    measure: Mapped[str | None] = mapped_column(String(120))
+    sqft: Mapped[int | None] = mapped_column(Integer)
+    hours: Mapped[int | None] = mapped_column(Integer)
+    baseline_desc: Mapped[str | None] = mapped_column(Text)
+    utm_json: Mapped[dict | None] = mapped_column(JSON)
+EOF
+
+cat > backend/app/routers/health.py << 'EOF'
+from fastapi import APIRouter
+router = APIRouter(tags=["health"]) 
+
+@router.get("/health")
+def health():
+    return {"ok": True}
+EOF
+
+cat > backend/app/routers/public.py << 'EOF'
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from ..database import SessionLocal
+from ..models import Program
+
+router = APIRouter(tags=["public"])
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+@router.get("/programs")
+def search_programs(q: str | None = None, state: str | None = None, utility: str | None = None, measure: str | None = None, limit: int = 100, db: Session = Depends(get_db)):
+    qry = db.query(Program)
+    if q:
+        qry = qry.filter(Program.name.ilike(f"%{q}%"))
+    if measure:
+        qry = qry.filter(Program.tech_tags.contains([measure]))
+    return [
+        {
+            "id": p.id,
+            "name": p.name,
+            "owner": p.owner,
+            "url": p.url,
+            "incentive_type": p.incentive_type,
+            "status": p.status,
+            "tech_tags": p.tech_tags,
+            "sector_tags": p.sector_tags,
+        }
+        for p in qry.limit(limit)
+    ]
+EOF
+
+cat > backend/app/routers/admin.py << 'EOF'
+from fastapi import APIRouter, Depends, Header, HTTPException
+from sqlalchemy.orm import Session
+from ..database import SessionLocal
+from ..models import Program
+from ..config import settings
+
+router = APIRouter(tags=["admin"])
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+def require_api_key(x_api_key: str | None = Header(None)):
+    if x_api_key != settings.API_ADMIN_KEY:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+
+@router.post("/programs/publish", dependencies=[Depends(require_api_key)])
+def publish_program(program_id: int, db: Session = Depends(get_db)):
+    p = db.get(Program, program_id)
+    if not p:
+        raise HTTPException(404, "Not found")
+    p.status = "open"
+    db.commit()
+    return {"ok": True}
+EOF
+
+cat > backend/app/main.py << 'EOF'
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from .config import settings
+from .routers import public, admin, health
+
+app = FastAPI(title="Enlighting Incentive Finder")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.ORIGINS.split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.include_router(health.router, prefix="/api")
+app.include_router(public.router, prefix="/api")
+app.include_router(admin.router, prefix="/api/admin")
+EOF
+
+cat > backend/alembic.ini << 'EOF'
+[alembic]
+script_location = alembic
+sqlalchemy.url = %(DATABASE_URL)s
+EOF
+
+cat > backend/alembic/env.py << 'EOF'
+from alembic import context
+from sqlalchemy import engine_from_config, pool
+from app.models import Base
+from app.config import settings
+
+config = context.config
+config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+
+def run_migrations_offline():
+    context.configure(target_metadata=Base.metadata, literal_binds=True)
+    with context.begin_transaction():
+        context.run_migrations()
+
+def run_migrations_online():
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+    with connectable.connect() as connection:
+        context.configure(connection=connection, target_metadata=Base.metadata)
+        with context.begin_transaction():
+            context.run_migrations()
+
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()
+EOF
+
+mkdir -p scripts
+cat > scripts/seed_programs.py << 'EOF'
+from backend.app.database import SessionLocal, engine
+from backend.app.models import Base, Program
+
+Base.metadata.create_all(bind=engine)
+
+def main():
+    db = SessionLocal()
+    demo = Program(
+        source="utility",
+        source_program_id="demo-001",
+        name="SCE Custom Efficiency Program",
+        owner="Southern California Edison",
+        url="https://www.sce.com/",
+        sector_tags=["Commercial"],
+        tech_tags=["Lighting", "HVAC"],
+        incentive_type="Custom",
+    )
+    db.add(demo)
+    db.commit()
+    print("Seeded demo program")
+
+if __name__ == "__main__":
+    main()
+EOF
+
+cat > backend/app/utils/pdf_templates/incentive_report.html << 'EOF'
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body { font-family: Inter, Arial, sans-serif; color:#0e1320; }
+      h1 { color:#0e1320; }
+      .muted { color:#666; font-size: 12px; }
+      .card { border:1px solid #ddd; border-radius:10px; padding:10px; margin:8px 0; }
+    </style>
+  </head>
+  <body>
+    <h1>{{ company_name }} — Incentive Report</h1>
+    <div class="muted">Contact: {{ company_email }} · {{ company_phone }}</div>
+    <hr>
+    <p>This sample report will be populated by the backend in a future step.</p>
+  </body>
+</html>
+EOF
+
+############################################
+# Frontend
+############################################
+mkdir -p frontend/src/components frontend/src/lib
+
+cat > frontend/package.json << 'EOF'
+{
+  "name": "enlighting-incentive-finder",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "axios": "^1.7.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vite": "^5.4.2",
+    "@types/react": "^18.3.8",
+    "@types/react-dom": "^18.3.0"
+  }
+}
+EOF
+
+cat > frontend/index.html << 'EOF'
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enlighting Incentive Finder</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+EOF
+
+cat > frontend/tsconfig.json << 'EOF'
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}
+EOF
+
+cat > frontend/vite.config.ts << 'EOF'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: { host: true }
+})
+EOF
+
+cat > frontend/src/styles.css << 'EOF'
+:root { --bg: #0e1320; --card: #121a2b; --accent: #5cc8ff; --text: #e8eefc; }
+body { background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, sans-serif; margin: 0; }
+.container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+.card { background: var(--card); border: 1px solid #1f2a44; border-radius: 14px; padding: 1rem; margin: 0.5rem 0; }
+input, select, button { width: 100%; padding: 0.7rem; margin: 0.25rem 0 0.8rem; border-radius: 10px; border: 1px solid #2b3a5f; background: #0d1526; color: var(--text); }
+button { background: var(--accent); color: #07121f; font-weight: 700; cursor: pointer; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+EOF
+
+cat > frontend/src/main.tsx << 'EOF'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+EOF
+
+cat > frontend/src/App.tsx << 'EOF'
+import { useState } from 'react';
+import HeroForm from './components/HeroForm';
+import ResultsPanel from './components/ResultsPanel';
+import './styles.css';
+
+export default function App(){
+  const [params, setParams] = useState<any>(null);
+  return (
+    <div className="container">
+      <h1>Enlighting Incentive Finder</h1>
+      <HeroForm onSearch={setParams} />
+      <ResultsPanel params={params} />
+    </div>
+  );
+}
+EOF
+
+cat > frontend/src/components/HeroForm.tsx << 'EOF'
+import { useState } from 'react';
+
+type Props = { onSearch: (p:any)=>void };
+export default function HeroForm({onSearch}:Props){
+  const [naics, setNaics] = useState("");
+  const [zip, setZip] = useState("");
+  const [utility, setUtility] = useState("");
+  const [measure, setMeasure] = useState("Lighting");
+
+  return (
+    <form className="card" onSubmit={e=>{e.preventDefault();onSearch({naics, zip, utility, measure});}}>
+      <label>Business Type / NAICS</label>
+      <input value={naics} onChange={e=>setNaics(e.target.value)} placeholder="e.g., 493110 (Warehousing)" />
+      <label>Location (ZIP)</label>
+      <input value={zip} onChange={e=>setZip(e.target.value)} placeholder="e.g., 93101" />
+      <label>Utility (optional)</label>
+      <input value={utility} onChange={e=>setUtility(e.target.value)} placeholder="Auto-detect soon" />
+      <label>Energy Measure</label>
+      <select value={measure} onChange={e=>setMeasure(e.target.value)}>
+        <option>Lighting</option>
+        <option>HVAC</option>
+        <option>Heat Pump WH</option>
+        <option>Controls</option>
+        <option>Refrigeration</option>
+        <option>Compressed Air</option>
+        <option>Envelope</option>
+        <option>Solar</option>
+        <option>Storage</option>
+      </select>
+      <button type="submit">Find Incentives</button>
+    </form>
+  );
+}
+EOF
+
+cat > frontend/src/components/ProgramCard.tsx << 'EOF'
+export default function ProgramCard({program}:{program:any}){
+  return (
+    <div className="card">
+      <h3>{program.name}</h3>
+      <p><strong>Owner:</strong> {program.owner}</p>
+      <p><strong>Type:</strong> {program.incentive_type}</p>
+      <p><strong>Tags:</strong> {program.tech_tags?.join(', ')}</p>
+      <a href={program.url} target="_blank">View Program</a>
+    </div>
+  );
+}
+EOF
+
+cat > frontend/src/components/ResultsPanel.tsx << 'EOF'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ProgramCard from './ProgramCard';
+
+type Props = { params:any };
+export default function ResultsPanel({params}:Props){
+  const [items, setItems] = useState<any[]>([]);
+  useEffect(()=>{
+    if(!params) return;
+    const url = new URL("/api/programs", window.location.origin.replace(":5173", ":8000"));
+    axios.get(url.toString(), { params: { q: params.naics, measure: params.measure }})
+      .then(resp=> setItems(resp.data))
+      .catch(()=> setItems([]));
+  },[params]);
+
+  if(!params) return null;
+  return (
+    <div className="grid">
+      {items.map(p=> <ProgramCard key={p.id} program={p} />)}
+      {items.length===0 && <div className="card">No programs found. Try another measure or keyword.</div>}
+    </div>
+  );
+}
+EOF
+
+############################################
+# Simple README with run steps
+############################################
+cat > README.md << 'EOF'
+# Enlighting Incentive Finder (Replit Bootstrap)
+
+**What you get**: FastAPI + Postgres + React app scaffold with one searchable endpoint and demo data.
+
+## Run in Replit
+1) Open the Replit Shell and run:
+```bash
+chmod +x bootstrap_enlighting_incentive_finder.sh || true
+bash bootstrap_enlighting_incentive_finder.sh
+```
+2) Create env file:
+```bash
+cp backend/.env.example backend/.env
+```
+3) Start DB/API/Web (3 terminals or background):
+```bash
+# Terminal A (API):
+cd backend && make migrate && make seed && make dev
+# Terminal B (Web):
+cd frontend && npm i && npm run dev
+```
+4) Open:
+- API: http://localhost:8000/api/health
+- Web: http://localhost:5173
+
+Next steps: add DSIRE/OpenEI adapters, PDF report, lead capture.
+EOF
+
+printf "\n✅ Bootstrap complete. Next steps:\n  1) cp backend/.env.example backend/.env\n  2) cd backend && make migrate && make seed && make dev\n  3) cd frontend && npm i && npm run dev\n\nHappy building!\n"
