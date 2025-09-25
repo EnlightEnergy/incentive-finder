@@ -180,7 +180,7 @@ export class DatabaseStorage implements IStorage {
   async createProgram(program: InsertProgram): Promise<Program> {
     const [newProgram] = await db
       .insert(programs)
-      .values([program])
+      .values(program as any)
       .returning();
     return newProgram;
   }
