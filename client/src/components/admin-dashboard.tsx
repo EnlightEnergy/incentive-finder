@@ -50,7 +50,7 @@ export default function AdminDashboard() {
 
   const filteredPrograms = programs.filter(program => 
     program.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (sourceFilter === "" || program.source === sourceFilter)
+    (sourceFilter === "" || sourceFilter === "all" || program.source === sourceFilter)
   );
 
   const stats = {
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
                   <SelectValue placeholder="All Sources" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Sources</SelectItem>
+                  <SelectItem value="all">All Sources</SelectItem>
                   <SelectItem value="dsire">DSIRE</SelectItem>
                   <SelectItem value="utility">Utility</SelectItem>
                   <SelectItem value="manual">Manual</SelectItem>
