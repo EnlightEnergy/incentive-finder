@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import logoPath from "@assets/Enlighting_Logo_F1 copy_1758840085642.jpg";
+import logoPath from "@assets/Enlighting_Logo_F1_Web_1758840736815.png";
 
 export default function NavigationHeader() {
   const [location] = useLocation();
