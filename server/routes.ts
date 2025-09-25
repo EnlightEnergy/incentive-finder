@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertLeadSchema, searchProgramsSchema, insertProgramSchema } from "@shared/schema";
+import { sendLeadNotification } from "./email";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -54,6 +55,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const leadData = insertLeadSchema.parse(req.body);
       const lead = await storage.createLead(leadData);
+      
+      // Send email notification to sales team
+      try {
+        await sendLeadNotification({
+          company: lead.company,
+          contactName: lead.contactName,
+          email: lead.email,
+          phone: lead.phone || undefined,
+          address: lead.address || undefined,
+          utility: lead.utility || undefined,
+          measure: lead.measure || undefined,
+          sqft: lead.sqft || undefined,
+          hours: lead.hours || undefined,
+          baselineDesc: lead.baselineDesc || undefined,
+        });
+        console.log(`✅ Lead notification email sent for ${lead.company} - ${lead.contactName}`);
+      } catch (emailError) {
+        console.error("Error sending lead notification email:", emailError);
+        // Don't fail the lead creation if email fails
+      }
+      
       res.status(201).json(lead);
     } catch (error) {
       console.error("Error creating lead:", error);
