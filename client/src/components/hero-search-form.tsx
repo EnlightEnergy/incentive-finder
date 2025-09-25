@@ -14,15 +14,15 @@ interface HeroSearchFormProps {
 }
 
 const energyMeasures = [
-  { id: "lighting", label: "LED Lighting" },
-  { id: "hvac", label: "HVAC Systems" },
-  { id: "hpwh", label: "Heat Pump Water Heaters" },
-  { id: "controls", label: "Energy Management Controls" },
-  { id: "refrigeration", label: "Refrigeration" },
-  { id: "compressed-air", label: "Compressed Air Systems" },
-  { id: "envelope", label: "Building Envelope" },
-  { id: "solar", label: "Solar Panels" },
-  { id: "storage", label: "Energy Storage" },
+  { id: "Lighting", label: "LED Lighting" },
+  { id: "HVAC", label: "HVAC Systems" },
+  { id: "Heat Pump Water Heaters", label: "Heat Pump Water Heaters" },
+  { id: "Controls", label: "Energy Management Controls" },
+  { id: "Refrigeration", label: "Refrigeration" },
+  { id: "Compressed Air", label: "Compressed Air Systems" },
+  { id: "Envelope", label: "Building Envelope" },
+  { id: "Solar", label: "Solar Panels" },
+  { id: "Energy Storage", label: "Energy Storage" },
 ];
 
 export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {

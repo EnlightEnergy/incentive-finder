@@ -63,7 +63,7 @@ export class DatabaseStorage implements IStorage {
     // Measures filter - check if any of the selected measures are in techTags
     if (params.measures && params.measures.length > 0) {
       const measureConditions = params.measures.map(measure => 
-        sql`${programs.techTags}::jsonb ? ${measure}`
+        sql`${programs.techTags}::jsonb @> ${JSON.stringify([measure])}`
       );
       conditions.push(or(...measureConditions));
     }
