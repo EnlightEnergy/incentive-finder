@@ -180,7 +180,7 @@ export class DatabaseStorage implements IStorage {
   async createProgram(program: InsertProgram): Promise<Program> {
     const [newProgram] = await db
       .insert(programs)
-      .values(program)
+      .values([program])
       .returning();
     return newProgram;
   }
@@ -188,7 +188,10 @@ export class DatabaseStorage implements IStorage {
   async updateProgram(id: number, program: Partial<InsertProgram>): Promise<Program | undefined> {
     const [updatedProgram] = await db
       .update(programs)
-      .set({ ...program, updatedAt: sql`CURRENT_TIMESTAMP` })
+      .set({
+        ...program,
+        updatedAt: new Date()
+      } as any)
       .where(eq(programs.id, id))
       .returning();
     return updatedProgram;
@@ -202,7 +205,7 @@ export class DatabaseStorage implements IStorage {
   async publishProgram(id: number): Promise<boolean> {
     const [updatedProgram] = await db
       .update(programs)
-      .set({ status: 'open', updatedAt: sql`CURRENT_TIMESTAMP` })
+      .set({ status: 'open', updatedAt: new Date() })
       .where(eq(programs.id, id))
       .returning();
     return !!updatedProgram;
