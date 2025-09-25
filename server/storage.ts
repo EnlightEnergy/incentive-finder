@@ -1,0 +1,146 @@
+import { 
+  programs, 
+  programGeos, 
+  eligibilityRules, 
+  benefitStructures, 
+  documentation,
+  leads,
+  ratesCache,
+  type Program, 
+  type InsertProgram,
+  type Lead,
+  type InsertLead,
+  type SearchProgramsParams
+} from "@shared/schema";
+import { db } from "./db";
+import { eq, ilike, and, or, inArray, sql, desc } from "drizzle-orm";
+
+export interface IStorage {
+  // Program management
+  getPrograms(params: SearchProgramsParams): Promise<Program[]>;
+  getProgramById(id: number): Promise<Program | undefined>;
+  createProgram(program: InsertProgram): Promise<Program>;
+  updateProgram(id: number, program: Partial<InsertProgram>): Promise<Program | undefined>;
+  deleteProgram(id: number): Promise<boolean>;
+  publishProgram(id: number): Promise<boolean>;
+  
+  // Lead management
+  createLead(lead: InsertLead): Promise<Lead>;
+  getLeads(): Promise<Lead[]>;
+  getLeadById(id: number): Promise<Lead | undefined>;
+  updateLeadStatus(id: number, status: string): Promise<boolean>;
+}
+
+export class DatabaseStorage implements IStorage {
+  async getPrograms(params: SearchProgramsParams): Promise<Program[]> {
+    let query: any = db.select().from(programs);
+    
+    const conditions = [];
+    
+    // Text search
+    if (params.q) {
+      conditions.push(
+        or(
+          ilike(programs.name, `%${params.q}%`),
+          ilike(programs.owner, `%${params.q}%`)
+        )
+      );
+    }
+    
+    // Status filter
+    if (params.status) {
+      conditions.push(eq(programs.status, params.status));
+    } else {
+      // Default to open programs only
+      conditions.push(eq(programs.status, 'open'));
+    }
+    
+    // Incentive type filter
+    if (params.incentiveType && params.incentiveType.length > 0) {
+      conditions.push(inArray(programs.incentiveType, params.incentiveType));
+    }
+    
+    // Measures filter - check if any of the selected measures are in techTags
+    if (params.measures && params.measures.length > 0) {
+      const measureConditions = params.measures.map(measure => 
+        sql`${programs.techTags}::jsonb ? ${measure}`
+      );
+      conditions.push(or(...measureConditions));
+    }
+    
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
+    }
+    
+    const result = await query
+      .orderBy(desc(programs.updatedAt))
+      .limit(params.limit)
+      .offset(params.offset);
+    
+    return result;
+  }
+
+  async getProgramById(id: number): Promise<Program | undefined> {
+    const [program] = await db.select().from(programs).where(eq(programs.id, id));
+    return program;
+  }
+
+  async createProgram(program: InsertProgram): Promise<Program> {
+    const [newProgram] = await db
+      .insert(programs)
+      .values(program)
+      .returning();
+    return newProgram;
+  }
+
+  async updateProgram(id: number, program: Partial<InsertProgram>): Promise<Program | undefined> {
+    const [updatedProgram] = await db
+      .update(programs)
+      .set({ ...program, updatedAt: sql`CURRENT_TIMESTAMP` })
+      .where(eq(programs.id, id))
+      .returning();
+    return updatedProgram;
+  }
+
+  async deleteProgram(id: number): Promise<boolean> {
+    const result = await db.delete(programs).where(eq(programs.id, id));
+    return (result.rowCount ?? 0) > 0;
+  }
+
+  async publishProgram(id: number): Promise<boolean> {
+    const [updatedProgram] = await db
+      .update(programs)
+      .set({ status: 'open', updatedAt: sql`CURRENT_TIMESTAMP` })
+      .where(eq(programs.id, id))
+      .returning();
+    return !!updatedProgram;
+  }
+
+  async createLead(lead: InsertLead): Promise<Lead> {
+    const [newLead] = await db
+      .insert(leads)
+      .values(lead)
+      .returning();
+    return newLead;
+  }
+
+  async getLeads(): Promise<Lead[]> {
+    const result = await db.select().from(leads).orderBy(desc(leads.createdAt));
+    return result;
+  }
+
+  async getLeadById(id: number): Promise<Lead | undefined> {
+    const [lead] = await db.select().from(leads).where(eq(leads.id, id));
+    return lead;
+  }
+
+  async updateLeadStatus(id: number, status: string): Promise<boolean> {
+    const result = await db
+      .update(leads)
+      .set({ status })
+      .where(eq(leads.id, id));
+    return (result.rowCount ?? 0) > 0;
+  }
+}
+
+export const storage = new DatabaseStorage();
