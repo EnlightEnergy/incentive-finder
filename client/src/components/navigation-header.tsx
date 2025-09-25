@@ -17,7 +17,7 @@ export default function NavigationHeader() {
                 className="h-12 w-auto object-contain"
                 data-testid="logo-enlighting"
               />
-              <h1 className="text-xl font-semibold text-foreground leading-none pb-1">Incentive Finder</h1>
+              <h1 className="text-xl font-semibold text-foreground leading-none pb-1 mt-1">Incentive Finder</h1>
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
