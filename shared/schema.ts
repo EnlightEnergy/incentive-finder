@@ -11,12 +11,19 @@ export const programs = pgTable("programs", {
   name: varchar("name", { length: 400 }).notNull(),
   owner: varchar("owner", { length: 200 }).notNull(),
   url: varchar("url", { length: 600 }),
+  description: text("description"), // Enhanced detailed program description
+  incentiveDescription: text("incentive_description"), // Detailed incentive value information
   sectorTags: jsonb("sector_tags").$type<string[]>().default([]),
   techTags: jsonb("tech_tags").$type<string[]>().default([]),
   incentiveType: varchar("incentive_type", { length: 60 }).notNull(), // 'Prescriptive', 'Custom', 'Tax Credit', 'Grant', 'On-Bill', 'Financing'
   status: varchar("status", { length: 30 }).default("open"), // 'open', 'paused', 'expired'
   startDate: date("start_date"),
   endDate: date("end_date"),
+  // Data validation tracking fields
+  urlStatus: varchar("url_status", { length: 20 }).default("unknown"), // 'valid', 'redirect', 'broken', 'unknown'
+  urlLastChecked: timestamp("url_last_checked"),
+  dataVerifiedAt: timestamp("data_verified_at"),
+  supersededByProgramId: integer("superseded_by_program_id"),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
   lastSeenAt: timestamp("last_seen_at").default(sql`CURRENT_TIMESTAMP`),
 });

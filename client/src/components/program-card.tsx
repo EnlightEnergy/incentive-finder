@@ -69,6 +69,28 @@ export default function ProgramCard({ program, onViewDetails }: ProgramCardProps
           )}
         </div>
 
+        {/* Enhanced Program Description */}
+        {program.description && (
+          <div className="mb-4">
+            <p className="text-sm text-foreground leading-relaxed" data-testid={`text-description-${program.id}`}>
+              {program.description}
+            </p>
+          </div>
+        )}
+
+        {/* Detailed Incentive Information */}
+        {program.incentiveDescription && (
+          <div className="mb-4 p-3 bg-accent/10 rounded-lg border border-accent/20">
+            <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center">
+              <span className="w-2 h-2 bg-accent rounded-full mr-2"></span>
+              Available Incentives & Values
+            </h4>
+            <div className="text-sm text-foreground whitespace-pre-line" data-testid={`text-incentives-${program.id}`}>
+              {program.incentiveDescription}
+            </div>
+          </div>
+        )}
+
         {program.techTags && program.techTags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {program.techTags.map((tag, index) => (
