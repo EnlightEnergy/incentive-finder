@@ -134,6 +134,11 @@ export class DatabaseStorage implements IStorage {
       conditions.push(inArray(programs.incentiveType, params.incentiveType));
     }
     
+    // Program Owner filter
+    if (params.programOwner && params.programOwner.length > 0) {
+      conditions.push(inArray(programs.owner, params.programOwner));
+    }
+    
     // Measures filter - check if any of the selected measures are in techTags
     if (params.measures && params.measures.length > 0) {
       const measureConditions = params.measures.map(measure => 
