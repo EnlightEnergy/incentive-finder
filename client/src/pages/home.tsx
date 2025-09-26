@@ -165,7 +165,7 @@ export default function Home() {
               onClick={() => setLeadModalOpen(true)}
               data-testid="button-book-audit"
             >
-              Book Free Audit
+              Book Free Energy Audit
             </button>
           </div>
 
@@ -204,7 +204,7 @@ export default function Home() {
                       onClick={() => setLeadModalOpen(true)}
                       data-testid="button-schedule-audit"
                     >
-                      Book Free Audit
+                      Book Free Energy Audit
                     </button>
                     <button 
                       className="btn btn--secondary"
@@ -250,7 +250,7 @@ export default function Home() {
                   onClick={() => setLeadModalOpen(true)}
                   data-testid="button-book-audit"
                 >
-                  Book Free Audit
+                  Book Free Energy Audit
                 </Button>
               </div>
             </div>
