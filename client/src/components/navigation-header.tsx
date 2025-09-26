@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import ContactSalesModal from "@/components/contact-sales-modal";
 import logoPath from "@assets/Enlighting_Logo_F1_Web_1758840736815.png";
 
 export default function NavigationHeader() {
   const [location] = useLocation();
+  const [contactSalesModalOpen, setContactSalesModalOpen] = useState(false);
 
   return (
     <header className="bg-card border-b border-border sticky top-0 z-50">
@@ -27,12 +30,21 @@ export default function NavigationHeader() {
             <Link href="/admin" className={`text-sm font-medium transition-colors ${location === '/admin' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}>
               Admin
             </Link>
-            <Button size="sm" data-testid="button-contact">
+            <Button 
+              size="sm" 
+              onClick={() => setContactSalesModalOpen(true)}
+              data-testid="button-contact"
+            >
               Contact Sales
             </Button>
           </nav>
         </div>
       </div>
+      
+      <ContactSalesModal 
+        open={contactSalesModalOpen} 
+        onOpenChange={setContactSalesModalOpen} 
+      />
     </header>
   );
 }
