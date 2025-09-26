@@ -93,7 +93,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
 
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Find energy incentives for your business --- in minutes.
+            Unlock hidden rebates, incentives, financing options and tax benefits.
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Stack utility, state, and federal rebates to cut project costs by up to 70%. Get instant savings estimates—and book your free audit today.
