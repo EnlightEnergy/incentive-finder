@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import NavigationHeader from "@/components/navigation-header";
 import HeroSearchForm from "@/components/hero-search-form";
@@ -15,6 +15,7 @@ export default function Home() {
   const [searchParams, setSearchParams] = useState<Partial<SearchProgramsParams> | null>(null);
   const [leadModalOpen, setLeadModalOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
+  const [countdown, setCountdown] = useState<{ days: number; hours: number; program: string } | null>(null);
 
   const { data: programs = [], isLoading } = useQuery({
     queryKey: ["/api/programs", searchParams],
@@ -31,6 +32,40 @@ export default function Home() {
     // In a real app, this would open a detailed modal or navigate to a detail page
     console.log("Viewing details for program:", program);
   };
+
+  // Countdown timer effect
+  useEffect(() => {
+    const updateCountdown = () => {
+      if (programs.length === 0) return;
+
+      // Find the program with the nearest deadline
+      const programsWithDeadlines = programs.filter(p => p.endDate);
+      if (programsWithDeadlines.length === 0) return;
+
+      const nextDeadline = programsWithDeadlines
+        .map(p => ({ ...p, deadline: new Date(p.endDate!) }))
+        .sort((a, b) => a.deadline.getTime() - b.deadline.getTime())[0];
+
+      const now = new Date();
+      const timeRemaining = nextDeadline.deadline.getTime() - now.getTime();
+
+      if (timeRemaining > 0) {
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        
+        setCountdown({
+          days,
+          hours,
+          program: nextDeadline.name
+        });
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000 * 60 * 60); // Update every hour
+
+    return () => clearInterval(interval);
+  }, [programs]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -108,8 +143,12 @@ export default function Home() {
               <div className="summary__right">
                 <div className="countdown" data-testid="countdown-timer">
                   <div className="countdown__label">Upcoming Program Deadline</div>
-                  <div className="countdown__timer">72 days</div>
-                  <div className="countdown__program">SCE GoGreen Business Energy Financing</div>
+                  <div className="countdown__timer">
+                    {countdown ? `${countdown.days} days, ${countdown.hours} hours` : '—'}
+                  </div>
+                  <div className="countdown__program">
+                    {countdown ? countdown.program : 'No upcoming deadlines'}
+                  </div>
                 </div>
               </div>
             </div>
