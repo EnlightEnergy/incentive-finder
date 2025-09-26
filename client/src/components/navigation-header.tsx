@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import ContactSalesModal from "@/components/contact-sales-modal";
-import logoPath from "@assets/Enlighting_Logo_F1_Web_1758840736815.png";
+import logoPath from "@assets/Enlighting_Logo_Web_1758865840922.png";
 
 export default function NavigationHeader() {
   const [location] = useLocation();
@@ -13,14 +13,17 @@ export default function NavigationHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-end space-x-3">
+            <Link href="/" className="flex items-center space-x-4">
               <img 
                 src={logoPath} 
                 alt="Enlighting Logo" 
-                className="h-12 w-auto object-contain"
+                className="h-16 w-auto object-contain"
                 data-testid="logo-enlighting"
               />
-              <h1 className="text-xl font-semibold text-foreground leading-none pb-1 mt-1">Incentive Finder</h1>
+              <div className="flex items-baseline space-x-2">
+                <h1 className="text-3xl font-bold text-[#6B21A8] leading-none">enlighting</h1>
+                <span className="text-3xl font-normal text-[#6B21A8] leading-none" style={{ fontFamily: 'Lato, sans-serif' }}>incentive finder</span>
+              </div>
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
