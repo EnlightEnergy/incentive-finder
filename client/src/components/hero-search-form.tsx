@@ -9,6 +9,19 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { Search } from "lucide-react";
 import type { SearchProgramsParams } from "@shared/schema";
 
+// Import utility provider logos
+import sceLogoPath from "@assets/stock_images/southern_california__3efbccd3.jpg";
+import pgeLogoPath from "@assets/stock_images/pacific_gas_electric_9b4251bb.jpg";
+import sdgeLogoPath from "@assets/stock_images/san_diego_gas_electr_abe6a9fc.jpg";
+import cpucLogoPath from "@assets/stock_images/california_public_ut_d47c0227.jpg";
+import mceLogoPath from "@assets/stock_images/marin_clean_energy_m_85d408fc.jpg";
+import ladwpLogoPath from "@assets/stock_images/los_angeles_departme_3428d8a1.jpg";
+import aescLogoPath from "@assets/stock_images/aesc_energy_services_21c7749b.jpg";
+import socalrenLogoPath from "@assets/stock_images/socalren_southern_ca_6d861556.jpg";
+import willdanLogoPath from "@assets/stock_images/willdan_energy_consu_a404205d.jpg";
+import clearResultLogoPath from "@assets/stock_images/clear_result_energy__5d96ec6c.jpg";
+import resourceInnovationsLogoPath from "@assets/stock_images/resource_innovations_72bf583d.jpg";
+
 interface HeroSearchFormProps {
   onSearch: (params: Partial<SearchProgramsParams>) => void;
 }
@@ -61,6 +74,23 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   return (
     <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Utility Provider Logos */}
+        <div className="text-center mb-8">
+          <div className="flex justify-center items-center gap-6 flex-wrap max-w-5xl mx-auto">
+            <img src={sceLogoPath} alt="SCE" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={pgeLogoPath} alt="PG&E" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={sdgeLogoPath} alt="SDG&E" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={cpucLogoPath} alt="CPUC" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={mceLogoPath} alt="MCE" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={ladwpLogoPath} alt="LADWP" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={aescLogoPath} alt="AESC" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={socalrenLogoPath} alt="SoCalRen" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={willdanLogoPath} alt="Willdan" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={clearResultLogoPath} alt="Clear Result" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+            <img src={resourceInnovationsLogoPath} alt="Resource Innovations" className="h-12 object-contain filter grayscale opacity-60 hover:opacity-80 transition-opacity" />
+          </div>
+        </div>
+
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Unlock Energy Incentives for Your Business
