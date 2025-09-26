@@ -9,18 +9,14 @@ export default function NavigationHeader() {
     <header className="bg-card border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-4">
+          <div className="flex items-center">
+            <Link href="/">
               <img 
                 src={logoPath} 
                 alt="Enlighting Logo" 
                 className="h-16 w-auto object-contain"
                 data-testid="logo-enlighting"
               />
-              <div className="flex items-baseline space-x-2">
-                <h1 className="text-3xl font-bold text-[#6B21A8] leading-none">enlighting</h1>
-                <span className="text-3xl font-normal text-[#6B21A8] leading-none" style={{ fontFamily: 'Lato, sans-serif' }}>incentive finder</span>
-              </div>
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
