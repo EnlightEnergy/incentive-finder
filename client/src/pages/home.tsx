@@ -368,8 +368,24 @@ export default function Home() {
             <div>
               <h3 className="font-medium text-foreground mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>hello@enlightingenergy.com</li>
-                <li>805-724-5299</li>
+                <li>
+                  <a 
+                    href="mailto:hello@enlightingenergy.com" 
+                    className="hover:text-foreground transition-colors"
+                    data-testid="link-footer-email"
+                  >
+                    hello@enlightingenergy.com
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="tel:+18057245299" 
+                    className="hover:text-foreground transition-colors"
+                    data-testid="link-footer-phone"
+                  >
+                    805-724-5299
+                  </a>
+                </li>
                 <li>Santa Barbara, CA</li>
               </ul>
             </div>
