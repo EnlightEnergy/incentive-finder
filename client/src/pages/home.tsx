@@ -36,17 +36,24 @@ export default function Home() {
   // Countdown timer effect
   useEffect(() => {
     const updateCountdown = () => {
-      if (programs.length === 0) return;
+      if (programs.length === 0) {
+        setCountdown(null);
+        return;
+      }
 
-      // Find the program with the nearest deadline
-      const programsWithDeadlines = programs.filter(p => p.endDate);
-      if (programsWithDeadlines.length === 0) return;
-
-      const nextDeadline = programsWithDeadlines
-        .map(p => ({ ...p, deadline: new Date(p.endDate!) }))
-        .sort((a, b) => a.deadline.getTime() - b.deadline.getTime())[0];
-
+      // Find programs with future deadlines only
       const now = new Date();
+      const futurePrograms = programs
+        .filter(p => p.endDate && new Date(p.endDate!).getTime() > now.getTime())
+        .map(p => ({ ...p, deadline: new Date(p.endDate!) }))
+        .sort((a, b) => a.deadline.getTime() - b.deadline.getTime());
+
+      if (futurePrograms.length === 0) {
+        setCountdown(null);
+        return;
+      }
+
+      const nextDeadline = futurePrograms[0];
       const timeRemaining = nextDeadline.deadline.getTime() - now.getTime();
 
       if (timeRemaining > 0) {
@@ -58,6 +65,8 @@ export default function Home() {
           hours,
           program: nextDeadline.name
         });
+      } else {
+        setCountdown(null);
       }
     };
 
