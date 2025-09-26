@@ -27,6 +27,9 @@ export default function NavigationHeader() {
             <Link href="/" className={`text-sm font-medium transition-colors ${location === '/' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}>
               Find Incentives
             </Link>
+            <a href="https://www.enlightingenergy.com/about" target="_blank" rel="noopener noreferrer" className="text-sm font-medium transition-colors text-muted-foreground hover:text-foreground">
+              About
+            </a>
             <Button 
               size="sm" 
               asChild
