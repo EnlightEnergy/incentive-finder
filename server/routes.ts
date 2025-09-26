@@ -4,6 +4,8 @@ import { storage } from "./storage";
 import { insertLeadSchema, searchProgramsSchema, insertProgramSchema } from "@shared/schema";
 import { sendLeadNotification } from "./email";
 import { basicAuth } from "./auth";
+import { searchPrograms } from "./search";
+import { searchSync } from "./sync";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -28,6 +30,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
         offset: req.query.offset ? parseInt(req.query.offset as string) : 0,
       });
       
+      // Try Typesense search first if query text is present
+      if (params.q && params.q.trim() !== '') {
+        try {
+          const typesenseParams = {
+            q: params.q,
+            owner: params.programOwner?.[0],
+            utility: params.utility,
+            state: params.state,
+            programStatus: params.status,
+            page: Math.floor(params.offset / params.limit) + 1,
+            per_page: params.limit,
+          };
+          
+          const searchResults = await searchPrograms(typesenseParams);
+          
+          // Transform Typesense results to match our API format
+          const programs = searchResults.hits?.map((hit: any) => ({
+            id: parseInt(hit.document.id),
+            name: hit.document.name,
+            owner: hit.document.owner,
+            utility: hit.document.utility,
+            state: hit.document.state,
+            incentiveDescription: hit.document.incentiveDescription,
+            description: hit.document.description,
+            eligibilityRequirements: hit.document.eligibilityRequirements,
+            geographicScope: hit.document.geographicScope,
+            programStatus: hit.document.programStatus,
+            sector: hit.document.sector
+          })) || [];
+          
+          return res.json(programs);
+        } catch (typesenseError) {
+          console.warn('Typesense search failed, falling back to PostgreSQL:', typesenseError);
+          // Fall through to PostgreSQL search
+        }
+      }
+      
+      // Use PostgreSQL search as fallback or when no text query
       const programs = await storage.getPrograms(params);
       res.json(programs);
     } catch (error) {
@@ -108,6 +148,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const programData = insertProgramSchema.parse(req.body);
       const program = await storage.createProgram(programData);
+      
+      // Sync to search index
+      try {
+        await searchSync.syncProgramByData(program);
+      } catch (syncError) {
+        console.warn('Failed to sync new program to search index:', syncError);
+      }
+      
       res.status(201).json(program);
     } catch (error) {
       console.error("Error creating program:", error);
@@ -128,6 +176,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ error: "Program not found" });
       }
       
+      // Sync to search index
+      try {
+        await searchSync.syncProgramByData(program);
+      } catch (syncError) {
+        console.warn('Failed to sync updated program to search index:', syncError);
+      }
+      
       res.json(program);
     } catch (error) {
       console.error("Error updating program:", error);
@@ -145,6 +200,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (!success) {
         return res.status(404).json({ error: "Program not found" });
+      }
+      
+      // Sync to search index after publishing
+      try {
+        await searchSync.syncProgram(id);
+      } catch (syncError) {
+        console.warn('Failed to sync published program to search index:', syncError);
       }
       
       res.json({ success: true });

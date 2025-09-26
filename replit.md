@@ -28,10 +28,17 @@ Preferred communication style: Simple, everyday language.
 - **Development**: Hot reloading with Vite integration in development mode
 
 ### Data Layer
-- **Database**: PostgreSQL with Neon serverless connection pooling
+- **Database**: PostgreSQL with Neon serverless connection pooling as source of truth
 - **ORM**: Drizzle ORM for type-safe database operations
 - **Schema Management**: Drizzle Kit for migrations and schema generation
 - **Data Models**: Normalized tables for programs, geographic coverage, eligibility rules, benefit structures, documentation, leads, and rate caching
+
+### Search Architecture
+- **Search Engine**: Hybrid approach using Typesense for advanced search with PostgreSQL fallback
+- **Full-Text Search**: Typesense provides instant search, faceted filtering, and relevance scoring
+- **Resilience**: Graceful fallback to PostgreSQL search when Typesense is unavailable
+- **Data Sync**: Automatic synchronization from PostgreSQL to Typesense search index
+- **Performance**: Optimized for thousands of incentive programs with complex filtering requirements
 
 ### Authentication & Security
 - **Session Management**: Express sessions with PostgreSQL storage via connect-pg-simple
