@@ -45,6 +45,8 @@ export default function ApplyEnlightingModal({
     preferredTiming: "", // when they'd like to be contacted
   });
 
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -62,13 +64,20 @@ export default function ApplyEnlightingModal({
     }
   }, [open, searchData]);
 
+  // Auto-close confirmation popup after 3 seconds
+  useEffect(() => {
+    if (showConfirmation) {
+      const timer = setTimeout(() => {
+        setShowConfirmation(false);
+        onOpenChange(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showConfirmation, onOpenChange]);
+
   const createLeadMutation = useMutation({
     mutationFn: api.createLead,
     onSuccess: () => {
-      toast({
-        title: "Application Submitted Successfully!",
-        description: "Thanks for wanting to learn more about energy efficiency incentives for your facility. We will get back to you lickety split.",
-      });
       queryClient.invalidateQueries({ queryKey: ["/api/admin/leads"] });
       // Reset form
       setFormData({
@@ -85,7 +94,8 @@ export default function ApplyEnlightingModal({
         contactPreference: "email",
         preferredTiming: "",
       });
-      onOpenChange(false);
+      // Show confirmation popup instead of toast
+      setShowConfirmation(true);
     },
     onError: (error) => {
       toast({
@@ -138,18 +148,20 @@ export default function ApplyEnlightingModal({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="apply-enlighting-modal">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">
-            Apply with Enlighting
-            {program && (
-              <div className="text-sm font-normal text-muted-foreground mt-1">
-                For: {program.name}
-              </div>
-            )}
-          </DialogTitle>
-        </DialogHeader>
+    <>
+      {/* Main Application Form Modal */}
+      <Dialog open={open && !showConfirmation} onOpenChange={onOpenChange}>
+        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="apply-enlighting-modal">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold">
+              Apply with Enlighting
+              {program && (
+                <div className="text-sm font-normal text-muted-foreground mt-1">
+                  For: {program.name}
+                </div>
+              )}
+            </DialogTitle>
+          </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Company Information */}
@@ -315,5 +327,24 @@ export default function ApplyEnlightingModal({
         </form>
       </DialogContent>
     </Dialog>
+
+      {/* Confirmation Popup */}
+      <Dialog open={showConfirmation} onOpenChange={() => {}}>
+        <DialogContent 
+          className="sm:max-w-md"
+          style={{ backgroundColor: '#C00BF5' }}
+          data-testid="apply-enlighting-confirmation"
+        >
+          <div className="text-center py-6">
+            <h2 className="text-xl font-semibold mb-4" style={{ color: 'black' }}>
+              Application Submitted Successfully!
+            </h2>
+            <p className="text-base" style={{ color: 'black' }}>
+              Thanks for wanting to learn more about energy efficiency incentives for your facility. We will get back to you lickety split.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
