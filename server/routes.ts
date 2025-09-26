@@ -202,6 +202,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin endpoint to seed database
+  app.post("/api/admin/seed-database", basicAuth, async (req, res) => {
+    try {
+      // Import and run the seeding logic
+      const { seedDatabase } = await import("../scripts/seed-database.js");
+      await seedDatabase();
+      res.json({ message: "Database seeded successfully", status: "success" });
+    } catch (error) {
+      console.error("Error seeding database:", error);
+      res.status(500).json({ 
+        error: "Failed to seed database", 
+        details: error instanceof Error ? error.message : String(error)
+      });
+    }
+  });
+
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
