@@ -69,13 +69,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
     <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ENL Icons */}
-        <div className="text-center mb-8">
-          <div className="flex justify-center items-center gap-8 max-w-3xl mx-auto">
-            <img src={enl1LogoPath} alt="ENL 1" className="h-8 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl2LogoPath} alt="ENL 2" className="h-8 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl3LogoPath} alt="ENL 3" className="h-8 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl4LogoPath} alt="ENL 4" className="h-8 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl5LogoPath} alt="ENL 5" className="h-8 object-contain hover:opacity-80 transition-opacity" />
+        <div className="text-center mb-6">
+          <div className="flex justify-center items-center gap-8 max-w-3xl mx-auto py-6">
+            <img src={enl1LogoPath} alt="ENL 1" className="h-12 object-contain hover:opacity-80 transition-opacity" />
+            <img src={enl2LogoPath} alt="ENL 2" className="h-12 object-contain hover:opacity-80 transition-opacity" />
+            <img src={enl3LogoPath} alt="ENL 3" className="h-12 object-contain hover:opacity-80 transition-opacity" />
+            <img src={enl4LogoPath} alt="ENL 4" className="h-12 object-contain hover:opacity-80 transition-opacity" />
+            <img src={enl5LogoPath} alt="ENL 5" className="h-12 object-contain hover:opacity-80 transition-opacity" />
           </div>
         </div>
 
