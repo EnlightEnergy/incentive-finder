@@ -27,9 +27,6 @@ export default function NavigationHeader() {
             <Link href="/" className={`text-sm font-medium transition-colors ${location === '/' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}>
               Find Incentives
             </Link>
-            <Link href="/admin" className={`text-sm font-medium transition-colors ${location === '/admin' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}>
-              Admin
-            </Link>
             <Button 
               size="sm" 
               asChild
