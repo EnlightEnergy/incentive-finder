@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import ContactSalesModal from "@/components/contact-sales-modal";
 import logoPath from "@assets/Enlighting_Logo_Web_1758865840922.png";
 
 export default function NavigationHeader() {
   const [location] = useLocation();
-  const [contactSalesModalOpen, setContactSalesModalOpen] = useState(false);
 
   return (
     <header className="bg-card border-b border-border sticky top-0 z-50">
@@ -35,19 +32,16 @@ export default function NavigationHeader() {
             </Link>
             <Button 
               size="sm" 
-              onClick={() => setContactSalesModalOpen(true)}
+              asChild
               data-testid="button-contact"
             >
-              Contact Sales
+              <a href="mailto:hello@enlightingenergy.com">
+                Contact Sales
+              </a>
             </Button>
           </nav>
         </div>
       </div>
-      
-      <ContactSalesModal 
-        open={contactSalesModalOpen} 
-        onOpenChange={setContactSalesModalOpen} 
-      />
     </header>
   );
 }
