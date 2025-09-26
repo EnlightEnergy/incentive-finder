@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
+import logoPath from "@assets/P_Mark_transp_1758848685119.png";
 
 export default function Home() {
   const [searchParams, setSearchParams] = useState<Partial<SearchProgramsParams> | null>(null);
@@ -121,22 +122,25 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">E</span>
-                </div>
+                <img 
+                  src={logoPath} 
+                  alt="Enlighting Energy Logo" 
+                  className="w-8 h-8"
+                />
                 <span className="text-lg font-semibold text-foreground">Enlighting Energy</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Helping commercial facilities find and secure energy incentives since 2024.
+                Helping commercial facilities find and secure energy incentives since 2018.
               </p>
             </div>
             <div>
               <h3 className="font-medium text-foreground mb-4">Services</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Incentive Finding</li>
+                <li>Finding Incentives</li>
                 <li>Energy Audits</li>
-                <li>Project Management</li>
-                <li>Consulting</li>
+                <li>Engineering Services</li>
+                <li>Turnkey Efficiency Upgrades</li>
+                <li>Project Efficiency Consulting</li>
               </ul>
             </div>
             <div>
@@ -152,7 +156,7 @@ export default function Home() {
               <h3 className="font-medium text-foreground mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>hello@enlightingenergy.com</li>
-                <li>805-555-1212</li>
+                <li>805-724-5299</li>
                 <li>Santa Barbara, CA</li>
               </ul>
             </div>
