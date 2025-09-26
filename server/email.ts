@@ -151,8 +151,8 @@ Generated on ${new Date().toLocaleString()}
   `;
 
   return await sendEmail({
-    to: "sales@example.com", // Default sales email - should be configured for production
-    from: "noreply@example.com", // Should be a verified SendGrid sender for production
+    to: "hello@enlightingenergy.com", // Enlighting sales team email
+    from: "noreply@enlightingenergy.com", // Enlighting verified sender
     subject: `🌟 New Lead: ${lead.company} - ${lead.contactName}`,
     text: emailText,
     html: emailHtml,

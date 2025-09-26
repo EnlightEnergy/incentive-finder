@@ -6,11 +6,39 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
-interface FiltersPanelProps {
-  onFiltersChange: (filters: any) => void;
+interface Filters {
+  status: string;
+  incentiveType: string[];
+  programOwner: string[];
 }
 
-export default function FiltersPanel({ onFiltersChange }: FiltersPanelProps) {
+interface FiltersPanelProps {
+  filters: Filters;
+  onFiltersChange: (filters: Filters) => void;
+  onClearFilters: () => void;
+}
+
+export default function FiltersPanel({ filters, onFiltersChange, onClearFilters }: FiltersPanelProps) {
+  const handleFilterChange = (category: keyof Filters, value: string, checked: boolean) => {
+    const newFilters = { ...filters };
+    
+    if (category === 'status') {
+      // Status is single-select, so set directly
+      newFilters.status = checked ? value : ''; // Clear status if unchecked
+    } else {
+      // Handle array properties (incentiveType, programOwner)
+      const arrayProperty = newFilters[category] as string[];
+      if (checked) {
+        if (!arrayProperty.includes(value)) {
+          (newFilters[category] as string[]) = [...arrayProperty, value];
+        }
+      } else {
+        (newFilters[category] as string[]) = arrayProperty.filter(item => item !== value);
+      }
+    }
+    
+    onFiltersChange(newFilters);
+  };
   return (
     <div className="space-y-6">
       <Card data-testid="filters-panel">
@@ -22,14 +50,31 @@ export default function FiltersPanel({ onFiltersChange }: FiltersPanelProps) {
             <Label className="text-sm font-medium mb-2 block">Program Status</Label>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <Checkbox id="status-open" defaultChecked data-testid="checkbox-status-open" />
+                <Checkbox 
+                  id="status-open" 
+                  checked={filters.status === 'open'}
+                  onCheckedChange={(checked) => handleFilterChange('status', 'open', !!checked)}
+                  data-testid="checkbox-status-open" 
+                />
                 <Label htmlFor="status-open" className="text-sm">Open</Label>
-                <span className="text-xs text-muted-foreground">(47)</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="status-paused" data-testid="checkbox-status-paused" />
+                <Checkbox 
+                  id="status-paused" 
+                  checked={filters.status === 'paused'}
+                  onCheckedChange={(checked) => handleFilterChange('status', 'paused', !!checked)}
+                  data-testid="checkbox-status-paused" 
+                />
                 <Label htmlFor="status-paused" className="text-sm">Paused</Label>
-                <span className="text-xs text-muted-foreground">(3)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="status-expired" 
+                  checked={filters.status === 'expired'}
+                  onCheckedChange={(checked) => handleFilterChange('status', 'expired', !!checked)}
+                  data-testid="checkbox-status-expired" 
+                />
+                <Label htmlFor="status-expired" className="text-sm">Expired</Label>
               </div>
             </div>
           </div>
@@ -38,24 +83,58 @@ export default function FiltersPanel({ onFiltersChange }: FiltersPanelProps) {
             <Label className="text-sm font-medium mb-2 block">Incentive Type</Label>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <Checkbox id="type-prescriptive" data-testid="checkbox-type-prescriptive" />
-                <Label htmlFor="type-prescriptive" className="text-sm">Prescriptive</Label>
-                <span className="text-xs text-muted-foreground">(23)</span>
+                <Checkbox 
+                  id="type-financing-rebates" 
+                  checked={filters.incentiveType.includes('Financing + Rebates')}
+                  onCheckedChange={(checked) => handleFilterChange('incentiveType', 'Financing + Rebates', !!checked)}
+                  data-testid="checkbox-type-financing-rebates" 
+                />
+                <Label htmlFor="type-financing-rebates" className="text-sm">Financing + Rebates</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="type-custom" data-testid="checkbox-type-custom" />
-                <Label htmlFor="type-custom" className="text-sm">Custom</Label>
-                <span className="text-xs text-muted-foreground">(15)</span>
+                <Checkbox 
+                  id="type-prescriptive-financing" 
+                  checked={filters.incentiveType.includes('Prescriptive + Financing')}
+                  onCheckedChange={(checked) => handleFilterChange('incentiveType', 'Prescriptive + Financing', !!checked)}
+                  data-testid="checkbox-type-prescriptive-financing" 
+                />
+                <Label htmlFor="type-prescriptive-financing" className="text-sm">Prescriptive + Financing</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="type-tax-credit" data-testid="checkbox-type-tax-credit" />
+                <Checkbox 
+                  id="type-rebate" 
+                  checked={filters.incentiveType.includes('Rebate')}
+                  onCheckedChange={(checked) => handleFilterChange('incentiveType', 'Rebate', !!checked)}
+                  data-testid="checkbox-type-rebate" 
+                />
+                <Label htmlFor="type-rebate" className="text-sm">Rebate</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="type-tax-credit" 
+                  checked={filters.incentiveType.includes('Tax Credit')}
+                  onCheckedChange={(checked) => handleFilterChange('incentiveType', 'Tax Credit', !!checked)}
+                  data-testid="checkbox-type-tax-credit" 
+                />
                 <Label htmlFor="type-tax-credit" className="text-sm">Tax Credit</Label>
-                <span className="text-xs text-muted-foreground">(8)</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="type-grant" data-testid="checkbox-type-grant" />
-                <Label htmlFor="type-grant" className="text-sm">Grant</Label>
-                <span className="text-xs text-muted-foreground">(5)</span>
+                <Checkbox 
+                  id="type-performance-based" 
+                  checked={filters.incentiveType.includes('Performance-Based')}
+                  onCheckedChange={(checked) => handleFilterChange('incentiveType', 'Performance-Based', !!checked)}
+                  data-testid="checkbox-type-performance-based" 
+                />
+                <Label htmlFor="type-performance-based" className="text-sm">Performance-Based</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="type-prescriptive-custom" 
+                  checked={filters.incentiveType.includes('Prescriptive + Custom')}
+                  onCheckedChange={(checked) => handleFilterChange('incentiveType', 'Prescriptive + Custom', !!checked)}
+                  data-testid="checkbox-type-prescriptive-custom" 
+                />
+                <Label htmlFor="type-prescriptive-custom" className="text-sm">Prescriptive + Custom</Label>
               </div>
             </div>
           </div>
@@ -64,24 +143,69 @@ export default function FiltersPanel({ onFiltersChange }: FiltersPanelProps) {
             <Label className="text-sm font-medium mb-2 block">Program Owner</Label>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <Checkbox id="owner-utility" data-testid="checkbox-owner-utility" />
-                <Label htmlFor="owner-utility" className="text-sm">Utility</Label>
-                <span className="text-xs text-muted-foreground">(28)</span>
+                <Checkbox 
+                  id="owner-sce" 
+                  checked={filters.programOwner.includes('Southern California Edison')}
+                  onCheckedChange={(checked) => handleFilterChange('programOwner', 'Southern California Edison', !!checked)}
+                  data-testid="checkbox-owner-sce" 
+                />
+                <Label htmlFor="owner-sce" className="text-sm">SCE</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="owner-state" data-testid="checkbox-owner-state" />
-                <Label htmlFor="owner-state" className="text-sm">State</Label>
-                <span className="text-xs text-muted-foreground">(12)</span>
+                <Checkbox 
+                  id="owner-pge" 
+                  checked={filters.programOwner.includes('Pacific Gas & Electric')}
+                  onCheckedChange={(checked) => handleFilterChange('programOwner', 'Pacific Gas & Electric', !!checked)}
+                  data-testid="checkbox-owner-pge" 
+                />
+                <Label htmlFor="owner-pge" className="text-sm">PG&E</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="owner-federal" data-testid="checkbox-owner-federal" />
-                <Label htmlFor="owner-federal" className="text-sm">Federal</Label>
-                <span className="text-xs text-muted-foreground">(7)</span>
+                <Checkbox 
+                  id="owner-cpuc" 
+                  checked={filters.programOwner.includes('California Public Utilities Commission')}
+                  onCheckedChange={(checked) => handleFilterChange('programOwner', 'California Public Utilities Commission', !!checked)}
+                  data-testid="checkbox-owner-cpuc" 
+                />
+                <Label htmlFor="owner-cpuc" className="text-sm">CPUC</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="owner-irs" 
+                  checked={filters.programOwner.includes('Internal Revenue Service')}
+                  onCheckedChange={(checked) => handleFilterChange('programOwner', 'Internal Revenue Service', !!checked)}
+                  data-testid="checkbox-owner-irs" 
+                />
+                <Label htmlFor="owner-irs" className="text-sm">Federal</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="owner-ladwp" 
+                  checked={filters.programOwner.includes('Los Angeles Department of Water & Power')}
+                  onCheckedChange={(checked) => handleFilterChange('programOwner', 'Los Angeles Department of Water & Power', !!checked)}
+                  data-testid="checkbox-owner-ladwp" 
+                />
+                <Label htmlFor="owner-ladwp" className="text-sm">LADWP</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="owner-sdge" 
+                  checked={filters.programOwner.includes('San Diego Gas & Electric')}
+                  onCheckedChange={(checked) => handleFilterChange('programOwner', 'San Diego Gas & Electric', !!checked)}
+                  data-testid="checkbox-owner-sdge" 
+                />
+                <Label htmlFor="owner-sdge" className="text-sm">SDG&E</Label>
               </div>
             </div>
           </div>
 
-          <Button variant="destructive" className="w-full" data-testid="button-clear-filters">
+          <Button 
+            variant="outline" 
+            className="w-full" 
+            style={{ backgroundColor: '#9f00ff', color: 'white', borderColor: '#9f00ff' }}
+            onClick={onClearFilters}
+            data-testid="button-clear-filters"
+          >
             Clear All Filters
           </Button>
         </CardContent>

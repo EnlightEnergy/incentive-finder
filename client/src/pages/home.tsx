@@ -5,6 +5,8 @@ import HeroSearchForm from "@/components/hero-search-form";
 import ProgramCard from "@/components/program-card";
 import FiltersPanel from "@/components/filters-panel";
 import LeadCaptureModal from "@/components/lead-capture-modal";
+import ProgramDetailsModal from "@/components/program-details-modal";
+import ApplyEnlightingModal from "@/components/apply-enlighting-modal";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
@@ -14,23 +16,89 @@ import logoPath from "@assets/P_Mark_transp_1758848685119.png";
 export default function Home() {
   const [searchParams, setSearchParams] = useState<Partial<SearchProgramsParams> | null>(null);
   const [leadModalOpen, setLeadModalOpen] = useState(false);
+  const [programDetailsOpen, setProgramDetailsOpen] = useState(false);
+  const [applyEnlightingModalOpen, setApplyEnlightingModalOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
   const [countdown, setCountdown] = useState<{ days: number; hours: number; program: string } | null>(null);
+  const [filters, setFilters] = useState({
+    status: 'open' as string,
+    incentiveType: [] as string[],
+    programOwner: [] as string[]
+  });
+  const [sortBy, setSortBy] = useState<string>('relevance');
 
-  const { data: programs = [], isLoading } = useQuery({
-    queryKey: ["/api/programs", searchParams],
-    queryFn: () => searchParams ? api.searchPrograms(searchParams) : Promise.resolve([]),
+  const { data: rawPrograms = [], isLoading } = useQuery({
+    queryKey: ["/api/programs", searchParams, filters],
+    queryFn: () => {
+      if (!searchParams) return Promise.resolve([]);
+      
+      // Combine search params with current filters for the API call
+      const combinedParams = {
+        ...searchParams,
+        status: filters.status || undefined, // Don't send empty status to backend
+        incentiveType: filters.incentiveType.length > 0 ? filters.incentiveType : undefined,
+        programOwner: filters.programOwner.length > 0 ? filters.programOwner : undefined
+      };
+      
+      return api.searchPrograms(combinedParams);
+    },
     enabled: !!searchParams,
   });
 
+
+  // Sort programs based on selected sort option (clone array to avoid mutating React Query cache)
+  const programs = [...rawPrograms].sort((a, b) => {
+    switch (sortBy) {
+      case 'deadline':
+        // Sort by end date (earliest deadline first)
+        if (!a.endDate && !b.endDate) return 0;
+        if (!a.endDate) return 1; // Programs without deadlines go to end
+        if (!b.endDate) return -1;
+        return new Date(a.endDate).getTime() - new Date(b.endDate).getTime();
+      
+      case 'owner':
+        // Sort alphabetically by program owner
+        return a.owner.localeCompare(b.owner);
+      
+      
+      case 'relevance':
+      default:
+        // Default sort by updatedAt (most recently updated first)
+        if (!a.updatedAt && !b.updatedAt) return 0;
+        if (!a.updatedAt) return 1;
+        if (!b.updatedAt) return -1;
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    }
+  });
+
   const handleSearch = (params: Partial<SearchProgramsParams>) => {
+    // Store the base search parameters (without filters)
     setSearchParams(params);
+  };
+
+  const handleFiltersChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+    // The useQuery will automatically refetch due to the filters dependency in queryKey
+  };
+
+  const handleClearFilters = () => {
+    const clearedFilters = {
+      status: '' as string, // Empty status to show all programs
+      incentiveType: [] as string[],
+      programOwner: [] as string[]
+    };
+    setFilters(clearedFilters);
+    // The useQuery will automatically refetch due to the filters dependency in queryKey
   };
 
   const handleViewDetails = (program: Program) => {
     setSelectedProgram(program);
-    // In a real app, this would open a detailed modal or navigate to a detail page
-    console.log("Viewing details for program:", program);
+    setProgramDetailsOpen(true);
+  };
+
+  const handleApplyEnlighting = (program: Program) => {
+    setSelectedProgram(program);
+    setApplyEnlightingModalOpen(true);
   };
 
   // Countdown timer effect
@@ -119,44 +187,42 @@ export default function Home() {
           {/* Results Summary */}
           <section className="summary" data-testid="results-summary">
             <div className="summary__card">
-              <div className="summary__left">
-                <div className="summary__label">Pre-Qualified Estimate</div>
-                <h2 className="summary__range">$18,000–$26,000</h2>
-                <div className="summary__meta">
-                  <span className="tag tag--conf">Confidence: Medium</span>
-                  <span className="divider">•</span>
-                  <span>Programs found: <strong>{programs.length}</strong></span>
-                  <span className="divider">•</span>
-                  <span>Last updated: <span>Sep 2025</span></span>
-                </div>
-                <p className="summary__note">
-                  Estimates depend on site conditions and operating hours. 
-                  <strong> Book a free on-site audit</strong> to verify eligibility and maximize your payout.
-                </p>
-                <div className="summary__ctas">
-                  <button 
-                    className="btn btn--primary" 
-                    onClick={() => setLeadModalOpen(true)}
-                    data-testid="button-schedule-audit"
-                  >
-                    Book Free Audit
-                  </button>
-                  <button 
-                    className="btn btn--secondary"
-                    data-testid="button-upload-bill"
-                  >
-                    Upload Utility Bill
-                  </button>
-                </div>
-              </div>
-              <div className="summary__right">
-                <div className="countdown" data-testid="countdown-timer">
-                  <div className="countdown__label">Upcoming Program Deadline</div>
-                  <div className="countdown__timer">
-                    {countdown ? `${countdown.days} days, ${countdown.hours} hours` : '—'}
+              <div className="summary__content">
+                <div className="summary__info">
+                  <h2 className="summary__title">Programs Found</h2>
+                  <div className="summary__meta">
+                    <span>Programs found: <strong>{programs.length}</strong></span>
+                    <span className="divider">•</span>
+                    <span>Last updated: <span>Sep 2025</span></span>
                   </div>
-                  <div className="countdown__program">
-                    {countdown ? countdown.program : 'No upcoming deadlines'}
+                  <p className="summary__note">
+                    <strong>Book a free on-site audit</strong> to verify eligibility and maximize your payout.
+                  </p>
+                  <div className="summary__ctas">
+                    <button 
+                      className="btn btn--primary" 
+                      onClick={() => setLeadModalOpen(true)}
+                      data-testid="button-schedule-audit"
+                    >
+                      Book Free Audit
+                    </button>
+                    <button 
+                      className="btn btn--secondary"
+                      data-testid="button-upload-bill"
+                    >
+                      Upload Utility Bill
+                    </button>
+                  </div>
+                </div>
+                <div className="summary__countdown">
+                  <div className="countdown" data-testid="countdown-timer">
+                    <div className="countdown__label">Upcoming Program Deadline</div>
+                    <div className="countdown__timer">
+                      {countdown ? `${countdown.days} days, ${countdown.hours} hours` : '—'}
+                    </div>
+                    <div className="countdown__program">
+                      {countdown ? countdown.program : 'No upcoming deadlines'}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -192,19 +258,22 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               {/* Filters Sidebar */}
               <div className="lg:col-span-1">
-                <FiltersPanel onFiltersChange={(filters) => console.log("Filters changed:", filters)} />
+                <FiltersPanel 
+                  filters={filters}
+                  onFiltersChange={handleFiltersChange}
+                  onClearFilters={handleClearFilters}
+                />
               </div>
 
               {/* Results Content */}
               <div className="lg:col-span-3">
                 <div className="flex items-center justify-between mb-6">
-                  <Select defaultValue="relevance">
+                  <Select value={sortBy} onValueChange={setSortBy}>
                     <SelectTrigger className="w-48" data-testid="select-sort">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="relevance">Sort by Relevance</SelectItem>
-                      <SelectItem value="incentive">Sort by Incentive Amount</SelectItem>
                       <SelectItem value="deadline">Sort by Deadline</SelectItem>
                       <SelectItem value="owner">Sort by Owner</SelectItem>
                     </SelectContent>
@@ -228,6 +297,7 @@ export default function Home() {
                         key={program.id}
                         program={program}
                         onViewDetails={handleViewDetails}
+                        onApplyEnlighting={handleApplyEnlighting}
                       />
                     ))}
                   </div>
@@ -240,6 +310,24 @@ export default function Home() {
       )}
 
       <LeadCaptureModal open={leadModalOpen} onOpenChange={setLeadModalOpen} />
+      <ProgramDetailsModal 
+        open={programDetailsOpen} 
+        onOpenChange={setProgramDetailsOpen}
+        program={selectedProgram}
+      />
+      <ApplyEnlightingModal
+        open={applyEnlightingModalOpen}
+        onOpenChange={setApplyEnlightingModalOpen}
+        program={selectedProgram}
+        searchData={{
+          location: searchParams?.location,
+          businessType: searchParams?.businessType,
+          utility: searchParams?.utility,
+          measures: searchParams?.measures,
+          sqft: searchParams?.sqft,
+          hours: searchParams?.hours,
+        }}
+      />
 
       {/* Footer */}
       <footer className="bg-card border-t border-border py-12">

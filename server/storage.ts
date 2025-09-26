@@ -67,10 +67,8 @@ export class DatabaseStorage implements IStorage {
     // Status filter
     if (params.status) {
       conditions.push(eq(programs.status, params.status));
-    } else {
-      // Default to open programs only
-      conditions.push(eq(programs.status, 'open'));
     }
+    // No default status filter - when status is not specified, show all programs
     
     // Location-based filtering (zip code or state)
     if (params.location) {
@@ -91,13 +89,26 @@ export class DatabaseStorage implements IStorage {
         // State abbreviation
         conditions.push(eq(programGeos.state, location.toUpperCase()));
       } else {
-        // City or county name
-        conditions.push(
-          or(
-            ilike(programGeos.county, `%${location}%`),
-            ilike(programGeos.utilityServiceArea, `%${location}%`)
-          )
-        );
+        // City or county name - handle common California cities
+        const cityMatch = location.toLowerCase();
+        let cityConditions = [
+          ilike(programGeos.county, `%${location}%`),
+          ilike(programGeos.utilityServiceArea, `%${location}%`)
+        ];
+        
+        // Map major California cities to their utilities
+        if (cityMatch.includes('san francisco') || cityMatch.includes('sf')) {
+          cityConditions.push(ilike(programs.owner, '%Pacific Gas & Electric%'));
+        } else if (cityMatch.includes('los angeles') || cityMatch.includes('la')) {
+          cityConditions.push(ilike(programs.owner, '%Los Angeles%'));
+        } else if (cityMatch.includes('san diego')) {
+          cityConditions.push(ilike(programs.owner, '%San Diego Gas & Electric%'));
+        } else if (cityMatch.includes('california') || cityMatch.includes('ca')) {
+          // If it contains California or CA, show all CA programs
+          cityConditions.push(eq(programGeos.state, 'CA'));
+        }
+        
+        conditions.push(or(...cityConditions));
       }
     }
     

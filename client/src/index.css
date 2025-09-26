@@ -139,11 +139,11 @@
 .summary{ max-width:1100px; margin:22px auto 10px; padding:0 20px;}
 .summary__card{
   background:var(--card); border:1px solid #ececec; border-radius:var(--radius); box-shadow:var(--shadow-custom);
-  padding:20px; display:grid; grid-template-columns:1.2fr .8fr; gap:22px;
+  padding:20px;
 }
-@media (max-width:900px){ .summary__card{ grid-template-columns:1fr; } }
-.summary__label{ font-size:12px; font-weight:700; color:var(--brand-ink); text-transform:uppercase; letter-spacing:.06em; }
-.summary__range{ font-size:34px; margin:6px 0 6px; }
+.summary__content{ display:grid; grid-template-columns:1.2fr .8fr; gap:22px; }
+@media (max-width:900px){ .summary__content{ grid-template-columns:1fr; } }
+.summary__title{ font-size:28px; margin:0 0 8px; color:var(--foreground); font-weight:700; }
 .summary__meta{ color:#6b7280; display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
 .summary .divider{ opacity:.6;}
 .summary__note{ color:#4b5563; margin:8px 0 14px;}

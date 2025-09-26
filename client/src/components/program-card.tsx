@@ -3,9 +3,10 @@ import type { Program } from "@shared/schema";
 interface ProgramCardProps {
   program: Program;
   onViewDetails?: (program: Program) => void;
+  onApplyEnlighting?: (program: Program) => void;
 }
 
-export default function ProgramCard({ program, onViewDetails }: ProgramCardProps) {
+export default function ProgramCard({ program, onViewDetails, onApplyEnlighting }: ProgramCardProps) {
   const getStatusTag = () => {
     switch (program.status) {
       case 'open':
@@ -76,10 +77,11 @@ export default function ProgramCard({ program, onViewDetails }: ProgramCardProps
           onClick={() => onViewDetails?.(program)}
           data-testid={`button-view-details-${program.id}`}
         >
-          View Details
+          Program Details
         </button>
         <button 
           className="btn btn--primary" 
+          onClick={() => onApplyEnlighting?.(program)}
           data-testid={`button-apply-enlighting-${program.id}`}
         >
           Apply With Enlighting
