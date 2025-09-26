@@ -21,6 +21,39 @@ export default function ProgramDetailsModal({ open, onOpenChange, program }: Pro
     });
   };
 
+  // Extract rebate values from incentive description for highlighting
+  const extractRebateHighlights = (text: string) => {
+    if (!text) return [];
+    
+    const highlights = [];
+    
+    // Look for dollar amounts per kWh
+    const kwhMatches = text.match(/\$[0-9.,]+\s*\/\s*kWh/gi);
+    if (kwhMatches) {
+      highlights.push(...kwhMatches.map(match => ({ type: 'rate', value: match })));
+    }
+    
+    // Look for percentage tax credits
+    const percentMatches = text.match(/\d+%[^a-z]*(?:tax credit|credit|coverage)/gi);
+    if (percentMatches) {
+      highlights.push(...percentMatches.map(match => ({ type: 'percent', value: match })));
+    }
+    
+    // Look for financing terms
+    const financingMatches = text.match(/(?:0%|zero[- ]interest|no[- ]interest)[^.]*(?:financing|loan)/gi);
+    if (financingMatches) {
+      highlights.push(...financingMatches.map(match => ({ type: 'financing', value: match })));
+    }
+    
+    // Look for up to dollar amounts
+    const upToMatches = text.match(/up to \$[0-9,]+(?:\s*million)?/gi);
+    if (upToMatches) {
+      highlights.push(...upToMatches.map(match => ({ type: 'amount', value: match })));
+    }
+
+    return highlights.slice(0, 4); // Limit to top 4 highlights
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto" data-testid="program-details-modal">
@@ -43,11 +76,33 @@ export default function ProgramDetailsModal({ open, onOpenChange, program }: Pro
             </div>
           )}
 
+          {/* Key Rebate Values - Highlighted */}
+          {program.incentiveDescription && extractRebateHighlights(program.incentiveDescription).length > 0 && (
+            <div>
+              <h3 className="font-medium text-sm text-muted-foreground mb-3">KEY REBATE VALUES</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {extractRebateHighlights(program.incentiveDescription).map((highlight, index) => (
+                  <div key={index} className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="text-lg font-semibold text-green-800">
+                      {highlight.value}
+                    </div>
+                    <div className="text-xs text-green-600 mt-1">
+                      {highlight.type === 'rate' && 'Rebate Rate'}
+                      {highlight.type === 'percent' && 'Tax Credit/Coverage'}
+                      {highlight.type === 'financing' && 'Financing Option'}
+                      {highlight.type === 'amount' && 'Maximum Amount'}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Incentive Details */}
           {program.incentiveDescription && (
             <div>
-              <h3 className="font-medium text-sm text-muted-foreground mb-2">INCENTIVE DETAILS</h3>
-              <div className="text-base leading-relaxed whitespace-pre-line">
+              <h3 className="font-medium text-sm text-muted-foreground mb-2">COMPLETE INCENTIVE DETAILS</h3>
+              <div className="text-base leading-relaxed whitespace-pre-line bg-gray-50 p-4 rounded-lg border">
                 {program.incentiveDescription}
               </div>
             </div>
