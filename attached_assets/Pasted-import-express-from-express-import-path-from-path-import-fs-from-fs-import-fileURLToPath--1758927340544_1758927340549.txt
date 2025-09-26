@@ -1,0 +1,77 @@
+import express from "express";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import leadStore from "./api/leadStore.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+app.use(express.json());
+
+// Load programs
+const programsPath = path.join(__dirname, "data", "programs.json");
+const programs = JSON.parse(fs.readFileSync(programsPath, "utf-8"));
+
+// API: search programs
+app.get("/api/programs", (req, res) => {
+  const { utility, measure, naics, q } = req.query;
+  let results = [...programs];
+
+  if (utility) results = results.filter(p => p.utility.toLowerCase() === utility.toLowerCase());
+  if (measure) results = results.filter(p => (p.measures || []).map(m => m.toLowerCase()).includes(measure.toLowerCase()));
+  if (naics) results = results.filter(p => (p.naics || []).some(n => n.startsWith(naics)));
+  if (q) {
+    const s = q.toLowerCase();
+    results = results.filter(p =>
+      `${p.programName} ${p.summary} ${p.utility} ${p.rebateType}`.toLowerCase().includes(s)
+    );
+  }
+  res.json({ count: results.length, programs: results });
+});
+
+// API: get by id
+app.get("/api/programs/:id", (req, res) => {
+  const item = programs.find(p => p.id === req.params.id);
+  if (!item) return res.status(404).json({ error: "Not found" });
+  res.json(item);
+});
+
+// API: capture lead
+app.post("/api/lead", async (req, res) => {
+  try {
+    const payload = req.body; // {name,email,company,phone,programId,notes}
+    await leadStore.save(payload);
+    res.json({ ok: true });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ ok: false, error: "Failed to store lead" });
+  }
+});
+
+// Serve client build if exists
+const clientDist = path.join(__dirname, "client", "dist");
+if (fs.existsSync(clientDist)) app.use(express.static(clientDist));
+
+// robots.txt
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain").send(`User-agent: *
+Allow: /
+Sitemap: ${process.env.SITE_URL || ""}/sitemap.xml`);
+});
+
+// dynamic sitemap
+app.get("/sitemap.xml", (req, res) => {
+  const base = process.env.SITE_URL || "http://localhost:3000";
+  const urls = [
+    "", "programs", "insights", "about", "privacy",
+    ...programs.map(p => `program/${p.id}`)
+  ].map(u => `<url><loc>${base}/${u}</loc></url>`).join("");
+
+  res.type("application/xml").send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
