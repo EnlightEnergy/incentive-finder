@@ -36,11 +36,87 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <NavigationHeader />
       
-      <HeroSearchForm onSearch={handleSearch} />
+      {/* New Hero Section */}
+      <section className="hero" data-testid="hero-section">
+        <div className="hero__inner">
+          <div className="hero__kicker">California Commercial</div>
+          <h1 className="hero__title">Find Energy Incentives—in minutes.</h1>
+          <p className="hero__sub">
+            Stack utility, state, and federal rebates to cut project costs by up to <strong>70%</strong>. 
+            We then handle the paperwork, installation, and verification to <strong>maximize your payout</strong>.
+          </p>
+
+          <div className="hero__ctas">
+            <a href="#search-form" className="btn btn--primary" data-testid="button-find-incentives">Find My Incentives</a>
+            <button 
+              className="btn btn--secondary" 
+              onClick={() => setLeadModalOpen(true)}
+              data-testid="button-book-audit"
+            >
+              Book Free Audit
+            </button>
+          </div>
+
+          <ul className="hero__proof">
+            <li>Trusted by leading CA facilities</li>
+            <li>$2M+ incentives secured</li>
+            <li>End-to-end: audit → design → install → filing</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Search Form */}
+      <div id="search-form">
+        <HeroSearchForm onSearch={handleSearch} />
+      </div>
 
       {searchParams && (
-        <section className="py-12 bg-background" data-testid="results-section">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <>
+          {/* Results Summary */}
+          <section className="summary" data-testid="results-summary">
+            <div className="summary__card">
+              <div className="summary__left">
+                <div className="summary__label">Pre-Qualified Estimate</div>
+                <h2 className="summary__range">$18,000–$26,000</h2>
+                <div className="summary__meta">
+                  <span className="tag tag--conf">Confidence: Medium</span>
+                  <span className="divider">•</span>
+                  <span>Programs found: <strong>{programs.length}</strong></span>
+                  <span className="divider">•</span>
+                  <span>Last updated: <span>Sep 2025</span></span>
+                </div>
+                <p className="summary__note">
+                  Estimates depend on site conditions and operating hours. 
+                  <strong> Book a free on-site audit</strong> to verify eligibility and maximize your payout.
+                </p>
+                <div className="summary__ctas">
+                  <button 
+                    className="btn btn--primary" 
+                    onClick={() => setLeadModalOpen(true)}
+                    data-testid="button-schedule-audit"
+                  >
+                    Book Free Audit
+                  </button>
+                  <button 
+                    className="btn btn--secondary"
+                    data-testid="button-upload-bill"
+                  >
+                    Upload Utility Bill
+                  </button>
+                </div>
+              </div>
+              <div className="summary__right">
+                <div className="countdown" data-testid="countdown-timer">
+                  <div className="countdown__label">Upcoming Program Deadline</div>
+                  <div className="countdown__timer">72 days</div>
+                  <div className="countdown__program">SCE GoGreen Business Energy Financing</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="py-12 bg-background" data-testid="results-section">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <h3 className="text-2xl font-bold text-foreground">Available Incentives</h3>
@@ -112,6 +188,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        </>
       )}
 
       <LeadCaptureModal open={leadModalOpen} onOpenChange={setLeadModalOpen} />
