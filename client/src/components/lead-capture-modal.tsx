@@ -3,9 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { CheckCircle, Calendar } from "lucide-react";
 import { api } from "@/lib/api";
 import type { InsertLead } from "@shared/schema";
 
@@ -20,8 +20,8 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
     contactName: "",
     email: "",
     phone: "",
-    interestedInAudit: false,
   });
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -29,19 +29,19 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
   const createLeadMutation = useMutation({
     mutationFn: api.createLead,
     onSuccess: () => {
-      toast({
-        title: "Thank you!",
-        description: "Your report has been sent and we'll be in touch soon.",
-      });
+      setShowSuccess(true);
       queryClient.invalidateQueries({ queryKey: ["/api/admin/leads"] });
-      setFormData({
-        company: "",
-        contactName: "",
-        email: "",
-        phone: "",
-        interestedInAudit: false,
-      });
-      onOpenChange(false);
+      // Reset form after a delay
+      setTimeout(() => {
+        setFormData({
+          company: "",
+          contactName: "",
+          email: "",
+          phone: "",
+        });
+        setShowSuccess(false);
+        onOpenChange(false);
+      }, 3000);
     },
     onError: (error) => {
       toast({
@@ -67,12 +67,40 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
       measure: undefined,
       sqft: undefined,
       hours: undefined,
-      baselineDesc: formData.interestedInAudit ? "Interested in energy audit" : undefined,
+      baselineDesc: "Interested in incentive report and potential energy audit",
       utmJson: {},
     };
 
     createLeadMutation.mutate(leadData);
   };
+
+  if (showSuccess) {
+    return (
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="sm:max-w-md" data-testid="lead-capture-success">
+          <div className="text-center py-6">
+            <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
+              <CheckCircle className="w-6 h-6 text-green-600" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Report Sent!</h3>
+            <p className="text-gray-600 mb-4">
+              Your customized incentive summary is on the way. We'll be in touch within 1 business day.
+            </p>
+            <Button 
+              asChild
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+              data-testid="button-schedule-audit"
+            >
+              <a href="mailto:hello@enlightingenergy.com?subject=Schedule Energy Audit&body=I'd like to schedule a free energy audit for my facility.">
+                <Calendar className="w-4 h-4 mr-2" />
+                Schedule Free Audit
+              </a>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -82,17 +110,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="company">Company Name</Label>
-            <Input
-              id="company"
-              value={formData.company}
-              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              required
-              data-testid="input-lead-company"
-            />
-          </div>
-          <div>
-            <Label htmlFor="contactName">Contact Name</Label>
+            <Label htmlFor="contactName">Name</Label>
             <Input
               id="contactName"
               value={formData.contactName}
@@ -102,7 +120,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             />
           </div>
           <div>
-            <Label htmlFor="email">Email Address</Label>
+            <Label htmlFor="email">Work Email</Label>
             <Input
               id="email"
               type="email"
@@ -113,7 +131,17 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             />
           </div>
           <div>
-            <Label htmlFor="phone">Phone (Optional)</Label>
+            <Label htmlFor="company">Company</Label>
+            <Input
+              id="company"
+              value={formData.company}
+              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+              required
+              data-testid="input-lead-company"
+            />
+          </div>
+          <div>
+            <Label htmlFor="phone">Phone <span className="text-slate-500">(optional)</span></Label>
             <Input
               id="phone"
               type="tel"
@@ -122,25 +150,17 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
               data-testid="input-lead-phone"
             />
           </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="interestedInAudit"
-              checked={formData.interestedInAudit}
-              onCheckedChange={(checked) => setFormData({ ...formData, interestedInAudit: checked as boolean })}
-              data-testid="checkbox-interested-audit"
-            />
-            <Label htmlFor="interestedInAudit" className="text-sm">
-              I'm interested in scheduling a free energy audit
-            </Label>
-          </div>
           <Button 
             type="submit" 
-            className="w-full" 
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white" 
             disabled={createLeadMutation.isPending}
             data-testid="button-submit-lead"
           >
-            {createLeadMutation.isPending ? "Sending..." : "Send Report & Schedule Audit"}
+            {createLeadMutation.isPending ? "Sending..." : "Get My Incentive Report"}
           </Button>
+          <p className="text-xs text-slate-500 text-center">
+            We'll send your customized incentive summary. No spam.
+          </p>
         </form>
       </DialogContent>
     </Dialog>

@@ -152,10 +152,10 @@ export default function Home() {
       <section className="hero" data-testid="hero-section">
         <div className="hero__inner">
           <div className="hero__kicker">California Commercial Energy</div>
-          <h1 className="hero__title">Get My Incentive Report</h1>
+          <h1 className="hero__title">Unlock Rebates, Grants & 0% Financing for Your Facility</h1>
           <p className="hero__sub">
-            Stack utility, state, and federal rebates to cut project costs by up to 70%. 
-            Professional energy consultants handle everything from audit to final payout.
+            Stack utility rebates, state grants, and federal tax incentives to cut project costs by up to 70%. 
+            Zero upfront costs with 0% financing. Our energy engineers handle eligibility verification, application filing, and full project management from audit to rebate payout.
           </p>
 
           <div className="hero__ctas">
@@ -172,27 +172,45 @@ export default function Home() {
           </div>
 
           <ul className="hero__proof">
-            <li>Trusted by 500+ CA facilities</li>
-            <li>$2M+ incentives secured</li>
-            <li>Audit → Design → Install → Filing</li>
+            <li>$2.3M in incentives secured YTD</li>
+            <li>Avg payback: 14 months across 127 sites</li>
+            <li>Design-to-rebate, handled</li>
           </ul>
         </div>
 
-        {/* Client/Logo Trust Strip */}
+        {/* Utility Logo Trust Strip */}
         <div className="bg-slate-50 py-8 border-t border-gray-200">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-6">
               <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
-                Trusted by leading utilities and energy companies
+                Partner utilities & programs
               </p>
             </div>
-            <div className="flex justify-center items-center gap-12 flex-wrap opacity-60">
-              <div className="text-lg font-semibold text-slate-700">SCE</div>
-              <div className="text-lg font-semibold text-slate-700">PG&E</div>
-              <div className="text-lg font-semibold text-slate-700">SDG&E</div>
-              <div className="text-lg font-semibold text-slate-700">LADWP</div>
-              <div className="text-lg font-semibold text-slate-700">Energy Star</div>
-              <div className="text-lg font-semibold text-slate-700">DSIRE</div>
+            <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
+              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">SCE</div>
+              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">PG&E</div>
+              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">SDG&E</div>
+              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">LADWP</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-blue-600 transition-colors cursor-default">SoCalREN</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-blue-600 transition-colors cursor-default">MCE</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Client Proof Strip */}
+        <div className="bg-white py-8 border-b border-gray-200">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-6">
+              <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+                Trusted by leading California businesses
+              </p>
+            </div>
+            <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
+              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Fender</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Sierra Aluminum</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">CalPoly</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Marriott Hotels</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Peninsula Clean Energy</div>
             </div>
           </div>
         </div>
@@ -261,7 +279,7 @@ export default function Home() {
                         <SelectValue placeholder="Utility (SCE, PG&E...)" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Utilities</SelectItem>
+                        <SelectItem value="all">All Utilities</SelectItem>
                         <SelectItem value="Southern California Edison">SCE</SelectItem>
                         <SelectItem value="Pacific Gas & Electric">PG&E</SelectItem>
                         <SelectItem value="San Diego Gas & Electric">SDG&E</SelectItem>
@@ -274,7 +292,7 @@ export default function Home() {
                         <SelectValue placeholder="Incentive Type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Types</SelectItem>
+                        <SelectItem value="all">All Types</SelectItem>
                         <SelectItem value="Prescriptive">Prescriptive</SelectItem>
                         <SelectItem value="Performance-Based">Performance-Based</SelectItem>
                         <SelectItem value="Tax Credit">Tax Credit</SelectItem>
@@ -287,7 +305,7 @@ export default function Home() {
                         <SelectValue placeholder="Status" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Status</SelectItem>
+                        <SelectItem value="all">All Status</SelectItem>
                         <SelectItem value="open">Open</SelectItem>
                         <SelectItem value="paused">Paused</SelectItem>
                         <SelectItem value="expired">Expired</SelectItem>
