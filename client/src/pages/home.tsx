@@ -202,12 +202,12 @@ export default function Home() {
               </p>
             </div>
             <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
-              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">SCE</div>
-              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">PG&E</div>
-              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">SDG&E</div>
-              <div className="text-xl font-bold text-slate-400 hover:text-blue-600 transition-colors cursor-default">LADWP</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-blue-600 transition-colors cursor-default">SoCalREN</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-blue-600 transition-colors cursor-default">MCE</div>
+              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SCE</div>
+              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">PG&E</div>
+              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SDG&E</div>
+              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">LADWP</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SoCalREN</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">MCE</div>
             </div>
           </div>
         </div>

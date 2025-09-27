@@ -50,7 +50,7 @@ export default function NavigationHeader() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium transition-colors text-slate-600 hover:text-blue-700"
+                  className="text-sm font-medium transition-colors text-slate-600 hover:text-[#0c558c]"
                 >
                   {link.label}
                 </a>
@@ -60,8 +60,8 @@ export default function NavigationHeader() {
                   href={link.href} 
                   className={`text-sm font-medium transition-colors ${
                     location === link.href 
-                      ? 'text-blue-700' 
-                      : 'text-slate-600 hover:text-blue-700'
+                      ? 'text-[#0c558c]' 
+                      : 'text-slate-600 hover:text-[#0c558c]'
                   }`}
                 >
                   {link.label}
@@ -70,7 +70,7 @@ export default function NavigationHeader() {
             )}
             <Button 
               asChild
-              className="ml-4 bg-blue-700 hover:bg-blue-800 text-white"
+              className="ml-4 bg-[#0c558c] hover:bg-[#0a4876] text-white"
               data-testid="button-get-report"
             >
               <a href="mailto:hello@enlightingenergy.com">
@@ -96,7 +96,7 @@ export default function NavigationHeader() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-lg font-medium transition-colors text-slate-600 hover:text-blue-700"
+                        className="text-lg font-medium transition-colors text-slate-600 hover:text-[#0c558c]"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {link.label}
@@ -107,8 +107,8 @@ export default function NavigationHeader() {
                         href={link.href}
                         className={`text-lg font-medium transition-colors ${
                           location === link.href 
-                            ? 'text-blue-700' 
-                            : 'text-slate-600 hover:text-blue-700'
+                            ? 'text-[#0c558c]' 
+                            : 'text-slate-600 hover:text-[#0c558c]'
                         }`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
@@ -118,7 +118,7 @@ export default function NavigationHeader() {
                   )}
                   <Button 
                     asChild
-                    className="mt-6 bg-blue-700 hover:bg-blue-800 text-white justify-start"
+                    className="mt-6 bg-[#0c558c] hover:bg-[#0a4876] text-white justify-start"
                     data-testid="button-get-report-mobile"
                   >
                     <a 

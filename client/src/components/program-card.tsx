@@ -80,7 +80,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
           </div>
           {program.status === 'open' && (
             <span 
-              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-700"
+              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#00a5cb] text-white"
               aria-label="Application status: Open for submissions"
             >
               Open
@@ -91,7 +91,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
         {/* Program Name - More prominent */}
         <h3 
           id={`program-title-${program.id}`}
-          className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-700 transition-colors" 
+          className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-[#0c558c] transition-colors" 
           data-testid={`text-program-name-${program.id}`}
         >
           {program.name}
@@ -101,7 +101,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
         <div className="mb-4">
           <span 
             id={`program-incentive-${program.id}`}
-            className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-bold bg-blue-600 text-white shadow-sm"
+            className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-bold bg-[#0c558c] text-white shadow-sm"
             aria-label={`Key incentive: ${getRebateBadge()}`}
           >
             {getRebateBadge()}
@@ -149,7 +149,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3" role="group" aria-label="Primary actions">
             <button 
-              className="flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+              className="flex items-center gap-1.5 text-sm font-medium text-[#0c558c] hover:text-[#0a4876] transition-colors"
               onClick={() => onViewDetails?.(program)}
               data-testid={`button-view-details-${program.id}`}
               aria-label={`View details for ${program.name}`}
@@ -159,7 +159,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
             </button>
             
             <button 
-              className="flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+              className="flex items-center gap-1.5 text-sm font-medium text-[#0c558c] hover:text-[#0a4876] transition-colors"
               onClick={() => onApplyEnlighting?.(program)}
               data-testid={`button-email-program-${program.id}`}
               aria-label={`Email information about ${program.name}`}

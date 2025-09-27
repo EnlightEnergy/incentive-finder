@@ -11,7 +11,7 @@
   --card-foreground: hsl(222.2, 84%, 4.9%);
   --popover: hsl(0, 0%, 100%);
   --popover-foreground: hsl(222.2, 84%, 4.9%);
-  --primary: hsl(214.3, 78%, 51%);
+  --primary: hsl(208, 85%, 31%);
   --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(215.4, 16.3%, 46.9%);
   --secondary-foreground: hsl(0, 0%, 100%);
@@ -54,8 +54,10 @@
   --spacing: 0.25rem;
   
   /* New Blue-Forward Design Variables */
-  --primary-blue: #1D4ED8;
-  --primary-blue-hover: #1E40AF;
+  --primary-blue: #0c558c;
+  --primary-blue-hover: #0a4876;
+  --search-blue: #00a5cb;
+  --search-blue-hover: #0094b3;
   --blue-50: #EFF6FF;
   --blue-200: #BFDBFE;
   --slate-600: #475569;
