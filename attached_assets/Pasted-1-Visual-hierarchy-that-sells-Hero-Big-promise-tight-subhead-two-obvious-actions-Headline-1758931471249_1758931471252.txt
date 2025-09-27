@@ -1,0 +1,37 @@
+1) Visual hierarchy that sells
+	•	Hero: Big promise, tight subhead, two obvious actions.
+	•	Headline 36–48px, bold. Subhead 18–20px, 60–70% width on desktop.
+	•	Two buttons: Primary “Get My Incentive Report”, Secondary “Browse Programs”.
+	•	Add a client/logo strip under the hero for trust (utilities + notable clients).
+	•	Section rhythm: Alternate subtle backgrounds (white → slate-50 → white) so the eye knows where one section ends and the next begins.
+	•	Card grid: Programs live in crisp cards with clear affordances (title, 2–3 bullets, rebate range badge, 3 links: Details / Email me / Source).
+
+2) A modern, “engineering-credible” aesthetic
+	•	Typography: Inter or IBM Plex Sans. 16px base / 24px line height. Tight letter-spacing for headings (-0.01em).
+	•	Color: Keep it clean and blue-forward:
+	•	Primary: #1D4ED8 (Tailwind blue-700)
+	•	Hover: #1E40AF (blue-800)
+	•	Accents: blue-50, slate-600, badges in green-50/200 and blue-50/200
+	•	Spacing scale: Generous. Outer sections py-16, inner blocks gap-6, card padding p-6.
+	•	Corners & shadows: Rounded-2xl, very light shadows; let whitespace do the work.
+
+3) Navigation that converts (and never confuses)
+	•	Sticky header with translucent backdrop + subtle border bottom.
+	•	Limit top-nav to Programs / Insights / About + a right-side CTA button.
+	•	On mobile: hamburger → slide-over with the same three links + primary CTA.
+
+4) Make search & filtering obvious (and friendly)
+	•	Filters row: Single line on desktop, stacked on mobile. Inputs look tappable.
+	•	Live result count (“12 programs”) right under filters.
+	•	Keep placeholder copy helpful: “Utility (SCE, PG&E…)”, “NAICS (31-33)”.
+	•	Empty state: Never a dead end—show 3 suggested queries and a “Talk to us” CTA.
+
+5) Program card that answers “is this for me?” at a glance
+
+Each card should surface:
+	•	Utility + type (e.g., SCE • Prescriptive)
+	•	Program name (link-color, semi-bold)
+	•	1–2 line summary
+	•	Badges: Rebates: $0.05–$0.25/kWh, 0% on-bill if applicable
+	•	Actions: Details, Email me this program, Source
+	•	Hover: soft lift; keep it classy.

@@ -1,0 +1,77 @@
+6) Lead capture that feels like a concierge, not a trap
+	•	Keep the form short (Name, Work Email, Company, Phone optional, Notes).
+	•	Put one compact form in the hero and another contextual form on every Program Detail page pre-filled with that program’s name.
+	•	Microcopy under the submit button: “We’ll send your customized incentive summary. No spam.”
+	•	Success state: Replace the form with a green confirmation card and a link to schedule an audit.
+
+7) Trust signals that do heavy lifting
+	•	Logo bar: SCE, PG&E, SoCalREN, MCE, etc. (lowsat grayscale; color on hover if you want flair).
+	•	Client strip: 4–6 recognizables (Fender, Sierra Aluminum…). Keep it tasteful, same height.
+	•	One-liner proof: “$X in incentives secured YTD” or “Avg payback: 14 months across 127 sites.”
+
+8) Insights page = insider value (and SEO moat)
+	•	Use card teasers: Title, 2-line summary, 3-min read tag.
+	•	Topics: Fluorescent ban timing, 0% on-bill finance primer, Custom M&V in manufacturing.
+	•	Link Insights where relevant from program cards (“Learn how on-bill works →”).
+
+9) Footer that says “we’re real people”
+	•	Left: Enlighting summary line.
+	•	Right: Quick links + a compact “Get My Incentive Report” inline form.
+	•	Bottom bar: ©, light gray, tiny.
+
+10) Accessibility & mobile polish (non-negotiable)
+	•	Touch targets ≥ 44px height.
+	•	Focus styles visible on all interactive elements.
+	•	Color contrast: buttons/text pass WCAG AA.
+	•	Mobile: collapse filters into an accordion; CTA button fixed at bottom on program detail pages for thumb reach.
+
+⸻
+
+Recommended layout (top to bottom)
+	1.	Sticky header (logo/wordmark, Programs / Insights / About, CTA button)
+	2.	Hero (headline, subhead, two CTAs, client/utility logo strip)
+	3.	How it works (3 cards)
+	4.	Popular now (three deep links into filtered results)
+	5.	Program grid (or link to Programs page if you want to keep home lean)
+	6.	Lead capture (compact form block)
+	7.	Insights strip (3 posts)
+	8.	Footer (credibility + quick links + mini form)
+
+⸻
+
+Quick style tokens (Tailwind)
+	•	Container: max-w-6xl mx-auto px-4
+	•	Sections: py-16 (desktop), py-12 (mobile)
+	•	Headings: text-4xl md:text-5xl font-bold tracking-tight (H1), text-2xl font-semibold (H2)
+	•	Body: text-slate-700, secondary: text-slate-500
+	•	Buttons:
+	•	Primary: rounded-xl px-6 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700
+	•	Secondary: rounded-xl px-6 py-3 border border-slate-300 hover:bg-white
+	•	Cards: border border-slate-200 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md transition
+
+⸻
+
+Micro-interactions (the subtle “premium”)
+	•	Hover lifts on cards (hover:-translate-y-0.5 + hover:shadow-md with transition).
+	•	Input focus ring: focus:outline-none focus:ring-2 focus:ring-blue-500.
+	•	Anchor hover underlines only: hover:underline—no jarring color shifts.
+	•	Loading states: skeleton shimmer bars on program cards during fetch.
+
+⸻
+
+Copy that sets the tone (use verbatim if you like)
+
+Hero H1
+“Unlock Rebates, Grants & 0% Financing for Your Facility”
+
+Hero subhead
+“Instantly find commercial energy incentives in California. Enlighting turns programs into payback—then delivers the project, turnkey.”
+
+CTA labels
+	•	Primary: “Get My Incentive Report”
+	•	Secondary: “Browse Programs”
+
+Value bullets
+	•	“Design-to-rebate, handled.”
+	•	“Real ROI, documented.”
+	•	“Custom for manufacturing & campuses.”

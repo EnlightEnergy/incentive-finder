@@ -151,29 +151,50 @@ export default function Home() {
       {/* New Hero Section */}
       <section className="hero" data-testid="hero-section">
         <div className="hero__inner">
-          <div className="hero__kicker">California Commercial</div>
-          <h1 className="hero__title">Find Energy Incentives—in minutes.</h1>
+          <div className="hero__kicker">California Commercial Energy</div>
+          <h1 className="hero__title">Get My Incentive Report</h1>
           <p className="hero__sub">
-            Stack utility, state, and federal rebates to cut project costs by up to <strong>70%</strong>. 
-            We then handle the paperwork, installation, and verification to <strong>maximize your payout</strong>.
+            Stack utility, state, and federal rebates to cut project costs by up to 70%. 
+            Professional energy consultants handle everything from audit to final payout.
           </p>
 
           <div className="hero__ctas">
-            <a href="#search-form" className="btn btn--primary" data-testid="button-find-incentives">Find My Incentives</a>
             <button 
-              className="btn btn--secondary" 
+              className="btn btn--primary" 
               onClick={() => setLeadModalOpen(true)}
-              data-testid="button-book-audit"
+              data-testid="button-get-report"
             >
-              Book Free Energy Audit
+              Get My Incentive Report
             </button>
+            <a href="#search-form" className="btn btn--secondary" data-testid="button-browse-programs">
+              Browse Programs
+            </a>
           </div>
 
           <ul className="hero__proof">
-            <li>Trusted by leading CA facilities</li>
+            <li>Trusted by 500+ CA facilities</li>
             <li>$2M+ incentives secured</li>
-            <li>End-to-end: audit → design → install → filing</li>
+            <li>Audit → Design → Install → Filing</li>
           </ul>
+        </div>
+
+        {/* Client/Logo Trust Strip */}
+        <div className="bg-slate-50 py-8 border-t border-gray-200">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-6">
+              <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+                Trusted by leading utilities and energy companies
+              </p>
+            </div>
+            <div className="flex justify-center items-center gap-12 flex-wrap opacity-60">
+              <div className="text-lg font-semibold text-slate-700">SCE</div>
+              <div className="text-lg font-semibold text-slate-700">PG&E</div>
+              <div className="text-lg font-semibold text-slate-700">SDG&E</div>
+              <div className="text-lg font-semibold text-slate-700">LADWP</div>
+              <div className="text-lg font-semibold text-slate-700">Energy Star</div>
+              <div className="text-lg font-semibold text-slate-700">DSIRE</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -229,82 +250,166 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="py-12 bg-background" data-testid="results-section">
+          <section className="py-16 bg-slate-50" data-testid="results-section">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h3 className="text-2xl font-bold text-foreground">Available Incentives</h3>
-                <p className="text-muted-foreground mt-1" data-testid="text-results-count">
-                  Found {programs.length} eligible programs for your project
-                </p>
-              </div>
-              <div className="flex items-center space-x-4">
-                <Button 
-                  variant="outline"
-                  onClick={() => setLeadModalOpen(true)}
-                  data-testid="button-email-report"
-                >
-                  📄 Email Report
-                </Button>
-                <Button 
-                  onClick={() => setLeadModalOpen(true)}
-                  data-testid="button-book-audit"
-                >
-                  Book Free Energy Audit
-                </Button>
-              </div>
-            </div>
+              {/* Horizontal Filters Bar */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
+                <div className="flex flex-col lg:flex-row gap-4 items-center">
+                  <div className="flex flex-col sm:flex-row gap-4 flex-1">
+                    <Select value={filters.programOwner[0] || ""} onValueChange={(value) => handleFiltersChange({...filters, programOwner: value ? [value] : []})}>
+                      <SelectTrigger className="min-w-48" data-testid="select-utility">
+                        <SelectValue placeholder="Utility (SCE, PG&E...)" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="">All Utilities</SelectItem>
+                        <SelectItem value="Southern California Edison">SCE</SelectItem>
+                        <SelectItem value="Pacific Gas & Electric">PG&E</SelectItem>
+                        <SelectItem value="San Diego Gas & Electric">SDG&E</SelectItem>
+                        <SelectItem value="Los Angeles Department of Water & Power">LADWP</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    
+                    <Select value={filters.incentiveType[0] || ""} onValueChange={(value) => handleFiltersChange({...filters, incentiveType: value ? [value] : []})}>
+                      <SelectTrigger className="min-w-48" data-testid="select-incentive-type">
+                        <SelectValue placeholder="Incentive Type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="">All Types</SelectItem>
+                        <SelectItem value="Prescriptive">Prescriptive</SelectItem>
+                        <SelectItem value="Performance-Based">Performance-Based</SelectItem>
+                        <SelectItem value="Tax Credit">Tax Credit</SelectItem>
+                        <SelectItem value="Financing + Rebates">Financing + Rebates</SelectItem>
+                      </SelectContent>
+                    </Select>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-              {/* Filters Sidebar */}
-              <div className="lg:col-span-1">
-                <FiltersPanel 
-                  filters={filters}
-                  onFiltersChange={handleFiltersChange}
-                  onClearFilters={handleClearFilters}
-                />
-              </div>
-
-              {/* Results Content */}
-              <div className="lg:col-span-3">
-                <div className="flex items-center justify-between mb-6">
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="w-48" data-testid="select-sort">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="relevance">Sort by Relevance</SelectItem>
-                      <SelectItem value="deadline">Sort by Deadline</SelectItem>
-                      <SelectItem value="owner">Sort by Owner</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    <Select value={filters.status} onValueChange={(value) => handleFiltersChange({...filters, status: value})}>
+                      <SelectTrigger className="min-w-36" data-testid="select-status">
+                        <SelectValue placeholder="Status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="">All Status</SelectItem>
+                        <SelectItem value="open">Open</SelectItem>
+                        <SelectItem value="paused">Paused</SelectItem>
+                        <SelectItem value="expired">Expired</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="flex items-center gap-4">
+                    <Button 
+                      variant="outline" 
+                      onClick={handleClearFilters}
+                      data-testid="button-clear-filters"
+                      className="text-slate-600"
+                    >
+                      Clear
+                    </Button>
+                    <Select value={sortBy} onValueChange={setSortBy}>
+                      <SelectTrigger className="w-48" data-testid="select-sort">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="relevance">Sort by Relevance</SelectItem>
+                        <SelectItem value="deadline">Sort by Deadline</SelectItem>
+                        <SelectItem value="owner">Sort by Owner</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-
-                {isLoading ? (
-                  <div className="text-center py-12" data-testid="loading-state">
-                    <p className="text-muted-foreground">Searching for programs...</p>
-                  </div>
-                ) : programs.length === 0 ? (
-                  <div className="text-center py-12" data-testid="empty-state">
-                    <p className="text-muted-foreground">
-                      No programs found matching your criteria. Try adjusting your search or filters.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="space-y-6" data-testid="programs-list">
-                    {programs.map((program) => (
-                      <ProgramCard
-                        key={program.id}
-                        program={program}
-                        onViewDetails={handleViewDetails}
-                        onApplyEnlighting={handleApplyEnlighting}
-                      />
-                    ))}
-                  </div>
-                )}
+                
+                {/* Live Result Count */}
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <p className="text-sm text-slate-600" data-testid="text-results-count">
+                    <span className="font-semibold text-slate-900">{programs.length} programs</span> match your criteria
+                  </p>
+                </div>
               </div>
+
+              {/* Action Bar */}
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground">Available Incentives</h3>
+                  <p className="text-slate-600 mt-1">
+                    California utility, state, and federal energy efficiency programs
+                  </p>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Button 
+                    variant="outline"
+                    onClick={() => setLeadModalOpen(true)}
+                    data-testid="button-email-report"
+                  >
+                    📄 Email Report
+                  </Button>
+                  <Button 
+                    className="bg-blue-700 hover:bg-blue-800"
+                    onClick={() => setLeadModalOpen(true)}
+                    data-testid="button-book-audit"
+                  >
+                    Book Free Energy Audit
+                  </Button>
+                </div>
+              </div>
+
+              {/* Results */}
+              {isLoading ? (
+                <div className="text-center py-12" data-testid="loading-state">
+                  <p className="text-slate-600">Searching for programs...</p>
+                </div>
+              ) : programs.length === 0 ? (
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center" data-testid="empty-state">
+                  <div className="max-w-md mx-auto">
+                    <h3 className="text-lg font-semibold text-slate-900 mb-2">No programs found</h3>
+                    <p className="text-slate-600 mb-6">
+                      Try these popular searches or talk to our experts for personalized guidance:
+                    </p>
+                    
+                    <div className="space-y-3 mb-8">
+                      <button 
+                        className="block w-full text-left p-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors text-sm"
+                        onClick={() => handleSearch({ businessType: "Commercial", measures: ["HVAC"] })}
+                      >
+                        <span className="font-medium text-slate-900">Commercial HVAC rebates</span>
+                        <span className="text-slate-600 ml-2">→ Find cooling & heating incentives</span>
+                      </button>
+                      <button 
+                        className="block w-full text-left p-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors text-sm"
+                        onClick={() => handleSearch({ businessType: "Industrial", measures: ["Lighting"] })}
+                      >
+                        <span className="font-medium text-slate-900">Industrial lighting upgrades</span>
+                        <span className="text-slate-600 ml-2">→ LED retrofit programs</span>
+                      </button>
+                      <button 
+                        className="block w-full text-left p-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors text-sm"
+                        onClick={() => handleSearch({ businessType: "Small Business" })}
+                      >
+                        <span className="font-medium text-slate-900">Small business programs</span>
+                        <span className="text-slate-600 ml-2">→ Direct install & financing</span>
+                      </button>
+                    </div>
+
+                    <Button 
+                      className="bg-blue-700 hover:bg-blue-800"
+                      onClick={() => setLeadModalOpen(true)}
+                      data-testid="button-talk-to-experts"
+                    >
+                      Talk to Our Experts
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-6" data-testid="programs-list">
+                  {programs.map((program) => (
+                    <ProgramCard
+                      key={program.id}
+                      program={program}
+                      onViewDetails={handleViewDetails}
+                      onApplyEnlighting={handleApplyEnlighting}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
         </section>
         </>
       )}
