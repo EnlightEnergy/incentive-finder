@@ -35,7 +35,7 @@ export default function NavigationHeader() {
               <img 
                 src={logoPath} 
                 alt="Enlighting Logo" 
-                className="h-18 w-auto object-contain"
+                className="h-12 w-auto object-contain"
                 data-testid="logo-enlighting"
               />
             </Link>
