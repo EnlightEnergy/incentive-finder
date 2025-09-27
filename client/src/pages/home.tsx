@@ -13,6 +13,19 @@ import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
 import logoPath from "@assets/P_Mark_transp_1758848685119.png";
 
+// Client logo imports
+import boeingLogo from "@assets/boeing_1758932853739.jpg";
+import dreamworksLogo from "@assets/dreamworks_1758932853741.jpg";
+import edcoLogo from "@assets/edco_1758932853742.jpg";
+import fenderLogo from "@assets/fender_1758932853743.jpg";
+import howmetLogo from "@assets/howmet_1758932853743.jpg";
+import metroLogo from "@assets/Metro_1758932853743.jpg";
+import nasaJplLogo from "@assets/nasa_jpl_1758932853744.jpg";
+import nipponLogo from "@assets/nippon_1758932853744.jpg";
+import redBullLogo from "@assets/red_bull_1758932853745.jpg";
+import sbAirportLogo from "@assets/SB Airport_1758932853745.jpg";
+import zogsLogo from "@assets/zogs_1758932853746.jpg";
+
 export default function Home() {
   const [searchParams, setSearchParams] = useState<Partial<SearchProgramsParams> | null>(null);
   const [leadModalOpen, setLeadModalOpen] = useState(false);
@@ -208,11 +221,17 @@ export default function Home() {
               </p>
             </div>
             <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
-              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Fender</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Sierra Aluminum</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">CalPoly</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Marriott Hotels</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-slate-700 transition-colors cursor-default">Peninsula Clean Energy</div>
+              <img src={boeingLogo} alt="Boeing" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={dreamworksLogo} alt="DreamWorks" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={edcoLogo} alt="EDCO" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={fenderLogo} alt="Fender" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={howmetLogo} alt="Howmet Aerospace" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={metroLogo} alt="Metro" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={nasaJplLogo} alt="NASA JPL" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={nipponLogo} alt="Nippon Express" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={redBullLogo} alt="Red Bull" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={sbAirportLogo} alt="Santa Barbara Airport" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+              <img src={zogsLogo} alt="Zog's" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
             </div>
           </div>
         </div>
