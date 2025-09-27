@@ -127,6 +127,131 @@
     font-weight: 600;
     line-height: 1.3;
   }
+
+  /* ========== ACCESSIBILITY IMPROVEMENTS ========== */
+  
+  /* Enhanced focus styles for WCAG AA compliance - use focus-visible for better UX */
+  :focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
+  }
+
+  /* Ensure interactive UI elements have minimum touch target size */
+  .btn,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select,
+  .touch-target {
+    min-height: 44px;
+  }
+
+  /* Apply flex layout and padding only to buttons and explicit interactive elements */
+  .btn,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  .touch-target {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Navigation and standalone links should be touch-friendly */
+  nav a,
+  header a,
+  .nav-link,
+  a.btn,
+  a[role="button"] {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Exception for icon-only buttons to maintain compact design */
+  button:has(svg:only-child),
+  [role="button"]:has(svg:only-child) {
+    min-width: 44px;
+    padding: 0.75rem;
+  }
+
+  /* Focus styles for form elements */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 1px;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+  }
+
+  /* Skip link for keyboard navigation */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary-blue);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    font-weight: 600;
+  }
+  
+  .skip-link:focus {
+    top: 6px;
+  }
+
+  /* Ensure text meets contrast requirements */
+  .text-slate-600 {
+    color: #475569 !important; /* Ensures 4.5:1 contrast ratio */
+  }
+  
+  .text-slate-500 {
+    color: #64748b !important; /* For secondary text */
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --primary-blue: #1E40AF;
+      --primary-blue-hover: #1D4ED8;
+    }
+    
+    .text-slate-600 {
+      color: #334155 !important;
+    }
+    
+    .border-slate-200 {
+      border-color: #64748b !important;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *, 
+    *::before, 
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 /* ========== HERO STYLES ========== */

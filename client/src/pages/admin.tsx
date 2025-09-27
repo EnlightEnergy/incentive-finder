@@ -17,6 +17,13 @@ export default function Admin() {
 
   return (
     <div className="min-h-screen bg-background">
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50"
+        data-testid="link-skip-to-main"
+      >
+        Skip to main content
+      </a>
       <NavigationHeader />
       
       <SidebarProvider>
@@ -43,7 +50,7 @@ export default function Admin() {
             </SidebarContent>
           </Sidebar>
 
-          <div className="flex-1 overflow-hidden">
+          <main id="main-content" className="flex-1 overflow-hidden" tabIndex={-1}>
             {activeSection === "programs" && <AdminDashboard />}
             
             {activeSection === "leads" && (
@@ -78,7 +85,7 @@ export default function Admin() {
                 </Card>
               </div>
             )}
-          </div>
+          </main>
         </div>
       </SidebarProvider>
     </div>

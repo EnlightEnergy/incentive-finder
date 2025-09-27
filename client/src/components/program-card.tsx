@@ -58,52 +58,85 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
     <article 
       className="group bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all duration-300 ease-out" 
       data-testid={`card-program-${program.id}`}
+      aria-labelledby={`program-title-${program.id}`}
+      aria-describedby={`program-summary-${program.id} program-incentive-${program.id}`}
     >
       {/* Header Section */}
       <div className="p-6 pb-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 mr-2">
+            <span 
+              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 mr-2"
+              aria-label={`Utility: ${program.owner}`}
+            >
               {getUtilityShortName(program.owner)}
             </span>
-            <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+            <span 
+              className="text-xs font-medium text-slate-500 uppercase tracking-wide"
+              aria-label={`Program type: ${program.incentiveType}`}
+            >
               {program.incentiveType}
             </span>
           </div>
           {program.status === 'open' && (
-            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-700">
+            <span 
+              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-700"
+              aria-label="Application status: Open for submissions"
+            >
               Open
             </span>
           )}
         </div>
 
         {/* Program Name - More prominent */}
-        <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-700 transition-colors" data-testid={`text-program-name-${program.id}`}>
+        <h3 
+          id={`program-title-${program.id}`}
+          className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-700 transition-colors" 
+          data-testid={`text-program-name-${program.id}`}
+        >
           {program.name}
         </h3>
 
         {/* Key Incentive - Make this very prominent */}
         <div className="mb-4">
-          <span className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-bold bg-blue-600 text-white shadow-sm">
+          <span 
+            id={`program-incentive-${program.id}`}
+            className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-bold bg-blue-600 text-white shadow-sm"
+            aria-label={`Key incentive: ${getRebateBadge()}`}
+          >
             {getRebateBadge()}
           </span>
         </div>
 
         {/* Summary */}
-        <p className="text-slate-600 text-sm leading-relaxed mb-4">
+        <p 
+          id={`program-summary-${program.id}`}
+          className="text-slate-600 text-sm leading-relaxed mb-4"
+        >
           {getSummary()}
         </p>
 
         {/* Tech Tags */}
         {program.techTags && program.techTags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div 
+            className="flex flex-wrap gap-2 mb-4"
+            role="list"
+            aria-label="Technology categories"
+          >
             {program.techTags.slice(0, 3).map((tag, index) => (
-              <span key={index} className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-50 text-slate-600 border border-slate-200">
+              <span 
+                key={index} 
+                className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-50 text-slate-600 border border-slate-200"
+                role="listitem"
+              >
                 {tag}
               </span>
             ))}
             {program.techTags.length > 3 && (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium text-slate-500">
+              <span 
+                className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium text-slate-500"
+                aria-label={`${program.techTags.length - 3} additional technology categories`}
+              >
                 +{program.techTags.length - 3} more
               </span>
             )}
@@ -112,15 +145,16 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
       </div>
 
       {/* Actions Footer */}
-      <div className="px-6 py-4 bg-slate-50 border-t border-slate-200">
+      <div className="px-6 py-4 bg-slate-50 border-t border-slate-200" role="toolbar" aria-label="Program actions">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3" role="group" aria-label="Primary actions">
             <button 
               className="flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
               onClick={() => onViewDetails?.(program)}
               data-testid={`button-view-details-${program.id}`}
+              aria-label={`View details for ${program.name}`}
             >
-              <Eye className="w-4 h-4" />
+              <Eye className="w-4 h-4" aria-hidden="true" />
               Details
             </button>
             
@@ -128,8 +162,9 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
               className="flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
               onClick={() => onApplyEnlighting?.(program)}
               data-testid={`button-email-program-${program.id}`}
+              aria-label={`Email information about ${program.name}`}
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4" aria-hidden="true" />
               Email this
             </button>
           </div>
@@ -141,8 +176,9 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
               data-testid={`link-source-${program.id}`}
+              aria-label={`View original source for ${program.name} (opens in new tab)`}
             >
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4" aria-hidden="true" />
               Source
             </a>
           )}

@@ -148,6 +148,8 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <NavigationHeader />
       
+      <main id="main-content" tabIndex={-1}>
+      
       {/* New Hero Section */}
       <section className="hero" data-testid="hero-section">
         <div className="hero__inner">
@@ -451,10 +453,10 @@ export default function Home() {
           hours: searchParams?.hours,
         }}
       />
-
-      {/* Footer */}
-      <footer className="bg-card border-t border-border py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      </main>
+      
+      <footer className="bg-slate-50 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
