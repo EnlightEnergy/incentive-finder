@@ -6,7 +6,7 @@ export default function NotFound() {
     <>
       <a 
         href="#main-content" 
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#0c558c] text-white px-4 py-2 rounded-md z-50"
         data-testid="link-skip-to-main"
       >
         Skip to main content

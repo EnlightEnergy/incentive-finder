@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, Calendar } from "lucide-react";
@@ -20,6 +21,9 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
     contactName: "",
     email: "",
     phone: "",
+    industryType: "",
+    sqft: "",
+    measure: "",
   });
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -38,6 +42,9 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
           contactName: "",
           email: "",
           phone: "",
+          industryType: "",
+          sqft: "",
+          measure: "",
         });
         setShowSuccess(false);
         onOpenChange(false);
@@ -63,9 +70,10 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
       phone: formData.phone || undefined,
       address: undefined,
       naics: undefined,
+      industryType: formData.industryType || undefined,
       utility: undefined,
-      measure: undefined,
-      sqft: undefined,
+      measure: formData.measure || undefined,
+      sqft: formData.sqft ? parseInt(formData.sqft, 10) : undefined,
       hours: undefined,
       baselineDesc: "Interested in incentive report and potential energy audit",
       utmJson: {},
@@ -93,7 +101,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             </p>
             <Button 
               asChild
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-[#00a5cb] hover:bg-[#0094b3] text-white"
               data-testid="button-schedule-audit"
               aria-label="Schedule a free energy audit via email"
             >
@@ -164,6 +172,48 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             />
           </div>
           <div>
+            <Label htmlFor="industryType">Industry Type</Label>
+            <Input
+              id="industryType"
+              name="industryType"
+              value={formData.industryType}
+              onChange={(e) => setFormData({ ...formData, industryType: e.target.value })}
+              placeholder="e.g., Manufacturing, Warehousing, Commercial"
+              data-testid="input-lead-industry-type"
+            />
+          </div>
+          <div>
+            <Label htmlFor="sqft">Building Square Footage</Label>
+            <Input
+              id="sqft"
+              name="sqft"
+              type="number"
+              value={formData.sqft}
+              onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
+              placeholder="e.g., 50000"
+              data-testid="input-lead-sqft"
+            />
+          </div>
+          <div>
+            <Label htmlFor="measure">Energy Efficiency Measure</Label>
+            <Select value={formData.measure} onValueChange={(value) => setFormData({ ...formData, measure: value })}>
+              <SelectTrigger data-testid="select-energy-measure">
+                <SelectValue placeholder="Select all that apply" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Lighting">Lighting</SelectItem>
+                <SelectItem value="HVAC Systems">HVAC Systems</SelectItem>
+                <SelectItem value="Heat Pump Water Heaters">Heat Pump Water Heaters</SelectItem>
+                <SelectItem value="Motors & VFDs">Motors & VFDs</SelectItem>
+                <SelectItem value="Refrigeration">Refrigeration</SelectItem>
+                <SelectItem value="Compressed Air Systems">Compressed Air Systems</SelectItem>
+                <SelectItem value="Building Envelope">Building Envelope</SelectItem>
+                <SelectItem value="Solar Panels">Solar Panels</SelectItem>
+                <SelectItem value="Energy Storage">Energy Storage</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
             <Label htmlFor="phone">Phone <span className="text-slate-500">(optional)</span></Label>
             <Input
               id="phone"
@@ -177,7 +227,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
           </div>
           <Button 
             type="submit" 
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white" 
+            className="w-full bg-[#00a5cb] hover:bg-[#0094b3] text-white" 
             disabled={createLeadMutation.isPending}
             data-testid="button-submit-lead"
           >

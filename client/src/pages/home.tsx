@@ -208,6 +208,10 @@ export default function Home() {
               <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">LADWP</div>
               <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SoCalREN</div>
               <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">MCE</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">Willdan</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">Resource Innovations</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">AESC</div>
+              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">GoGreen Financing</div>
             </div>
           </div>
         </div>
@@ -260,7 +264,8 @@ export default function Home() {
                   </p>
                   <div className="summary__ctas">
                     <button 
-                      className="btn btn--primary" 
+                      className="btn" 
+                      style={{ background: '#00a5cb', color: '#fff' }}
                       onClick={() => setLeadModalOpen(true)}
                       data-testid="button-schedule-audit"
                     >
@@ -381,7 +386,7 @@ export default function Home() {
                     📄 Email Report
                   </Button>
                   <Button 
-                    className="bg-blue-700 hover:bg-blue-800"
+                    className="bg-[#00a5cb] hover:bg-[#0094b3]"
                     onClick={() => setLeadModalOpen(true)}
                     data-testid="button-book-audit"
                   >
@@ -428,7 +433,7 @@ export default function Home() {
                     </div>
 
                     <Button 
-                      className="bg-blue-700 hover:bg-blue-800"
+                      className="bg-[#0c558c] hover:bg-[#0a4876]"
                       onClick={() => setLeadModalOpen(true)}
                       data-testid="button-talk-to-experts"
                     >
@@ -487,14 +492,14 @@ export default function Home() {
                 <span className="text-lg font-semibold text-foreground">Enlighting Energy</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Helping commercial facilities find and secure energy incentives since 2018.
+                Helping industrial, manufacturing, warehousing, and commercial facilities find and secure energy incentives since 2018.
               </p>
             </div>
             <div>
               <h3 className="font-medium text-foreground mb-4">Services</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Finding Incentives</li>
-                <li>Energy Audits</li>
+                <li>Locate and Target Incentives</li>
+                <li>Energy Efficiency Audits</li>
                 <li>Engineering Services</li>
                 <li>Turnkey Efficiency Upgrades</li>
                 <li>Project Efficiency Consulting</li>

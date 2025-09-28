@@ -80,6 +80,7 @@ export const leads = pgTable("leads", {
   phone: varchar("phone", { length: 40 }),
   address: varchar("address", { length: 300 }),
   naics: varchar("naics", { length: 10 }),
+  industryType: varchar("industry_type", { length: 100 }),
   utility: varchar("utility", { length: 200 }),
   measure: varchar("measure", { length: 120 }),
   sqft: integer("sqft"),

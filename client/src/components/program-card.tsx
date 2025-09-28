@@ -56,7 +56,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
 
   return (
     <article 
-      className="group bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-lg hover:border-blue-200 transition-all duration-300 ease-out" 
+      className="group bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-lg hover:border-[#00a5cb]/30 transition-all duration-300 ease-out" 
       data-testid={`card-program-${program.id}`}
       aria-labelledby={`program-title-${program.id}`}
       aria-describedby={`program-summary-${program.id} program-incentive-${program.id}`}
