@@ -102,7 +102,6 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                       <SelectItem value="Commercial">Commercial</SelectItem>
                       <SelectItem value="Industrial">Industrial</SelectItem>
                       <SelectItem value="Small Business">Small Business</SelectItem>
-                      <SelectItem value="Residential">Residential</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
