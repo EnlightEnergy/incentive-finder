@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
-import logoPath from "@assets/P_Mark_transp_1758848685119.png";
+import logoPath from "@assets/Blue Mark_1759082307340.png";
 
 // Client logo imports
 import boeingLogo from "@assets/boeing_1758932853739.jpg";
