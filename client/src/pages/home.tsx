@@ -215,35 +215,35 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Client Proof Strip */}
-        <div className="bg-white py-8 border-b border-gray-200">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-6">
-              <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
-                Trusted by leading California businesses
-              </p>
-            </div>
-            <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
-              <img src={boeingLogo} alt="Boeing" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={dreamworksLogo} alt="DreamWorks" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={edcoLogo} alt="EDCO" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={fenderLogo} alt="Fender" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={howmetLogo} alt="Howmet Aerospace" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={metroLogo} alt="Metro" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={nasaJplLogo} alt="NASA JPL" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={nipponLogo} alt="Nippon Express" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={redBullLogo} alt="Red Bull" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={sbAirportLogo} alt="Santa Barbara Airport" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-              <img src={zogsLogo} alt="Zog's" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Search Form */}
       <div id="search-form">
         <HeroSearchForm onSearch={handleSearch} />
+      </div>
+
+      {/* Client Proof Strip */}
+      <div className="bg-white py-8 border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-6">
+            <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+              Trusted by leading California businesses
+            </p>
+          </div>
+          <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
+            <img src={boeingLogo} alt="Boeing" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={dreamworksLogo} alt="DreamWorks" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={edcoLogo} alt="EDCO" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={fenderLogo} alt="Fender" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={howmetLogo} alt="Howmet Aerospace" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={metroLogo} alt="Metro" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={nasaJplLogo} alt="NASA JPL" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={nipponLogo} alt="Nippon Express" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={redBullLogo} alt="Red Bull" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={sbAirportLogo} alt="Santa Barbara Airport" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={zogsLogo} alt="Zog's" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+          </div>
+        </div>
       </div>
 
       {searchParams && (
