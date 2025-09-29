@@ -208,9 +208,6 @@ export default function Home() {
               <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">LADWP</div>
               <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SoCalREN</div>
               <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">MCE</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">Willdan</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">Resource Innovations</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">AESC</div>
               <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">GoGreen Financing</div>
             </div>
           </div>
