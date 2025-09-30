@@ -124,8 +124,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-commercial-industry"
               onClick={() => setMarketSegmentModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
-                <Building2 className="w-10 h-10 text-[#00a5cb]" />
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Building2 className="w-10 h-10 text-[#0c558c]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial & Industry</span>
             </div>
@@ -134,8 +134,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-small-commercial"
               onClick={() => setSmallCommercialModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
-                <Store className="w-10 h-10 text-[#00a5cb]" />
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Store className="w-10 h-10 text-[#0c558c]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Small Commercial</span>
             </div>
@@ -144,8 +144,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-industrial"
               onClick={() => setIndustrialModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
-                <Factory className="w-10 h-10 text-[#00a5cb]" />
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Factory className="w-10 h-10 text-[#0c558c]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Industrial</span>
             </div>
@@ -154,8 +154,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-multifamily"
               onClick={() => setMultifamilyModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
-                <Building className="w-10 h-10 text-[#00a5cb]" />
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Building className="w-10 h-10 text-[#0c558c]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Multifamily</span>
             </div>
@@ -164,8 +164,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-direct-install"
               onClick={() => setDirectInstallModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
-                <Wrench className="w-10 h-10 text-[#00a5cb]" />
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Wrench className="w-10 h-10 text-[#0c558c]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Direct Install</span>
             </div>
@@ -174,8 +174,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-solar"
               onClick={() => setSolarModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
-                <Sun className="w-10 h-10 text-[#00a5cb]" />
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Sun className="w-10 h-10 text-[#0c558c]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Solar</span>
             </div>
