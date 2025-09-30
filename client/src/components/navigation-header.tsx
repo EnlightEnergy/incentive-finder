@@ -11,6 +11,7 @@ export default function NavigationHeader() {
 
   const navLinks = [
     { href: "/", label: "Programs" },
+    { href: "/terminology", label: "Terminology" },
     { href: "https://www.enlightingenergy.com/insights", label: "Insights", external: true },
     { href: "https://www.enlightingenergy.com/about", label: "About", external: true }
   ];
