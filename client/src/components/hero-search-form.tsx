@@ -76,8 +76,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   ];
 
   const multifamilySegments = [
-    { name: "Multifamily", incentiveRate: "100% Project Cost" },
-    { name: "Multifamily Hard-to-Reach, Disadvantage Community Direct Install (DI)", incentiveRate: "100% Project Cost" },
+    { name: "Multifamily", incentiveRate: "Up to 65% of project cost" },
+    { name: "Multifamily Hard-to-Reach, Disadvantage Community Direct Install (DI)", incentiveRate: "Up to 65% of project cost" },
   ];
 
   const directInstallSegments = [
