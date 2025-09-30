@@ -6,15 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Search } from "lucide-react";
+import { Search, Building2, Store, Factory, Building, Wrench, Sun } from "lucide-react";
 import type { SearchProgramsParams } from "@shared/schema";
 
-// Import ENL icons
-import enl1LogoPath from "@assets/ENL-1_1758900465404.png";
-import enl2LogoPath from "@assets/ENL-2_1758900465405.png";
-import enl3LogoPath from "@assets/ENL-3_1758900465406.png";
-import enl4LogoPath from "@assets/ENL-4_1758900465406.png";
-import enl5LogoPath from "@assets/ENL-5_1758900465406.png";
 
 interface HeroSearchFormProps {
   onSearch: (params: Partial<SearchProgramsParams>) => void;
@@ -68,14 +62,45 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   return (
     <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ENL Icons */}
+        {/* Program Category Icons */}
         <div className="text-center mb-6">
-          <div className="flex justify-center items-center gap-8 max-w-4xl mx-auto py-6">
-            <img src={enl1LogoPath} alt="ENL 1" className="h-24 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl2LogoPath} alt="ENL 2" className="h-24 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl3LogoPath} alt="ENL 3" className="h-24 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl4LogoPath} alt="ENL 4" className="h-24 object-contain hover:opacity-80 transition-opacity" />
-            <img src={enl5LogoPath} alt="ENL 5" className="h-24 object-contain hover:opacity-80 transition-opacity" />
+          <div className="flex justify-center items-center gap-6 lg:gap-8 max-w-5xl mx-auto py-6 flex-wrap">
+            <div className="flex flex-col items-center gap-2" data-testid="icon-commercial-industry">
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+                <Building2 className="w-10 h-10 text-[#00a5cb]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial & Industry</span>
+            </div>
+            <div className="flex flex-col items-center gap-2" data-testid="icon-small-commercial">
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+                <Store className="w-10 h-10 text-[#00a5cb]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Small Commercial</span>
+            </div>
+            <div className="flex flex-col items-center gap-2" data-testid="icon-industrial">
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+                <Factory className="w-10 h-10 text-[#00a5cb]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Industrial</span>
+            </div>
+            <div className="flex flex-col items-center gap-2" data-testid="icon-multifamily">
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+                <Building className="w-10 h-10 text-[#00a5cb]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Multifamily</span>
+            </div>
+            <div className="flex flex-col items-center gap-2" data-testid="icon-direct-install">
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+                <Wrench className="w-10 h-10 text-[#00a5cb]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Direct Install</span>
+            </div>
+            <div className="flex flex-col items-center gap-2" data-testid="icon-solar">
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+                <Sun className="w-10 h-10 text-[#00a5cb]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Solar</span>
+            </div>
           </div>
         </div>
 
