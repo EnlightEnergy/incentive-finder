@@ -37,6 +37,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   const [projectCost, setProjectCost] = useState("");
   const [marketSegmentModalOpen, setMarketSegmentModalOpen] = useState(false);
   const [smallCommercialModalOpen, setSmallCommercialModalOpen] = useState(false);
+  const [industrialModalOpen, setIndustrialModalOpen] = useState(false);
 
   const commercialIndustrySegments = [
     { name: "Public administration buildings", incentiveRate: "$.12 to $.20 per kWh Saved" },
@@ -64,6 +65,11 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
     { name: "Data centers", incentiveRate: "$.10 per kWh Saved" },
     { name: "Private universities and schools", incentiveRate: "$.10 per kWh Saved" },
     { name: "Small businesses", incentiveRate: "$.10 per kWh Saved" },
+  ];
+
+  const industrialSegments = [
+    { name: "All Industrial and Manufacturing Facilities", incentiveRate: "$.03 to $.20 per kWh Saved" },
+    { name: "Food Processing", incentiveRate: "$.03 to $.20 per kWh Saved" },
   ];
 
   const handleMeasureChange = (measureId: string, checked: boolean) => {
@@ -116,8 +122,12 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Small Commercial</span>
             </div>
-            <div className="flex flex-col items-center gap-2" data-testid="icon-industrial">
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-industrial"
+              onClick={() => setIndustrialModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
                 <Factory className="w-10 h-10 text-[#00a5cb]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Industrial</span>
@@ -287,6 +297,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
         onOpenChange={setSmallCommercialModalOpen}
         title="Smaller Commercial Building Types <200 kW"
         segments={smallCommercialSegments}
+      />
+      
+      <MarketSegmentModal
+        open={industrialModalOpen}
+        onOpenChange={setIndustrialModalOpen}
+        title="Industrial/Manufacturing Market Segments"
+        segments={industrialSegments}
       />
     </section>
   );
