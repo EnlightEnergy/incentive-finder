@@ -39,6 +39,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   const [smallCommercialModalOpen, setSmallCommercialModalOpen] = useState(false);
   const [industrialModalOpen, setIndustrialModalOpen] = useState(false);
   const [multifamilyModalOpen, setMultifamilyModalOpen] = useState(false);
+  const [directInstallModalOpen, setDirectInstallModalOpen] = useState(false);
 
   const commercialIndustrySegments = [
     { name: "Public administration buildings", incentiveRate: "$.12 to $.20 per kWh Saved" },
@@ -76,6 +77,11 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   const multifamilySegments = [
     { name: "Multifamily", incentiveRate: "100% Project Cost" },
     { name: "Multifamily Hard-to-Reach, Disadvantage Community Direct Install (DI)", incentiveRate: "100% Project Cost" },
+  ];
+
+  const directInstallSegments = [
+    { name: "Hard-to-reach (HTR), Low Income/Low Access (LILA) or Disadvantaged Community (DAC)", incentiveRate: "100% Project Cost" },
+    { name: "Food Desert Energy Efficiency Equity (FDEEE) - commercial underserved/refrigeration", incentiveRate: "100% Project Cost" },
   ];
 
   const handleMeasureChange = (measureId: string, checked: boolean) => {
@@ -148,8 +154,12 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Multifamily</span>
             </div>
-            <div className="flex flex-col items-center gap-2" data-testid="icon-direct-install">
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-direct-install"
+              onClick={() => setDirectInstallModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
                 <Wrench className="w-10 h-10 text-[#00a5cb]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Direct Install</span>
@@ -321,6 +331,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
         onOpenChange={setMultifamilyModalOpen}
         title="SoCal Ren Multifamily Market Segments"
         segments={multifamilySegments}
+      />
+      
+      <MarketSegmentModal
+        open={directInstallModalOpen}
+        onOpenChange={setDirectInstallModalOpen}
+        title="SoCal Ren Commercial Direct Install"
+        segments={directInstallSegments}
       />
     </section>
   );
