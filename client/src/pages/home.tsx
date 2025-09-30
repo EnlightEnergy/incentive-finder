@@ -489,7 +489,7 @@ export default function Home() {
                 <span className="text-lg font-semibold text-foreground">Enlighting Energy</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Helping industrial, manufacturing, warehousing, and commercial facilities find and secure energy incentives since 2018.
+                Over 36 years of combined expertise helping industrial, manufacturing, warehousing, and commercial facilities unlock and secure energy incentives.
               </p>
             </div>
             <div>
