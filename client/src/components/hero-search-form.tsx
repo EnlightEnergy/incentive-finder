@@ -40,6 +40,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   const [industrialModalOpen, setIndustrialModalOpen] = useState(false);
   const [multifamilyModalOpen, setMultifamilyModalOpen] = useState(false);
   const [directInstallModalOpen, setDirectInstallModalOpen] = useState(false);
+  const [solarModalOpen, setSolarModalOpen] = useState(false);
 
   const commercialIndustrySegments = [
     { name: "Public administration buildings", incentiveRate: "$.12 to $.20 per kWh Saved" },
@@ -82,6 +83,10 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   const directInstallSegments = [
     { name: "Hard-to-reach (HTR), Low Income/Low Access (LILA) or Disadvantaged Community (DAC)", incentiveRate: "100% Project Cost" },
     { name: "Food Desert Energy Efficiency Equity (FDEEE) - commercial underserved/refrigeration", incentiveRate: "100% Project Cost" },
+  ];
+
+  const solarSegments = [
+    { name: "Investment Tax Credit (ITC) + Federal & State/SGIP", incentiveRate: "Up to 65% Project Cost" },
   ];
 
   const handleMeasureChange = (measureId: string, checked: boolean) => {
@@ -164,8 +169,12 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Direct Install</span>
             </div>
-            <div className="flex flex-col items-center gap-2" data-testid="icon-solar">
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-solar"
+              onClick={() => setSolarModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
                 <Sun className="w-10 h-10 text-[#00a5cb]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Solar</span>
@@ -338,6 +347,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
         onOpenChange={setDirectInstallModalOpen}
         title="SoCal Ren Commercial Direct Install"
         segments={directInstallSegments}
+      />
+      
+      <MarketSegmentModal
+        open={solarModalOpen}
+        onOpenChange={setSolarModalOpen}
+        title="Renewable Solar and BESS"
+        segments={solarSegments}
       />
     </section>
   );
