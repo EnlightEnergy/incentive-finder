@@ -36,6 +36,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   const [hours, setHours] = useState("");
   const [projectCost, setProjectCost] = useState("");
   const [marketSegmentModalOpen, setMarketSegmentModalOpen] = useState(false);
+  const [smallCommercialModalOpen, setSmallCommercialModalOpen] = useState(false);
 
   const commercialIndustrySegments = [
     { name: "Public administration buildings", incentiveRate: "$.12 to $.20 per kWh Saved" },
@@ -52,6 +53,17 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
     { name: "Casinos and other gaming", incentiveRate: "$.12 to $.20 per kWh Saved" },
     { name: "Skiing facilities", incentiveRate: "$.12 to $.20 per kWh Saved" },
     { name: "Fitness and recreational sport centers", incentiveRate: "$.12 to $.20 per kWh Saved" },
+  ];
+
+  const smallCommercialSegments = [
+    { name: "Healthcare", incentiveRate: "$.10 per kWh Saved" },
+    { name: "Outpatient centers", incentiveRate: "$.10 per kWh Saved" },
+    { name: "Residential care facilities", incentiveRate: "$.10 per kWh Saved" },
+    { name: "Biotech", incentiveRate: "$.10 per kWh Saved" },
+    { name: "High-tech facilities", incentiveRate: "$.10 per kWh Saved" },
+    { name: "Data centers", incentiveRate: "$.10 per kWh Saved" },
+    { name: "Private universities and schools", incentiveRate: "$.10 per kWh Saved" },
+    { name: "Small businesses", incentiveRate: "$.10 per kWh Saved" },
   ];
 
   const handleMeasureChange = (measureId: string, checked: boolean) => {
@@ -94,8 +106,12 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial & Industry</span>
             </div>
-            <div className="flex flex-col items-center gap-2" data-testid="icon-small-commercial">
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-small-commercial"
+              onClick={() => setSmallCommercialModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
                 <Store className="w-10 h-10 text-[#00a5cb]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Small Commercial</span>
@@ -264,6 +280,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
         onOpenChange={setMarketSegmentModalOpen}
         title="Commercial & Industry Buildings"
         segments={commercialIndustrySegments}
+      />
+      
+      <MarketSegmentModal
+        open={smallCommercialModalOpen}
+        onOpenChange={setSmallCommercialModalOpen}
+        title="Smaller Commercial Building Types <200 kW"
+        segments={smallCommercialSegments}
       />
     </section>
   );
