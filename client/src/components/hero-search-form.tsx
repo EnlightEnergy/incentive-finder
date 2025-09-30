@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Search, Building2, Store, Factory, Building, Wrench, Sun } from "lucide-react";
 import type { SearchProgramsParams } from "@shared/schema";
+import MarketSegmentModal from "@/components/market-segment-modal";
 
 
 interface HeroSearchFormProps {
@@ -34,6 +35,24 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   const [sqft, setSqft] = useState("");
   const [hours, setHours] = useState("");
   const [projectCost, setProjectCost] = useState("");
+  const [marketSegmentModalOpen, setMarketSegmentModalOpen] = useState(false);
+
+  const commercialIndustrySegments = [
+    { name: "Public administration buildings", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Care homes, nursing homes, hospitals, and assisted living facilities", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Schools (K–12 and universities, including trade schools)", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Supermarkets and grocery retailers", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Convenience retailers", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Office and executive buildings", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Car dealerships", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Religious organizations", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Government buildings (courts, police, fire departments)", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Warehousing and distribution centers", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Amusement arcades and theme parks", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Casinos and other gaming", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Skiing facilities", incentiveRate: "$.12 to $.20 per kWh Saved" },
+    { name: "Fitness and recreational sport centers", incentiveRate: "$.12 to $.20 per kWh Saved" },
+  ];
 
   const handleMeasureChange = (measureId: string, checked: boolean) => {
     if (checked) {
@@ -65,8 +84,12 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
         {/* Program Category Icons */}
         <div className="text-center mb-6">
           <div className="flex justify-center items-center gap-6 lg:gap-8 max-w-5xl mx-auto py-6 flex-wrap">
-            <div className="flex flex-col items-center gap-2" data-testid="icon-commercial-industry">
-              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300">
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-commercial-industry"
+              onClick={() => setMarketSegmentModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-[#00a5cb]/10 flex items-center justify-center hover:bg-[#00a5cb]/20 transition-all duration-300 hover:scale-105">
                 <Building2 className="w-10 h-10 text-[#00a5cb]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial & Industry</span>
@@ -235,6 +258,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
           </CardContent>
         </Card>
       </div>
+      
+      <MarketSegmentModal
+        open={marketSegmentModalOpen}
+        onOpenChange={setMarketSegmentModalOpen}
+        title="Commercial & Industry Buildings"
+        segments={commercialIndustrySegments}
+      />
     </section>
   );
 }
