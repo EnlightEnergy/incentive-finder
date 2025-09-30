@@ -1,0 +1,105 @@
+{
+  "title": "Enlighting Energy Terminology",
+  "terms": [
+    {
+      "id": "rebate",
+      "name": "Rebate",
+      "definition": "A partial refund from a utility, state, or aggregator that reduces the net cost of an energy-efficiency project. Rebates can be per-unit or savings-based.",
+      "example": "Project cost $50,000; $20,000 rebate → net cost $30,000.",
+      "tags": ["funding","utility","savings"]
+    },
+    {
+      "id": "incentive",
+      "name": "Incentive",
+      "definition": "Umbrella term covering rebates, grants, performance payments, tax credits, and financing designed to accelerate adoption of energy-saving upgrades.",
+      "example": "Stacking a rebate + tax credit can cut payback below 1 year.",
+      "tags": ["funding","stacking"]
+    },
+    {
+      "id": "on-bill-financing",
+      "name": "On-Bill Financing (OBF)",
+      "definition": "Utility financing repaid on your energy bill, often at 0% interest. Savings typically exceed payments, enabling cash-flow-positive projects.",
+      "example": "LED upgrade paid via bill; monthly savings > monthly OBF.",
+      "tags": ["financing","utility"]
+    },
+    {
+      "id": "prescriptive",
+      "name": "Prescriptive Incentive",
+      "definition": "Menu-based, pre-set incentive per measure (e.g., $100/fixture). Easiest path with predictable amounts and fast approvals.",
+      "example": "$120 per LED high-bay installed.",
+      "tags": ["rebate","lighting"]
+    },
+    {
+      "id": "performance-based",
+      "name": "Performance-Based Incentive (PBI)",
+      "definition": "Payouts tied to measured or modeled kWh/therm savings over time; more complex but often larger than prescriptive.",
+      "example": "Paid quarterly based on verified kWh reduction.",
+      "tags": ["savings","measurement"]
+    },
+    {
+      "id": "investment-tax-credit",
+      "name": "Investment Tax Credit (ITC)",
+      "definition": "Federal tax credit (often up to 30% under IRA) for qualifying technologies such as solar, storage, EVSE, and some advanced efficiency.",
+      "example": "30% ITC lowers net capital outlay on solar+storage.",
+      "tags": ["federal","tax"]
+    },
+    {
+      "id": "msp-program",
+      "name": "MSP Program (Market Support Program)",
+      "definition": "Targeted utility/state program providing extra incentives or cost-share for specific technologies (e.g., ALC, HPWH). Often time-limited pilots.",
+      "example": "Extra $/fixture for advanced lighting controls during pilot.",
+      "tags": ["utility","pilot"]
+    },
+
+    // Additional recommended terms
+    {
+      "id": "custom-incentive",
+      "name": "Custom Incentive",
+      "definition": "Project-specific incentive based on engineering analysis when prescriptive tables don’t fit.",
+      "example": "Unique process lighting modeled to claim savings.",
+      "tags": ["engineering","savings"]
+    },
+    {
+      "id": "incentive-stacking",
+      "name": "Incentive Stacking",
+      "definition": "Combining utility, state, and federal programs to maximize funding.",
+      "example": "Utility rebate + state grant + federal credit.",
+      "tags": ["strategy","funding"]
+    },
+    {
+      "id": "demand-response",
+      "name": "Demand Response (DR)",
+      "definition": "Payments for reducing load during grid stress windows.",
+      "example": "Curtail lighting/HVAC for 2 hours → DR payment.",
+      "tags": ["grid","operations"]
+    },
+    {
+      "id": "simple-payback",
+      "name": "Simple Payback",
+      "definition": "Years for savings+incentives to recover project cost.",
+      "example": "$120k project / $120k annual savings = 1-year payback.",
+      "tags": ["finance","roi"]
+    },
+    {
+      "id": "co2e-reduction",
+      "name": "CO₂e Reduction",
+      "definition": "Greenhouse gas emissions avoided via energy savings, in tons of CO₂-equivalent.",
+      "example": "Lighting retrofit avoids 59 tons CO₂e/year.",
+      "tags": ["sustainability"]
+    },
+    {
+      "id": "dir-prevailing-wage",
+      "name": "DIR (Prevailing Wage)",
+      "definition": "California prevailing-wage compliance when public or certain incentive funds are used.",
+      "example": "SoCalREN project requires DIR reporting.",
+      "tags": ["compliance","california"]
+    },
+    {
+      "id": "title-24",
+      "name": "Title 24",
+      "definition": "California energy code baseline requirements for building efficiency and controls.",
+      "example": "Daylight sensors, high-efficacy fixtures per Title 24.",
+      "tags": ["code","california"]
+    }
+  ]
+}
