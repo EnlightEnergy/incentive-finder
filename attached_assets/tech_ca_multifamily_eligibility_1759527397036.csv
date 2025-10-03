@@ -1,0 +1,7 @@
+program_id,rule
+TECH_CA_MULTIFAMILY_2025,Property must be multifamily (multiple dwelling units).
+TECH_CA_MULTIFAMILY_2025,"Projects must be installed at sites served by participating electric utilities (PG&E, SCE, SDG&E, SMUD region-specific notes may apply)."
+TECH_CA_MULTIFAMILY_2025,Contractor must be enrolled with TECH Clean California; incentives are paid to enrolled contractors.
+TECH_CA_MULTIFAMILY_2025,Equipment must meet program specification (JA13/ENERGY STAR/EcoPort or ENERGY STAR v2.0 for commercial equipment where applicable).
+TECH_CA_MULTIFAMILY_2025,Projects may require demand response enrollment and/or TOU configuration depending on pathway (in‑unit vs. central).
+TECH_CA_MULTIFAMILY_2025,Thermostatic mixing valve required for domestic water heating projects (integrated or added).

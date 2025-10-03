@@ -1,0 +1,9 @@
+program_id,requirement,source
+SCE_GRID_MAP_2025,Project site in SCE territory; active SCE electric account; pays PPP surcharge on the account with EE installation.,Program page
+SCE_GRID_MAP_2025,12 consecutive months of energy usage (AMI) data available; baseline modeling criteria apply.,Program page
+SCE_GRID_MAP_2025,"No more than one CPUC ratepayer-funded EE incentive/rebate program can fund the same measure cost (no double-dipping, incl. statewide midstream HVAC/Lighting).",Program page
+SCE_GRID_MAP_2025,"No change in onsite generation capacity within the previous 12 months and no planned change within the next 12 months (solar, TES, batteries).",Program page
+SCE_GRID_MAP_2025,Customer may not be enrolled in a wholesale Demand Response program under Rule 24.,Program page
+SCE_GRID_MAP_2025,Customer sites with >1 MW peak demand require additional screening.,Program page
+SCE_GRID_MAP_2025,Projects must comply with the CPUC NMEC Rulebook for permissible projects.,Program page
+SCE_GRID_MAP_2025,"Installations must be completed by December 31, 2027, or before funding is fully allocated.",Program page

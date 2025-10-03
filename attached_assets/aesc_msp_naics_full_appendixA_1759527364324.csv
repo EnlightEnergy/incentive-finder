@@ -1,0 +1,89 @@
+sector,segment,naics_code,description
+441 Auto Retailers,New Car Dealers,441110,"Retailing new automobiles and light trucks; may include repair services, used car retailing, and selling parts/accessories."
+441 Auto Retailers,Used Car Dealers,441120,Retailing used automobiles and light trucks.
+441 Auto Retailers,Recreational Vehicle Dealers,441210,Retailing new and/or used recreational vehicles (RVs); may include repair services and parts/accessories.
+445 Grocery and Convenience Retailers,Supermarkets and Other Grocery Retailers (except Convenience Retailers),445110,Supermarkets and other grocery retailers (except convenience stores) retailing a general line of food.
+445 Grocery and Convenience Retailers,Convenience Retailers,445131,"Retailing a limited line of groceries such as milk, bread, soda, and snacks (except fuel pumps)."
+445 Grocery and Convenience Retailers,Vending Machine Operators,445132,Retailing merchandise through vending machines (operators).
+445 Grocery and Convenience Retailers,Specialty Food Retailers,4452,Fruit and vegetable retailers; meat; fish and seafood; baked goods; confectionery; nut retailers; other specialty food retailers.
+445 Grocery and Convenience Retailers,"Beer, Wine, and Liquor Retailers",445320,"Retailing packaged alcoholic beverages, such as ale, beer, wine, and liquor."
+45 Retail Trade,Furniture and Home Furnishings Retailers,4491,Furniture retailers; floor covering retailers; window treatment retailers; other home furnishings retailers.
+45 Retail Trade,Electronics and Appliance Retailers,449210,Retailing consumer-type electronics/appliances; may include repair/support services and software/media retailing.
+45 Retail Trade,Department Stores,455110,Department stores with separate departments for general lines of new merchandise.
+45 Retail Trade,All Other General Merchandise Retailers,455219,"Retailing new and used general merchandise (except department stores, warehouse clubs, superstores, supercenters)."
+45 Retail Trade,Gasoline Stations with Convenience Stores,457110,Retailing automotive fuels in combination with a limited line of groceries; may provide auto repair services.
+45 Retail Trade,Gasoline Stations without Convenience Stores,457120,Gasoline or truck stops primarily retailing automotive fuels without a convenience store.
+45 Retail Trade,Clothing and Clothing Accessories Retailers,458110,"Retailing clothing and clothing accessories (e.g., hats, handbags, gloves, ties)."
+45 Retail Trade,Shoe Retailers,458210,Retailing new footwear.
+45 Retail Trade,Jewelry Retailers,458310,Retailing new jewelry (except costume); new sterling/silverware; new watches and clocks; may include repair.
+45 Retail Trade,Luggage and Leather Goods Retailers,458320,"Retailing luggage, briefcases, trunks, and leather goods (except leather apparel)."
+45 Retail Trade,"Sporting Goods, Hobby, and Musical Instrument Retailers, Other",459110–459999,"Sporting goods; hobby, toy and game; sewing/needlework; musical instrument; florists; office supplies; gift; used merchandise; pet supply; art dealers; manufactured home dealers; all other misc. retailers."
+48–49 Transportation and Warehousing,Warehousing and Storage,493110–493190,General warehousing and storage; refrigerated; farm product; other warehousing and storage.
+"54 Professional, Scientific, and Technical Services","Professional, Scientific, and Technical Services",541110–541990,"Professional, Scientific, and Technical Services (range of industries)."
+55 Management of Companies and Enterprises,Management of Companies and Enterprises,551111–551114,"Offices of bank holding companies, other holding companies, and corporate/subsidiary/regional managing offices."
+56 Administrative and Support and Waste Management and Remediation Services,Administrative and Support and Waste Management and Remediation Services,561110–562998,Administrative and support services; waste management and remediation services (range).
+61 Educational Services,Elementary and Secondary Schools,6111,"Private, public, and parochial K–12 schools."
+61 Educational Services,Junior Colleges,6112,"Institutions granting associate degrees, certificates, or diplomas below the baccalaureate level."
+61 Educational Services,"Colleges, Universities, and Professional Schools",6113,Institutions granting baccalaureate or graduate degrees.
+61 Educational Services,Business Schools and Computer and Management Training,6114,Business and secretarial schools; computer training; professional and management development training.
+61 Educational Services,Technical and Trade Schools,6115,Cosmetology; flight training; apprenticeship; other technical and trade training.
+61 Educational Services,Other Schools and Instruction,6116,Fine art schools; sports and recreation instruction; language schools; exam preparation.
+61 Educational Services,Educational Support Services,6117,Educational support services.
+62 Health Care and Social Assistance,Nursing Care Facilities (Skilled Nursing Facilities),623110,Convalescent/nursing homes; assisted living with nursing care; inpatient care hospices.
+62 Health Care and Social Assistance,Residential Intellectual and Developmental Disability Facilities,623210,Residential care services for persons with intellectual and developmental disabilities.
+62 Health Care and Social Assistance,Residential Mental Health and Substance Abuse Facilities,623220,Residential care and treatment for mental health and substance abuse illnesses.
+62 Health Care and Social Assistance,Continuing Care Retirement Communities,623311,Residential and personal care services with on‑site nursing care for elderly and others unable to live independently.
+62 Health Care and Social Assistance,Assisted Living Facilities for the Elderly,623312,Residential and personal care services without nursing care for the elderly and others unable to live independently.
+62 Health Care and Social Assistance,Other Residential Care Facilities,623990,Residential care (except intellectual and developmental disability; mental health and substance abuse; CCRCs; assisted living).
+"71 Arts, Entertainment, and Recreation",Amusement and Theme Parks,713110,"Operating amusement/theme parks with rides, games, shows, exhibits, food stands; may lease space to others."
+"71 Arts, Entertainment, and Recreation",Amusement Arcades,713120,Operating amusement (except gambling) arcades and parlors.
+"71 Arts, Entertainment, and Recreation",Casinos (except Casino Hotels),713210,Operating casino gambling facilities; often include food and beverage services.
+"71 Arts, Entertainment, and Recreation",Other Gambling Industries,713290,Operating gambling facilities (except casino hotels) or providing gambling services.
+"71 Arts, Entertainment, and Recreation",Golf Courses and Country Clubs,713910,Operating golf courses; may include dining and other recreational facilities as country clubs.
+"71 Arts, Entertainment, and Recreation",Skiing Facilities,713920,"Operating downhill, cross-country, or related skiing areas and/or equipment such as ski lifts and tows."
+"71 Arts, Entertainment, and Recreation",Marinas,713930,Docking/storage facilities for pleasure craft; may retail fuel/marine supplies; repair/maintain/rent boats.
+"71 Arts, Entertainment, and Recreation",Fitness and Recreational Sports Centers,713940,"Fitness and recreational sports facilities (e.g., exercise, skating, racquet sports)."
+"71 Arts, Entertainment, and Recreation",Bowling Centers,713850,Operating bowling centers.
+"71 Arts, Entertainment, and Recreation",All Other Amusement and Recreation Industries,713990,"All other amusement and recreation industries (except amusement parks/arcades, gambling industries, golf, skiing, marinas, fitness centers, bowling)."
+81 Other Services,Automotive Repair and Maintenance,8111,Automotive repair and maintenance services.
+81 Other Services,Electronic and Precision Equipment Repair and Maintenance,811210,"Repair and maintenance of consumer electronics, computers, office machines, communications equipment, precision instruments."
+81 Other Services,Commercial and Industrial Machinery and Equipment,811310,"Repair and maintenance of commercial/industrial machinery and equipment (e.g., refrigeration, construction, mining)."
+81 Other Services,Personal and Household Goods Repair and Maintenance,8114,Repair and servicing of personal or household‑type goods.
+81 Other Services,Personal Care Services,8121,"Hair, nail, facial, nonpermanent makeup, non‑medical diet and weight reducing services."
+81 Other Services,Death Care Services,8122,Preparing the dead for burial or interment; conducting funerals.
+81 Other Services,Drycleaning and Laundry Services,8123,"Drycleaning services, laundering services, specialty cleaning services."
+81 Other Services,Other Personal Services,8129,"Other personal services such as pet care, photo finishing labs, parking lots/garages."
+81 Other Services,Religious Organizations,813110,"Operating religious organizations (churches, temples, mosques, monasteries) and administering/ promoting religious activities."
+81 Other Services,Grantmaking and Giving Services,8132,"Awarding grants from trust funds; may fund a single entity (e.g., museum or university)."
+81 Other Services,Social Advocacy Organizations,8133,Promoting causes (human rights; environment; conservation; other social advocacy).
+81 Other Services,Civic and Social Organizations,813410,Promoting the civic/social interests of members; may operate bars/restaurants for members.
+81 Other Services,"Business, Professional, Labor, Political, and Similar Organizations",8139,"Promoting the interests of members (business, professional, labor, political, similar)."
+92 Public Administration,Executive Offices,921110,Offices of chief executives and their advisory committees and commissions.
+92 Public Administration,Legislative Bodies,921120,Legislative bodies and their advisory committees and commissions.
+92 Public Administration,Public Finance Activities,921130,"Public finance, taxation, and monetary policy; tax administration/collection; custody/disbursement of funds; auditing."
+92 Public Administration,"Executive and Legislative Offices, Combined",921140,Combined executive and legislative offices.
+92 Public Administration,American Indian and Alaska Native Tribal Governments,921150,American Indian and Alaska Native Tribal Governments.
+92 Public Administration,Other General Government Support,921190,Other general government support.
+92 Public Administration,Courts,922110,"Civilian courts, courts of law, and sheriffs' offices conducting court functions only."
+92 Public Administration,Police Protection,922120,Law enforcement and public order; police; traffic safety; enforcement of law; combined police and fire not included.
+92 Public Administration,Legal Counsel and Prosecution,922130,Offices of attorneys general; public defenders; district attorneys; public prosecutors' offices.
+92 Public Administration,Correctional Institutions,922140,Correctional institutions; penitentiaries; detention centers; prisons and jails.
+92 Public Administration,Parole Offices and Probation Offices,922150,"Judicially administering probation offices, parole offices and boards, pardon boards."
+92 Public Administration,Fire Protection,922160,Firefighting and other related fire protection activities (combined fire and ambulance/rescue classified here).
+92 Public Administration,"Other Justice, Public Order, and Safety Activities",922190,General administration of public order and safety programs; disaster preparedness and management; public safety statistics.
+92 Public Administration,Administration of Education Programs,923110,"Central coordination, planning, supervision, and administration of education funds, policies, programs."
+92 Public Administration,Administration of Public Health Programs,923120,Administration of public health programs.
+92 Public Administration,"Administration of Human Resource Programs (except Education, Public Health, and Veterans' Affairs Programs)",923130,"Administration of human resource programs except education, public health, veterans' affairs."
+92 Public Administration,Administration of Veterans' Affairs,923140,Administration of veterans' affairs programs.
+92 Public Administration,Administration of Air and Water Resource and Solid Waste Management Programs,924110,Administration/regulation/enforcement of air and water resource programs; solid waste management; flood control; drainage; toxic waste cleanup.
+92 Public Administration,Administration of Conservation Programs,924120,Administration/regulation/supervision/control of land use; conservation/preservation of natural resources; weather forecasting; protection of publicly and privately owned forests.
+92 Public Administration,Administration of Housing Programs,925110,"Administration and planning of housing programs (building standards agencies; housing authorities; housing programs, planning and development)."
+92 Public Administration,Administration of Urban Planning and Community and Rural Development,925120,Administration/planning of urban and rural development (community development agencies; county/land redevelopment agencies).
+92 Public Administration,Administration of General Economic Programs,926110,Administration of general economic programs.
+92 Public Administration,Regulation and Administration of Transportation Programs,926120,Regulation and administration of transportation programs.
+92 Public Administration,"Regulation and Administration of Communications, Electric, Gas, and Other Utilities",926130,"Administration/regulation/licensing/inspection of utilities (communications; electric power, gas and water supply; sewerage)."
+92 Public Administration,Regulation of Agricultural Marketing and Commodities,926140,Regulation of agricultural marketing and commodities.
+92 Public Administration,"Regulation, Licensing, and Inspection of Miscellaneous Commercial Sectors",926150,"Regulation, licensing, inspection of miscellaneous commercial sectors."
+92 Public Administration,Space Research and Technology,927110,"Administration and operations of space flights, space research, space exploration (space flight centers)."
+92 Public Administration,National Security,928110,"Government establishments of the Armed Forces, including National Guard, engaged in national security and related activities."
+92 Public Administration,International Affairs,928120,Government establishments engaged in international affairs and programs relating to other nations and peoples.

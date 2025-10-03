@@ -1,0 +1,3 @@
+program_id,pathway,incentive_value,incentive_unit,low_gwp_kicker,kicker_unit,max_incentive_per_project,notes
+TECH_CA_MULTIFAMILY_2025,In‑Unit HPWH (per dwelling unit),,$ per unit,,$ per unit (GWP ≤ 150),,Residential-qualified HPWH installed in multifamily dwelling units; confirm connected product/EcoPort requirement and DR/TOU enrollment.
+TECH_CA_MULTIFAMILY_2025,Central HPWH (plant or ganged systems),,$ per kWh of thermal storage or other program metric,,$ per kWh (GWP ≤ 150),,Commercial/JA13/ENERGY STAR v2.0 equipment; reservation required; custom calculation pathway typical; confirm DR enrollment requirements.

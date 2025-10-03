@@ -1,0 +1,6 @@
+program_id,incentive_component,value,unit,caps_or_notes
+SCE_DR_ELRP_2025,Event performance payment,$2.00,per kWh reduced during ELRP events,No penalties for non‑performance; payout only for measured reduction.
+SCE_DR_CBP_E_2025,Aggregator compensation,,,Compensation defined by aggregator agreement; typically based on nominated/curtailed kW and event performance.
+SCE_DR_AUTODR_EXPRESS_2025,Technology incentive,,,Pre‑qualified menu; amounts depend on device/control type and rules; separate from DR performance payments.
+SCE_DR_AUTODR_CUSTOM_2025,Customized technology incentive,,,Project‑specific incentive; subject to technical review and program caps.
+SCE_DR_APP_2025,N/A,,,App provides alerts/visibility only; no direct financial incentive.

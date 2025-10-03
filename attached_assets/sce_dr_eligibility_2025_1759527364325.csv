@@ -1,0 +1,7 @@
+program_id,eligibility_rule
+SCE_DR_ELRP_2025,SCE business account; ability to curtail during CAISO emergency events; eligible customers may enroll via aggregator or directly (varies by sector).
+SCE_DR_ELRP_2025,No penalties for non‑performance; payment based on kWh reduced during events.
+SCE_DR_CBP_E_2025,"Enroll with an approved SCE CBP‑E Aggregator; terms, baselines, and commitments vary by aggregator contract."
+SCE_DR_AUTODR_EXPRESS_2025,SCE non‑residential customer; install pre‑qualified Auto‑DR controls; enroll in a DR program; project must meet Auto‑DR program rules to receive technology incentives.
+SCE_DR_AUTODR_CUSTOM_2025,SCE non‑residential customer; custom control project enabling automated DR; incentive contingent on meeting Auto‑DR requirements and DR enrollment.
+SCE_DR_APP_2025,Any SCE business user may install the app; alerts are a courtesy and do not replace participation obligations.

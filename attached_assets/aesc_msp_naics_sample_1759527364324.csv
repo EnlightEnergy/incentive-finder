@@ -1,0 +1,5 @@
+sector,segment,naics_code,description,source
+441 Auto Retailers,New Car Dealers,441110,Establishments primarily engaged in retailing new automobiles and light trucks.,IP Appendix A
+441 Auto Retailers,Used Car Dealers,441120,Retailing used automobiles and light trucks.,IP Appendix A
+445 Grocery & Convenience,Supermarkets and Other Grocery Retailers,445110,Supermarkets and other grocery retailers (except convenience retailers).,IP Appendix A
+445 Grocery & Convenience,Convenience Retailers,445131,Retailing limited line of groceries; convenience stores or food marts.,IP Appendix A

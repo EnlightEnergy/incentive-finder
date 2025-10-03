@@ -1,0 +1,9 @@
+program_id,rule
+TECH_CA_COMM_HPWH_2025,"Project must be at a non-residential, non-multifamily facility (e.g., retail, office, schools)."
+TECH_CA_COMM_HPWH_2025,Installed HPWH may only serve the hot water needs of ONE business/entity (no central systems serving multiple customers).
+TECH_CA_COMM_HPWH_2025,"Electric service must be with PG&E, SCE, SDG&E, or SMUD. (SMUD customers must also be gas customers of PG&E.)"
+TECH_CA_COMM_HPWH_2025,Incentives available only to TECH Clean California–enrolled contractors.
+TECH_CA_COMM_HPWH_2025,Small Business path uses residential HPWH equipment meeting JA13 + ENERGY STAR 4.0 Connected Product or NEEA Residential w/ EcoPort; follows residential/simple application process.
+TECH_CA_COMM_HPWH_2025,Large Commercial path uses ENERGY STAR Commercial WH v2.0 (individually) or JA13/ENERGY STAR v2.0 for ganged systems; follows reservation + custom incentive calc process.
+TECH_CA_COMM_HPWH_2025,All projects must include a thermostatic mixing valve (integrated or added).
+TECH_CA_COMM_HPWH_2025,Customer must enroll in qualified demand response (both Small Business and Large Commercial); Small Business also must enroll on a time-of-use rate and set HPWH to follow TOU via app.

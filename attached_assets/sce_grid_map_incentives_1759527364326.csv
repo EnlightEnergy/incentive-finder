@@ -1,0 +1,2 @@
+program_id,incentive_component,description,units,rate_example_2025,notes
+SCE_GRID_MAP_2025,Base payment,Payments to Aggregators are based on measured savings weighted by avoided costs by time of day and season; higher payments when avoided costs are higher.,"$ per avoided-cost-weighted kWh (and therm, if applicable) converted via CET/avoided cost values",,Exact $/TSB or $ per unit savings not published on public page; rates vary each year with avoided-cost updates.

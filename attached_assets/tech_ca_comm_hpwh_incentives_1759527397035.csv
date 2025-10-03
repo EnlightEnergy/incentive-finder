@@ -1,0 +1,3 @@
+program_id,customer_class,incentive_value,incentive_unit,low_gwp_kicker,kicker_unit,max_incentive_per_project,notes
+TECH_CA_COMM_HPWH_2025,Large Commercial,700,$ per kWh of energy storage capacity,200,$ per kWh (GWP ≤150),50000,Applicant must propose system energy storage capacity for review.
+TECH_CA_COMM_HPWH_2025,Small Business,3100,$ per unit,1500,$ per unit (GWP ≤150),,Uses residential-qualified HPWH equipment at a non-residential site.

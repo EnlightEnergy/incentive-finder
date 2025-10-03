@@ -1,0 +1,17 @@
+program_id,measure_category,measure,rebate_code,rebate_value,unit,key_requirements,source_page
+VPU_CERP_2025,Lighting,LED A/G/BR/Downlight/PAR20/30/38,CERP-LED-A,3.0,per lamp,UL/ETL + (DLC or ENERGY STAR or 3‑yr warranty); integrated dimming for fixtures; 1‑for‑1; input W ≤ existing,p.3
+VPU_CERP_2025,Lighting,"MR16, Candelabra, Reach‑in case, LED Tubes",CERP-LED-B,5.0,per lamp,Same as above,p.3
+VPU_CERP_2025,Lighting,Exterior LED fixture w/ motion + photo (45–254 W),CERP-LED-EXT1,50.0,per fixture,Motion + photo required,p.3
+VPU_CERP_2025,Lighting,Exterior LED fixture w/ motion + photo (255–643 W),CERP-LED-EXT2,150.0,per fixture,Motion + photo required,p.3
+VPU_CERP_2025,Lighting,LED Exit Sign,CERP-LED-EXIT,20.0,per unit,UL/ETL,p.3
+VPU_CERP_2025,Lighting,LED High/Low Bay 40–160 W,CERP-LED-HB1,30.0,per fixture,UL/ETL + DLC/ES/3‑yr; 1‑for‑1,p.3
+VPU_CERP_2025,Lighting,LED High/Low Bay >160–320 W,CERP-LED-HB2,50.0,per fixture,As above,p.3
+VPU_CERP_2025,Lighting,LED High/Low Bay >320–500 W,CERP-LED-HB3,70.0,per fixture,As above,p.3
+VPU_CERP_2025,Lighting,LED Wall Pack 20–40 W,CERP-LED-WP1,20.0,per fixture,As above,p.3
+VPU_CERP_2025,Lighting,LED Wall Pack 41–80 W,CERP-LED-WP2,40.0,per fixture,As above,p.3
+VPU_CERP_2025,HVAC,"Split/Packaged AC <5 tons, EER ≥12",CERP-HVAC-AC,300.0,per unit,Like‑for‑like; retrofit or new construction; <5 tons; EER ≥12,p.3
+VPU_CERP_2025,HVAC,Smart Thermostat (single or multizone),CERP-HVAC-TSTAT,75.0,per unit,Replacement of non‑Wi‑Fi thermostat; EMS/BMS‑controlled go thru CIP,p.4
+VPU_CERP_2025,Heat Pump,Heat Pump (≥20% above current Title 24 min),CERP-HP-STD,600.0,per unit,20% above Title 24; retrofit/new; **$800** if fuel substitution (existing gas → electric) with documentation,p.4
+VPU_CERP_2025,Heat Pump,Heat Pump (Fuel Substitution bonus),CERP-HP-FS,800.0,per unit,Replace existing gas unit; provide CPUC D.19‑08‑009 documentation; may request FS Test evidence,p.4
+VPU_CERP_2025,Heat Pump,Heat Pump Clothes Dryer (ENERGY STAR ≥4 cu ft),CERP-HP-DRYER,350.0,per unit,ENERGY STAR list; capacity ≥4 cu ft,p.3
+VPU_CERP_2025,Heat Pump,Heat Pump Water Heater 40 gal (EF ≥2.0),CERP-HP-WH40,450.0,per unit,ENERGY STAR list; EF ≥2.0; 40‑gal+; instantaneous/tankless not eligible,p.3

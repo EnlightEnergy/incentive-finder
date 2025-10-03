@@ -1,0 +1,3 @@
+pathway,rate_usd_per_TSB,payment_frequency,payment_instances_per_project,source
+Population-Level NMEC,0.48,Quarterly,Pre-payment; Interim at 6–9 months; Final true-up after 12-month M&V,IP Table 1
+Site-Level NMEC,0.46,Monthly,Pre-payment; Final true-up after 12-month M&V,IP Table 1
