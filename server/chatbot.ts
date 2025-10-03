@@ -106,6 +106,24 @@ function generateFallbackResponse(params: ChatParams): string {
   const { messages, zipCode, facilityType, utility, programs } = params;
   const lastMessage = messages[messages.length - 1]?.content.toLowerCase() || '';
   
+  // Check for utility corrections
+  const utilityCorrectionPatterns = {
+    'sce': /\b(sce|southern california edison|socal edison)\b/i,
+    'pge': /\b(pg&?e|pacific gas|pacific gas & electric)\b/i,
+    'sdge': /\b(sdg&?e|san diego gas|san diego gas & electric)\b/i,
+    'ladwp': /\b(ladwp|los angeles|la water|la power)\b/i,
+  };
+  
+  for (const [utilityKey, pattern] of Object.entries(utilityCorrectionPatterns)) {
+    if (pattern.test(lastMessage) && (lastMessage.includes('actually') || lastMessage.includes('correct') || lastMessage.includes('wrong') || lastMessage.includes("i'm in"))) {
+      const utilityName = utilityKey === 'sce' ? 'Southern California Edison' : 
+                         utilityKey === 'pge' ? 'Pacific Gas & Electric' :
+                         utilityKey === 'sdge' ? 'San Diego Gas & Electric' :
+                         'Los Angeles Department of Water & Power';
+      return `Thank you for the correction! I've updated your utility to ${utilityName}. Now, what type of facility do you have? This will help me find the most relevant incentive programs for you.`;
+    }
+  }
+  
   if (!zipCode && /\d{5}/.test(lastMessage)) {
     const zip = lastMessage.match(/\d{5}/)?.[0];
     return `Thank you for providing your ZIP code (${zip}). I'm checking your utility territory now. What type of facility do you have? (For example: office building, retail store, restaurant, industrial facility, etc.)`;
