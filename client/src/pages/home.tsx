@@ -7,6 +7,7 @@ import FiltersPanel from "@/components/filters-panel";
 import LeadCaptureModal from "@/components/lead-capture-modal";
 import ProgramDetailsModal from "@/components/program-details-modal";
 import ApplyEnlightingModal from "@/components/apply-enlighting-modal";
+import { ChatBot } from "@/components/chatbot";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
@@ -541,6 +542,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <ChatBot />
     </div>
   );
 }

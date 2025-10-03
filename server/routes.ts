@@ -127,6 +127,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Chatbot API routes
+  app.post("/api/chat/message", async (req, res) => {
+    try {
+      const { sessionId, message, zipCode, facilityType } = req.body;
+      
+      if (!sessionId || !message) {
+        return res.status(400).json({ error: "Session ID and message are required" });
+      }
+
+      const response = await storage.processChatMessage({
+        sessionId,
+        message,
+        zipCode,
+        facilityType,
+      });
+
+      res.json(response);
+    } catch (error) {
+      console.error("Error processing chat message:", error);
+      res.status(500).json({ error: "Failed to process message" });
+    }
+  });
+
+  app.get("/api/chat/conversation/:sessionId", async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      const conversation = await storage.getChatConversation(sessionId);
+      
+      if (!conversation) {
+        return res.status(404).json({ error: "Conversation not found" });
+      }
+      
+      res.json(conversation);
+    } catch (error) {
+      console.error("Error fetching conversation:", error);
+      res.status(500).json({ error: "Failed to fetch conversation" });
+    }
+  });
+
+  app.get("/api/utility/:zipCode", async (req, res) => {
+    try {
+      const { zipCode } = req.params;
+      const utility = await storage.getUtilityByZipCode(zipCode);
+      
+      if (!utility) {
+        return res.status(404).json({ error: "Utility not found for this ZIP code" });
+      }
+      
+      res.json(utility);
+    } catch (error) {
+      console.error("Error fetching utility:", error);
+      res.status(500).json({ error: "Failed to fetch utility information" });
+    }
+  });
+
   // Admin API routes (protected with basic authentication)
   app.get("/api/admin/programs", basicAuth, async (req, res) => {
     try {

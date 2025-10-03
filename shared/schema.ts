@@ -102,6 +102,30 @@ export const ratesCache = pgTable("rates_cache", {
   lastRefreshed: timestamp("last_refreshed").default(sql`CURRENT_TIMESTAMP`),
 });
 
+// Utility ZIP codes mapping
+export const utilityZipCodes = pgTable("utility_zip_codes", {
+  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+  zipCode: varchar("zip_code", { length: 5 }).notNull(),
+  ownerUtility: varchar("owner_utility", { length: 100 }).notNull(),
+  cca: varchar("cca", { length: 100 }),
+  notes: text("notes"),
+  source: varchar("source", { length: 300 }),
+});
+
+// Chatbot conversations
+export const chatConversations = pgTable("chat_conversations", {
+  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+  sessionId: varchar("session_id", { length: 100 }).notNull(),
+  zipCode: varchar("zip_code", { length: 5 }),
+  facilityType: varchar("facility_type", { length: 100 }),
+  utility: varchar("utility", { length: 100 }),
+  messages: jsonb("messages").$type<Array<{role: string, content: string, timestamp: string}>>().default([]),
+  leadCaptured: boolean("lead_captured").default(false),
+  leadId: integer("lead_id").references(() => leads.id),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
+});
+
 // Relations
 export const programsRelations = relations(programs, ({ many }) => ({
   geos: many(programGeos),
@@ -177,3 +201,5 @@ export type Documentation = typeof documentation.$inferSelect;
 export type Lead = typeof leads.$inferSelect;
 export type InsertLead = z.infer<typeof insertLeadSchema>;
 export type SearchProgramsParams = z.infer<typeof searchProgramsSchema>;
+export type UtilityZipCode = typeof utilityZipCodes.$inferSelect;
+export type ChatConversation = typeof chatConversations.$inferSelect;

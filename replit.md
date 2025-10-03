@@ -50,6 +50,28 @@ Preferred communication style: Simple, everyday language.
 - **Data Sources**: Designed to integrate with DSIRE API for incentive metadata
 - **Rate Data**: Built to consume OpenEI Utility Rate Database API for electricity/gas rates
 - **Product Eligibility**: Ready for ENERGY STAR Rebate Finder integration
+- **AI Chatbot**: OpenAI GPT-4o-mini for conversational incentive discovery with intelligent fallback system
+
+### AI Chatbot System
+- **Architecture**: Full-stack conversational interface for personalized incentive discovery
+- **Frontend**: Floating chat widget with expandable modal interface using Shadcn UI components
+- **Backend**: Express API endpoints with OpenAI integration and PostgreSQL conversation storage
+- **Intelligence**: 
+  - OpenAI GPT-4o-mini for natural language understanding and contextual responses
+  - Intelligent fallback system when API quota exceeded - generates contextual responses using business logic
+  - Auto-detects ZIP codes and facility types from natural language input
+- **Data Integration**:
+  - utility_zip_codes table: 4,368 California ZIP-to-utility mappings for territory identification
+  - chat_conversations table: Persistent conversation history with JSONB message storage
+  - Real-time program matching based on location and facility type
+- **User Flow**:
+  1. Collects ZIP code to determine utility territory
+  2. Asks about facility type (office, retail, restaurant, industrial, etc.)
+  3. Searches relevant programs from database
+  4. Provides high-level program overview (2-3 examples)
+  5. Guides users toward consultation for detailed analysis
+- **Behavior**: Provides helpful information while avoiding complete technical details, positioning consultation as the value-added service
+- **Resilience**: Graceful degradation - fallback responses maintain conversation quality when AI API unavailable
 
 ### Build & Deployment
 - **Build System**: Vite for frontend bundling, esbuild for backend compilation

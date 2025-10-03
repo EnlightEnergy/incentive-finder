@@ -6,14 +6,19 @@ import {
   documentation,
   leads,
   ratesCache,
+  utilityZipCodes,
+  chatConversations,
   type Program, 
   type InsertProgram,
   type Lead,
   type InsertLead,
-  type SearchProgramsParams
+  type SearchProgramsParams,
+  type UtilityZipCode,
+  type ChatConversation
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, ilike, and, or, inArray, sql, desc } from "drizzle-orm";
+import { processChatWithAI } from "./chatbot";
 
 export interface IStorage {
   // Program management
@@ -29,6 +34,11 @@ export interface IStorage {
   getLeads(): Promise<Lead[]>;
   getLeadById(id: number): Promise<Lead | undefined>;
   updateLeadStatus(id: number, status: string): Promise<boolean>;
+  
+  // Chatbot management
+  processChatMessage(params: { sessionId: string; message: string; zipCode?: string; facilityType?: string }): Promise<any>;
+  getChatConversation(sessionId: string): Promise<any>;
+  getUtilityByZipCode(zipCode: string): Promise<any>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -255,6 +265,100 @@ export class DatabaseStorage implements IStorage {
       .set({ status })
       .where(eq(leads.id, id));
     return (result.rowCount ?? 0) > 0;
+  }
+
+  async getUtilityByZipCode(zipCode: string): Promise<UtilityZipCode | undefined> {
+    const [result] = await db
+      .select()
+      .from(utilityZipCodes)
+      .where(eq(utilityZipCodes.zipCode, zipCode));
+    return result;
+  }
+
+  async getChatConversation(sessionId: string): Promise<ChatConversation | undefined> {
+    const [conversation] = await db
+      .select()
+      .from(chatConversations)
+      .where(eq(chatConversations.sessionId, sessionId));
+    return conversation;
+  }
+
+  async processChatMessage(params: { 
+    sessionId: string; 
+    message: string; 
+    zipCode?: string; 
+    facilityType?: string 
+  }): Promise<any> {
+    const { sessionId, message, zipCode, facilityType } = params;
+    
+    let conversation = await this.getChatConversation(sessionId);
+    
+    if (!conversation) {
+      const [newConversation] = await db
+        .insert(chatConversations)
+        .values({
+          sessionId,
+          zipCode: zipCode || null,
+          facilityType: facilityType || null,
+          messages: [],
+          leadCaptured: false,
+        })
+        .returning();
+      conversation = newConversation;
+    }
+    
+    const userMessage = {
+      role: 'user',
+      content: message,
+      timestamp: new Date().toISOString(),
+    };
+    
+    const updatedMessages = [...(conversation.messages || []), userMessage];
+    
+    let utility = null;
+    if (zipCode) {
+      utility = await this.getUtilityByZipCode(zipCode);
+    }
+    
+    const relevantPrograms = await this.getPrograms({
+      utility: utility?.ownerUtility,
+      businessType: facilityType,
+      limit: 5,
+      offset: 0,
+    });
+    
+    const aiResponse = await processChatWithAI({
+      messages: updatedMessages,
+      zipCode,
+      facilityType,
+      utility: utility?.ownerUtility,
+      programs: relevantPrograms,
+    });
+    
+    const assistantMessage = {
+      role: 'assistant',
+      content: aiResponse,
+      timestamp: new Date().toISOString(),
+    };
+    
+    const finalMessages = [...updatedMessages, assistantMessage];
+    
+    await db
+      .update(chatConversations)
+      .set({
+        messages: finalMessages,
+        zipCode: zipCode || conversation.zipCode,
+        facilityType: facilityType || conversation.facilityType,
+        utility: utility?.ownerUtility || conversation.utility,
+        updatedAt: new Date(),
+      })
+      .where(eq(chatConversations.sessionId, sessionId));
+    
+    return {
+      message: aiResponse,
+      utility: utility?.ownerUtility,
+      programs: relevantPrograms,
+    };
   }
 }
 
