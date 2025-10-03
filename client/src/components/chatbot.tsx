@@ -20,15 +20,17 @@ export function ChatBot() {
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substring(7)}`);
   const [zipCode, setZipCode] = useState<string>();
   const [facilityType, setFacilityType] = useState<string>();
+  const [utility, setUtility] = useState<string>();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = useMutation({
-    mutationFn: async (params: { message: string; zipCode?: string; facilityType?: string }) => {
+    mutationFn: async (params: { message: string; zipCode?: string; facilityType?: string; utility?: string }) => {
       const response = await apiRequest("POST", "/api/chat/message", {
         sessionId,
         message: params.message,
         zipCode: params.zipCode,
         facilityType: params.facilityType,
+        utility: params.utility,
       });
       return response.json();
     },
@@ -72,11 +74,27 @@ export function ChatBot() {
 
     let nextZipCode = zipCode;
     let nextFacilityType = facilityType;
+    let nextUtility = utility;
 
     const zipMatch = inputMessage.match(/\b\d{5}\b/);
     if (zipMatch && !zipCode) {
       nextZipCode = zipMatch[0];
       setZipCode(nextZipCode);
+    }
+
+    const utilityPatterns = {
+      'SCE': /\b(sce|southern california edison|socal edison)\b/i,
+      'PGE': /\b(pg&?e|pacific gas|pacific gas & electric)\b/i,
+      'SDGE': /\b(sdg&?e|san diego gas|san diego gas & electric)\b/i,
+      'LADWP': /\b(ladwp|los angeles|la water|la power)\b/i,
+    };
+
+    for (const [utilityKey, pattern] of Object.entries(utilityPatterns)) {
+      if (pattern.test(inputMessage)) {
+        nextUtility = utilityKey;
+        setUtility(nextUtility);
+        break;
+      }
     }
 
     const facilityKeywords = {
@@ -104,9 +122,10 @@ export function ChatBot() {
       message: currentMessage,
       zipCode: nextZipCode,
       facilityType: nextFacilityType,
+      utility: nextUtility,
     });
 
-    if (response.utility && !nextZipCode) {
+    if (response.utility && !nextUtility) {
       console.log("Detected utility from backend:", response.utility);
     }
   };

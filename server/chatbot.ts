@@ -34,16 +34,22 @@ interface ChatParams {
   zipCode?: string;
   facilityType?: string;
   utility?: string;
+  allUtilities?: string[];
   programs: Program[];
 }
 
 export async function processChatWithAI(params: ChatParams): Promise<string> {
-  const { messages, zipCode, facilityType, utility, programs } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs } = params;
   
   const contextInfo = [];
   
   if (zipCode) {
     contextInfo.push(`User's ZIP code: ${zipCode}`);
+  }
+  
+  if (allUtilities && allUtilities.length > 1) {
+    contextInfo.push(`IMPORTANT: Multiple utilities serve this ZIP code: ${allUtilities.join(', ')}`);
+    contextInfo.push(`Ask the user which utility they receive service from before proceeding.`);
   }
   
   if (utility) {
@@ -103,35 +109,52 @@ export async function processChatWithAI(params: ChatParams): Promise<string> {
 }
 
 function generateFallbackResponse(params: ChatParams): string {
-  const { messages, zipCode, facilityType, utility, programs } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs } = params;
   const lastMessage = messages[messages.length - 1]?.content.toLowerCase() || '';
   
-  // Check for utility corrections
+  // Check for utility selection/correction
   const utilityCorrectionPatterns = {
-    'sce': /\b(sce|southern california edison|socal edison)\b/i,
-    'pge': /\b(pg&?e|pacific gas|pacific gas & electric)\b/i,
-    'sdge': /\b(sdg&?e|san diego gas|san diego gas & electric)\b/i,
-    'ladwp': /\b(ladwp|los angeles|la water|la power)\b/i,
+    'SCE': /\b(sce|southern california edison|socal edison)\b/i,
+    'PGE': /\b(pg&?e|pacific gas|pacific gas & electric)\b/i,
+    'SDGE': /\b(sdg&?e|san diego gas|san diego gas & electric)\b/i,
+    'LADWP': /\b(ladwp|los angeles|la water|la power)\b/i,
   };
   
   for (const [utilityKey, pattern] of Object.entries(utilityCorrectionPatterns)) {
-    if (pattern.test(lastMessage) && (lastMessage.includes('actually') || lastMessage.includes('correct') || lastMessage.includes('wrong') || lastMessage.includes("i'm in"))) {
-      const utilityName = utilityKey === 'sce' ? 'Southern California Edison' : 
-                         utilityKey === 'pge' ? 'Pacific Gas & Electric' :
-                         utilityKey === 'sdge' ? 'San Diego Gas & Electric' :
+    if (pattern.test(lastMessage)) {
+      const utilityName = utilityKey === 'SCE' ? 'Southern California Edison' : 
+                         utilityKey === 'PGE' ? 'Pacific Gas & Electric' :
+                         utilityKey === 'SDGE' ? 'San Diego Gas & Electric' :
                          'Los Angeles Department of Water & Power';
-      return `Thank you for the correction! I've updated your utility to ${utilityName}. Now, what type of facility do you have? This will help me find the most relevant incentive programs for you.`;
+      return `Thank you for clarifying! I've updated your utility to ${utilityName}. Now, what type of facility do you have? This will help me find the most relevant incentive programs for you.`;
     }
   }
   
   if (!zipCode && /\d{5}/.test(lastMessage)) {
     const zip = lastMessage.match(/\d{5}/)?.[0];
-    return `Thank you for providing your ZIP code (${zip}). I'm checking your utility territory now. What type of facility do you have? (For example: office building, retail store, restaurant, industrial facility, etc.)`;
+    return `Thank you for providing your ZIP code (${zip}). I'm checking your utility territory now. One moment please...`;
+  }
+  
+  // Handle multiple utilities for a ZIP code
+  if (zipCode && allUtilities && allUtilities.length > 1 && !facilityType) {
+    const utilityList = allUtilities.map(u => {
+      if (u === 'SCE') return 'Southern California Edison (SCE)';
+      if (u === 'PGE') return 'Pacific Gas & Electric (PG&E)';
+      if (u === 'SDGE') return 'San Diego Gas & Electric (SDG&E)';
+      if (u === 'LADWP') return 'Los Angeles Department of Water & Power (LADWP)';
+      return u;
+    }).join(', ');
+    
+    return `Your ZIP code (${zipCode}) is served by multiple utilities: ${utilityList}. Which utility do you receive service from? This will help me find the right incentive programs for you.`;
   }
   
   if (zipCode && !facilityType) {
     if (utility) {
-      return `Great! I can see you're in ${utility}'s service territory. Now, to help you find the most relevant incentive programs, what type of facility do you have?`;
+      const utilityName = utility === 'SCE' ? 'Southern California Edison' : 
+                         utility === 'PGE' ? 'Pacific Gas & Electric' :
+                         utility === 'SDGE' ? 'San Diego Gas & Electric' :
+                         utility === 'LADWP' ? 'Los Angeles Department of Water & Power' : utility;
+      return `Great! I can see you're in ${utilityName}'s service territory. Now, to help you find the most relevant incentive programs, what type of facility do you have?`;
     }
     return `Thank you! What type of facility do you have? This will help me identify the best incentive programs for you. (For example: office building, retail store, restaurant, industrial facility)`;
   }

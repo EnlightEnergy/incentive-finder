@@ -36,9 +36,10 @@ export interface IStorage {
   updateLeadStatus(id: number, status: string): Promise<boolean>;
   
   // Chatbot management
-  processChatMessage(params: { sessionId: string; message: string; zipCode?: string; facilityType?: string }): Promise<any>;
+  processChatMessage(params: { sessionId: string; message: string; zipCode?: string; facilityType?: string; utility?: string }): Promise<any>;
   getChatConversation(sessionId: string): Promise<any>;
   getUtilityByZipCode(zipCode: string): Promise<any>;
+  getAllUtilitiesByZipCode(zipCode: string): Promise<any>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -275,6 +276,14 @@ export class DatabaseStorage implements IStorage {
     return result;
   }
 
+  async getAllUtilitiesByZipCode(zipCode: string): Promise<UtilityZipCode[]> {
+    const results = await db
+      .select()
+      .from(utilityZipCodes)
+      .where(eq(utilityZipCodes.zipCode, zipCode));
+    return results;
+  }
+
   async getChatConversation(sessionId: string): Promise<ChatConversation | undefined> {
     const [conversation] = await db
       .select()
@@ -287,9 +296,10 @@ export class DatabaseStorage implements IStorage {
     sessionId: string; 
     message: string; 
     zipCode?: string; 
-    facilityType?: string 
+    facilityType?: string;
+    utility?: string;
   }): Promise<any> {
-    const { sessionId, message, zipCode, facilityType } = params;
+    const { sessionId, message, zipCode, facilityType, utility: userSelectedUtility } = params;
     
     let conversation = await this.getChatConversation(sessionId);
     
@@ -316,12 +326,26 @@ export class DatabaseStorage implements IStorage {
     const updatedMessages = [...(conversation.messages || []), userMessage];
     
     let utility = null;
+    let allUtilities: UtilityZipCode[] = [];
+    let selectedUtility = userSelectedUtility || conversation.utility;
+    
     if (zipCode) {
-      utility = await this.getUtilityByZipCode(zipCode);
+      allUtilities = await this.getAllUtilitiesByZipCode(zipCode);
+      
+      if (userSelectedUtility) {
+        utility = allUtilities.find(u => u.ownerUtility === userSelectedUtility);
+        selectedUtility = userSelectedUtility;
+      } else if (conversation.utility) {
+        utility = allUtilities.find(u => u.ownerUtility === conversation.utility);
+        selectedUtility = conversation.utility;
+      } else {
+        utility = allUtilities[0];
+        selectedUtility = utility?.ownerUtility;
+      }
     }
     
     const relevantPrograms = await this.getPrograms({
-      utility: utility?.ownerUtility,
+      utility: selectedUtility,
       businessType: facilityType,
       limit: 5,
       offset: 0,
@@ -331,7 +355,8 @@ export class DatabaseStorage implements IStorage {
       messages: updatedMessages,
       zipCode,
       facilityType,
-      utility: utility?.ownerUtility,
+      utility: selectedUtility,
+      allUtilities: allUtilities.map(u => u.ownerUtility),
       programs: relevantPrograms,
     });
     
@@ -349,14 +374,14 @@ export class DatabaseStorage implements IStorage {
         messages: finalMessages,
         zipCode: zipCode || conversation.zipCode,
         facilityType: facilityType || conversation.facilityType,
-        utility: utility?.ownerUtility || conversation.utility,
+        utility: selectedUtility || conversation.utility,
         updatedAt: new Date(),
       })
       .where(eq(chatConversations.sessionId, sessionId));
     
     return {
       message: aiResponse,
-      utility: utility?.ownerUtility,
+      utility: selectedUtility,
       programs: relevantPrograms,
     };
   }

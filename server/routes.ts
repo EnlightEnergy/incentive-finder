@@ -130,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Chatbot API routes
   app.post("/api/chat/message", async (req, res) => {
     try {
-      const { sessionId, message, zipCode, facilityType } = req.body;
+      const { sessionId, message, zipCode, facilityType, utility } = req.body;
       
       if (!sessionId || !message) {
         return res.status(400).json({ error: "Session ID and message are required" });
@@ -141,6 +141,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         message,
         zipCode,
         facilityType,
+        utility,
       });
 
       res.json(response);
@@ -169,13 +170,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/utility/:zipCode", async (req, res) => {
     try {
       const { zipCode } = req.params;
-      const utility = await storage.getUtilityByZipCode(zipCode);
+      const utilities = await storage.getAllUtilitiesByZipCode(zipCode);
       
-      if (!utility) {
+      if (utilities.length === 0) {
         return res.status(404).json({ error: "Utility not found for this ZIP code" });
       }
       
-      res.json(utility);
+      res.json({ 
+        zipCode, 
+        utilities: utilities.map(u => u.ownerUtility),
+        multipleUtilities: utilities.length > 1 
+      });
     } catch (error) {
       console.error("Error fetching utility:", error);
       res.status(500).json({ error: "Failed to fetch utility information" });
