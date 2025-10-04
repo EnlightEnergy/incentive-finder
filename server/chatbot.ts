@@ -25,9 +25,15 @@ CONVERSATION FLOW:
 3. Ask: "Would you like to search for a specific energy saving measure or incentives for your building type?"
 4. If Measure: Ask what measure (LED, HVAC, solar, etc.)
 5. If Building Type: Ask facility type (office, retail, industrial, restaurant, etc.)
-6. Provide high-level overview of 2-3 relevant programs
+6. Provide high-level overview of 2-3 relevant programs WITH KEY DETAILS
 7. Highlight potential benefits but emphasize complexity
 8. Guide toward lead capture for detailed consultation
+
+IMPORTANT: When showing program results, ALWAYS include:
+- Program name and utility
+- Key incentive amounts or types (rebates, financing, etc.)
+- Brief description of what's covered
+Format each program with clear details to help the user understand value. Use emojis like 💰 for incentives and 📋 for descriptions.
 
 TONE: Professional, knowledgeable, helpful but not overly detailed. Focus on creating interest and demonstrating value while positioning the consultation as the next step.`;
 
@@ -83,10 +89,16 @@ export async function processChatWithAI(params: ChatParams): Promise<string> {
     programs.slice(0, 3).forEach((program, idx) => {
       contextInfo.push(`${idx + 1}. ${program.name} (${program.owner})`);
       if (program.incentiveDescription) {
-        contextInfo.push(`   - ${program.incentiveDescription.substring(0, 150)}...`);
+        // Provide full incentive description to AI so it can summarize key points
+        contextInfo.push(`   Incentives: ${program.incentiveDescription}`);
+      }
+      if (program.description && program.description !== program.incentiveDescription) {
+        // Add program description if different and available
+        contextInfo.push(`   Description: ${program.description}`);
       }
     });
     contextInfo.push(`\n(${programs.length} total programs may be relevant - mention there are multiple stackable opportunities)`);
+    contextInfo.push(`\nIMPORTANT: Include the key incentive details (amounts, types) from above when you present these programs to the user.`);
   }
   
   const contextMessage = contextInfo.length > 0 
@@ -248,9 +260,30 @@ function generateFallbackResponse(params: ChatParams): string {
   }
   
   if (zipCode && (facilityType || measure) && programs.length > 0) {
-    const programList = programs.slice(0, 3).map((p, idx) => 
-      `${idx + 1}. ${p.name} from ${p.owner}`
-    ).join('\n');
+    const programList = programs.slice(0, 3).map((p, idx) => {
+      let details = `${idx + 1}. **${p.name}** from ${p.owner}`;
+      
+      // Add incentive description if available
+      if (p.incentiveDescription) {
+        const incentiveDesc = p.incentiveDescription.trim();
+        // Limit to first sentence or ~150 chars for brevity
+        const shortDesc = incentiveDesc.length > 150 
+          ? incentiveDesc.substring(0, 150).split('.')[0] + '...'
+          : incentiveDesc.split('.')[0] + '.';
+        details += `\n   💰 ${shortDesc}`;
+      }
+      
+      // Add program description if available and different from incentive description
+      if (p.description && p.description !== p.incentiveDescription) {
+        const desc = p.description.trim();
+        const shortDesc = desc.length > 120 
+          ? desc.substring(0, 120).split('.')[0] + '...'
+          : desc.split('.')[0] + '.';
+        details += `\n   📋 ${shortDesc}`;
+      }
+      
+      return details;
+    }).join('\n\n');
     
     const searchContext = measure ? `${measure} programs` : `programs for your ${userFacilityWord}`;
     return `Based on ${searchContext} in ${utility || 'your area'}, I found ${programs.length} potentially relevant incentive programs, including:\n\n${programList}\n\nThese programs can often be combined or "stacked" for maximum savings. To get a detailed analysis of your specific eligibility and potential incentive amounts, I'd recommend scheduling a free consultation with our energy efficiency experts. Would you like to learn more about our consultation services?`;

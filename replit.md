@@ -8,6 +8,29 @@ The application is built as a full-stack TypeScript solution using Express.js fo
 
 ## Recent Changes
 
+### October 4, 2025 - Enhanced Program Details Display
+**Improved chatbot responses to include incentive amounts and program descriptions:**
+
+1. **AI Response Enhancement** ✅
+   - Updated SYSTEM_PROMPT to instruct AI to always include incentive details (amounts, types, descriptions)
+   - Provides full incentive descriptions in context (not truncated to 150 chars)
+   - AI now presents programs with 💰 for incentives and 📋 for descriptions
+
+2. **Fallback Response Enhancement** ✅
+   - Updated fallback response to show detailed program information
+   - Each program now displays: name, owner, incentive amounts/details, and description
+   - Uses emojis (💰 📋) to make information scannable
+
+**Files Modified:**
+- `server/chatbot.ts` - Updated SYSTEM_PROMPT and context building, enhanced fallback formatting
+
+**Example Program Display:**
+```
+1. **PG&E Business Energy Efficiency Rebates & Financing** from Pacific Gas & Electric
+   💰 0% Interest On-Bill Financing up to 10 years, prescriptive equipment rebates...
+   📋 Comprehensive business energy efficiency program with industry-specific options...
+```
+
 ### October 4, 2025 - Lead Form Scroll & ZIP Reset Bug Fixes
 **Fixed critical UX issues with lead capture form and conversation state management:**
 
