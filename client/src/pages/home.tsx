@@ -195,7 +195,7 @@ export default function Home() {
         </div>
 
         {/* Utility Logo Trust Strip */}
-        <div className="bg-slate-50 py-8 border-t border-gray-200">
+        <div className="bg-slate-50 pt-8 border-t border-gray-200">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-6">
               <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
