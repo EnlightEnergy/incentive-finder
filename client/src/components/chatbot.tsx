@@ -40,6 +40,7 @@ export function ChatBot() {
   const [showLeadCaptureForm, setShowLeadCaptureForm] = useState<LeadCapturePrompt>({ show: false, timestamp: "" });
   const [leadFormData, setLeadFormData] = useState({ company: "", contactName: "", email: "", phone: "" });
   const scrollRef = useRef<HTMLDivElement>(null);
+  const leadFormRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = useMutation({
     mutationFn: async (params: { message: string; zipCode?: string; facilityType?: string; utility?: string; unrecognizedFacility?: string; measure?: string; searchMode?: string }) => {
@@ -71,6 +72,13 @@ export function ChatBot() {
     }
   }, [messages]);
 
+  // Scroll to top of lead form when it appears
+  useEffect(() => {
+    if (showLeadCaptureForm.show && leadFormRef.current) {
+      leadFormRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [showLeadCaptureForm.show]);
+
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       const welcomeMessage: Message = {
@@ -96,81 +104,110 @@ export function ChatBot() {
     let nextZipCode = zipCode;
     let nextFacilityType = facilityType;
     let nextUtility = utility;
+    let nextMeasure = measure;
+    let nextSearchMode = searchMode;
+    let nextUnrecognizedFacility = unrecognizedFacility;
 
     const zipMatch = inputMessage.match(/\b\d{5}\b/);
+    let isNewZipDetected = false;
     if (zipMatch) {
-      nextZipCode = zipMatch[0];
-      setZipCode(nextZipCode);
-    }
-
-    const utilityPatterns = {
-      'SCE': /\b(sce|southern california edison|so\.?\s*cal\.?\s*edison)\b/i,
-      'PGE': /\b(pg&?e|pge|pacific gas & electric|pacific gas and electric|pacific gas)\b/i,
-      'SDGE': /\b(sdg&?e|sdge|san diego gas & electric|san diego gas and electric|san diego gas)\b/i,
-      'LADWP': /\b(ladwp|los angeles department of water & power|los angeles department of water and power|la\s*dept\.?\s*of\s*water|los angeles water|los angeles power)\b/i,
-    };
-
-    for (const [utilityKey, pattern] of Object.entries(utilityPatterns)) {
-      if (pattern.test(inputMessage)) {
-        nextUtility = utilityKey;
-        setUtility(nextUtility);
-        break;
+      const newZip = zipMatch[0];
+      // If this is a different ZIP, reset the entire conversation flow
+      if (newZip !== zipCode) {
+        isNewZipDetected = true;
+        nextZipCode = newZip;
+        setZipCode(nextZipCode);
+        // Reset all conversation state including utility and unrecognized facility
+        nextFacilityType = undefined;
+        nextUtility = undefined;
+        nextMeasure = undefined;
+        nextSearchMode = undefined;
+        nextUnrecognizedFacility = undefined;
+        setFacilityType(undefined);
+        setUtility(undefined);
+        setMeasure(undefined);
+        setSearchMode(undefined);
+        setUnrecognizedFacility(undefined);
+        setShowLeadCaptureForm({ show: false, timestamp: "" });
+        setLeadCaptureState(false);
+      } else {
+        nextZipCode = newZip;
+        setZipCode(nextZipCode);
       }
     }
 
-    const facilityKeywords = {
-      office: /\boffice\b/i,
-      retail: /\bretail\b|\bstore\b|\bshop\b/i,
-      restaurant: /\brestaurant\b|\bdining\b|\bcafe\b|\bbar\b/i,
-      industrial: /\bindustrial\b|\bmanufacturing\b|\bfactory\b/i,
-      warehouse: /\bwarehousing\b|\bwarehouse\b|\bdistribution\s*center\b|\bstorage\b/i,
-      hotel: /\bhotel\b|\blodging\b|\bmotel\b/i,
-      medical: /\bhealthcare\b|\bhospital\b|\bclinic\b|\bmedical\b|\bnursing\s*home\b|\bassisted\s*living\b|\bdental\b/i,
-      school: /\bschool\b|\beducation\b|\buniversity\b|\bcollege\b/i,
-      recreation: /\bgolf\s*course\b|\brecreation\b|\bgym\b|\bfitness\b|\bsports\b|\bathletic\b/i,
-      agriculture: /\bfarm\b|\bagriculture\b|\bvineyard\b|\bgreenhouse\b/i,
-      multifamily: /\bapartment\b|\bmultifamily\b|\bcondo\b/i,
-      foodprocessing: /\bfood\s*processing\b|\bprocessing\s*facility\b/i,
-      autodealer: /\bauto\s*dealer\b|\bcar\s*dealer\b/i,
-      grocery: /\bgrocery\b|\bsupermarket\b|\bconvenience\s*store\b/i,
-    };
+    // Don't detect utility if we just detected a new ZIP - let the flow restart
+    if (!isNewZipDetected) {
+      const utilityPatterns = {
+        'SCE': /\b(sce|southern california edison|so\.?\s*cal\.?\s*edison)\b/i,
+        'PGE': /\b(pg&?e|pge|pacific gas & electric|pacific gas and electric|pacific gas)\b/i,
+        'SDGE': /\b(sdg&?e|sdge|san diego gas & electric|san diego gas and electric|san diego gas)\b/i,
+        'LADWP': /\b(ladwp|los angeles department of water & power|los angeles department of water and power|la\s*dept\.?\s*of\s*water|los angeles water|los angeles power)\b/i,
+      };
 
-    for (const [type, pattern] of Object.entries(facilityKeywords)) {
-      if (pattern.test(inputMessage)) {
-        nextFacilityType = type;
-        setFacilityType(nextFacilityType);
-        break;
+      for (const [utilityKey, pattern] of Object.entries(utilityPatterns)) {
+        if (pattern.test(inputMessage)) {
+          nextUtility = utilityKey;
+          setUtility(nextUtility);
+          break;
+        }
       }
     }
 
-    // Detect measures from user message
-    const measureKeywords = {
-      'LED': /\bled\b|\blighting\b|\blights\b|\blamp\b/i,
-      'HVAC': /\bhvac\b|\bheating\b|\bcooling\b|\bair\s*conditioning\b|\bfurnace\b|\bboiler\b/i,
-      'Heat Pump': /\bheat\s*pump\b|\bhp\s*water\s*heater\b|\bhpwh\b/i,
-      'Solar': /\bsolar\b|\bpv\b|\bphotovoltaic\b/i,
-      'Insulation': /\binsulation\b|\bweatherization\b/i,
-      'Motors': /\bmotor\b|\bvfd\b|\bvariable\s*frequency\s*drive\b/i,
-      'Refrigeration': /\brefrigeration\b|\bcooler\b|\bfreezer\b/i,
-    };
+    // Don't detect facility, measure, or search mode if we just detected a new ZIP - let the flow restart
+    if (!isNewZipDetected) {
+      const facilityKeywords = {
+        office: /\boffice\b/i,
+        retail: /\bretail\b|\bstore\b|\bshop\b/i,
+        restaurant: /\brestaurant\b|\bdining\b|\bcafe\b|\bbar\b/i,
+        industrial: /\bindustrial\b|\bmanufacturing\b|\bfactory\b/i,
+        warehouse: /\bwarehousing\b|\bwarehouse\b|\bdistribution\s*center\b|\bstorage\b/i,
+        hotel: /\bhotel\b|\blodging\b|\bmotel\b/i,
+        medical: /\bhealthcare\b|\bhospital\b|\bclinic\b|\bmedical\b|\bnursing\s*home\b|\bassisted\s*living\b|\bdental\b/i,
+        school: /\bschool\b|\beducation\b|\buniversity\b|\bcollege\b/i,
+        recreation: /\bgolf\s*course\b|\brecreation\b|\bgym\b|\bfitness\b|\bsports\b|\bathletic\b/i,
+        agriculture: /\bfarm\b|\bagriculture\b|\bvineyard\b|\bgreenhouse\b/i,
+        multifamily: /\bapartment\b|\bmultifamily\b|\bcondo\b/i,
+        foodprocessing: /\bfood\s*processing\b|\bprocessing\s*facility\b/i,
+        autodealer: /\bauto\s*dealer\b|\bcar\s*dealer\b/i,
+        grocery: /\bgrocery\b|\bsupermarket\b|\bconvenience\s*store\b/i,
+      };
 
-    let nextMeasure = measure;
-    for (const [measureType, pattern] of Object.entries(measureKeywords)) {
-      if (pattern.test(inputMessage)) {
-        nextMeasure = measureType;
-        setMeasure(nextMeasure);
-        break;
+      for (const [type, pattern] of Object.entries(facilityKeywords)) {
+        if (pattern.test(inputMessage)) {
+          nextFacilityType = type;
+          setFacilityType(nextFacilityType);
+          break;
+        }
       }
-    }
 
-    // Detect search mode from user message
-    let nextSearchMode = searchMode;
-    if (/\b(measure|specific\s*measure|energy\s*saving\s*measure)\b/i.test(inputMessage)) {
-      nextSearchMode = 'measure';
-      setSearchMode(nextSearchMode);
-    } else if (/\b(building\s*type|facility\s*type|my\s*building)\b/i.test(inputMessage)) {
-      nextSearchMode = 'buildingType';
-      setSearchMode(nextSearchMode);
+      // Detect measures from user message
+      const measureKeywords = {
+        'LED': /\bled\b|\blighting\b|\blights\b|\blamp\b/i,
+        'HVAC': /\bhvac\b|\bheating\b|\bcooling\b|\bair\s*conditioning\b|\bfurnace\b|\bboiler\b/i,
+        'Heat Pump': /\bheat\s*pump\b|\bhp\s*water\s*heater\b|\bhpwh\b/i,
+        'Solar': /\bsolar\b|\bpv\b|\bphotovoltaic\b/i,
+        'Insulation': /\binsulation\b|\bweatherization\b/i,
+        'Motors': /\bmotor\b|\bvfd\b|\bvariable\s*frequency\s*drive\b/i,
+        'Refrigeration': /\brefrigeration\b|\bcooler\b|\bfreezer\b/i,
+      };
+
+      for (const [measureType, pattern] of Object.entries(measureKeywords)) {
+        if (pattern.test(inputMessage)) {
+          nextMeasure = measureType;
+          setMeasure(nextMeasure);
+          break;
+        }
+      }
+
+      // Detect search mode from user message
+      if (/\b(measure|specific\s*measure|energy\s*saving\s*measure)\b/i.test(inputMessage)) {
+        nextSearchMode = 'measure';
+        setSearchMode(nextSearchMode);
+      } else if (/\b(building\s*type|facility\s*type|my\s*building)\b/i.test(inputMessage)) {
+        nextSearchMode = 'buildingType';
+        setSearchMode(nextSearchMode);
+      }
     }
 
     // Detect affirmative responses for lead capture
@@ -200,8 +237,9 @@ export function ChatBot() {
     }
 
     // Detect potential unrecognized facility mentions
+    // Only detect if not a new ZIP and we don't already have a facility
     let detectedUnrecognized: string | undefined;
-    if (!nextFacilityType && zipCode) {
+    if (!isNewZipDetected && !nextFacilityType && nextZipCode) {
       const facilityPatterns = [
         /(?:my|a|the|our)\s+([a-z\s]{3,30}?)(?:\s+(?:business|facility|building|center|location))?/i,
         /(?:incentives?\s+for\s+(?:my|a|the|our)\s+)([a-z\s]{3,30}?)(?:\?|$|\.)/i,
@@ -215,6 +253,7 @@ export function ChatBot() {
           // Don't capture generic words
           if (!['building', 'facility', 'business', 'location', 'place', 'property'].includes(extracted.toLowerCase())) {
             detectedUnrecognized = extracted;
+            nextUnrecognizedFacility = detectedUnrecognized;
             setUnrecognizedFacility(detectedUnrecognized);
             break;
           }
@@ -230,7 +269,7 @@ export function ChatBot() {
       zipCode: nextZipCode,
       facilityType: nextFacilityType,
       utility: nextUtility,
-      unrecognizedFacility: detectedUnrecognized || unrecognizedFacility,
+      unrecognizedFacility: detectedUnrecognized || nextUnrecognizedFacility,
       measure: nextMeasure,
       searchMode: nextSearchMode,
     });
@@ -251,7 +290,7 @@ export function ChatBot() {
     }
 
     // Check if backend indicates we should show search mode selector
-    if (response.showSearchModeSelector && !searchMode) {
+    if (response.showSearchModeSelector && !nextSearchMode) {
       setShowSearchModePrompt({ show: true, timestamp: new Date().toISOString() });
     }
 
@@ -409,7 +448,7 @@ export function ChatBot() {
           )}
           
           {showLeadCaptureForm.show && (
-            <div className="flex justify-start">
+            <div className="flex justify-start" ref={leadFormRef}>
               <div className="bg-blue-50 border-2 border-[#0c558c] rounded-lg p-4 w-full" data-testid="lead-capture-form">
                 <p className="text-sm font-semibold mb-3 text-slate-900">Great! Let's connect you with our experts</p>
                 <form onSubmit={handleLeadFormSubmit} className="space-y-3">
