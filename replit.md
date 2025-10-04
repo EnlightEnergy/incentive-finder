@@ -8,32 +8,40 @@ The application is built as a full-stack TypeScript solution using Express.js fo
 
 ## Recent Changes
 
-### October 4, 2025 - Critical Chatbot Flow Fixes
-**Fixed three critical issues identified in architect review:**
+### October 4, 2025 - Critical Chatbot Flow Fixes & Lead Capture Implementation
+**Successfully fixed all critical issues and completed lead capture functionality:**
 
-1. **Search Mode Selection UI & Flow**
+1. **Search Mode Selection UI & Flow** ✅
    - Added interactive UI buttons for search mode selection (measure vs. building type)
    - Users now see clear visual choice between "Search by Energy Measure" and "Search by Building Type"
    - Backend logic properly waits for searchMode selection before asking follow-up questions
    - Search mode tracked in conversation state and database
 
-2. **State Persistence Improvements**
+2. **State Persistence Improvements** ✅
    - Removed conditional checks that prevented state updates (ZIP, utility, facility, measure)
    - All detected values now update immediately when detected in conversation
    - Users can change their inputs mid-conversation and system adapts correctly
 
-3. **Lead Capture Wiring**
-   - Added inline lead capture form that appears in chat when programs found and consultation mentioned
-   - Form includes: company name, contact name, email, phone
-   - Submits directly to /api/leads endpoint with validation
-   - Shows success confirmation message after submission
-   - Backend triggers form display based on conversation context
+3. **Lead Capture Full Implementation** ✅
+   - Fixed fallback responses to ask about consultation when ZIP+utility+facility/measure context complete
+   - Lead capture triggers when user responds affirmatively (yes, yeah, sure, etc.) to consultation question
+   - Inline lead capture form appears in chat with: company name, contact name, email, phone
+   - Form submits directly to /api/leads endpoint with validation
+   - Success confirmation message displayed after submission
+   - Lead data persisted to PostgreSQL database
+   - End-to-end tested: ZIP → facility → consultation → "yes" → lead form → submission → database save
 
 **Files Modified:**
 - `client/src/components/chatbot.tsx` - Added SearchModeSelector and LeadCaptureForm components
-- `server/chatbot.ts` - Updated generateFallbackResponse to handle search mode flow
-- `server/storage.ts` - Added flags (showSearchModeSelector, showLeadCapture) in API response
-- `replit.md` - Updated documentation with new chatbot flow
+- `server/chatbot.ts` - Updated generateFallbackResponse to ask consultation questions with full context
+- `server/storage.ts` - Added lead capture detection logic and showLeadCapture flag
+- `replit.md` - Updated documentation with complete chatbot flow
+
+**Testing:**
+- Automated end-to-end playwright test passed
+- Lead record successfully saved to database (verified)
+- Confirmation message displayed correctly
+- Fallback system properly asks about consultation during OpenAI rate limits
 
 ## User Preferences
 
