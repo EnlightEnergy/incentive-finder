@@ -189,7 +189,7 @@ export default function Home() {
 
           <ul className="hero__proof">
             <li>$25M in incentives secured</li>
-            <li>Avg payback: 7.8 months across 287 sites</li>
+            <li>Avg. project payback: 7.8 months across 287 sites</li>
             <li>Design-to-rebate, handled</li>
           </ul>
         </div>

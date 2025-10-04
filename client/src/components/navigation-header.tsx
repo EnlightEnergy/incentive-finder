@@ -75,7 +75,7 @@ export default function NavigationHeader() {
               data-testid="button-get-report"
             >
               <a href="mailto:hello@enlightingenergy.com">
-                Get My Report
+                Reach Out
               </a>
             </Button>
           </nav>
@@ -126,7 +126,7 @@ export default function NavigationHeader() {
                       href="mailto:hello@enlightingenergy.com"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Get My Report
+                      Reach Out
                     </a>
                   </Button>
                 </div>
