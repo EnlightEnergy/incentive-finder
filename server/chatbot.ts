@@ -158,10 +158,16 @@ function generateFallbackResponse(params: ChatParams): string {
       autodealer: 'auto dealership',
     };
     const facilityName = facilityWords[facilityType] || facilityType;
+    if (zipCode && utility) {
+      return `I see you're looking for programs for ${facilityName}s in ${utility}. While I'm having trouble accessing the full program database right now, there are typically multiple incentive opportunities available for ${facilityName}s in California. I'd recommend speaking with one of our energy efficiency consultants who can provide a comprehensive analysis of all available programs and help you maximize your savings. Would you like to schedule a free consultation?`;
+    }
     return `Great! I understand you have a ${facilityName}. Let me search for relevant incentive programs in your area...`;
   }
   
   if (hasNewMeasure && measure) {
+    if (zipCode && utility) {
+      return `Excellent! I'll look for ${measure} incentive programs available to you. While I'm having difficulty accessing the complete database at the moment, there are usually several programs that can help with ${measure} projects. I'd recommend scheduling a free consultation with one of our energy efficiency experts who can provide a detailed analysis of all your options. Would you like to connect with a consultant?`;
+    }
     return `Excellent! I'll look for ${measure} incentive programs available to you. Let me pull up the relevant options...`;
   }
   
