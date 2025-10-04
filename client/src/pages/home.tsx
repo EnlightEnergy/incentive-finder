@@ -195,14 +195,14 @@ export default function Home() {
         </div>
 
         {/* Utility Logo Trust Strip */}
-        <div className="bg-slate-50 pt-8 border-t border-gray-200">
+        <div className="bg-slate-50 py-8 border-t border-gray-200 border-b border-gray-200">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-6">
               <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
                 Partner utilities & programs
               </p>
             </div>
-            <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
+            <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap pb-8">
               <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SCE</div>
               <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">PG&E</div>
               <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SDG&E</div>
@@ -216,7 +216,7 @@ export default function Home() {
       </section>
 
       {/* Search Form */}
-      <div id="search-form">
+      <div id="search-form" className="-mt-8">
         <HeroSearchForm onSearch={handleSearch} />
       </div>
 
