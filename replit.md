@@ -8,6 +8,41 @@ The application is built as a full-stack TypeScript solution using Express.js fo
 
 ## Recent Changes
 
+### October 4, 2025 - Lead Form Scroll & ZIP Reset Bug Fixes
+**Fixed critical UX issues with lead capture form and conversation state management:**
+
+1. **Lead Form Scroll-to-Top** ✅
+   - Added `leadFormRef` with `scrollIntoView` to automatically scroll form to top when it appears
+   - Improves UX by ensuring users see the form immediately without manual scrolling
+   - Smooth scroll animation with `block: 'start'` positioning
+
+2. **Complete ZIP Reset State Management** ✅
+   - **Frontend**: Created local `next*` variables for all state (zipCode, facilityType, utility, measure, searchMode, unrecognizedFacility)
+   - **Frontend**: When new ZIP detected, clears ALL `next*` variables and React state, hides lead form
+   - **Frontend**: Guards ALL detection (utility, facility, measure, searchMode) with `!isNewZipDetected` to prevent keyword leaks
+   - **Frontend**: Always updates lead form visibility explicitly (shows when true, hides when false) - fixes form staying visible forever
+   - **Backend**: Detects `isNewZip` flag and sets all detected values (utility, facility, measure) to undefined
+   - **Backend**: Guards ALL detection loops with `if (!isNewZip)` to prevent re-detection during reset
+   - **Backend**: Clears database fields (facilityType, utility, searchMode) when isNewZip
+   - **Backend**: Added `!isNewZip` guard to `shouldShowLeadCapture` - never shows lead form during reset
+
+3. **ZIP Reset Flow** ✅
+   - Entering new ZIP completely restarts conversation from utility confirmation
+   - No state leaks: facility, measure, utility, searchMode all cleared
+   - Lead form hidden until new flow completes with affirmative consultation response
+   - Complex messages with new ZIP (e.g., "93103 PGE office HVAC") only process ZIP, ignore all other keywords
+
+**Files Modified:**
+- `client/src/components/chatbot.tsx` - Added leadFormRef scroll, complete next* variable system, lead form visibility logic
+- `server/storage.ts` - Added isNewZip guards, database searchMode clearing, shouldShowLeadCapture guard
+
+**Testing:**
+- Automated end-to-end playwright test passed all scenarios
+- Lead form scroll verified ✅
+- ZIP reset flow verified ✅
+- No state leaks verified ✅
+- Lead form visibility correctly managed ✅
+
 ### October 4, 2025 - Critical Chatbot Flow Fixes & Lead Capture Implementation
 **Successfully fixed all critical issues and completed lead capture functionality:**
 
@@ -36,18 +71,6 @@ The application is built as a full-stack TypeScript solution using Express.js fo
    - Form now waits for user's affirmative response before appearing
    - Prevents user from having to scroll up to see the question
    - Improved user experience: question → user decision → form (proper flow)
-
-**Files Modified:**
-- `client/src/components/chatbot.tsx` - Added SearchModeSelector and LeadCaptureForm components
-- `server/chatbot.ts` - Updated generateFallbackResponse to ask consultation questions with full context
-- `server/storage.ts` - Added lead capture detection logic and showLeadCapture flag
-- `replit.md` - Updated documentation with complete chatbot flow
-
-**Testing:**
-- Automated end-to-end playwright test passed
-- Lead record successfully saved to database (verified)
-- Confirmation message displayed correctly
-- Fallback system properly asks about consultation during OpenAI rate limits
 
 ## User Preferences
 
