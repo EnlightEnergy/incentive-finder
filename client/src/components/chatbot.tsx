@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
 const WattsonRobotIcon = ({ className = "", showText = false }: { className?: string; showText?: boolean }) => (
-  <svg viewBox="0 0 120 120" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="15 10 90 110" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
     {/* Antennae */}
     <circle cx="35" cy="15" r="4" fill="#0c558c" />
     <line x1="35" y1="19" x2="35" y2="28" stroke="#0c558c" strokeWidth="3" strokeLinecap="round" />
