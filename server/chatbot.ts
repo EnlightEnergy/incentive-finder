@@ -112,6 +112,19 @@ function generateFallbackResponse(params: ChatParams): string {
   const { messages, zipCode, facilityType, utility, allUtilities, programs } = params;
   const lastMessage = messages[messages.length - 1]?.content.toLowerCase() || '';
   
+  // Extract actual facility words from user's message
+  const facilityWords = {
+    office: 'office building',
+    retail: lastMessage.includes('store') ? 'store' : 'retail',
+    restaurant: lastMessage.includes('restaurant') ? 'restaurant' : lastMessage.includes('cafe') ? 'cafe' : 'dining facility',
+    industrial: lastMessage.includes('warehouse') ? 'warehouse' : lastMessage.includes('manufacturing') ? 'manufacturing facility' : 'industrial facility',
+    hotel: 'hotel',
+    medical: lastMessage.includes('hospital') ? 'hospital' : lastMessage.includes('clinic') ? 'clinic' : 'medical facility',
+    school: lastMessage.includes('university') ? 'university' : 'school',
+  };
+  
+  const userFacilityWord = facilityType ? (facilityWords[facilityType as keyof typeof facilityWords] || facilityType) : 'facility';
+  
   // Check for utility selection/correction
   const utilityCorrectionPatterns = {
     'SCE': /\b(sce|southern california edison|socal edison)\b/i,
@@ -164,11 +177,11 @@ function generateFallbackResponse(params: ChatParams): string {
       `${idx + 1}. ${p.name} from ${p.owner}`
     ).join('\n');
     
-    return `Based on your ${facilityType} in ${utility || 'your area'}, I found ${programs.length} potentially relevant incentive programs, including:\n\n${programList}\n\nThese programs can often be combined or "stacked" for maximum savings. To get a detailed analysis of your specific eligibility and potential incentive amounts, I'd recommend scheduling a free consultation with our energy efficiency experts. Would you like to learn more about our consultation services?`;
+    return `Based on your ${userFacilityWord} in ${utility || 'your area'}, I found ${programs.length} potentially relevant incentive programs, including:\n\n${programList}\n\nThese programs can often be combined or "stacked" for maximum savings. To get a detailed analysis of your specific eligibility and potential incentive amounts, I'd recommend scheduling a free consultation with our energy efficiency experts. Would you like to learn more about our consultation services?`;
   }
   
   if (zipCode && facilityType && programs.length === 0) {
-    return `I see you have a ${facilityType} in ${utility || 'your area'}. While I'm having trouble accessing the full program database right now, there are typically multiple incentive opportunities available for ${facilityType} facilities in California. I'd recommend speaking with one of our energy efficiency consultants who can provide a comprehensive analysis of all available programs and help you maximize your savings. Would you like to schedule a free consultation?`;
+    return `I see you have a ${userFacilityWord} in ${utility || 'your area'}. While I'm having trouble accessing the full program database right now, there are typically multiple incentive opportunities available for ${userFacilityWord}s in California. I'd recommend speaking with one of our energy efficiency consultants who can provide a comprehensive analysis of all available programs and help you maximize your savings. Would you like to schedule a free consultation?`;
   }
   
   return `Thank you for your interest in energy efficiency incentives! To provide you with the most accurate information about available programs and potential savings, I'd recommend speaking with one of our energy efficiency experts. They can analyze your specific situation and help you identify all stackable incentive opportunities. Would you like to learn more about our free consultation service?`;
