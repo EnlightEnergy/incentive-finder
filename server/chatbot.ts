@@ -133,14 +133,15 @@ function generateFallbackResponse(params: ChatParams): string {
   // CONTEXT-AWARE: Check if user just provided new information
   const hasNewZip = /\b\d{5}\b/.test(lastMessage);
   const hasNewFacility = /\b(office|retail|restaurant|industrial|warehouse|hotel|medical|school|recreation|agriculture|multifamily|grocery|food\s*processing|auto\s*dealer)\b/i.test(lastMessage);
-  const hasNewMeasure = /\b(led|lighting|hvac|heat\s*pump|solar|insulation|motor|refrigeration)\b/i.test(lastMessage);
+  const hasNewMeasure = /\b(led|lighting|lights|lamp|hvac|heat\s*pump|solar|insulation|motor|refrigeration)\b/i.test(lastMessage);
   
   // If user just provided new info, acknowledge it
   if (hasNewZip && zipCode) {
     return `Thank you for providing your ZIP code (${zipCode}). Let me check which utilities serve this area...`;
   }
   
-  if (hasNewFacility && facilityType) {
+  // Only acknowledge new facility/measure if we don't have programs to show yet
+  if (hasNewFacility && facilityType && programs.length === 0) {
     const facilityWords: Record<string, string> = {
       office: 'office building',
       retail: 'retail store',
@@ -158,17 +159,12 @@ function generateFallbackResponse(params: ChatParams): string {
       autodealer: 'auto dealership',
     };
     const facilityName = facilityWords[facilityType] || facilityType;
-    if (zipCode && utility) {
-      return `I see you're looking for programs for ${facilityName}s in ${utility}. While I'm having trouble accessing the full program database right now, there are typically multiple incentive opportunities available for ${facilityName}s in California. I'd recommend speaking with one of our energy efficiency consultants who can provide a comprehensive analysis of all available programs and help you maximize your savings. Would you like to schedule a free consultation?`;
-    }
     return `Great! I understand you have a ${facilityName}. Let me search for relevant incentive programs in your area...`;
   }
   
-  if (hasNewMeasure && measure) {
-    if (zipCode && utility) {
-      return `Excellent! I'll look for ${measure} incentive programs available to you. While I'm having difficulty accessing the complete database at the moment, there are usually several programs that can help with ${measure} projects. I'd recommend scheduling a free consultation with one of our energy efficiency experts who can provide a detailed analysis of all your options. Would you like to connect with a consultant?`;
-    }
-    return `Excellent! I'll look for ${measure} incentive programs available to you. Let me pull up the relevant options...`;
+  if (hasNewMeasure && measure && programs.length === 0) {
+    const measureName = measure === 'Lighting' ? 'lighting' : measure;
+    return `Excellent! I'll look for ${measureName} incentive programs available to you. Let me pull up the relevant options...`;
   }
   
   // Handle unrecognized facility type

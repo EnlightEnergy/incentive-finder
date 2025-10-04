@@ -417,7 +417,7 @@ export class DatabaseStorage implements IStorage {
     // RE-DETECT measure from message
     let detectedMeasure = frontendMeasure;
     const measurePatterns = {
-      'LED': /\bled\b|\blighting\b|\blights\b|\blamp\b/i,
+      'Lighting': /\bled\b|\blighting\b|\blights\b|\blamp\b/i,
       'HVAC': /\bhvac\b|\bheating\b|\bcooling\b|\bair\s*conditioning\b|\bfurnace\b|\bboiler\b/i,
       'Heat Pump': /\bheat\s*pump\b|\bhp\s*water\s*heater\b|\bhpwh\b/i,
       'Solar': /\bsolar\b|\bpv\b|\bphotovoltaic\b/i,
