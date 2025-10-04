@@ -410,7 +410,7 @@ export function ChatBot() {
           
           {showLeadCaptureForm.show && (
             <div className="flex justify-start">
-              <div className="bg-green-50 border-2 border-green-600 rounded-lg p-4 w-full" data-testid="lead-capture-form">
+              <div className="bg-blue-50 border-2 border-[#0c558c] rounded-lg p-4 w-full" data-testid="lead-capture-form">
                 <p className="text-sm font-semibold mb-3 text-slate-900">Great! Let's connect you with our experts</p>
                 <form onSubmit={handleLeadFormSubmit} className="space-y-3">
                   <div>
@@ -466,7 +466,7 @@ export function ChatBot() {
                   <Button
                     data-testid="button-submit-lead"
                     type="submit"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white"
+                    className="w-full bg-[#0c558c] hover:bg-[#00a5cb] text-white"
                   >
                     Submit
                   </Button>
