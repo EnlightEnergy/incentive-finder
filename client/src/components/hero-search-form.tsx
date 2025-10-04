@@ -117,6 +117,7 @@ export default function HeroSearchForm({ onSearch, showIcons = true }: HeroSearc
   return (
     <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <>
         {/* Program Category Icons */}
         {showIcons && (
         <div className="text-center mb-6">
@@ -315,6 +316,7 @@ export default function HeroSearchForm({ onSearch, showIcons = true }: HeroSearc
             </form>
           </CardContent>
         </Card>
+        </>
       </div>
       
       <MarketSegmentModal
