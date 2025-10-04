@@ -31,6 +31,12 @@ The application is built as a full-stack TypeScript solution using Express.js fo
    - Lead data persisted to PostgreSQL database
    - End-to-end tested: ZIP → facility → consultation → "yes" → lead form → submission → database save
 
+4. **Lead Capture Timing Fix** ✅
+   - Fixed issue where form appeared immediately when AI asked about consultation
+   - Form now waits for user's affirmative response before appearing
+   - Prevents user from having to scroll up to see the question
+   - Improved user experience: question → user decision → form (proper flow)
+
 **Files Modified:**
 - `client/src/components/chatbot.tsx` - Added SearchModeSelector and LeadCaptureForm components
 - `server/chatbot.ts` - Updated generateFallbackResponse to ask consultation questions with full context

@@ -535,7 +535,7 @@ export class DatabaseStorage implements IStorage {
     const shouldShowSearchModeSelector = detectedZip && selectedUtility && !searchMode && !detectedFacility && !detectedMeasure;
     
     // Determine if we should show lead capture
-    // Check if AI response mentions consultation/scheduling OR if user is responding affirmatively to a previous consultation question
+    // Only show when user responds affirmatively to a previous consultation question
     const previousAssistantMessage = updatedMessages
       .filter(m => m.role === 'assistant')
       .slice(-1)[0]?.content || '';
@@ -545,13 +545,8 @@ export class DatabaseStorage implements IStorage {
     const previouslyAskedAboutConsultation = /\b(consultation|schedule|speak with|contact|free consultation|would you like)\b/i.test(previousAssistantMessage);
     
     const shouldShowLeadCapture = (
-      // Current response asks about consultation
-      (/\b(consultation|schedule|speak with|contact|free consultation)\b/i.test(aiResponse) &&
-       (detectedFacility || detectedMeasure) &&
-       relevantPrograms.length > 0)
-      ||
       // User said yes to previous consultation question
-      (isAffirmativeResponse && previouslyAskedAboutConsultation && (detectedFacility || detectedMeasure))
+      isAffirmativeResponse && previouslyAskedAboutConsultation && (detectedFacility || detectedMeasure)
     );
     
     return {
