@@ -131,13 +131,15 @@ export class DatabaseStorage implements IStorage {
       conditions.push(ilike(programs.owner, `%${params.utility}%`));
     }
     
-    // Business type filtering
+    // Business type filtering (case-insensitive)
     if (params.businessType) {
       needsEligibilityJoin = true;
+      // Capitalize first letter to match the data format (e.g., "industrial" -> "Industrial")
+      const capitalizedType = params.businessType.charAt(0).toUpperCase() + params.businessType.slice(1);
       conditions.push(
         or(
-          sql`${programs.sectorTags}::jsonb @> ${JSON.stringify([params.businessType])}`,
-          sql`${eligibilityRules.buildingTypes}::jsonb @> ${JSON.stringify([params.businessType])}`
+          sql`${programs.sectorTags}::jsonb @> ${JSON.stringify([capitalizedType])}`,
+          sql`${eligibilityRules.buildingTypes}::jsonb @> ${JSON.stringify([capitalizedType])}`
         )
       );
     }
