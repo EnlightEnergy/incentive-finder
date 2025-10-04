@@ -317,7 +317,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
       <MarketSegmentModal
         open={marketSegmentModalOpen}
         onOpenChange={setMarketSegmentModalOpen}
-        title="Commercial & Industry Buildings"
+        title="Commercial Buildings"
         segments={commercialIndustrySegments}
       />
       
