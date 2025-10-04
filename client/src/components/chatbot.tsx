@@ -405,7 +405,7 @@ export function ChatBot() {
       <Button
         data-testid="button-open-chat"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg bg-[#0c558c] hover:bg-[#00a5cb] z-50 p-2"
+        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg bg-[#0c558c] hover:bg-[#00a5cb] z-50 p-0"
         size="icon"
       >
         <WattsonRobotIcon className="h-full w-full" showText={true} />
