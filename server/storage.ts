@@ -42,9 +42,14 @@ function mapFacilityTypeToSector(facilityType: string): string[] {
 function mapUtilityToSearchTerms(utility: string): string[] {
   const mapping: Record<string, string[]> = {
     'SCE': ['Southern California Edison', 'SCE'],
-    'PG&E': ['Pacific Gas & Electric', 'PG&E', 'PGE'],
-    'SDGE': ['San Diego Gas & Electric', 'SDG&E', 'SDGE'],
-    'LADWP': ['Los Angeles Department of Water & Power', 'LADWP'],
+    // PG&E - handle both with and without ampersand, and both "&" and "and"
+    'PG&E': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE'],
+    'PGE': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE'],
+    // SDG&E - handle both with and without ampersand, and both "&" and "and"
+    'SDGE': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE'],
+    'SDG&E': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE'],
+    // LADWP - handle both "&" and "and"
+    'LADWP': ['Los Angeles Department of Water & Power', 'Los Angeles Department of Water and Power', 'LADWP'],
     'SMUD': ['Sacramento Municipal Utility District', 'SMUD'],
     'SoCalREN': ['Southern California Regional Energy Network', 'SoCalREN'],
     'MCE': ['MCE Clean Energy', 'MCE'],
