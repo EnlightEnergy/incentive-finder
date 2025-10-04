@@ -294,9 +294,13 @@ export function ChatBot() {
       setShowSearchModePrompt({ show: true, timestamp: new Date().toISOString() });
     }
 
-    // Check if backend indicates we should show lead capture
+    // Update lead capture form visibility based on backend response or state
+    // Always update to ensure it's hidden when it should be
     if (response.showLeadCapture || leadCaptureState) {
       setShowLeadCaptureForm({ show: true, timestamp: new Date().toISOString() });
+    } else if (!leadCaptureState) {
+      // Only hide if leadCaptureState is also false
+      setShowLeadCaptureForm({ show: false, timestamp: "" });
     }
   };
 

@@ -543,7 +543,7 @@ export class DatabaseStorage implements IStorage {
     const finalMessages = [...updatedMessages, assistantMessage];
     
     // Update conversation with newly detected values
-    // If new ZIP detected, reset facility, measure, and utility
+    // If new ZIP detected, reset facility, measure, searchMode, and utility
     await db
       .update(chatConversations)
       .set({
@@ -551,6 +551,7 @@ export class DatabaseStorage implements IStorage {
         zipCode: detectedZip || conversation.zipCode,
         facilityType: isNewZip ? null : (detectedFacility || conversation.facilityType),
         utility: isNewZip ? null : (selectedUtility || conversation.utility),
+        searchMode: isNewZip ? null : (searchMode || conversation.searchMode),
         updatedAt: new Date(),
       })
       .where(eq(chatConversations.sessionId, sessionId));
@@ -569,6 +570,8 @@ export class DatabaseStorage implements IStorage {
     const previouslyAskedAboutConsultation = /\b(consultation|schedule|speak with|contact|free consultation|would you like)\b/i.test(previousAssistantMessage);
     
     const shouldShowLeadCapture = (
+      // Never show lead capture when new ZIP is detected (restart flow)
+      !isNewZip &&
       // User said yes to previous consultation question
       isAffirmativeResponse && previouslyAskedAboutConsultation && (detectedFacility || detectedMeasure)
     );
