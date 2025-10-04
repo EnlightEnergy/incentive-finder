@@ -127,7 +127,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
                 <Building2 className="w-10 h-10 text-[#0c558c]" />
               </div>
-              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial & Industry</span>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial Buildings</span>
             </div>
             <div 
               className="flex flex-col items-center gap-2 cursor-pointer" 
