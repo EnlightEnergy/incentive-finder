@@ -13,6 +13,7 @@ import MarketSegmentModal from "@/components/market-segment-modal";
 
 interface HeroSearchFormProps {
   onSearch: (params: Partial<SearchProgramsParams>) => void;
+  showIcons?: boolean;
 }
 
 const energyMeasures = [
@@ -27,7 +28,7 @@ const energyMeasures = [
   { id: "Energy Storage", label: "Energy Storage" },
 ];
 
-export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
+export default function HeroSearchForm({ onSearch, showIcons = true }: HeroSearchFormProps) {
   const [businessType, setBusinessType] = useState("");
   const [location, setLocation] = useState("");
   const [utility, setUtility] = useState("");
@@ -117,6 +118,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
     <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Program Category Icons */}
+        {showIcons && (
         <div className="text-center mb-6">
           <div className="flex justify-center items-center gap-6 lg:gap-8 max-w-5xl mx-auto py-6 flex-wrap">
             <div 
@@ -181,6 +183,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
             </div>
           </div>
         </div>
+        )}
 
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-foreground mb-4">

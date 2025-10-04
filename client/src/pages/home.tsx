@@ -10,6 +10,7 @@ import ApplyEnlightingModal from "@/components/apply-enlighting-modal";
 import { ChatBot } from "@/components/chatbot";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Building2, Store, Factory, Building, Wrench, Sun } from "lucide-react";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
 import logoPath from "@assets/Blue Mark_1759082307340.png";
@@ -195,7 +196,7 @@ export default function Home() {
         </div>
 
         {/* Utility Logo Trust Strip */}
-        <div className="bg-slate-50 py-8 border-t border-gray-200 border-b border-gray-200">
+        <div className="bg-slate-50 py-8 border-t border-gray-200">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-6">
               <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
@@ -211,13 +212,49 @@ export default function Home() {
               <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">MCE</div>
               <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">GoGreen Financing</div>
             </div>
+
+            {/* Program Category Icons - Moved up from search form */}
+            <div className="text-center pt-6 pb-8 border-t border-gray-200">
+              <div className="flex justify-center items-center gap-6 lg:gap-8 max-w-5xl mx-auto flex-wrap">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300">
+                    <Building2 className="w-8 h-8 text-[#0c558c]" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300">
+                    <Store className="w-8 h-8 text-[#0c558c]" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300">
+                    <Factory className="w-8 h-8 text-[#0c558c]" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300">
+                    <Building className="w-8 h-8 text-[#0c558c]" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300">
+                    <Wrench className="w-8 h-8 text-[#0c558c]" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300">
+                    <Sun className="w-8 h-8 text-[#0c558c]" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Search Form */}
-      <div id="search-form" className="-mt-8">
-        <HeroSearchForm onSearch={handleSearch} />
+      <div id="search-form">
+        <HeroSearchForm onSearch={handleSearch} showIcons={false} />
       </div>
 
       {/* Client Proof Strip */}
