@@ -20,6 +20,36 @@ import { db } from "./db";
 import { eq, ilike, and, or, inArray, sql, desc } from "drizzle-orm";
 import { processChatWithAI } from "./chatbot";
 
+function mapFacilityTypeToSector(facilityType: string): string[] {
+  const mapping: Record<string, string[]> = {
+    'retail': ['Commercial', 'Small Business'],
+    'office': ['Commercial', 'Small Business'],
+    'restaurant': ['Commercial', 'Small Business'],
+    'hotel': ['Commercial'],
+    'medical': ['Commercial'],
+    'school': ['Commercial'],
+    'industrial': ['Industrial'],
+    'warehouse': ['Industrial'],
+    'manufacturing': ['Industrial'],
+  };
+  
+  return mapping[facilityType.toLowerCase()] || [facilityType.charAt(0).toUpperCase() + facilityType.slice(1)];
+}
+
+function mapUtilityToSearchTerms(utility: string): string[] {
+  const mapping: Record<string, string[]> = {
+    'SCE': ['Southern California Edison', 'SCE'],
+    'PG&E': ['Pacific Gas & Electric', 'PG&E', 'PGE'],
+    'SDGE': ['San Diego Gas & Electric', 'SDG&E', 'SDGE'],
+    'LADWP': ['Los Angeles Department of Water & Power', 'LADWP'],
+    'SMUD': ['Sacramento Municipal Utility District', 'SMUD'],
+    'SoCalREN': ['Southern California Regional Energy Network', 'SoCalREN'],
+    'MCE': ['MCE Clean Energy', 'MCE'],
+  };
+  
+  return mapping[utility] || [utility];
+}
+
 export interface IStorage {
   // Program management
   getPrograms(params: SearchProgramsParams): Promise<Program[]>;
@@ -125,23 +155,27 @@ export class DatabaseStorage implements IStorage {
       }
     }
     
-    // Utility filtering
+    // Utility filtering - map abbreviations to full names
     if (params.utility) {
-      // First try to match by program owner (which is the utility name)
-      conditions.push(ilike(programs.owner, `%${params.utility}%`));
+      const utilitySearchTerms = mapUtilityToSearchTerms(params.utility);
+      const utilityConditions = utilitySearchTerms.map(term => 
+        ilike(programs.owner, `%${term}%`)
+      );
+      conditions.push(or(...utilityConditions));
     }
     
-    // Business type filtering (case-insensitive)
+    // Business type filtering - map friendly names to database sectors
     if (params.businessType) {
       needsEligibilityJoin = true;
-      // Capitalize first letter to match the data format (e.g., "industrial" -> "Industrial")
-      const capitalizedType = params.businessType.charAt(0).toUpperCase() + params.businessType.slice(1);
-      conditions.push(
-        or(
-          sql`${programs.sectorTags}::jsonb @> ${JSON.stringify([capitalizedType])}`,
-          sql`${eligibilityRules.buildingTypes}::jsonb @> ${JSON.stringify([capitalizedType])}`
-        )
-      );
+      const sectors = mapFacilityTypeToSector(params.businessType);
+      
+      // Build conditions for each mapped sector
+      const sectorConditions = sectors.flatMap(sector => [
+        sql`${programs.sectorTags}::jsonb @> ${JSON.stringify([sector])}`,
+        sql`${eligibilityRules.buildingTypes}::jsonb @> ${JSON.stringify([sector])}`
+      ]);
+      
+      conditions.push(or(...sectorConditions));
     }
     
     // Incentive type filter
@@ -349,7 +383,7 @@ export class DatabaseStorage implements IStorage {
     }
     
     const relevantPrograms = await this.getPrograms({
-      utility: selectedUtility,
+      utility: selectedUtility || undefined,
       businessType: facilityType,
       limit: 5,
       offset: 0,
@@ -359,7 +393,7 @@ export class DatabaseStorage implements IStorage {
       messages: updatedMessages,
       zipCode,
       facilityType,
-      utility: selectedUtility,
+      utility: selectedUtility || undefined,
       allUtilities: allUtilities.map(u => u.ownerUtility),
       programs: relevantPrograms,
     });
