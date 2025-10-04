@@ -496,6 +496,15 @@ export class DatabaseStorage implements IStorage {
       })
       .where(eq(chatConversations.sessionId, sessionId));
     
+    // Determine if we should show search mode selector
+    const shouldShowSearchModeSelector = detectedZip && selectedUtility && !searchMode && !detectedFacility && !detectedMeasure;
+    
+    // Determine if we should show lead capture
+    // Check if AI response mentions consultation/scheduling
+    const shouldShowLeadCapture = /\b(consultation|schedule|speak with|contact|free consultation)\b/i.test(aiResponse) &&
+                                   (detectedFacility || detectedMeasure) &&
+                                   relevantPrograms.length > 0;
+    
     return {
       message: aiResponse,
       utility: selectedUtility,
@@ -503,6 +512,8 @@ export class DatabaseStorage implements IStorage {
       detectedZip,
       detectedFacility,
       detectedMeasure,
+      showSearchModeSelector: shouldShowSearchModeSelector,
+      showLeadCapture: shouldShowLeadCapture,
     };
   }
 }

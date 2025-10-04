@@ -6,6 +6,35 @@ Enlighting Incentive Finder is a commercial web application that helps facility 
 
 The application is built as a full-stack TypeScript solution using Express.js for the backend API, React with Vite for the frontend, and PostgreSQL for data persistence. It integrates with external APIs like DSIRE for incentive data and includes comprehensive admin tools for program management.
 
+## Recent Changes
+
+### October 4, 2025 - Critical Chatbot Flow Fixes
+**Fixed three critical issues identified in architect review:**
+
+1. **Search Mode Selection UI & Flow**
+   - Added interactive UI buttons for search mode selection (measure vs. building type)
+   - Users now see clear visual choice between "Search by Energy Measure" and "Search by Building Type"
+   - Backend logic properly waits for searchMode selection before asking follow-up questions
+   - Search mode tracked in conversation state and database
+
+2. **State Persistence Improvements**
+   - Removed conditional checks that prevented state updates (ZIP, utility, facility, measure)
+   - All detected values now update immediately when detected in conversation
+   - Users can change their inputs mid-conversation and system adapts correctly
+
+3. **Lead Capture Wiring**
+   - Added inline lead capture form that appears in chat when programs found and consultation mentioned
+   - Form includes: company name, contact name, email, phone
+   - Submits directly to /api/leads endpoint with validation
+   - Shows success confirmation message after submission
+   - Backend triggers form display based on conversation context
+
+**Files Modified:**
+- `client/src/components/chatbot.tsx` - Added SearchModeSelector and LeadCaptureForm components
+- `server/chatbot.ts` - Updated generateFallbackResponse to handle search mode flow
+- `server/storage.ts` - Added flags (showSearchModeSelector, showLeadCapture) in API response
+- `replit.md` - Updated documentation with new chatbot flow
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -65,19 +94,37 @@ Preferred communication style: Simple, everyday language.
   - utility_zip_codes table: 4,368 California ZIP-to-utility mappings for territory identification
   - chat_conversations table: Persistent conversation history with JSONB message storage
   - Real-time program matching based on location and facility type
-- **User Flow**:
+- **User Flow** (Updated October 2025):
   1. Collects ZIP code to determine utility territory
-  2. Asks about facility type (office, retail, restaurant, industrial, etc.)
-  3. For unrecognized facilities: prompts user to classify into one of four categories
-  4. Searches relevant programs from database
-  5. Provides high-level program overview (2-3 examples)
-  6. Guides users toward consultation for detailed analysis
+  2. Detects and confirms utility provider (handles multiple utilities per ZIP)
+  3. **Search Mode Selection** (NEW): Shows UI buttons for user to choose search method:
+     - "Search by Energy Measure" (LED, HVAC, Solar, etc.)
+     - "Search by Building Type" (Office, Retail, Warehouse, etc.)
+  4. Based on search mode selection:
+     - If Measure: Asks for specific measure (LED, HVAC, solar, etc.)
+     - If Building Type: Asks for facility type (office, retail, restaurant, etc.)
+  5. For unrecognized facilities: prompts user to classify into one of four categories
+  6. Searches relevant programs from database
+  7. Provides high-level program overview (2-3 examples)
+  8. **Lead Capture** (NEW): When programs found and consultation mentioned, shows inline form:
+     - Company name, contact name, email, phone
+     - Submits directly to leads API
+     - Confirmation message upon successful submission
+  9. Guides users toward consultation for detailed analysis
 - **Facility Type Coverage**:
-  - **Commercial**: retail, office, restaurant, hotel, medical, school, recreation (golf course, gym)
+  - **Commercial**: retail, office, restaurant, hotel, medical, school, recreation (golf course, gym), grocery, auto dealer, food processing
   - **Industrial**: warehouse, industrial, manufacturing, factory
   - **Agricultural**: farm, vineyard, agriculture
   - **Multifamily**: apartment, multifamily, condo
   - **Unrecognized**: library, museum, church, theater, stadium → triggers classification prompt
+- **State Management** (Updated October 2025):
+  - Always updates detected values (ZIP, utility, facility, measure) - no conditional blocking
+  - Tracks searchMode in both frontend and conversation database
+  - Persistent state across conversation for seamless experience
+- **Interactive UI Components** (NEW):
+  - Search Mode Selector: Two-button card with icons for clear visual choice
+  - Lead Capture Form: Inline form with validation that appears in chat flow
+  - All components styled with brand colors and Shadcn UI consistency
 - **Behavior**: Provides helpful information while avoiding complete technical details, positioning consultation as the value-added service
 - **Resilience**: Graceful degradation - fallback responses maintain conversation quality when AI API unavailable
 

@@ -222,15 +222,27 @@ function generateFallbackResponse(params: ChatParams): string {
     return `Your ZIP code (${zipCode}) is served by multiple utilities: ${utilityList}. Which utility do you receive service from? This will help me find the right incentive programs for you.`;
   }
   
-  if (zipCode && !facilityType && !measure) {
-    if (utility) {
-      const utilityName = utility === 'SCE' ? 'Southern California Edison' : 
-                         utility === 'PGE' ? 'Pacific Gas & Electric' :
-                         utility === 'SDGE' ? 'San Diego Gas & Electric' :
-                         utility === 'LADWP' ? 'Los Angeles Department of Water & Power' : utility;
-      return `Great! I can see you're in ${utilityName}'s service territory. Would you like to search for a specific energy saving measure (like LED, HVAC, solar) or incentives for your building type?`;
-    }
-    return `Thank you! Would you like to search for a specific energy saving measure (like LED, HVAC, solar) or incentives for your building type?`;
+  // CRITICAL: If ZIP and utility confirmed but no searchMode, trigger UI selector
+  if (zipCode && utility && !searchMode && !facilityType && !measure) {
+    const utilityName = utility === 'SCE' ? 'Southern California Edison' : 
+                       utility === 'PGE' ? 'Pacific Gas & Electric' :
+                       utility === 'SDGE' ? 'San Diego Gas & Electric' :
+                       utility === 'LADWP' ? 'Los Angeles Department of Water & Power' : utility;
+    return `Great! I can see you're in ${utilityName}'s service territory. I can help you find incentives in two ways: by a specific energy saving measure (like LED lighting, HVAC upgrades, or solar) OR by your building type (like office, retail, or warehouse). Please select your preferred search method using the buttons below.`;
+  }
+  
+  // If ZIP confirmed but no utility yet and only one utility available
+  if (zipCode && !utility && !facilityType && !measure && (!allUtilities || allUtilities.length === 1)) {
+    return `Thank you! I can help you find incentives in two ways: by a specific energy saving measure (like LED lighting, HVAC upgrades, or solar) OR by your building type (like office, retail, or warehouse). Please select your preferred search method using the buttons below.`;
+  }
+  
+  // Handle when searchMode is selected but specific info not yet provided
+  if (zipCode && searchMode === 'buildingType' && !facilityType) {
+    return `Perfect! You've chosen to search by building type. What type of facility do you have? For example: office, retail, restaurant, warehouse, hotel, medical facility, or school.`;
+  }
+  
+  if (zipCode && searchMode === 'measure' && !measure) {
+    return `Perfect! You've chosen to search by energy measure. What type of energy efficiency upgrade are you interested in? For example: LED lighting, HVAC systems, solar panels, heat pumps, insulation, or refrigeration.`;
   }
   
   if (zipCode && (facilityType || measure) && programs.length > 0) {

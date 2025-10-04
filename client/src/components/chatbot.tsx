@@ -1,15 +1,26 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Building2, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Label } from "@/components/ui/label";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  timestamp: string;
+}
+
+interface SearchModePrompt {
+  show: boolean;
+  timestamp: string;
+}
+
+interface LeadCapturePrompt {
+  show: boolean;
   timestamp: string;
 }
 
@@ -25,6 +36,9 @@ export function ChatBot() {
   const [measure, setMeasure] = useState<string>();
   const [searchMode, setSearchMode] = useState<string>();
   const [leadCaptureState, setLeadCaptureState] = useState(false);
+  const [showSearchModePrompt, setShowSearchModePrompt] = useState<SearchModePrompt>({ show: false, timestamp: "" });
+  const [showLeadCaptureForm, setShowLeadCaptureForm] = useState<LeadCapturePrompt>({ show: false, timestamp: "" });
+  const [leadFormData, setLeadFormData] = useState({ company: "", contactName: "", email: "", phone: "" });
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = useMutation({
@@ -84,7 +98,7 @@ export function ChatBot() {
     let nextUtility = utility;
 
     const zipMatch = inputMessage.match(/\b\d{5}\b/);
-    if (zipMatch && !zipCode) {
+    if (zipMatch) {
       nextZipCode = zipMatch[0];
       setZipCode(nextZipCode);
     }
@@ -123,12 +137,7 @@ export function ChatBot() {
 
     for (const [type, pattern] of Object.entries(facilityKeywords)) {
       if (pattern.test(inputMessage)) {
-        // If user mentions a new facility type, clear the old one
-        if (nextFacilityType && nextFacilityType !== type) {
-          nextFacilityType = type;
-        } else {
-          nextFacilityType = type;
-        }
+        nextFacilityType = type;
         setFacilityType(nextFacilityType);
         break;
       }
@@ -240,6 +249,65 @@ export function ChatBot() {
     if (response.detectedMeasure && response.detectedMeasure !== nextMeasure) {
       setMeasure(response.detectedMeasure);
     }
+
+    // Check if backend indicates we should show search mode selector
+    if (response.showSearchModeSelector && !searchMode) {
+      setShowSearchModePrompt({ show: true, timestamp: new Date().toISOString() });
+    }
+
+    // Check if backend indicates we should show lead capture
+    if (response.showLeadCapture || leadCaptureState) {
+      setShowLeadCaptureForm({ show: true, timestamp: new Date().toISOString() });
+    }
+  };
+
+  const handleSearchModeSelect = async (mode: 'measure' | 'buildingType') => {
+    setSearchMode(mode);
+    setShowSearchModePrompt({ show: false, timestamp: "" });
+    
+    const modeMessage = mode === 'measure' 
+      ? 'I want to search by energy saving measure'
+      : 'I want to search by building type';
+    
+    const userMessage: Message = {
+      role: "user",
+      content: modeMessage,
+      timestamp: new Date().toISOString(),
+    };
+    setMessages(prev => [...prev, userMessage]);
+
+    await chatMutation.mutateAsync({
+      message: modeMessage,
+      zipCode,
+      facilityType,
+      utility,
+      measure,
+      searchMode: mode,
+    });
+  };
+
+  const handleLeadFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      await apiRequest("POST", "/api/leads", leadFormData);
+      
+      const successMessage: Message = {
+        role: "assistant",
+        content: "Thank you! We've received your information. One of our energy efficiency experts will be in touch with you shortly to discuss your incentive opportunities.",
+        timestamp: new Date().toISOString(),
+      };
+      setMessages(prev => [...prev, successMessage]);
+      setShowLeadCaptureForm({ show: false, timestamp: "" });
+      setLeadFormData({ company: "", contactName: "", email: "", phone: "" });
+    } catch (error) {
+      const errorMessage: Message = {
+        role: "assistant",
+        content: "I apologize, but there was an error submitting your information. Please try again or contact us directly.",
+        timestamp: new Date().toISOString(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -312,6 +380,101 @@ export function ChatBot() {
               </div>
             </div>
           )}
+          
+          {showSearchModePrompt.show && (
+            <div className="flex justify-start">
+              <div className="bg-blue-50 border-2 border-[#0c558c] rounded-lg p-4 max-w-[85%]" data-testid="search-mode-selector">
+                <p className="text-sm font-semibold mb-3 text-slate-900">How would you like to search for incentives?</p>
+                <div className="flex flex-col gap-2">
+                  <Button
+                    data-testid="button-search-by-measure"
+                    onClick={() => handleSearchModeSelect('measure')}
+                    className="w-full bg-[#0c558c] hover:bg-[#00a5cb] text-white flex items-center gap-2 justify-start"
+                  >
+                    <Lightbulb className="h-4 w-4" />
+                    <span>Search by Energy Measure</span>
+                  </Button>
+                  <Button
+                    data-testid="button-search-by-building"
+                    onClick={() => handleSearchModeSelect('buildingType')}
+                    className="w-full bg-[#0c558c] hover:bg-[#00a5cb] text-white flex items-center gap-2 justify-start"
+                  >
+                    <Building2 className="h-4 w-4" />
+                    <span>Search by Building Type</span>
+                  </Button>
+                </div>
+                <p className="text-xs mt-2 text-slate-600 italic">Click one of the options above</p>
+              </div>
+            </div>
+          )}
+          
+          {showLeadCaptureForm.show && (
+            <div className="flex justify-start">
+              <div className="bg-green-50 border-2 border-green-600 rounded-lg p-4 w-full" data-testid="lead-capture-form">
+                <p className="text-sm font-semibold mb-3 text-slate-900">Great! Let's connect you with our experts</p>
+                <form onSubmit={handleLeadFormSubmit} className="space-y-3">
+                  <div>
+                    <Label htmlFor="lead-company" className="text-xs text-slate-700">Company Name</Label>
+                    <Input
+                      id="lead-company"
+                      data-testid="input-lead-company"
+                      value={leadFormData.company}
+                      onChange={(e) => setLeadFormData({ ...leadFormData, company: e.target.value })}
+                      placeholder="ABC Corporation"
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="lead-name" className="text-xs text-slate-700">Your Name</Label>
+                    <Input
+                      id="lead-name"
+                      data-testid="input-lead-name"
+                      value={leadFormData.contactName}
+                      onChange={(e) => setLeadFormData({ ...leadFormData, contactName: e.target.value })}
+                      placeholder="John Doe"
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="lead-email" className="text-xs text-slate-700">Email</Label>
+                    <Input
+                      id="lead-email"
+                      data-testid="input-lead-email"
+                      type="email"
+                      value={leadFormData.email}
+                      onChange={(e) => setLeadFormData({ ...leadFormData, email: e.target.value })}
+                      placeholder="john@company.com"
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="lead-phone" className="text-xs text-slate-700">Phone</Label>
+                    <Input
+                      id="lead-phone"
+                      data-testid="input-lead-phone"
+                      type="tel"
+                      value={leadFormData.phone}
+                      onChange={(e) => setLeadFormData({ ...leadFormData, phone: e.target.value })}
+                      placeholder="(555) 123-4567"
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  <Button
+                    data-testid="button-submit-lead"
+                    type="submit"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    Submit
+                  </Button>
+                </form>
+              </div>
+            </div>
+          )}
+          
           <div ref={scrollRef} />
         </div>
       </ScrollArea>
