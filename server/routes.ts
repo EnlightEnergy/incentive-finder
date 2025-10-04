@@ -130,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Chatbot API routes
   app.post("/api/chat/message", async (req, res) => {
     try {
-      const { sessionId, message, zipCode, facilityType, utility } = req.body;
+      const { sessionId, message, zipCode, facilityType, utility, unrecognizedFacility } = req.body;
       
       if (!sessionId || !message) {
         return res.status(400).json({ error: "Session ID and message are required" });
@@ -142,6 +142,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         zipCode,
         facilityType,
         utility,
+        unrecognizedFacility,
       });
 
       res.json(response);

@@ -36,10 +36,16 @@ interface ChatParams {
   utility?: string;
   allUtilities?: string[];
   programs: Program[];
+  unrecognizedFacility?: string;
 }
 
 export async function processChatWithAI(params: ChatParams): Promise<string> {
-  const { messages, zipCode, facilityType, utility, allUtilities, programs } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility } = params;
+  
+  // If there's an unrecognized facility, use fallback immediately
+  if (zipCode && !facilityType && unrecognizedFacility) {
+    return generateFallbackResponse(params);
+  }
   
   const contextInfo = [];
   
@@ -109,8 +115,13 @@ export async function processChatWithAI(params: ChatParams): Promise<string> {
 }
 
 function generateFallbackResponse(params: ChatParams): string {
-  const { messages, zipCode, facilityType, utility, allUtilities, programs } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility } = params;
   const lastMessage = messages[messages.length - 1]?.content.toLowerCase() || '';
+  
+  // Handle unrecognized facility type
+  if (zipCode && !facilityType && unrecognizedFacility) {
+    return `I do not recognize "${unrecognizedFacility}". Would you qualify this as Retail, Commercial, Industrial, or Multi-family?`;
+  }
   
   // Extract actual facility words from user's message
   const facilityWords = {

@@ -69,7 +69,7 @@ export interface IStorage {
   updateLeadStatus(id: number, status: string): Promise<boolean>;
   
   // Chatbot management
-  processChatMessage(params: { sessionId: string; message: string; zipCode?: string; facilityType?: string; utility?: string }): Promise<any>;
+  processChatMessage(params: { sessionId: string; message: string; zipCode?: string; facilityType?: string; utility?: string; unrecognizedFacility?: string }): Promise<any>;
   getChatConversation(sessionId: string): Promise<any>;
   getUtilityByZipCode(zipCode: string): Promise<any>;
   getAllUtilitiesByZipCode(zipCode: string): Promise<any>;
@@ -337,8 +337,9 @@ export class DatabaseStorage implements IStorage {
     zipCode?: string; 
     facilityType?: string;
     utility?: string;
+    unrecognizedFacility?: string;
   }): Promise<any> {
-    const { sessionId, message, zipCode, facilityType, utility: userSelectedUtility } = params;
+    const { sessionId, message, zipCode, facilityType, utility: userSelectedUtility, unrecognizedFacility } = params;
     
     let conversation = await this.getChatConversation(sessionId);
     
@@ -399,6 +400,7 @@ export class DatabaseStorage implements IStorage {
       utility: selectedUtility || undefined,
       allUtilities: allUtilities.map(u => u.ownerUtility),
       programs: relevantPrograms,
+      unrecognizedFacility,
     });
     
     const assistantMessage = {

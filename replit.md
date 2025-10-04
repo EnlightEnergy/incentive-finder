@@ -60,6 +60,7 @@ Preferred communication style: Simple, everyday language.
   - OpenAI GPT-4o-mini for natural language understanding and contextual responses
   - Intelligent fallback system when API quota exceeded - generates contextual responses using business logic
   - Auto-detects ZIP codes and facility types from natural language input
+  - **Unrecognized Facility Handling**: When users mention unknown facility types (library, museum, church, etc.), system prompts for classification as Retail, Commercial, Industrial, or Multi-family
 - **Data Integration**:
   - utility_zip_codes table: 4,368 California ZIP-to-utility mappings for territory identification
   - chat_conversations table: Persistent conversation history with JSONB message storage
@@ -67,9 +68,16 @@ Preferred communication style: Simple, everyday language.
 - **User Flow**:
   1. Collects ZIP code to determine utility territory
   2. Asks about facility type (office, retail, restaurant, industrial, etc.)
-  3. Searches relevant programs from database
-  4. Provides high-level program overview (2-3 examples)
-  5. Guides users toward consultation for detailed analysis
+  3. For unrecognized facilities: prompts user to classify into one of four categories
+  4. Searches relevant programs from database
+  5. Provides high-level program overview (2-3 examples)
+  6. Guides users toward consultation for detailed analysis
+- **Facility Type Coverage**:
+  - **Commercial**: retail, office, restaurant, hotel, medical, school, recreation (golf course, gym)
+  - **Industrial**: warehouse, industrial, manufacturing, factory
+  - **Agricultural**: farm, vineyard, agriculture
+  - **Multifamily**: apartment, multifamily, condo
+  - **Unrecognized**: library, museum, church, theater, stadium → triggers classification prompt
 - **Behavior**: Provides helpful information while avoiding complete technical details, positioning consultation as the value-added service
 - **Resilience**: Graceful degradation - fallback responses maintain conversation quality when AI API unavailable
 

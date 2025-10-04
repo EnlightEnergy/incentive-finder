@@ -21,16 +21,18 @@ export function ChatBot() {
   const [zipCode, setZipCode] = useState<string>();
   const [facilityType, setFacilityType] = useState<string>();
   const [utility, setUtility] = useState<string>();
+  const [unrecognizedFacility, setUnrecognizedFacility] = useState<string>();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = useMutation({
-    mutationFn: async (params: { message: string; zipCode?: string; facilityType?: string; utility?: string }) => {
+    mutationFn: async (params: { message: string; zipCode?: string; facilityType?: string; utility?: string; unrecognizedFacility?: string }) => {
       const response = await apiRequest("POST", "/api/chat/message", {
         sessionId,
         message: params.message,
         zipCode: params.zipCode,
         facilityType: params.facilityType,
         utility: params.utility,
+        unrecognizedFacility: params.unrecognizedFacility,
       });
       return response.json();
     },
@@ -119,6 +121,45 @@ export function ChatBot() {
       }
     }
 
+    // Check if user is responding with a facility category (for unrecognized facilities)
+    const categoryPatterns = {
+      retail: /^(retail|commercial|office)$/i,
+      industrial: /^(industrial|manufacturing)$/i,
+      multifamily: /^(multi-?family|residential|apartment)$/i,
+    };
+
+    for (const [type, pattern] of Object.entries(categoryPatterns)) {
+      if (pattern.test(inputMessage.trim())) {
+        nextFacilityType = type;
+        setFacilityType(nextFacilityType);
+        setUnrecognizedFacility(undefined); // Clear unrecognized facility
+        break;
+      }
+    }
+
+    // Detect potential unrecognized facility mentions
+    let detectedUnrecognized: string | undefined;
+    if (!nextFacilityType && zipCode) {
+      const facilityPatterns = [
+        /(?:my|a|the|our)\s+([a-z\s]{3,30}?)(?:\s+(?:business|facility|building|center|location))?/i,
+        /(?:incentives?\s+for\s+(?:my|a|the|our)\s+)([a-z\s]{3,30}?)(?:\?|$|\.)/i,
+        /(?:I\s+have\s+a\s+)([a-z\s]{3,30}?)(?:\?|$|\.)/i,
+      ];
+
+      for (const pattern of facilityPatterns) {
+        const match = inputMessage.match(pattern);
+        if (match && match[1]) {
+          const extracted = match[1].trim();
+          // Don't capture generic words
+          if (!['building', 'facility', 'business', 'location', 'place', 'property'].includes(extracted.toLowerCase())) {
+            detectedUnrecognized = extracted;
+            setUnrecognizedFacility(detectedUnrecognized);
+            break;
+          }
+        }
+      }
+    }
+
     const currentMessage = inputMessage;
     setInputMessage("");
     
@@ -127,6 +168,7 @@ export function ChatBot() {
       zipCode: nextZipCode,
       facilityType: nextFacilityType,
       utility: nextUtility,
+      unrecognizedFacility: detectedUnrecognized || unrecognizedFacility,
     });
 
     if (response.utility && !nextUtility) {
