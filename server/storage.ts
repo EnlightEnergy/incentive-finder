@@ -40,22 +40,52 @@ function mapFacilityTypeToSector(facilityType: string): string[] {
 }
 
 function mapUtilityToSearchTerms(utility: string): string[] {
+  // Normalize to uppercase and strip ALL non-alphanumeric characters for comprehensive matching
+  const normalizedUtility = utility.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  
   const mapping: Record<string, string[]> = {
-    'SCE': ['Southern California Edison', 'SCE'],
-    // PG&E - handle both with and without ampersand, and both "&" and "and"
-    'PG&E': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE'],
-    'PGE': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE'],
-    // SDG&E - handle both with and without ampersand, and both "&" and "and"
-    'SDGE': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE'],
-    'SDG&E': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE'],
-    // LADWP - handle both "&" and "and"
-    'LADWP': ['Los Angeles Department of Water & Power', 'Los Angeles Department of Water and Power', 'LADWP'],
-    'SMUD': ['Sacramento Municipal Utility District', 'SMUD'],
-    'SoCalREN': ['Southern California Regional Energy Network', 'SoCalREN'],
-    'MCE': ['MCE Clean Energy', 'MCE'],
+    // Southern California Edison
+    'SCE': ['Southern California Edison', 'SCE', 'So Cal Edison', 'SoCal Edison'],
+    'SOUTHERNCALIFORNIAEDISON': ['Southern California Edison', 'SCE'],
+    'SOUTHERNCALIFORNIAEDISONSCE': ['Southern California Edison', 'SCE'],
+    'SOCALEDISON': ['Southern California Edison', 'SCE'],
+    
+    // Pacific Gas & Electric - comprehensive coverage
+    'PGE': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE', 'Pacific Gas Electric'],
+    'PG&E': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE', 'Pacific Gas Electric'],
+    'PACIFICGAS&ELECTRIC': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE'],
+    'PACIFICGASANDELECTRIC': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE'],
+    'PACIFICGASELECTRIC': ['Pacific Gas & Electric', 'Pacific Gas and Electric', 'PG&E', 'PGE'],
+    
+    // San Diego Gas & Electric - comprehensive coverage
+    'SDGE': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE', 'San Diego Gas Electric'],
+    'SDG&E': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE', 'San Diego Gas Electric'],
+    'SANDIEGOGAS&ELECTRIC': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE'],
+    'SANDIEGOGASANDELECTRIC': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE'],
+    'SANDIEGOGASELECTRIC': ['San Diego Gas & Electric', 'San Diego Gas and Electric', 'SDG&E', 'SDGE'],
+    
+    // Los Angeles Department of Water & Power - comprehensive coverage
+    'LADWP': ['Los Angeles Department of Water & Power', 'Los Angeles Department of Water and Power', 'LADWP', 'LA DWP', 'Los Angeles Water & Power', 'Los Angeles Water and Power'],
+    'LOSANGELESDEPARTMENTOFWATER&POWER': ['Los Angeles Department of Water & Power', 'Los Angeles Department of Water and Power', 'LADWP'],
+    'LOSANGELESDEPARTMENTOFWATERANDPOWER': ['Los Angeles Department of Water & Power', 'Los Angeles Department of Water and Power', 'LADWP'],
+    'LOSANGELESWATER&POWER': ['Los Angeles Department of Water & Power', 'Los Angeles Department of Water and Power', 'LADWP'],
+    'LOSANGELESWATERANDPOWER': ['Los Angeles Department of Water & Power', 'Los Angeles Department of Water and Power', 'LADWP'],
+    
+    // Sacramento Municipal Utility District
+    'SMUD': ['Sacramento Municipal Utility District', 'SMUD', 'Sacramento MUD'],
+    'SACRAMENTOMUNICIPALUTILITYDISTRICT': ['Sacramento Municipal Utility District', 'SMUD'],
+    
+    // Southern California Regional Energy Network
+    'SOCALREN': ['Southern California Regional Energy Network', 'SoCalREN', 'SoCal REN'],
+    'SOUTHERNCALIFORNIAREGIONALENERGYNETWORK': ['Southern California Regional Energy Network', 'SoCalREN'],
+    
+    // MCE Clean Energy
+    'MCE': ['MCE Clean Energy', 'MCE', 'Marin Clean Energy'],
+    'MCECLEANENERGY': ['MCE Clean Energy', 'MCE', 'Marin Clean Energy'],
+    'MARINCLEANENERGY': ['MCE Clean Energy', 'MCE', 'Marin Clean Energy'],
   };
   
-  return mapping[utility] || [utility];
+  return mapping[normalizedUtility] || [utility];
 }
 
 export interface IStorage {
