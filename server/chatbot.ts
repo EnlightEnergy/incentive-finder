@@ -130,10 +130,10 @@ function generateFallbackResponse(params: ChatParams): string {
   
   // Check for utility selection/correction
   const utilityCorrectionPatterns = {
-    'SCE': /\b(sce|southern california edison|socal edison)\b/i,
-    'PGE': /\b(pg&?e|pacific gas|pacific gas & electric)\b/i,
-    'SDGE': /\b(sdg&?e|san diego gas|san diego gas & electric)\b/i,
-    'LADWP': /\b(ladwp|los angeles|la water|la power)\b/i,
+    'SCE': /\b(sce|southern california edison|so\.?\s*cal\.?\s*edison)\b/i,
+    'PGE': /\b(pg&?e|pge|pacific gas & electric|pacific gas and electric|pacific gas)\b/i,
+    'SDGE': /\b(sdg&?e|sdge|san diego gas & electric|san diego gas and electric|san diego gas)\b/i,
+    'LADWP': /\b(ladwp|los angeles department of water & power|los angeles department of water and power|la\s*dept\.?\s*of\s*water|los angeles water|los angeles power)\b/i,
   };
   
   for (const [utilityKey, pattern] of Object.entries(utilityCorrectionPatterns)) {
