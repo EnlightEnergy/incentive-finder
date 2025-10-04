@@ -46,7 +46,7 @@ export function ChatBot() {
 
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, [messages]);
 
@@ -168,7 +168,7 @@ export function ChatBot() {
         </Button>
       </div>
 
-      <ScrollArea className="flex-1 p-4" ref={scrollRef}>
+      <ScrollArea className="flex-1 p-4">
         <div className="space-y-4">
           {messages.map((message, idx) => (
             <div
@@ -200,6 +200,7 @@ export function ChatBot() {
               </div>
             </div>
           )}
+          <div ref={scrollRef} />
         </div>
       </ScrollArea>
 

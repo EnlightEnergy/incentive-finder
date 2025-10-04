@@ -329,8 +329,10 @@ export class DatabaseStorage implements IStorage {
     let allUtilities: UtilityZipCode[] = [];
     let selectedUtility = userSelectedUtility || conversation.utility;
     
-    if (zipCode) {
-      allUtilities = await this.getAllUtilitiesByZipCode(zipCode);
+    const effectiveZipCode = zipCode || conversation.zipCode;
+    
+    if (effectiveZipCode) {
+      allUtilities = await this.getAllUtilitiesByZipCode(effectiveZipCode);
       
       if (userSelectedUtility) {
         utility = allUtilities.find(u => u.ownerUtility === userSelectedUtility);

@@ -135,8 +135,8 @@ function generateFallbackResponse(params: ChatParams): string {
     return `Thank you for providing your ZIP code (${zip}). I'm checking your utility territory now. One moment please...`;
   }
   
-  // Handle multiple utilities for a ZIP code
-  if (zipCode && allUtilities && allUtilities.length > 1 && !facilityType) {
+  // Handle multiple utilities for a ZIP code - only ask if no utility selected yet
+  if (zipCode && allUtilities && allUtilities.length > 1 && !facilityType && !utility) {
     const utilityList = allUtilities.map(u => {
       if (u === 'SCE') return 'Southern California Edison (SCE)';
       if (u === 'PGE') return 'Pacific Gas & Electric (PG&E)';
