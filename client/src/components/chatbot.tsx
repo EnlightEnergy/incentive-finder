@@ -8,6 +8,46 @@ import { Label } from "@/components/ui/label";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
+const WattsonRobotIcon = ({ className = "", showText = false }: { className?: string; showText?: boolean }) => (
+  <svg viewBox="0 0 120 120" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Antennae */}
+    <circle cx="35" cy="15" r="4" fill="#0c558c" />
+    <line x1="35" y1="19" x2="35" y2="28" stroke="#0c558c" strokeWidth="3" strokeLinecap="round" />
+    <circle cx="85" cy="15" r="4" fill="#0c558c" />
+    <line x1="85" y1="19" x2="85" y2="28" stroke="#0c558c" strokeWidth="3" strokeLinecap="round" />
+    
+    {/* Head */}
+    <rect x="20" y="28" width="80" height="35" rx="15" fill="#b8e0f0" stroke="#0c558c" strokeWidth="3" />
+    
+    {/* Eyes */}
+    <circle cx="45" cy="45" r="6" fill="#0c558c" />
+    <circle cx="75" cy="45" r="6" fill="#0c558c" />
+    
+    {/* Smile */}
+    <path d="M 50 55 Q 60 62 70 55" stroke="#0c558c" strokeWidth="3" fill="none" strokeLinecap="round" />
+    
+    {/* Body */}
+    <ellipse cx="60" cy="85" rx="28" ry="35" fill="#b8e0f0" stroke="#0c558c" strokeWidth="3" />
+    
+    {showText ? (
+      <>
+        {/* Text on chest */}
+        <text x="60" y="80" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#0c558c">Ask</text>
+        <text x="60" y="92" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#0c558c">Wattson</text>
+      </>
+    ) : (
+      <>
+        {/* Lightning bolt on chest */}
+        <path d="M 65 75 L 58 85 L 62 85 L 55 95 L 63 85 L 59 85 Z" fill="#f59e0b" stroke="#0c558c" strokeWidth="1.5" />
+      </>
+    )}
+    
+    {/* Arms */}
+    <path d="M 32 75 L 25 80 L 25 88" stroke="#0c558c" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 88 75 L 95 80 L 95 88" stroke="#0c558c" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -365,10 +405,10 @@ export function ChatBot() {
       <Button
         data-testid="button-open-chat"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg bg-[#0c558c] hover:bg-[#00a5cb] z-50"
+        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg bg-[#0c558c] hover:bg-[#00a5cb] z-50 p-2"
         size="icon"
       >
-        <MessageCircle className="h-6 w-6" />
+        <WattsonRobotIcon className="h-full w-full" showText={true} />
       </Button>
     );
   }
@@ -377,7 +417,7 @@ export function ChatBot() {
     <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-2xl flex flex-col z-50">
       <div className="flex items-center justify-between p-4 border-b bg-[#0c558c] text-white rounded-t-lg">
         <div className="flex items-center gap-2">
-          <MessageCircle className="h-5 w-5" />
+          <WattsonRobotIcon className="h-6 w-6" showText={false} />
           <h3 className="font-semibold" data-testid="text-chat-title">WattSon Incentive AI</h3>
         </div>
         <Button
