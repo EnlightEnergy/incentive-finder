@@ -5,7 +5,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const SYSTEM_PROMPT = `You are an AI assistant for Enlighting, a commercial energy efficiency consulting company specializing in California utility incentive programs.
+const SYSTEM_PROMPT = `You are WattSon Incentive AI, an AI assistant for Enlighting, a commercial energy efficiency consulting company specializing in California utility incentive programs.
 
 Your role is to help facility managers and business owners understand incentive opportunities while guiding them toward a consultation with Enlighting's experts.
 
@@ -13,7 +13,7 @@ KEY GUIDELINES:
 1. Be helpful and informative, but avoid giving away complete details or doing the consultant's job
 2. Always steer the conversation toward scheduling a consultation for detailed analysis
 3. Ask for ZIP code first to determine utility territory
-4. Ask about facility type to narrow down relevant programs
+4. Ask if they want to search by specific energy saving measure OR by building type
 5. Provide teasers about potential savings but emphasize the need for professional assessment
 6. Mention that multiple incentives can often be "stacked" for maximum savings
 7. Never promise specific dollar amounts without proper assessment
@@ -22,10 +22,12 @@ KEY GUIDELINES:
 CONVERSATION FLOW:
 1. Greet and ask for ZIP code
 2. Confirm utility territory
-3. Ask about facility type (office, retail, industrial, restaurant, etc.)
-4. Provide high-level overview of 2-3 relevant programs
-5. Highlight potential benefits but emphasize complexity
-6. Guide toward lead capture for detailed consultation
+3. Ask: "Would you like to search for a specific energy saving measure or incentives for your building type?"
+4. If Measure: Ask what measure (LED, HVAC, solar, etc.)
+5. If Building Type: Ask facility type (office, retail, industrial, restaurant, etc.)
+6. Provide high-level overview of 2-3 relevant programs
+7. Highlight potential benefits but emphasize complexity
+8. Guide toward lead capture for detailed consultation
 
 TONE: Professional, knowledgeable, helpful but not overly detailed. Focus on creating interest and demonstrating value while positioning the consultation as the next step.`;
 
@@ -37,10 +39,12 @@ interface ChatParams {
   allUtilities?: string[];
   programs: Program[];
   unrecognizedFacility?: string;
+  measure?: string;
+  searchMode?: string;
 }
 
 export async function processChatWithAI(params: ChatParams): Promise<string> {
-  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility, measure, searchMode } = params;
   
   // If there's an unrecognized facility, use fallback immediately
   if (zipCode && !facilityType && unrecognizedFacility) {
@@ -64,6 +68,14 @@ export async function processChatWithAI(params: ChatParams): Promise<string> {
   
   if (facilityType) {
     contextInfo.push(`User's facility type: ${facilityType}`);
+  }
+  
+  if (measure) {
+    contextInfo.push(`User's energy measure interest: ${measure}`);
+  }
+  
+  if (searchMode) {
+    contextInfo.push(`User's search mode: ${searchMode}`);
   }
   
   if (programs.length > 0) {
@@ -115,8 +127,43 @@ export async function processChatWithAI(params: ChatParams): Promise<string> {
 }
 
 function generateFallbackResponse(params: ChatParams): string {
-  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility, measure, searchMode } = params;
   const lastMessage = messages[messages.length - 1]?.content.toLowerCase() || '';
+  
+  // CONTEXT-AWARE: Check if user just provided new information
+  const hasNewZip = /\b\d{5}\b/.test(lastMessage);
+  const hasNewFacility = /\b(office|retail|restaurant|industrial|warehouse|hotel|medical|school|recreation|agriculture|multifamily|grocery|food\s*processing|auto\s*dealer)\b/i.test(lastMessage);
+  const hasNewMeasure = /\b(led|lighting|hvac|heat\s*pump|solar|insulation|motor|refrigeration)\b/i.test(lastMessage);
+  
+  // If user just provided new info, acknowledge it
+  if (hasNewZip && zipCode) {
+    return `Thank you for providing your ZIP code (${zipCode}). Let me check which utilities serve this area...`;
+  }
+  
+  if (hasNewFacility && facilityType) {
+    const facilityWords: Record<string, string> = {
+      office: 'office building',
+      retail: 'retail store',
+      restaurant: 'restaurant',
+      industrial: 'industrial facility',
+      warehouse: 'warehouse',
+      hotel: 'hotel',
+      medical: 'medical facility',
+      school: 'school',
+      recreation: 'recreation facility',
+      agriculture: 'agricultural facility',
+      multifamily: 'multifamily property',
+      grocery: 'grocery store',
+      foodprocessing: 'food processing facility',
+      autodealer: 'auto dealership',
+    };
+    const facilityName = facilityWords[facilityType] || facilityType;
+    return `Great! I understand you have a ${facilityName}. Let me search for relevant incentive programs in your area...`;
+  }
+  
+  if (hasNewMeasure && measure) {
+    return `Excellent! I'll look for ${measure} incentive programs available to you. Let me pull up the relevant options...`;
+  }
   
   // Handle unrecognized facility type
   if (zipCode && !facilityType && unrecognizedFacility) {
@@ -175,27 +222,29 @@ function generateFallbackResponse(params: ChatParams): string {
     return `Your ZIP code (${zipCode}) is served by multiple utilities: ${utilityList}. Which utility do you receive service from? This will help me find the right incentive programs for you.`;
   }
   
-  if (zipCode && !facilityType) {
+  if (zipCode && !facilityType && !measure) {
     if (utility) {
       const utilityName = utility === 'SCE' ? 'Southern California Edison' : 
                          utility === 'PGE' ? 'Pacific Gas & Electric' :
                          utility === 'SDGE' ? 'San Diego Gas & Electric' :
                          utility === 'LADWP' ? 'Los Angeles Department of Water & Power' : utility;
-      return `Great! I can see you're in ${utilityName}'s service territory. Now, to help you find the most relevant incentive programs, what type of facility do you have?`;
+      return `Great! I can see you're in ${utilityName}'s service territory. Would you like to search for a specific energy saving measure (like LED, HVAC, solar) or incentives for your building type?`;
     }
-    return `Thank you! What type of facility do you have? This will help me identify the best incentive programs for you. (For example: office building, retail store, restaurant, industrial facility)`;
+    return `Thank you! Would you like to search for a specific energy saving measure (like LED, HVAC, solar) or incentives for your building type?`;
   }
   
-  if (zipCode && facilityType && programs.length > 0) {
+  if (zipCode && (facilityType || measure) && programs.length > 0) {
     const programList = programs.slice(0, 3).map((p, idx) => 
       `${idx + 1}. ${p.name} from ${p.owner}`
     ).join('\n');
     
-    return `Based on your ${userFacilityWord} in ${utility || 'your area'}, I found ${programs.length} potentially relevant incentive programs, including:\n\n${programList}\n\nThese programs can often be combined or "stacked" for maximum savings. To get a detailed analysis of your specific eligibility and potential incentive amounts, I'd recommend scheduling a free consultation with our energy efficiency experts. Would you like to learn more about our consultation services?`;
+    const searchContext = measure ? `${measure} programs` : `programs for your ${userFacilityWord}`;
+    return `Based on ${searchContext} in ${utility || 'your area'}, I found ${programs.length} potentially relevant incentive programs, including:\n\n${programList}\n\nThese programs can often be combined or "stacked" for maximum savings. To get a detailed analysis of your specific eligibility and potential incentive amounts, I'd recommend scheduling a free consultation with our energy efficiency experts. Would you like to learn more about our consultation services?`;
   }
   
-  if (zipCode && facilityType && programs.length === 0) {
-    return `I see you have a ${userFacilityWord} in ${utility || 'your area'}. While I'm having trouble accessing the full program database right now, there are typically multiple incentive opportunities available for ${userFacilityWord}s in California. I'd recommend speaking with one of our energy efficiency consultants who can provide a comprehensive analysis of all available programs and help you maximize your savings. Would you like to schedule a free consultation?`;
+  if (zipCode && (facilityType || measure) && programs.length === 0) {
+    const searchContext = measure ? `${measure} programs` : `programs for ${userFacilityWord}s`;
+    return `I see you're looking for ${searchContext} in ${utility || 'your area'}. While I'm having trouble accessing the full program database right now, there are typically multiple incentive opportunities available. I'd recommend speaking with one of our energy efficiency consultants who can provide a comprehensive analysis of all available programs and help you maximize your savings. Would you like to schedule a free consultation?`;
   }
   
   return `Thank you for your interest in energy efficiency incentives! To provide you with the most accurate information about available programs and potential savings, I'd recommend speaking with one of our energy efficiency experts. They can analyze your specific situation and help you identify all stackable incentive opportunities. Would you like to learn more about our free consultation service?`;

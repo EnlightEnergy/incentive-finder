@@ -119,6 +119,8 @@ export const chatConversations = pgTable("chat_conversations", {
   zipCode: varchar("zip_code", { length: 5 }),
   facilityType: varchar("facility_type", { length: 100 }),
   utility: varchar("utility", { length: 100 }),
+  searchMode: varchar("search_mode", { length: 20 }),
+  measure: varchar("measure", { length: 120 }),
   messages: jsonb("messages").$type<Array<{role: string, content: string, timestamp: string}>>().default([]),
   leadCaptured: boolean("lead_captured").default(false),
   leadId: integer("lead_id").references(() => leads.id),

@@ -22,10 +22,13 @@ export function ChatBot() {
   const [facilityType, setFacilityType] = useState<string>();
   const [utility, setUtility] = useState<string>();
   const [unrecognizedFacility, setUnrecognizedFacility] = useState<string>();
+  const [measure, setMeasure] = useState<string>();
+  const [searchMode, setSearchMode] = useState<string>();
+  const [leadCaptureState, setLeadCaptureState] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = useMutation({
-    mutationFn: async (params: { message: string; zipCode?: string; facilityType?: string; utility?: string; unrecognizedFacility?: string }) => {
+    mutationFn: async (params: { message: string; zipCode?: string; facilityType?: string; utility?: string; unrecognizedFacility?: string; measure?: string; searchMode?: string }) => {
       const response = await apiRequest("POST", "/api/chat/message", {
         sessionId,
         message: params.message,
@@ -33,6 +36,8 @@ export function ChatBot() {
         facilityType: params.facilityType,
         utility: params.utility,
         unrecognizedFacility: params.unrecognizedFacility,
+        measure: params.measure,
+        searchMode: params.searchMode,
       });
       return response.json();
     },
@@ -56,7 +61,7 @@ export function ChatBot() {
     if (isOpen && messages.length === 0) {
       const welcomeMessage: Message = {
         role: "assistant",
-        content: "Hello! I'm here to help you discover energy efficiency incentives for your California business. To get started, could you please share your facility's ZIP code?",
+        content: "Hello! I'm WattSon Incentive AI. I help California businesses discover energy efficiency incentives. To get started, could you please share your facility's ZIP code?",
         timestamp: new Date().toISOString(),
       };
       setMessages([welcomeMessage]);
@@ -103,21 +108,69 @@ export function ChatBot() {
       office: /\boffice\b/i,
       retail: /\bretail\b|\bstore\b|\bshop\b/i,
       restaurant: /\brestaurant\b|\bdining\b|\bcafe\b|\bbar\b/i,
-      industrial: /\bindustrial\b|\bmanufacturing\b|\bwarehouse\b|\bfactory\b/i,
+      industrial: /\bindustrial\b|\bmanufacturing\b|\bfactory\b/i,
+      warehouse: /\bwarehousing\b|\bwarehouse\b|\bdistribution\s*center\b|\bstorage\b/i,
       hotel: /\bhotel\b|\blodging\b|\bmotel\b/i,
-      medical: /\bmedical\b|\bhospital\b|\bclinic\b|\bdental\b/i,
+      medical: /\bhealthcare\b|\bhospital\b|\bclinic\b|\bmedical\b|\bnursing\s*home\b|\bassisted\s*living\b|\bdental\b/i,
       school: /\bschool\b|\beducation\b|\buniversity\b|\bcollege\b/i,
       recreation: /\bgolf\s*course\b|\brecreation\b|\bgym\b|\bfitness\b|\bsports\b|\bathletic\b/i,
       agriculture: /\bfarm\b|\bagriculture\b|\bvineyard\b|\bgreenhouse\b/i,
       multifamily: /\bapartment\b|\bmultifamily\b|\bcondo\b/i,
+      foodprocessing: /\bfood\s*processing\b|\bprocessing\s*facility\b/i,
+      autodealer: /\bauto\s*dealer\b|\bcar\s*dealer\b/i,
+      grocery: /\bgrocery\b|\bsupermarket\b|\bconvenience\s*store\b/i,
     };
 
     for (const [type, pattern] of Object.entries(facilityKeywords)) {
       if (pattern.test(inputMessage)) {
-        // Allow facility type to be updated if user mentions a different one
-        nextFacilityType = type;
+        // If user mentions a new facility type, clear the old one
+        if (nextFacilityType && nextFacilityType !== type) {
+          nextFacilityType = type;
+        } else {
+          nextFacilityType = type;
+        }
         setFacilityType(nextFacilityType);
         break;
+      }
+    }
+
+    // Detect measures from user message
+    const measureKeywords = {
+      'LED': /\bled\b|\blighting\b|\blights\b|\blamp\b/i,
+      'HVAC': /\bhvac\b|\bheating\b|\bcooling\b|\bair\s*conditioning\b|\bfurnace\b|\bboiler\b/i,
+      'Heat Pump': /\bheat\s*pump\b|\bhp\s*water\s*heater\b|\bhpwh\b/i,
+      'Solar': /\bsolar\b|\bpv\b|\bphotovoltaic\b/i,
+      'Insulation': /\binsulation\b|\bweatherization\b/i,
+      'Motors': /\bmotor\b|\bvfd\b|\bvariable\s*frequency\s*drive\b/i,
+      'Refrigeration': /\brefrigeration\b|\bcooler\b|\bfreezer\b/i,
+    };
+
+    let nextMeasure = measure;
+    for (const [measureType, pattern] of Object.entries(measureKeywords)) {
+      if (pattern.test(inputMessage)) {
+        nextMeasure = measureType;
+        setMeasure(nextMeasure);
+        break;
+      }
+    }
+
+    // Detect search mode from user message
+    let nextSearchMode = searchMode;
+    if (/\b(measure|specific\s*measure|energy\s*saving\s*measure)\b/i.test(inputMessage)) {
+      nextSearchMode = 'measure';
+      setSearchMode(nextSearchMode);
+    } else if (/\b(building\s*type|facility\s*type|my\s*building)\b/i.test(inputMessage)) {
+      nextSearchMode = 'buildingType';
+      setSearchMode(nextSearchMode);
+    }
+
+    // Detect affirmative responses for lead capture
+    const affirmativePattern = /^(yes|yeah|sure|ok|okay|yep|yup|absolutely|definitely|sounds\s*good)$/i;
+    if (affirmativePattern.test(inputMessage.trim())) {
+      // Check if previous message was asking about consultation
+      const lastAssistantMessage = messages.filter(m => m.role === 'assistant').pop();
+      if (lastAssistantMessage && /\b(consultation|schedule|speak with|contact)\b/i.test(lastAssistantMessage.content)) {
+        setLeadCaptureState(true);
       }
     }
 
@@ -169,10 +222,23 @@ export function ChatBot() {
       facilityType: nextFacilityType,
       utility: nextUtility,
       unrecognizedFacility: detectedUnrecognized || unrecognizedFacility,
+      measure: nextMeasure,
+      searchMode: nextSearchMode,
     });
 
     if (response.utility && !nextUtility) {
       console.log("Detected utility from backend:", response.utility);
+    }
+
+    // Update detected values from backend
+    if (response.detectedZip && response.detectedZip !== nextZipCode) {
+      setZipCode(response.detectedZip);
+    }
+    if (response.detectedFacility && response.detectedFacility !== nextFacilityType) {
+      setFacilityType(response.detectedFacility);
+    }
+    if (response.detectedMeasure && response.detectedMeasure !== nextMeasure) {
+      setMeasure(response.detectedMeasure);
     }
   };
 
@@ -201,7 +267,7 @@ export function ChatBot() {
       <div className="flex items-center justify-between p-4 border-b bg-[#0c558c] text-white rounded-t-lg">
         <div className="flex items-center gap-2">
           <MessageCircle className="h-5 w-5" />
-          <h3 className="font-semibold" data-testid="text-chat-title">Incentive Assistant</h3>
+          <h3 className="font-semibold" data-testid="text-chat-title">WattSon Incentive AI</h3>
         </div>
         <Button
           data-testid="button-close-chat"

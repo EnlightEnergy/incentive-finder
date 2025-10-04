@@ -69,7 +69,7 @@ export interface IStorage {
   updateLeadStatus(id: number, status: string): Promise<boolean>;
   
   // Chatbot management
-  processChatMessage(params: { sessionId: string; message: string; zipCode?: string; facilityType?: string; utility?: string; unrecognizedFacility?: string }): Promise<any>;
+  processChatMessage(params: { sessionId: string; message: string; zipCode?: string; facilityType?: string; utility?: string; unrecognizedFacility?: string; measure?: string; searchMode?: string }): Promise<any>;
   getChatConversation(sessionId: string): Promise<any>;
   getUtilityByZipCode(zipCode: string): Promise<any>;
   getAllUtilitiesByZipCode(zipCode: string): Promise<any>;
@@ -338,8 +338,10 @@ export class DatabaseStorage implements IStorage {
     facilityType?: string;
     utility?: string;
     unrecognizedFacility?: string;
+    measure?: string;
+    searchMode?: string;
   }): Promise<any> {
-    const { sessionId, message, zipCode, facilityType, utility: userSelectedUtility, unrecognizedFacility } = params;
+    const { sessionId, message, zipCode: frontendZip, facilityType: frontendFacility, utility: userSelectedUtility, unrecognizedFacility, measure: frontendMeasure, searchMode } = params;
     
     let conversation = await this.getChatConversation(sessionId);
     
@@ -348,8 +350,8 @@ export class DatabaseStorage implements IStorage {
         .insert(chatConversations)
         .values({
           sessionId,
-          zipCode: zipCode || null,
-          facilityType: facilityType || null,
+          zipCode: frontendZip || null,
+          facilityType: frontendFacility || null,
           messages: [],
           leadCaptured: false,
         })
@@ -365,42 +367,113 @@ export class DatabaseStorage implements IStorage {
     
     const updatedMessages = [...(conversation.messages || []), userMessage];
     
+    // RE-DETECT from message every time (not just from frontend params)
+    let detectedZip = frontendZip || conversation.zipCode;
+    const zipMatch = message.match(/\b\d{5}\b/);
+    if (zipMatch) {
+      detectedZip = zipMatch[0];
+    }
+    
+    // RE-DETECT utility from message
+    let detectedUtility = userSelectedUtility || conversation.utility;
+    const utilityPatterns = {
+      'SCE': /\b(sce|southern california edison|so\.?\s*cal\.?\s*edison)\b/i,
+      'PGE': /\b(pg&?e|pge|pacific gas & electric|pacific gas and electric|pacific gas)\b/i,
+      'SDGE': /\b(sdg&?e|sdge|san diego gas & electric|san diego gas and electric|san diego gas)\b/i,
+      'LADWP': /\b(ladwp|los angeles department of water & power|los angeles department of water and power|la\s*dept\.?\s*of\s*water|los angeles water|los angeles power)\b/i,
+    };
+    for (const [utilityKey, pattern] of Object.entries(utilityPatterns)) {
+      if (pattern.test(message)) {
+        detectedUtility = utilityKey;
+        break;
+      }
+    }
+    
+    // RE-DETECT facility type from message (expanded patterns)
+    let detectedFacility = frontendFacility;
+    const facilityPatterns = {
+      'office': /\boffice\b/i,
+      'retail': /\bretail\b|\bstore\b|\bshop\b/i,
+      'restaurant': /\brestaurant\b|\bdining\b|\bcafe\b|\bbar\b/i,
+      'industrial': /\bindustrial\b|\bmanufacturing\b|\bfactory\b/i,
+      'warehouse': /\bwarehousing\b|\bwarehouse\b|\bdistribution\s*center\b|\bstorage\b/i,
+      'hotel': /\bhotel\b|\blodging\b|\bmotel\b/i,
+      'medical': /\bhealthcare\b|\bhospital\b|\bclinic\b|\bmedical\b|\bnursing\s*home\b|\bassisted\s*living\b|\bdental\b/i,
+      'school': /\bschool\b|\beducation\b|\buniversity\b|\bcollege\b/i,
+      'recreation': /\bgolf\s*course\b|\brecreation\b|\bgym\b|\bfitness\b|\bsports\b|\bathletic\b/i,
+      'agriculture': /\bfarm\b|\bagriculture\b|\bvineyard\b|\bgreenhouse\b/i,
+      'multifamily': /\bapartment\b|\bmultifamily\b|\bcondo\b/i,
+      'foodprocessing': /\bfood\s*processing\b|\bprocessing\s*facility\b/i,
+      'autodealer': /\bauto\s*dealer\b|\bcar\s*dealer\b/i,
+      'grocery': /\bgrocery\b|\bsupermarket\b|\bconvenience\s*store\b/i,
+    };
+    for (const [type, pattern] of Object.entries(facilityPatterns)) {
+      if (pattern.test(message)) {
+        detectedFacility = type;
+        break;
+      }
+    }
+    
+    // RE-DETECT measure from message
+    let detectedMeasure = frontendMeasure;
+    const measurePatterns = {
+      'LED': /\bled\b|\blighting\b|\blights\b|\blamp\b/i,
+      'HVAC': /\bhvac\b|\bheating\b|\bcooling\b|\bair\s*conditioning\b|\bfurnace\b|\bboiler\b/i,
+      'Heat Pump': /\bheat\s*pump\b|\bhp\s*water\s*heater\b|\bhpwh\b/i,
+      'Solar': /\bsolar\b|\bpv\b|\bphotovoltaic\b/i,
+      'Insulation': /\binsulation\b|\bweatherization\b/i,
+      'Motors': /\bmotor\b|\bvfd\b|\bvariable\s*frequency\s*drive\b/i,
+      'Refrigeration': /\brefrigeration\b|\bcooler\b|\bfreezer\b/i,
+    };
+    for (const [measureType, pattern] of Object.entries(measurePatterns)) {
+      if (pattern.test(message)) {
+        detectedMeasure = measureType;
+        break;
+      }
+    }
+    
+    // Get utilities for ZIP code
     let utility = null;
     let allUtilities: UtilityZipCode[] = [];
-    let selectedUtility = userSelectedUtility || conversation.utility;
+    let selectedUtility = detectedUtility;
     
-    const effectiveZipCode = zipCode || conversation.zipCode;
-    
-    if (effectiveZipCode) {
-      allUtilities = await this.getAllUtilitiesByZipCode(effectiveZipCode);
+    if (detectedZip) {
+      allUtilities = await this.getAllUtilitiesByZipCode(detectedZip);
       
-      if (userSelectedUtility) {
-        utility = allUtilities.find(u => u.ownerUtility === userSelectedUtility);
-        selectedUtility = userSelectedUtility;
-      } else if (conversation.utility) {
-        utility = allUtilities.find(u => u.ownerUtility === conversation.utility);
-        selectedUtility = conversation.utility;
+      if (detectedUtility) {
+        utility = allUtilities.find(u => u.ownerUtility === detectedUtility);
+        selectedUtility = detectedUtility;
       } else {
         utility = allUtilities[0];
         selectedUtility = utility?.ownerUtility;
       }
     }
     
-    const relevantPrograms = await this.getPrograms({
+    // Build program search params
+    const programParams: any = {
       utility: selectedUtility || undefined,
-      businessType: facilityType,
+      businessType: detectedFacility || undefined,
       limit: 5,
       offset: 0,
-    });
+    };
+    
+    // Add measure filtering if detected
+    if (detectedMeasure) {
+      programParams.measures = [detectedMeasure];
+    }
+    
+    const relevantPrograms = await this.getPrograms(programParams);
     
     const aiResponse = await processChatWithAI({
       messages: updatedMessages,
-      zipCode,
-      facilityType,
+      zipCode: detectedZip || undefined,
+      facilityType: detectedFacility || undefined,
       utility: selectedUtility || undefined,
       allUtilities: allUtilities.map(u => u.ownerUtility),
       programs: relevantPrograms,
       unrecognizedFacility,
+      measure: detectedMeasure || undefined,
+      searchMode: searchMode || undefined,
     });
     
     const assistantMessage = {
@@ -411,12 +484,13 @@ export class DatabaseStorage implements IStorage {
     
     const finalMessages = [...updatedMessages, assistantMessage];
     
+    // Update conversation with newly detected values
     await db
       .update(chatConversations)
       .set({
         messages: finalMessages,
-        zipCode: zipCode || conversation.zipCode,
-        facilityType: facilityType || conversation.facilityType,
+        zipCode: detectedZip || conversation.zipCode,
+        facilityType: detectedFacility || conversation.facilityType,
         utility: selectedUtility || conversation.utility,
         updatedAt: new Date(),
       })
@@ -426,6 +500,9 @@ export class DatabaseStorage implements IStorage {
       message: aiResponse,
       utility: selectedUtility,
       programs: relevantPrograms,
+      detectedZip,
+      detectedFacility,
+      detectedMeasure,
     };
   }
 }
