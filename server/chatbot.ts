@@ -115,12 +115,15 @@ function generateFallbackResponse(params: ChatParams): string {
   // Extract actual facility words from user's message
   const facilityWords = {
     office: 'office building',
-    retail: lastMessage.includes('store') ? 'store' : 'retail',
-    restaurant: lastMessage.includes('restaurant') ? 'restaurant' : lastMessage.includes('cafe') ? 'cafe' : 'dining facility',
-    industrial: lastMessage.includes('warehouse') ? 'warehouse' : lastMessage.includes('manufacturing') ? 'manufacturing facility' : 'industrial facility',
-    hotel: 'hotel',
-    medical: lastMessage.includes('hospital') ? 'hospital' : lastMessage.includes('clinic') ? 'clinic' : 'medical facility',
-    school: lastMessage.includes('university') ? 'university' : 'school',
+    retail: lastMessage.includes('store') ? 'store' : lastMessage.includes('shop') ? 'shop' : 'retail',
+    restaurant: lastMessage.includes('restaurant') ? 'restaurant' : lastMessage.includes('cafe') ? 'cafe' : lastMessage.includes('bar') ? 'bar' : 'dining facility',
+    industrial: lastMessage.includes('warehouse') ? 'warehouse' : lastMessage.includes('manufacturing') ? 'manufacturing facility' : lastMessage.includes('factory') ? 'factory' : 'industrial facility',
+    hotel: lastMessage.includes('motel') ? 'motel' : 'hotel',
+    medical: lastMessage.includes('hospital') ? 'hospital' : lastMessage.includes('clinic') ? 'clinic' : lastMessage.includes('dental') ? 'dental office' : 'medical facility',
+    school: lastMessage.includes('university') ? 'university' : lastMessage.includes('college') ? 'college' : 'school',
+    recreation: lastMessage.includes('golf') ? 'golf course' : lastMessage.includes('gym') ? 'gym' : lastMessage.includes('fitness') ? 'fitness center' : lastMessage.includes('athletic') ? 'athletic facility' : 'recreation facility',
+    agriculture: lastMessage.includes('farm') ? 'farm' : lastMessage.includes('vineyard') ? 'vineyard' : lastMessage.includes('greenhouse') ? 'greenhouse' : 'agricultural facility',
+    multifamily: lastMessage.includes('apartment') ? 'apartment building' : lastMessage.includes('condo') ? 'condo' : 'multifamily property',
   };
   
   const userFacilityWord = facilityType ? (facilityWords[facilityType as keyof typeof facilityWords] || facilityType) : 'facility';

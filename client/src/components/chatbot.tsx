@@ -99,16 +99,20 @@ export function ChatBot() {
 
     const facilityKeywords = {
       office: /\boffice\b/i,
-      retail: /\bretail\b|\bstore\b/i,
-      restaurant: /\brestaurant\b|\bdining\b|\bcafe\b/i,
-      industrial: /\bindustrial\b|\bmanufacturing\b|\bwarehouse\b/i,
-      hotel: /\bhotel\b|\blodging\b/i,
-      medical: /\bmedical\b|\bhospital\b|\bclinic\b/i,
-      school: /\bschool\b|\beducation\b|\buniversity\b/i,
+      retail: /\bretail\b|\bstore\b|\bshop\b/i,
+      restaurant: /\brestaurant\b|\bdining\b|\bcafe\b|\bbar\b/i,
+      industrial: /\bindustrial\b|\bmanufacturing\b|\bwarehouse\b|\bfactory\b/i,
+      hotel: /\bhotel\b|\blodging\b|\bmotel\b/i,
+      medical: /\bmedical\b|\bhospital\b|\bclinic\b|\bdental\b/i,
+      school: /\bschool\b|\beducation\b|\buniversity\b|\bcollege\b/i,
+      recreation: /\bgolf\s*course\b|\brecreation\b|\bgym\b|\bfitness\b|\bsports\b|\bathletic\b/i,
+      agriculture: /\bfarm\b|\bagriculture\b|\bvineyard\b|\bgreenhouse\b/i,
+      multifamily: /\bapartment\b|\bmultifamily\b|\bcondo\b/i,
     };
 
     for (const [type, pattern] of Object.entries(facilityKeywords)) {
-      if (pattern.test(inputMessage) && !facilityType) {
+      if (pattern.test(inputMessage)) {
+        // Allow facility type to be updated if user mentions a different one
         nextFacilityType = type;
         setFacilityType(nextFacilityType);
         break;
