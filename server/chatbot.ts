@@ -268,6 +268,18 @@ function generateFallbackResponse(params: ChatParams): string {
   }
   
   if (zipCode && searchMode === 'measure' && !measure) {
+    // Check if user just entered something that wasn't recognized as a measure
+    const previousMessage = messages[messages.length - 1];
+    const previousAssistantMsg = messages.filter(m => m.role === 'assistant').slice(-1)[0]?.content || '';
+    
+    // If the previous assistant message was asking for a measure and user responded but no measure detected
+    if (previousMessage?.role === 'user' && 
+        previousAssistantMsg.includes('energy measure') && 
+        previousMessage.content.trim().length > 2 &&
+        !hasNewZip) {
+      return `I don't recognize "${previousMessage.content}" as one of our available energy measures. Please choose from: LED lighting, HVAC systems, solar panels, heat pumps, insulation, motors, or refrigeration. What energy efficiency upgrade are you interested in?`;
+    }
+    
     return `Perfect! You've chosen to search by energy measure. What type of energy efficiency upgrade are you interested in? For example: LED lighting, HVAC systems, solar panels, heat pumps, insulation, or refrigeration.`;
   }
   
