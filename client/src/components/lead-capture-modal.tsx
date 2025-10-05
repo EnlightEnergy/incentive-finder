@@ -24,6 +24,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
     industryType: "",
     sqft: "",
     measure: "",
+    utility: "",
   });
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -45,6 +46,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
           industryType: "",
           sqft: "",
           measure: "",
+          utility: "",
         });
         setShowSuccess(false);
         onOpenChange(false);
@@ -63,6 +65,15 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!formData.contactName || !formData.email || !formData.company || !formData.industryType || !formData.sqft || !formData.utility || !formData.measure) {
+      toast({
+        title: "Missing Required Fields",
+        description: "Please fill in all required fields except Phone.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     const leadData: InsertLead = {
       company: formData.company,
       contactName: formData.contactName,
@@ -71,7 +82,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
       address: undefined,
       naics: undefined,
       industryType: formData.industryType || undefined,
-      utility: undefined,
+      utility: formData.utility || undefined,
       measure: formData.measure || undefined,
       sqft: formData.sqft ? parseInt(formData.sqft, 10) : undefined,
       hours: undefined,
@@ -92,12 +103,12 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
           aria-describedby="success-description"
         >
           <div className="text-center py-6">
-            <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4" aria-hidden="true">
-              <CheckCircle className="w-6 h-6 text-green-600" />
+            <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-4" aria-hidden="true">
+              <CheckCircle className="w-6 h-6 text-[#0c558c]" />
             </div>
-            <h3 id="success-title" className="text-lg font-semibold text-gray-900 mb-2">Report Sent!</h3>
+            <h3 id="success-title" className="text-lg font-semibold text-gray-900 mb-2">Incentive Enquiry Received</h3>
             <p id="success-description" className="text-gray-600 mb-4">
-              Your customized incentive summary is on the way. We'll be in touch within 1 business day.
+              We are working on your customized incentive report. We'll be in touch within 48 hours.
             </p>
             <Button 
               asChild
@@ -193,6 +204,22 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
               placeholder="e.g., 50000"
               data-testid="input-lead-sqft"
             />
+          </div>
+          <div>
+            <Label htmlFor="utility">Utility Provider</Label>
+            <Select value={formData.utility} onValueChange={(value) => setFormData({ ...formData, utility: value })}>
+              <SelectTrigger data-testid="select-utility">
+                <SelectValue placeholder="Select your utility" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Southern California Edison">Southern California Edison (SCE)</SelectItem>
+                <SelectItem value="Pacific Gas & Electric">Pacific Gas & Electric (PG&E)</SelectItem>
+                <SelectItem value="San Diego Gas & Electric">San Diego Gas & Electric (SDG&E)</SelectItem>
+                <SelectItem value="Los Angeles Department of Water & Power">Los Angeles Department of Water & Power (LADWP)</SelectItem>
+                <SelectItem value="Sacramento Municipal Utility District">Sacramento Municipal Utility District (SMUD)</SelectItem>
+                <SelectItem value="Other">Other</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <Label htmlFor="measure">Energy Efficiency Measure</Label>

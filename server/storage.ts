@@ -204,14 +204,12 @@ export class DatabaseStorage implements IStorage {
     
     // Business type filtering - map friendly names to database sectors
     if (params.businessType) {
-      needsEligibilityJoin = true;
       const sectors = mapFacilityTypeToSector(params.businessType);
       
-      // Build conditions for each mapped sector
-      const sectorConditions = sectors.flatMap(sector => [
-        sql`${programs.sectorTags}::jsonb @> ${JSON.stringify([sector])}`,
-        sql`${eligibilityRules.buildingTypes}::jsonb @> ${JSON.stringify([sector])}`
-      ]);
+      // Check sector tags in programs table (primary filter)
+      const sectorConditions = sectors.map(sector => 
+        sql`${programs.sectorTags}::jsonb @> ${JSON.stringify([sector])}`
+      );
       
       conditions.push(or(...sectorConditions));
     }

@@ -175,6 +175,9 @@ export default function Home() {
           </p>
 
           <div className="hero__ctas">
+            <a href="#search-form" className="btn btn--secondary" data-testid="button-browse-programs">
+              Browse Programs
+            </a>
             <button 
               className="btn btn--primary" 
               onClick={() => setLeadModalOpen(true)}
@@ -182,9 +185,6 @@ export default function Home() {
             >
               Get My Incentive Report
             </button>
-            <a href="#search-form" className="btn btn--secondary" data-testid="button-browse-programs">
-              Browse Programs
-            </a>
           </div>
 
           <ul className="hero__proof">
@@ -260,22 +260,6 @@ export default function Home() {
                   <p className="summary__note">
                     <strong>Book a free on-site audit</strong> to verify eligibility and maximize your payout.
                   </p>
-                  <div className="summary__ctas">
-                    <button 
-                      className="btn" 
-                      style={{ background: '#00a5cb', color: '#fff' }}
-                      onClick={() => setLeadModalOpen(true)}
-                      data-testid="button-schedule-audit"
-                    >
-                      Book Free Energy Audit
-                    </button>
-                    <button 
-                      className="btn btn--secondary"
-                      data-testid="button-upload-bill"
-                    >
-                      Upload Utility Bill
-                    </button>
-                  </div>
                 </div>
                 <div className="summary__countdown">
                   <div className="countdown" data-testid="countdown-timer">
@@ -538,7 +522,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 Enlighting Energy. All rights reserved. Data sourced from DSIRE, OpenEI, and utility partners.</p>
+            <p>&copy; Enlighting Energy. All rights reserved. Data sourced from DSIRE, OpenEI, and utility partners.</p>
           </div>
         </div>
       </footer>

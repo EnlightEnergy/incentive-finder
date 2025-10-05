@@ -87,6 +87,10 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
 
   const solarSegments = [
     { name: "Investment Tax Credit (ITC) + Federal & State/SGIP", incentiveRate: "Up to 65% Project Cost" },
+    { name: "Solar Photovoltaic (PV) Systems", incentiveRate: "Up to 30% Tax Credit" },
+    { name: "Battery Energy Storage Systems (BESS)", incentiveRate: "Up to 30% Tax Credit" },
+    { name: "Self-Generation Incentive Program (SGIP)", incentiveRate: "$200-$850 per kWh" },
+    { name: "Net Energy Metering (NEM) 3.0", incentiveRate: "Bill Credit for Excess Generation" },
   ];
 
   const handleMeasureChange = (measureId: string, checked: boolean) => {
@@ -111,6 +115,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
     };
     
     onSearch(searchParams);
+    
+    setTimeout(() => {
+      const resultsSection = document.querySelector('[data-testid="results-summary"]');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   return (
@@ -187,7 +198,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
             Find Your Energy Incentives
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Search all applicable utility, state, federal, and aggregator programs available to California businesses. Enlighting will qualify and apply for these incentives at no cost to you — we simply take a small share of the free money we generate for your project.
+            Search all applicable utility, state, federal, and aggregator programs available to California businesses. Enlighting can help you apply and qualify for these incentives at no cost to you — we simply claim a fractional % of the free money we generate for your efficiency project.
           </p>
         </div>
 
