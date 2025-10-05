@@ -1,0 +1,30 @@
+program_id,utility,category,measure,rebate_code,rebate_value,unit,requirements,source_page
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (10 hp),PR088,250,per motor,"NAICS ranges 111000–112990, 211120–213115, 311000–339999; feedback control on static pressure/CFM/velocity; no prior/failed VSD; submit ≤60 days.",p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (15 hp),PR089,1000,per motor,Same as PR088.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (20 hp),PR090,1500,per motor,Same as PR088.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (25 hp),PR091,3000,per motor,Same as PR088.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (30 hp),PR092,3000,per motor,Same as PR088.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (40 hp),PR093,3500,per motor,Same as PR088.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (50 hp),PR094,3500,per motor,Same as PR088.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (60 hp),PR100,6000,per motor,"NAICS 111000–112990, 311000–339999; submit ≤60 days.",p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (75 hp),PR101,7500,per motor,Same as PR100.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (100 hp),PR102,10000,per motor,Same as PR100.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (125 hp),PR103,12500,per motor,Same as PR100.,p.7
+PGE_BUS_2025,PG&E,Agriculture & Food Processing,Dust Collection Fan VSD (150 hp),PR104,15000,per motor,Same as PR100.,p.8
+PGE_BUS_2025,PG&E,HVAC – Commercial Ventilation,Variable Frequency Drive for HVAC Fan,H148,80,per hp,Existing HVAC supply/return/exhaust fan; single-speed motor; remove throttling devices; building types limited; submit ≤60 days.,p.16–17
+PGE_BUS_2025,PG&E,HVAC – Advanced Controls,Advanced Rooftop HVAC Controls (various packages),HV055/HV056/HV064/HV065/HV061/HV062/HV070/HV071/HV058/HV059/HV067/HV068/SA08/SA09/SA11/SA12,0,$120–$194 per ton (caps vary),Pick correct measure code by pack type (gas pack/HP/AC only); enter AC tons as quantity; see table for $/ton and caps.,p.21 (table)
+PGE_BUS_2025,PG&E,Refrigeration,Ultra-Low Temperature (–80 °C) Freezer 15–<24 ft3,RF006,300,per unit,ENERGY STAR; vertical hinges; 15–29 ft3 volume; capable to –80 °C; submit ≤60 days.,p.23
+PGE_BUS_2025,PG&E,Refrigeration,Ultra-Low Temperature (–80 °C) Freezer 24–29 ft3,RF007,600,per unit,Same as RF006.,p.23
+PGE_BUS_2025,PG&E,Refrigeration,"ASH Controls (Medium Temp, Cooler)",R7,25,per linear ft,Humidity-sensing controls reduce or turn off ASH; not combinable with door measures; submit ≤60 days.,p.23–24
+PGE_BUS_2025,PG&E,Refrigeration,"ASH Controls (Low Temp, Freezer)",HB31,25,per linear ft,Same as R7.,p.23–24
+PGE_BUS_2025,PG&E,Refrigeration,New High‑Efficiency Low‑Temp Display Case Doors,R87,75,per linear ft,"Low-temp only; no door ASH; mullion/frame heater amps limits; building types: restaurant, hotel, grocery, retail; submit ≤60 days.",p.24–25
+PGE_BUS_2025,PG&E,Refrigeration,Replace Open Multi‑Deck with New Case (Low Temp),R4,175,per linear ft,"New case includes LED, ECMs, double-pane doors; various exclusions & remodel limits; submit ≤60 days.",p.25
+PGE_BUS_2025,PG&E,Refrigeration,Replace Open Multi‑Deck with New Case (Medium Temp),R5,75,per linear ft,Same as R4 for medium temp.,p.25–26
+PGE_BUS_2025,PG&E,Insulation,"Pipe insulation ≤1"" pipe, ≤15 psig steam, outdoor (1"" layer)",PR051,3,per linear ft,"Min. pipe dia 0.5""; retrofit only; Title 24-mandated insulation ineligible; submit ≤60 days.",p.28
+PGE_BUS_2025,PG&E,Insulation,"Pipe insulation 1""<pipe≤4"", hot water, indoor (1"" layer)",PR068,3,per linear ft,As above.,p.28
+PGE_BUS_2025,PG&E,Insulation,"Fitting insulation 1""<pipe≤4"", outdoor, >15 psig steam",PR085,3,per fitting,As above.,p.28
+PGE_BUS_2025,PG&E,Insulation,"Pipe insulation >4"" pipe, ≤15 psig steam, outdoor (1"" layer)",PR054,3,per linear ft,As above.,p.28
+PGE_BUS_2025,PG&E,Laundry,Ozone Laundry System,B85,39,per lb washer capacity,Provide washer capacity; spec sheet; hotel apps need occupancy rate evidence; submit ≤60 days.,p.29–30
+PGE_BUS_2025,PG&E,Pool Heating,Commercial Pool & Spa Heater – Indoor,SWRE003B,2,per MBtuh,Replace existing; ≥84% TE; on/off switch; no pilot; CEC-qual list; submit ≤60 days.,p.31
+PGE_BUS_2025,PG&E,Pool Heating,Commercial Pool & Spa Heater – Outdoor,SWRE003C,2,per MBtuh,Same as indoor.,p.31–32
+PGE_BUS_2025,PG&E,Backup Power,Generator Rebate Program,GEN30,300,per qualifying generator,HFRA Tier 2/3 or EPSS circuit; ≥2 PSPS events; product on PG&E list; 1 rebate/account; submit within 12 months or by 12/31/2024 (whichever sooner per catalog).,"p.3, p.32–33"
