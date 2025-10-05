@@ -578,7 +578,7 @@ export class DatabaseStorage implements IStorage {
     
     return {
       message: aiResponse,
-      utility: selectedUtility,
+      utility: selectedUtility || utility?.ownerUtility,
       programs: relevantPrograms,
       detectedZip,
       detectedFacility,
