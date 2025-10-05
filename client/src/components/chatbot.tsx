@@ -362,14 +362,13 @@ export function ChatBot() {
 
   if (!isOpen) {
     return (
-      <Button
+      <button
         data-testid="button-open-chat"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg hover:opacity-90 z-50 p-0 overflow-hidden"
-        size="icon"
+        className="fixed bottom-6 right-6 h-16 w-16 hover:opacity-90 z-50 cursor-pointer border-none bg-transparent p-0"
       >
-        <img src={chatbotIconPath} alt="WattSon Incentive AI" className="h-full w-full object-cover" />
-      </Button>
+        <img src={chatbotIconPath} alt="WattSon Incentive AI" className="h-full w-full" />
+      </button>
     );
   }
 

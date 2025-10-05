@@ -499,8 +499,8 @@ export default function Home() {
                 <li>Locate and Target Incentives</li>
                 <li>Energy Efficiency Audits</li>
                 <li>Engineering Services</li>
-                <li>Turnkey Efficiency Upgrades</li>
-                <li>Project Efficiency Consulting</li>
+                <li>Turnkey Upgrades</li>
+                <li>Energy Project Consulting</li>
               </ul>
             </div>
             <div>
