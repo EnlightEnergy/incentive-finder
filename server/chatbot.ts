@@ -147,8 +147,20 @@ function generateFallbackResponse(params: ChatParams): string {
   const hasNewFacility = /\b(office|retail|restaurant|industrial|warehouse|hotel|medical|school|recreation|agriculture|multifamily|grocery|food\s*processing|auto\s*dealer)\b/i.test(lastMessage);
   const hasNewMeasure = /\b(led|lighting|lights|lamp|hvac|heat\s*pump|solar|insulation|motor|refrigeration)\b/i.test(lastMessage);
   
-  // If user just provided new info, acknowledge it
+  // If user just provided new ZIP, check if there are multiple utilities before acknowledging
   if (hasNewZip && zipCode) {
+    // If multiple utilities available, skip acknowledgment and ask about utility instead
+    if (allUtilities && allUtilities.length > 1 && !utility) {
+      const utilityList = allUtilities.map(u => {
+        if (u === 'SCE') return 'Southern California Edison (SCE)';
+        if (u === 'PGE') return 'Pacific Gas & Electric (PG&E)';
+        if (u === 'SDGE') return 'San Diego Gas & Electric (SDG&E)';
+        if (u === 'LADWP') return 'Los Angeles Department of Water & Power (LADWP)';
+        return u;
+      }).join(', ');
+      
+      return `Your ZIP code (${zipCode}) is served by multiple utilities: ${utilityList}. Which utility do you receive service from? This will help me find the right incentive programs for you.`;
+    }
     return `Thank you for providing your ZIP code (${zipCode}). Let me check which utilities serve this area...`;
   }
   

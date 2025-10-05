@@ -529,9 +529,10 @@ export class DatabaseStorage implements IStorage {
         utility = allUtilities.find(u => u.ownerUtility === detectedUtility);
         selectedUtility = detectedUtility;
       } else if (isNewZip) {
-        // New ZIP: don't auto-select, let user confirm
+        // New ZIP: don't auto-select, especially if multiple utilities available
         utility = allUtilities[0];
-        selectedUtility = undefined;
+        // If there are multiple utilities, selectedUtility must stay undefined so fallback asks user to choose
+        selectedUtility = allUtilities.length > 1 ? undefined : allUtilities[0]?.ownerUtility;
       } else {
         utility = allUtilities[0];
         selectedUtility = utility?.ownerUtility;
@@ -609,7 +610,7 @@ export class DatabaseStorage implements IStorage {
     
     return {
       message: aiResponse,
-      utility: selectedUtility || utility?.ownerUtility,
+      utility: selectedUtility,
       programs: relevantPrograms,
       detectedZip,
       detectedFacility,

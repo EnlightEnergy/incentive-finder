@@ -275,13 +275,13 @@ export function ChatBot() {
       searchMode: nextSearchMode,
     });
 
-    if (response.utility && !nextUtility) {
-      console.log("Detected utility from backend:", response.utility);
-    }
-
     // Update detected values from backend
     if (response.detectedZip && response.detectedZip !== nextZipCode) {
       setZipCode(response.detectedZip);
+    }
+    if (response.utility && response.utility !== nextUtility) {
+      console.log("Detected utility from backend:", response.utility);
+      setUtility(response.utility);
     }
     if (response.detectedFacility && response.detectedFacility !== nextFacilityType) {
       setFacilityType(response.detectedFacility);
