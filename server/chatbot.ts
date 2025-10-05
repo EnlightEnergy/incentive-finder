@@ -286,7 +286,7 @@ function generateFallbackResponse(params: ChatParams): string {
     }).join('\n\n');
     
     const searchContext = measure ? `${measure} programs` : `programs for your ${userFacilityWord}`;
-    return `Based on ${searchContext} in ${utility || 'your area'}, I found ${programs.length} potentially relevant incentive programs, including:\n\n${programList}\n\nThese programs can often be combined or "stacked" for maximum savings. To get a detailed analysis of your specific eligibility and potential incentive amounts, I'd recommend scheduling a free consultation with our energy efficiency experts. Would you like to learn more about our consultation services?`;
+    return `Based on ${searchContext} in ${utility || 'your area'}, I found ${programs.length} potentially relevant incentive programs, including:\n\n${programList}\n\nThese programs can often be combined or "stacked" for maximum savings. To get a detailed analysis of your specific eligibility and potential incentive amounts, I'd recommend scheduling a free consultation with our energy efficiency experts. Would you like us to contact you?`;
   }
   
   if (zipCode && (facilityType || measure) && programs.length === 0) {
