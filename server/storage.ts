@@ -493,6 +493,37 @@ export class DatabaseStorage implements IStorage {
     if (detectedZip) {
       allUtilities = await this.getAllUtilitiesByZipCode(detectedZip);
       
+      // Check if ZIP code is not in California (no utilities found)
+      if (allUtilities.length === 0) {
+        const notInCaliforniaMessage = {
+          role: 'assistant',
+          content: `I apologize, but ZIP code ${detectedZip} is not in California. Our incentive finder currently only covers California utility incentive programs. If you have a California location, please provide that ZIP code and I'll be happy to help you find available incentives!`,
+          timestamp: new Date().toISOString(),
+        };
+        
+        const finalMessages = [...updatedMessages, notInCaliforniaMessage];
+        
+        await db
+          .update(chatConversations)
+          .set({
+            messages: finalMessages,
+            zipCode: null, // Clear invalid ZIP
+            updatedAt: new Date(),
+          })
+          .where(eq(chatConversations.sessionId, sessionId));
+        
+        return {
+          message: notInCaliforniaMessage.content,
+          utility: undefined,
+          programs: [],
+          detectedZip: undefined,
+          detectedFacility: undefined,
+          detectedMeasure: undefined,
+          showSearchModeSelector: false,
+          showLeadCapture: false,
+        };
+      }
+      
       // Only auto-select utility if not a new ZIP (new ZIP needs user to confirm utility)
       if (!isNewZip && detectedUtility) {
         utility = allUtilities.find(u => u.ownerUtility === detectedUtility);
