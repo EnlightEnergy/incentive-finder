@@ -134,6 +134,7 @@ export class DatabaseStorage implements IStorage {
     const conditions = [];
     let needsGeoJoin = false;
     let needsEligibilityJoin = false;
+    let autoDetectedUtility = null;
     
     // Text search
     if (params.q) {
@@ -153,23 +154,46 @@ export class DatabaseStorage implements IStorage {
     
     // Location-based filtering (zip code or state)
     if (params.location) {
-      needsGeoJoin = true;
       const location = params.location.trim();
       
-      // Check if it's a zip code (5 digits) or state abbreviation
+      // Check if it's a zip code (5 digits)
       if (/^\d{5}$/.test(location)) {
-        // ZIP code search - use first 3 digits for broader matching
-        const zipPrefix = location.substring(0, 3);
-        conditions.push(
-          or(
-            ilike(programGeos.zipPrefix, `${zipPrefix}%`),
-            eq(programGeos.state, "CA") // Default to CA for now
-          )
-        );
+        // ZIP code search - first look up which utility/utilities serve this zip
+        const utilities = await this.getAllUtilitiesByZipCode(location);
+        
+        if (utilities.length > 0) {
+          // Auto-detect utilities from zip code
+          // Only apply auto-filter if user hasn't explicitly selected a utility
+          if (!params.utility) {
+            // If multiple utilities serve this zip, show programs from all of them
+            const allUtilityConditions = utilities.flatMap(util => {
+              const utilitySearchTerms = mapUtilityToSearchTerms(util.ownerUtility);
+              return utilitySearchTerms.map(term => 
+                ilike(programs.owner, `%${term}%`)
+              );
+            });
+            conditions.push(or(...allUtilityConditions));
+          }
+          
+          // Track that we auto-detected utilities (for informational purposes)
+          autoDetectedUtility = utilities.map(u => u.ownerUtility).join(', ');
+        } else {
+          // Fallback: if zip not found in utility_zip_codes, use geo filtering
+          needsGeoJoin = true;
+          const zipPrefix = location.substring(0, 3);
+          conditions.push(
+            or(
+              ilike(programGeos.zipPrefix, `${zipPrefix}%`),
+              eq(programGeos.state, "CA")
+            )
+          );
+        }
       } else if (/^[A-Z]{2}$/i.test(location)) {
         // State abbreviation
+        needsGeoJoin = true;
         conditions.push(eq(programGeos.state, location.toUpperCase()));
       } else {
+        needsGeoJoin = true;
         // City or county name - handle common California cities
         const cityMatch = location.toLowerCase();
         let cityConditions = [
@@ -193,7 +217,7 @@ export class DatabaseStorage implements IStorage {
       }
     }
     
-    // Utility filtering - map abbreviations to full names
+    // Utility filtering - explicit user selection takes precedence
     if (params.utility) {
       const utilitySearchTerms = mapUtilityToSearchTerms(params.utility);
       const utilityConditions = utilitySearchTerms.map(term => 
