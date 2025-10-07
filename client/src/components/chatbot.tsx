@@ -365,7 +365,7 @@ export function ChatBot() {
       <button
         data-testid="button-open-chat"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 left-1/2 -translate-x-1/2 h-24 w-24 hover:scale-110 z-50 cursor-pointer border-none bg-transparent p-0 transition-all duration-300 hover:drop-shadow-[0_0_20px_rgba(12,85,140,0.8)]"
+        className="fixed top-1/2 -translate-y-1/2 right-8 h-24 w-24 hover:scale-110 z-50 cursor-pointer border-none bg-transparent p-0 transition-all duration-300 hover:drop-shadow-[0_0_20px_rgba(12,85,140,0.8)]"
       >
         <img src={chatbotIconPath} alt="WattSon Incentive AI" className="h-full w-full" />
       </button>
