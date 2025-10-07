@@ -167,7 +167,7 @@ export default function Home() {
       {/* New Hero Section */}
       <section className="hero" data-testid="hero-section">
         <div className="hero__inner">
-          <div className="hero__kicker">California Commercial Energy</div>
+          <div className="hero__kicker">California Commercial Energy Incentives</div>
           <h1 className="hero__title">Unlock Rebates, Grants & 0% Financing for Your Facility</h1>
           <p className="hero__sub">
             Stack utility rebates, state grants, and federal tax incentives to cut project costs by up to 70%. 
