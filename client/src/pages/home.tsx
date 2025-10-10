@@ -15,6 +15,9 @@ import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
 import logoPath from "@assets/Blue Mark_1759082307340.png";
 
+// Hero background import
+import heroCityscape from "@assets/Incentive_background_1760128727694.png";
+
 // Client logo imports
 import boeingLogo from "@assets/boeing_1758932853739.jpg";
 import dreamworksLogo from "@assets/dreamworks_1758932853741.jpg";
@@ -168,7 +171,7 @@ export default function Home() {
         className="hero hero--cityscape" 
         data-testid="hero-section"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/attached_assets/Incentive_background_1760128727694.png)',
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(${heroCityscape})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
