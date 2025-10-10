@@ -180,10 +180,13 @@ export class DatabaseStorage implements IStorage {
               );
             });
             
-            // State-level programs: state='CA' AND utility_service_area IS NULL
+            // State-level programs: state='CA' AND (utility_service_area IS NULL OR empty string)
             const stateLevelCondition = and(
               eq(programGeos.state, "CA"),
-              isNull(programGeos.utilityServiceArea)
+              or(
+                isNull(programGeos.utilityServiceArea),
+                eq(programGeos.utilityServiceArea, '')
+              )
             );
             
             // Combine: match utility service area OR state-level (no utility specified)
@@ -240,12 +243,30 @@ export class DatabaseStorage implements IStorage {
     }
     
     // Utility filtering - explicit user selection takes precedence
+    // When a utility is selected, show both utility-specific programs AND state/federal programs
     if (params.utility) {
+      needsGeoJoin = true;
       const utilitySearchTerms = mapUtilityToSearchTerms(params.utility);
       const utilityConditions = utilitySearchTerms.map(term => 
         ilike(programs.owner, `%${term}%`)
       );
-      conditions.push(or(...utilityConditions));
+      
+      // State/federal programs: state='CA' AND (utility_service_area IS NULL OR empty string)
+      const stateLevelCondition = and(
+        eq(programGeos.state, "CA"),
+        or(
+          isNull(programGeos.utilityServiceArea),
+          eq(programGeos.utilityServiceArea, '')
+        )
+      );
+      
+      // Combine: show utility programs OR state/federal programs
+      conditions.push(
+        or(
+          ...utilityConditions,
+          stateLevelCondition
+        )
+      );
     }
     
     // Business type filtering - map friendly names to database sectors
@@ -604,9 +625,9 @@ export class DatabaseStorage implements IStorage {
     if (detectedZip && !(isNewZip && !detectedFacility && !detectedMeasure)) {
       const programParams: any = {
         location: detectedZip, // CRITICAL: Always include ZIP for location-based filtering
-        utility: selectedUtility || undefined,
+        utility: selectedUtility || undefined, // Include utility for explicit user selections
         businessType: detectedFacility || undefined,
-        limit: 5,
+        limit: 50, // Increased from 5 to capture all relevant programs
         offset: 0,
       };
       
