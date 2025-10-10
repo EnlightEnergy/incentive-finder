@@ -141,7 +141,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="businessType" className="text-base font-semibold">Business Type</Label>
+                  <Label htmlFor="businessType" className="text-base font-semibold text-left block">Business Type</Label>
                   <Select value={businessType} onValueChange={setBusinessType}>
                     <SelectTrigger data-testid="select-business-type">
                       <SelectValue placeholder="Select business type" />
@@ -154,7 +154,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="location" className="text-base font-semibold">Location / Address</Label>
+                  <Label htmlFor="location" className="text-base font-semibold text-left block">Location / Address</Label>
                   <Input
                     id="location"
                     placeholder="Enter ZIP code or address"
@@ -207,7 +207,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                 <CollapsibleContent className="space-y-4 mt-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="sqft" className="text-base font-semibold">Building Square Footage</Label>
+                      <Label htmlFor="sqft" className="text-base font-semibold text-left block">Building Square Footage</Label>
                       <Input
                         id="sqft"
                         type="number"
@@ -218,7 +218,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="hours" className="text-base font-semibold">Operating Hours/Day</Label>
+                      <Label htmlFor="hours" className="text-base font-semibold text-left block">Operating Hours/Day</Label>
                       <Input
                         id="hours"
                         type="number"
@@ -229,7 +229,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="projectCost" className="text-base font-semibold">Estimated Project Cost</Label>
+                      <Label htmlFor="projectCost" className="text-base font-semibold text-left block">Estimated Project Cost</Label>
                       <Input
                         id="projectCost"
                         type="number"
