@@ -11,13 +11,16 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes (October 2025)
 
 ### Homepage UI/UX Enhancements
-- **Hero Section**: Updated title to "Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades." Added white-to-light-slate gradient background.
-- **3-Step Process**: Added visual guide under "Find Your Energy Incentives" with Discover, Qualify, and Deliver steps with icons.
+- **Hero Section**: Updated title to "Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades." Added white-to-light-slate gradient background. Removed "Get my Incentive Report" CTA button.
+- **3-Step Process**: Added visual guide under "Find Your Energy Incentives" with Discover, Qualify, and Deliver steps with icons. Simplified description text to focus on program availability.
 - **Right Rail CTA**: Added sticky CTA card on results page with "Want help implementing?" message and two action buttons (Talk to an Engineer, Email me this report).
 - **Typography**: Updated to Inter font at 17px body, H1 52px, H2 30px with improved line heights and negative letter-spacing.
 - **Layout**: Standardized max-width to 1180px across sections, added proper section spacing (64-80px).
 - **Responsive Design**: 2-column desktop layout (programs 65% + CTA rail 35%) that stacks on mobile.
 - **Chatbot Icon**: Replaced with new AI ball design with orange blinking indicator.
+- **Modal Text Updates**: 
+  - ApplyEnlightingModal: Changed title to "Contact Enlighting for your custom report", removed secondary program name line
+  - LeadCaptureModal: Changed title to "Contact Me About Incentives", submit button to "Contact Me", bottom text to "We will be in touch within 48 hours. No Spam."
 
 ## System Architecture
 
