@@ -125,7 +125,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   };
 
   return (
-    <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-16">
+    <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-foreground mb-4">
@@ -141,7 +141,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="businessType">Business Type</Label>
+                  <Label htmlFor="businessType" className="text-base font-semibold">Business Type</Label>
                   <Select value={businessType} onValueChange={setBusinessType}>
                     <SelectTrigger data-testid="select-business-type">
                       <SelectValue placeholder="Select business type" />
@@ -154,7 +154,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="location">Location / Address</Label>
+                  <Label htmlFor="location" className="text-base font-semibold">Location / Address</Label>
                   <Input
                     id="location"
                     placeholder="Enter ZIP code or address"
@@ -167,9 +167,9 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="utility">Utility Provider</Label>
+                  <Label htmlFor="utility" className="text-base font-semibold text-left block">Utility Provider</Label>
                   <Select value={utility} onValueChange={setUtility}>
-                    <SelectTrigger data-testid="select-utility">
+                    <SelectTrigger data-testid="select-utility" className="text-left">
                       <SelectValue placeholder="Auto-detected from address" />
                     </SelectTrigger>
                     <SelectContent>
@@ -181,17 +181,17 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                   </Select>
                 </div>
                 <div>
-                  <Label>Energy Measures (Select all that apply)</Label>
+                  <Label className="text-base font-semibold text-left block">Energy Measures (Select all that apply)</Label>
                   <div className="grid grid-cols-2 gap-2 mt-2" data-testid="measures-checkboxes">
                     {energyMeasures.map((measure) => (
-                      <div key={measure.id} className="flex items-center space-x-2">
+                      <div key={measure.id} className="flex items-start space-x-2">
                         <Checkbox
                           id={measure.id}
                           checked={selectedMeasures.includes(measure.id)}
                           onCheckedChange={(checked) => handleMeasureChange(measure.id, checked as boolean)}
                           data-testid={`checkbox-measure-${measure.id}`}
                         />
-                        <Label htmlFor={measure.id} className="text-sm">
+                        <Label htmlFor={measure.id} className="text-sm text-left">
                           {measure.label}
                         </Label>
                       </div>
@@ -207,7 +207,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                 <CollapsibleContent className="space-y-4 mt-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="sqft">Building Square Footage</Label>
+                      <Label htmlFor="sqft" className="text-base font-semibold">Building Square Footage</Label>
                       <Input
                         id="sqft"
                         type="number"
@@ -218,7 +218,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="hours">Operating Hours/Day</Label>
+                      <Label htmlFor="hours" className="text-base font-semibold">Operating Hours/Day</Label>
                       <Input
                         id="hours"
                         type="number"
@@ -229,7 +229,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="projectCost">Estimated Project Cost</Label>
+                      <Label htmlFor="projectCost" className="text-base font-semibold">Estimated Project Cost</Label>
                       <Input
                         id="projectCost"
                         type="number"
