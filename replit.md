@@ -27,6 +27,16 @@ Preferred communication style: Simple, everyday language.
   - Footer: Updated copyright to include "and aggregators" in data sources
   - Right Rail CTA and 3-Step Process: Changed "under one contract" to "in one turnkey proposition" for consistent messaging
 
+### Chatbot Search Fix (October 10, 2025)
+- **Critical Issue Resolved**: Fixed chatbot search returning only 2-5 programs instead of all available programs (11+ for SCE territories)
+- **Root Cause**: Chatbot limited search results to 5 programs and excluded state/federal programs when utility was explicitly selected
+- **Solution Implemented**:
+  - Increased chatbot search limit from 5 to 50 programs to capture all relevant incentives
+  - Modified utility filtering logic to always include state/federal programs (179D, CEITC, SGIP) alongside utility-specific programs
+  - Updated state-level condition to handle both NULL and empty string values in `utility_service_area` field
+- **Verification**: All test scenarios pass - single-utility ZIPs, multi-utility ZIPs with explicit selection, and chatbot/API endpoints all return complete program lists
+- **Impact**: Users now see comprehensive incentive opportunities including stackable state and federal programs, significantly improving search results quality
+
 ## System Architecture
 
 ### Frontend Architecture
