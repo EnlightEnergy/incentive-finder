@@ -114,28 +114,23 @@ export function ChatBot() {
     let isNewZipDetected = false;
     if (zipMatch) {
       const newZip = zipMatch[0];
-      // If this is a different ZIP, reset the entire conversation flow
-      if (newZip !== zipCode) {
-        isNewZipDetected = true;
-        nextZipCode = newZip;
-        setZipCode(nextZipCode);
-        // Reset all conversation state including utility and unrecognized facility
-        nextFacilityType = undefined;
-        nextUtility = undefined;
-        nextMeasure = undefined;
-        nextSearchMode = undefined;
-        nextUnrecognizedFacility = undefined;
-        setFacilityType(undefined);
-        setUtility(undefined);
-        setMeasure(undefined);
-        setSearchMode(undefined);
-        setUnrecognizedFacility(undefined);
-        setShowLeadCaptureForm({ show: false, timestamp: "" });
-        setLeadCaptureState(false);
-      } else {
-        nextZipCode = newZip;
-        setZipCode(nextZipCode);
-      }
+      // Any ZIP mention (even the same one) resets the search flow for a fresh start
+      isNewZipDetected = true;
+      nextZipCode = newZip;
+      setZipCode(nextZipCode);
+      // Reset all conversation state including utility and unrecognized facility
+      nextFacilityType = undefined;
+      nextUtility = undefined;
+      nextMeasure = undefined;
+      nextSearchMode = undefined;
+      nextUnrecognizedFacility = undefined;
+      setFacilityType(undefined);
+      setUtility(undefined);
+      setMeasure(undefined);
+      setSearchMode(undefined);
+      setUnrecognizedFacility(undefined);
+      setShowLeadCaptureForm({ show: false, timestamp: "" });
+      setLeadCaptureState(false);
     }
 
     // Don't detect utility if we just detected a new ZIP - let the flow restart

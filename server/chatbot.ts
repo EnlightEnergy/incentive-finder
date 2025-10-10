@@ -62,10 +62,11 @@ interface ChatParams {
   unrecognizedFacility?: string;
   measure?: string;
   searchMode?: string;
+  isNewZip?: boolean;
 }
 
 export async function processChatWithAI(params: ChatParams): Promise<string> {
-  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility, measure, searchMode } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility, measure, searchMode, isNewZip } = params;
   
   // If there's an unrecognized facility, use fallback immediately
   if (zipCode && !facilityType && unrecognizedFacility) {
@@ -76,6 +77,11 @@ export async function processChatWithAI(params: ChatParams): Promise<string> {
   
   if (zipCode) {
     contextInfo.push(`User's ZIP code: ${zipCode}`);
+    
+    // If this is a new/re-entered ZIP with no facility/measure, explicitly ask user what to search for
+    if (isNewZip && !facilityType && !measure) {
+      contextInfo.push(`CRITICAL: User just provided a ZIP code but NO recognized facility type or measure. This is a FRESH SEARCH START - completely ignore ALL previous facility types, measures, or search context from earlier messages. Do NOT show programs yet. Instead, confirm the utility and ask: "Would you like to search by specific energy measure or by building type?"`);
+    }
   }
   
   if (allUtilities && allUtilities.length > 1) {
@@ -154,7 +160,7 @@ export async function processChatWithAI(params: ChatParams): Promise<string> {
 }
 
 function generateFallbackResponse(params: ChatParams): string {
-  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility, measure, searchMode } = params;
+  const { messages, zipCode, facilityType, utility, allUtilities, programs, unrecognizedFacility, measure, searchMode, isNewZip } = params;
   const lastMessage = messages[messages.length - 1]?.content.toLowerCase() || '';
   
   // CONTEXT-AWARE: Check if user just provided new information
@@ -162,8 +168,8 @@ function generateFallbackResponse(params: ChatParams): string {
   const hasNewFacility = /\b(office|retail|restaurant|industrial|warehouse|hotel|medical|school|recreation|agriculture|multifamily|grocery|food\s*processing|auto\s*dealer)\b/i.test(lastMessage);
   const hasNewMeasure = /\b(led|lighting|lights|lamp|hvac|heat\s*pump|solar|insulation|motor|refrigeration)\b/i.test(lastMessage);
   
-  // If user just provided new ZIP, check if there are multiple utilities before acknowledging
-  if (hasNewZip && zipCode) {
+  // If this is a new ZIP (fresh search), ignore previous facility/measure context
+  if (isNewZip && zipCode) {
     // If multiple utilities available, skip acknowledgment and ask about utility instead
     if (allUtilities && allUtilities.length > 1 && !utility) {
       const utilityList = allUtilities.map(u => {

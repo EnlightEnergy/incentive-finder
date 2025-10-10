@@ -452,10 +452,15 @@ export class DatabaseStorage implements IStorage {
     let isNewZip = false;
     if (zipMatch) {
       const newZip = zipMatch[0];
-      if (newZip !== conversation.zipCode) {
-        isNewZip = true;
-      }
+      // Any ZIP mention (even the same one) should reset the search flow
+      isNewZip = true;
       detectedZip = newZip;
+      
+      // IMMEDIATELY wipe conversation state to prevent stale data from being used
+      conversation.facilityType = null;
+      conversation.utility = null;
+      conversation.searchMode = null;
+      conversation.measure = null;
     }
     
     // RE-DETECT utility from message
@@ -478,8 +483,8 @@ export class DatabaseStorage implements IStorage {
     }
     
     // RE-DETECT facility type from message (expanded patterns)
-    // If new ZIP detected, don't use old facility value or detect new ones
-    let detectedFacility = isNewZip ? undefined : frontendFacility;
+    // If new ZIP detected, don't use old facility value or detect new ones  
+    let detectedFacility = isNewZip ? undefined : (frontendFacility || conversation.facilityType);
     
     if (!isNewZip) {
       const facilityPatterns = {
@@ -583,10 +588,20 @@ export class DatabaseStorage implements IStorage {
       }
     }
     
-    // Build program search params - ONLY search if we have a ZIP code
+    // Build program search params - ONLY search if we have a ZIP code AND search criteria
     let relevantPrograms: Program[] = [];
     
-    if (detectedZip) {
+    console.log('[ZIP RESET DEBUG]', {
+      message,
+      detectedZip,
+      isNewZip,
+      detectedFacility,
+      detectedMeasure,
+      willSearch: detectedZip && !(isNewZip && !detectedFacility && !detectedMeasure)
+    });
+    
+    // If new ZIP but no facility/measure, don't search yet - ask user what to search for first
+    if (detectedZip && !(isNewZip && !detectedFacility && !detectedMeasure)) {
       const programParams: any = {
         location: detectedZip, // CRITICAL: Always include ZIP for location-based filtering
         utility: selectedUtility || undefined,
@@ -600,9 +615,12 @@ export class DatabaseStorage implements IStorage {
         programParams.measures = [detectedMeasure];
       }
       
+      console.log('[ZIP RESET DEBUG] Searching programs with params:', programParams);
       relevantPrograms = await this.getPrograms(programParams);
+    } else {
+      console.log('[ZIP RESET DEBUG] Skipping program search - fresh ZIP with no criteria');
     }
-    // If no ZIP code, don't search programs - chatbot will ask for ZIP first
+    // If no ZIP code or if new ZIP with no search criteria, don't search programs yet
     
     const aiResponse = await processChatWithAI({
       messages: updatedMessages,
@@ -614,6 +632,7 @@ export class DatabaseStorage implements IStorage {
       unrecognizedFacility,
       measure: detectedMeasure || undefined,
       searchMode: searchMode || undefined,
+      isNewZip: isNewZip,
     });
     
     const assistantMessage = {
@@ -639,7 +658,8 @@ export class DatabaseStorage implements IStorage {
       .where(eq(chatConversations.sessionId, sessionId));
     
     // Determine if we should show search mode selector
-    const shouldShowSearchModeSelector = detectedZip && selectedUtility && !searchMode && !detectedFacility && !detectedMeasure;
+    // If ZIP was just entered/re-entered (isNewZip), always show selector for fresh start
+    const shouldShowSearchModeSelector = isNewZip ? (detectedZip && selectedUtility) : (detectedZip && selectedUtility && !searchMode && !detectedFacility && !detectedMeasure);
     
     // Determine if we should show lead capture
     // Only show when user responds affirmatively to a previous consultation question
