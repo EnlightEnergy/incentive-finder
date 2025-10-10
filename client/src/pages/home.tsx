@@ -164,7 +164,15 @@ export default function Home() {
       <main id="main-content" tabIndex={-1}>
       
       {/* New Hero Section */}
-      <section className="hero" data-testid="hero-section">
+      <section 
+        className="hero hero--cityscape" 
+        data-testid="hero-section"
+        style={{
+          background: 'linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/attached_assets/Incentive_background_1760126054331.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         <div className="hero__inner">
           <div className="hero__kicker">California Commercial Energy Incentives</div>
           <h1 className="hero__title">Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades.</h1>

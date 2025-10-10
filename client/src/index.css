@@ -260,9 +260,7 @@
 
 /* ========== HERO STYLES ========== */
 .hero{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/attached_assets/Incentive_background_1760126054331.png');
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(to bottom, #ffffff, hsl(215, 25%, 96%));
   border-bottom: 1px solid var(--border);
   padding: 5rem 0;
 }
@@ -275,8 +273,8 @@
 .hero__kicker{
   display: inline-block; 
   font-weight: 600; 
-  color: white;
-  background: rgba(255, 255, 255, 0.15); 
+  color: var(--primary-blue);
+  background: var(--blue-50); 
   padding: 0.5rem 1rem; 
   border-radius: 9999px; 
   font-size: 3rem; 
@@ -287,7 +285,7 @@
   font-size: 2.25rem; 
   line-height: 1.1; 
   margin: 0 0 1rem; 
-  color: white; 
+  color: var(--foreground); 
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
   max-width: 42ch;
@@ -295,11 +293,23 @@
   margin-right: auto;
 }
 .hero__sub{
-  color: white; 
+  color: var(--slate-600); 
   font-size: 1.125rem; 
   max-width: 60ch; 
   margin: 0 auto 2rem;
   line-height: 1.6;
+}
+
+/* Cityscape variant - white text for dark background */
+.hero--cityscape .hero__kicker{
+  color: white !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+.hero--cityscape .hero__title{
+  color: white !important;
+}
+.hero--cityscape .hero__sub{
+  color: white !important;
 }
 .hero__ctas{ 
   display: flex; 
