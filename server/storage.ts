@@ -228,6 +228,8 @@ export class DatabaseStorage implements IStorage {
           cityConditions.push(ilike(programs.owner, '%Los Angeles%'));
         } else if (cityMatch.includes('san diego')) {
           cityConditions.push(ilike(programs.owner, '%San Diego Gas & Electric%'));
+        } else if (cityMatch.includes('santa barbara')) {
+          cityConditions.push(ilike(programs.owner, '%Southern California Edison%'));
         } else if (cityMatch.includes('california') || cityMatch.includes('ca')) {
           // If it contains California or CA, show all CA programs
           cityConditions.push(eq(programGeos.state, 'CA'));
