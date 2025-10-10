@@ -234,7 +234,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="px-8 bg-[#00a5cb] hover:bg-[#0094b3] text-white" 
+                  className="px-8 bg-[#045e8a] hover:bg-[#034e73] text-white" 
                   data-testid="button-search"
                 >
                   <Search className="w-5 h-5 mr-2" />
