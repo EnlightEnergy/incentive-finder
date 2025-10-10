@@ -363,7 +363,7 @@ export default function Home() {
                     <Card className="bg-white shadow-md rounded-xl p-6" data-testid="right-rail-cta">
                       <h4 className="font-bold text-lg mb-3 text-slate-900">Want help implementing?</h4>
                       <p className="text-sm text-slate-600 mb-6">
-                        Our licensed team can design, install, and file for these incentives under one contract.
+                        Our licensed team can design, install, and file for these incentives in one turnkey proposition.
                       </p>
                       <div className="space-y-3">
                         <Button 
@@ -515,7 +515,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>&copy; Enlighting Energy. All rights reserved. Data sourced from DSIRE, OpenEI, and utility partners.</p>
+            <p>&copy; Enlighting Energy. All rights reserved. Data sourced from DSIRE, OpenEI, utility partners and aggregators.</p>
           </div>
         </div>
       </footer>

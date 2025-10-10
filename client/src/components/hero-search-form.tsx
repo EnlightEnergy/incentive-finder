@@ -156,7 +156,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                 <Wrench className="h-5 w-5 text-[#0c558c] mt-0.5 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-base mb-1">3. Deliver (optional)</h3>
-                  <p className="text-sm text-slate-600">If you want help, we engineer, install, commission, and file for incentives under one contract.</p>
+                  <p className="text-sm text-slate-600">If you want help, we engineer, install, commission, and file for incentives in one turnkey proposition.</p>
                 </div>
               </div>
             </div>
