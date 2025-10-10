@@ -169,6 +169,7 @@ export default function Home() {
           <h1 className="hero__title">Unlock rebates, grants, and 0% financing — and let us handle the entire upgrade.</h1>
           <p className="hero__sub">
             Stack utility rebates, state grants, and federal tax incentives to cut your project costs by up to 70% — with zero upfront expense and 0% financing options.
+            <br /><br />
             As a licensed turnkey contractor, Enlighting Energy not only secures the incentives but we can also design, install, and commission the entire project. Our energy engineers manage every step — from audit and application to installation, inspection, and rebate payout.
           </p>
 
