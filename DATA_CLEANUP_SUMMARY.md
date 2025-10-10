@@ -27,13 +27,13 @@ The SDG&E climate zone mapping file contained **1,525 incorrect ZIP code entries
 
 ## Current Database State
 
-### ZIP Code Coverage (1,054 verified entries)
+### ZIP Code Coverage (2,173 verified entries)
+- **PG&E**: 1,119 ZIP codes (comprehensive Northern & Central CA coverage)
 - **SCE**: 631 ZIP codes
 - **SDG&E**: 148 ZIP codes (San Diego County only)
 - **LADWP**: 132 ZIP codes
 - **SMUD**: 42 ZIP codes
-- **PG&E**: 27 ZIP codes (SF core added manually)
-- **Municipal utilities**: 61 ZIP codes across 11 utilities
+- **Municipal utilities**: 74 ZIP codes across 11 utilities
 
 ### Program Geographic Entries
 - **State/Federal programs** (179D, SGIP, ITC): `state='CA'`, `utility_service_area=NULL`

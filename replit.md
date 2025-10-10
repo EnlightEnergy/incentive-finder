@@ -45,7 +45,7 @@ Preferred communication style: Simple, everyday language.
 - **Frontend**: Floating chat widget with expandable modal interface (Shadcn UI).
 - **Backend**: Express API endpoints with OpenAI integration and PostgreSQL conversation storage.
 - **Intelligence**: OpenAI GPT-4o-mini for natural language understanding and contextual responses, with an intelligent fallback system for API unavailability. Auto-detects ZIP codes and facility types. Handles unrecognized facility types by prompting for classification (Retail, Commercial, Industrial, Multi-family).
-- **Data Integration**: Utilizes `utility_zip_codes` table for territory identification (1,054 verified California ZIP-to-utility mappings across 15 utilities) and `chat_conversations` for persistent history. Real-time program matching based on location and facility type.
+- **Data Integration**: Utilizes `utility_zip_codes` table for territory identification (2,173 verified California ZIP-to-utility mappings across 15 utilities, including comprehensive PG&E coverage) and `chat_conversations` for persistent history. Real-time program matching based on location and facility type.
 - **User Flow**:
     1. Collects ZIP code to determine utility territory.
     2. Detects and confirms utility provider.
