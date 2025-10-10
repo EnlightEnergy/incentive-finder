@@ -165,14 +165,25 @@ export class DatabaseStorage implements IStorage {
           // Auto-detect utilities from zip code
           // Only apply auto-filter if user hasn't explicitly selected a utility
           if (!params.utility) {
+            // Need to join with program_geos to include state-level programs
+            needsGeoJoin = true;
+            
             // If multiple utilities serve this zip, show programs from all of them
+            // PLUS state-level programs (like federal 179D)
             const allUtilityConditions = utilities.flatMap(util => {
               const utilitySearchTerms = mapUtilityToSearchTerms(util.ownerUtility);
               return utilitySearchTerms.map(term => 
                 ilike(programs.owner, `%${term}%`)
               );
             });
-            conditions.push(or(...allUtilityConditions));
+            
+            // Include programs that match utilities OR are state-level (CA)
+            conditions.push(
+              or(
+                ...allUtilityConditions,
+                eq(programGeos.state, "CA")
+              )
+            );
           }
           
           // Track that we auto-detected utilities (for informational purposes)
