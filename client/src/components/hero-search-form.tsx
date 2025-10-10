@@ -200,49 +200,6 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                 </div>
               </div>
 
-              <Collapsible>
-                <CollapsibleTrigger className="text-sm font-medium text-muted-foreground hover:text-foreground">
-                  Optional: Project Details (improves accuracy)
-                </CollapsibleTrigger>
-                <CollapsibleContent className="space-y-4 mt-4">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                      <Label htmlFor="sqft" className="text-base font-semibold text-center block">Building Square Footage</Label>
-                      <Input
-                        id="sqft"
-                        type="number"
-                        placeholder="10,000"
-                        value={sqft}
-                        onChange={(e) => setSqft(e.target.value)}
-                        data-testid="input-sqft"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="hours" className="text-base font-semibold text-center block">Operating Hours/Day</Label>
-                      <Input
-                        id="hours"
-                        type="number"
-                        placeholder="12"
-                        value={hours}
-                        onChange={(e) => setHours(e.target.value)}
-                        data-testid="input-hours"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="projectCost" className="text-base font-semibold text-center block">Estimated Project Cost</Label>
-                      <Input
-                        id="projectCost"
-                        type="number"
-                        placeholder="25,000"
-                        value={projectCost}
-                        onChange={(e) => setProjectCost(e.target.value)}
-                        data-testid="input-project-cost"
-                      />
-                    </div>
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
-
               <div className="flex justify-center">
                 <Button 
                   type="submit" 
