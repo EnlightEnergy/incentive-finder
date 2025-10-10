@@ -362,13 +362,23 @@ export function ChatBot() {
 
   if (!isOpen) {
     return (
-      <button
-        data-testid="button-open-chat"
-        onClick={() => setIsOpen(true)}
-        className="fixed top-1/2 -translate-y-1/2 right-8 h-24 w-24 hover:scale-110 z-50 cursor-pointer border-none bg-transparent p-0 transition-all duration-300 hover:drop-shadow-[0_0_20px_rgba(12,85,140,0.8)]"
-      >
-        <img src={chatbotIconPath} alt="WattSon Incentive AI" className="h-full w-full" />
-      </button>
+      <div className="fixed bottom-6 right-6 z-50 group">
+        <button
+          data-testid="button-open-chat"
+          onClick={() => setIsOpen(true)}
+          className="relative h-16 w-16 hover:scale-110 cursor-pointer border-none bg-transparent p-0 transition-all duration-300 hover:drop-shadow-[0_0_20px_rgba(12,85,140,0.8)] animate-pulse-subtle"
+        >
+          <img src={chatbotIconPath} alt="WattSon AI" className="h-full w-full" />
+          <span className="absolute -top-1 -right-1 h-3 w-3 bg-green-500 rounded-full animate-ping" />
+          <span className="absolute -top-1 -right-1 h-3 w-3 bg-green-500 rounded-full" />
+        </button>
+        <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          <div className="bg-slate-900 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap">
+            Chat with WattSon AI
+            <div className="absolute top-full right-4 -mt-1 border-4 border-transparent border-t-slate-900" />
+          </div>
+        </div>
+      </div>
     );
   }
 

@@ -419,3 +419,17 @@
 .program__actions{ display:flex; gap:10px; flex-wrap:wrap;}
 .program__disclaimer{ color:#6b7280; font-size:12px; margin:12px 0 0;}
 .bullet{ opacity:.6;}
+
+/* Chatbot animations */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
