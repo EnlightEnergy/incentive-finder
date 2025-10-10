@@ -182,19 +182,17 @@ export default function Home() {
             </button>
           </div>
 
+          {/* Search Form - Positioned right after CTA */}
+          <div id="search-form" className="mt-12">
+            <h2 className="text-2xl font-bold text-center text-slate-900 mb-6">Find Your Energy Incentives</h2>
+            <HeroSearchForm onSearch={handleSearch} />
+          </div>
+
           <ul className="hero__proof">
             <li>$25M in incentives secured</li>
             <li>Avg. project payback: 7.8 months across 287 sites</li>
             <li>Design-to-rebate, handled</li>
           </ul>
-        </div>
-
-        {/* Search Form - Moved up inside hero section */}
-        <div id="search-form" className="pb-8">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-center text-slate-900 mb-6">Find Your Energy Incentives</h2>
-            <HeroSearchForm onSearch={handleSearch} />
-          </div>
         </div>
 
         {/* Utility Logo Trust Strip */}
