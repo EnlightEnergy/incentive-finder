@@ -166,10 +166,10 @@ export default function Home() {
       <section className="hero" data-testid="hero-section">
         <div className="hero__inner">
           <div className="hero__kicker">California Commercial Energy Incentives</div>
-          <h1 className="hero__title">Unlock rebates, grants, and 0% financing for your facility</h1>
+          <h1 className="hero__title">Unlock rebates, grants, and 0% financing — and let us handle the entire upgrade.</h1>
           <p className="hero__sub">
-            Stack utility rebates, state grants, and federal tax incentives to cut project costs by up to 70%. 
-            Zero upfront costs with 0% financing. Our energy engineers handle eligibility verification, application filing, and full project management from audit to rebate payout.
+            Stack utility rebates, state grants, and federal tax incentives to cut your project costs by up to 70% — with zero upfront expense and 0% financing options.
+            As a licensed turnkey contractor, Enlighting Energy not only secures the incentives but we can also design, install, and commission the entire project. Our energy engineers manage every step — from audit and application to installation, inspection, and rebate payout.
           </p>
 
           <div className="hero__ctas">
