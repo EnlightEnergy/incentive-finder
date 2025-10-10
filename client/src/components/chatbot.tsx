@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Label } from "@/components/ui/label";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import chatbotIconPath from "@assets/CHATBOT ICON_1759686674784.png";
+import chatbotIconPath from "@assets/Ai ball_1760074582441.png";
 
 interface Message {
   role: "user" | "assistant";
