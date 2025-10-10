@@ -168,7 +168,7 @@ export default function Home() {
         className="hero hero--cityscape" 
         data-testid="hero-section"
         style={{
-          background: 'linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/attached_assets/Incentive_background_1760126054331.png)',
+          background: 'linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/attached_assets/Incentive_background_1760128727694.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
