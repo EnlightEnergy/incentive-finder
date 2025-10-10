@@ -165,22 +165,23 @@ export class DatabaseStorage implements IStorage {
           // Auto-detect utilities from zip code
           // Only apply auto-filter if user hasn't explicitly selected a utility
           if (!params.utility) {
-            // Need to join with program_geos to include state-level programs
+            // Need to join with program_geos to identify state-level programs
             needsGeoJoin = true;
             
             // If multiple utilities serve this zip, show programs from all of them
             // PLUS state-level programs (like federal 179D)
             
             // Build conditions to match ONLY detected utilities' programs + state-level programs
-            // Use the mapping function to handle various naming formats (SDGE vs SDG&E, etc.)
-            const utilityAreaConditions = utilities.flatMap(util => {
+            // Filter directly on programs.owner for utility-specific programs
+            const utilityOwnerConditions = utilities.flatMap(util => {
               const searchTerms = mapUtilityToSearchTerms(util.ownerUtility);
               return searchTerms.map(term => 
-                ilike(programGeos.utilityServiceArea, `%${term}%`)
+                ilike(programs.owner, `%${term}%`)
               );
             });
             
             // State-level programs: state='CA' AND (utility_service_area IS NULL OR empty string)
+            // These are programs like 179D, CEITC, SGIP that apply statewide
             const stateLevelCondition = and(
               eq(programGeos.state, "CA"),
               or(
@@ -189,10 +190,10 @@ export class DatabaseStorage implements IStorage {
               )
             );
             
-            // Combine: match utility service area OR state-level (no utility specified)
+            // Combine: match program owner directly OR state-level programs
             conditions.push(
               or(
-                ...utilityAreaConditions,
+                ...utilityOwnerConditions,
                 stateLevelCondition
               )
             );
