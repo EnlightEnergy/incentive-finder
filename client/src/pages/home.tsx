@@ -166,16 +166,13 @@ export default function Home() {
       <section className="hero" data-testid="hero-section">
         <div className="hero__inner">
           <div className="hero__kicker">California Commercial Energy Incentives</div>
-          <h1 className="hero__title">Unlock Rebates, Grants & 0% Financing for Your Facility</h1>
+          <h1 className="hero__title">Unlock rebates, grants, and 0% financing for your facility.</h1>
           <p className="hero__sub">
             Stack utility rebates, state grants, and federal tax incentives to cut project costs by up to 70%. 
             Zero upfront costs with 0% financing. Our energy engineers handle eligibility verification, application filing, and full project management from audit to rebate payout.
           </p>
 
           <div className="hero__ctas">
-            <a href="#search-form" className="btn btn--secondary" data-testid="button-browse-programs">
-              Browse Programs
-            </a>
             <button 
               className="btn btn--primary" 
               onClick={() => setLeadModalOpen(true)}
@@ -190,6 +187,14 @@ export default function Home() {
             <li>Avg. project payback: 7.8 months across 287 sites</li>
             <li>Design-to-rebate, handled</li>
           </ul>
+        </div>
+
+        {/* Search Form - Moved up inside hero section */}
+        <div id="search-form" className="pb-8">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-2xl font-bold text-center text-slate-900 mb-6">Find Your Energy Incentives</h2>
+            <HeroSearchForm onSearch={handleSearch} />
+          </div>
         </div>
 
         {/* Utility Logo Trust Strip */}
@@ -212,11 +217,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Search Form */}
-      <div id="search-form" className="-mt-8">
-        <HeroSearchForm onSearch={handleSearch} />
-      </div>
 
       {/* Client Proof Strip */}
       <div className="bg-white py-8 border-b border-gray-200">
