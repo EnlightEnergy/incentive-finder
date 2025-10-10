@@ -286,7 +286,7 @@
   color: var(--foreground); 
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
-  max-width: 60ch;
+  max-width: 42ch;
   margin-left: auto;
   margin-right: auto;
 }
