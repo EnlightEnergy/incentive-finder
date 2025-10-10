@@ -581,20 +581,26 @@ export class DatabaseStorage implements IStorage {
       }
     }
     
-    // Build program search params
-    const programParams: any = {
-      utility: selectedUtility || undefined,
-      businessType: detectedFacility || undefined,
-      limit: 5,
-      offset: 0,
-    };
+    // Build program search params - ONLY search if we have a ZIP code
+    let relevantPrograms: Program[] = [];
     
-    // Add measure filtering if detected
-    if (detectedMeasure) {
-      programParams.measures = [detectedMeasure];
+    if (detectedZip) {
+      const programParams: any = {
+        location: detectedZip, // CRITICAL: Always include ZIP for location-based filtering
+        utility: selectedUtility || undefined,
+        businessType: detectedFacility || undefined,
+        limit: 5,
+        offset: 0,
+      };
+      
+      // Add measure filtering if detected
+      if (detectedMeasure) {
+        programParams.measures = [detectedMeasure];
+      }
+      
+      relevantPrograms = await this.getPrograms(programParams);
     }
-    
-    const relevantPrograms = await this.getPrograms(programParams);
+    // If no ZIP code, don't search programs - chatbot will ask for ZIP first
     
     const aiResponse = await processChatWithAI({
       messages: updatedMessages,
