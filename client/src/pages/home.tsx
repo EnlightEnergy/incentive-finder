@@ -179,11 +179,13 @@ export default function Home() {
           <p className="hero__sub">
             Stack utility rebates, state grants, and federal tax incentives to cut your project costs by up to 70% — with zero upfront expense and 0% financing options.
           </p>
+        </div>
+      </section>
 
-          {/* Search Form - Positioned right after hero text */}
-          <div id="search-form" className="mt-12">
-            <HeroSearchForm onSearch={handleSearch} />
-          </div>
+      {/* Search Form Section - On white background */}
+      <section className="bg-white py-16">
+        <div className="max-w-[1180px] mx-auto px-4">
+          <HeroSearchForm onSearch={handleSearch} />
         </div>
       </section>
 
