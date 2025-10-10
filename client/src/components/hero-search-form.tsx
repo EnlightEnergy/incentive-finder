@@ -309,6 +309,13 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Solar</span>
             </div>
           </div>
+          
+          {/* Turnkey Proposition Section */}
+          <div className="mt-8 bg-[#0c558c] rounded-lg p-6 max-w-4xl mx-auto" data-testid="turnkey-proposition-block">
+            <p className="text-white text-base leading-relaxed">
+              As a licensed turnkey contractor, Enlighting Energy not only secures the incentives but we can also design, install, and commission the entire project. Our energy engineers manage every step — from audit and application to installation, inspection, and rebate payout.
+            </p>
+          </div>
         </div>
       </div>
       

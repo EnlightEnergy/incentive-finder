@@ -260,7 +260,9 @@
 
 /* ========== HERO STYLES ========== */
 .hero{
-  background: linear-gradient(to bottom, #ffffff, hsl(215, 25%, 96%));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/attached_assets/Incentive_background_1760126054331.png');
+  background-size: cover;
+  background-position: center;
   border-bottom: 1px solid var(--border);
   padding: 5rem 0;
 }
@@ -273,8 +275,8 @@
 .hero__kicker{
   display: inline-block; 
   font-weight: 600; 
-  color: var(--primary-blue);
-  background: var(--blue-50); 
+  color: white;
+  background: rgba(255, 255, 255, 0.15); 
   padding: 0.5rem 1rem; 
   border-radius: 9999px; 
   font-size: 3rem; 
@@ -285,7 +287,7 @@
   font-size: 2.25rem; 
   line-height: 1.1; 
   margin: 0 0 1rem; 
-  color: var(--foreground); 
+  color: white; 
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
   max-width: 42ch;
@@ -293,7 +295,7 @@
   margin-right: auto;
 }
 .hero__sub{
-  color: var(--slate-600); 
+  color: white; 
   font-size: 1.125rem; 
   max-width: 60ch; 
   margin: 0 auto 2rem;
