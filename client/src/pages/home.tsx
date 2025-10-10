@@ -186,56 +186,8 @@ export default function Home() {
           <div id="search-form" className="mt-12">
             <HeroSearchForm onSearch={handleSearch} />
           </div>
-
-          <ul className="hero__proof">
-            <li>$25M in incentives secured</li>
-            <li>Avg. project payback: 7.8 months across 287 sites</li>
-            <li>Design-to-rebate, handled</li>
-          </ul>
-        </div>
-
-        {/* Utility Logo Trust Strip */}
-        <div className="bg-slate-50 py-8 border-t border-gray-200 border-b border-gray-200">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-6">
-              <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
-                Partner utilities & programs
-              </p>
-            </div>
-            <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap pb-8">
-              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SCE</div>
-              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">PG&E</div>
-              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SDG&E</div>
-              <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">LADWP</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SoCalREN</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">MCE</div>
-              <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">GoGreen Financing</div>
-            </div>
-          </div>
         </div>
       </section>
-
-      {/* Client Proof Strip */}
-      <div className="bg-white py-8 border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-6">
-            <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
-              Trusted by leading California businesses
-            </p>
-          </div>
-          <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
-            <img src={boeingLogo} alt="Boeing" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={dreamworksLogo} alt="DreamWorks" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={edcoLogo} alt="EDCO" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={fenderLogo} alt="Fender" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={howmetLogo} alt="Howmet Aerospace" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={metroLogo} alt="Metro" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={nasaJplLogo} alt="NASA JPL" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={nipponLogo} alt="Nippon Express" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={redBullLogo} alt="Red Bull" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-          </div>
-        </div>
-      </div>
 
       {searchParams && (
         <>
@@ -432,6 +384,48 @@ export default function Home() {
         </section>
         </>
       )}
+
+      {/* Utility Logo Trust Strip */}
+      <div className="bg-slate-50 py-8 border-t border-gray-200 border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-6">
+            <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+              Partner utilities & programs
+            </p>
+          </div>
+          <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap pb-8">
+            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SCE</div>
+            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">PG&E</div>
+            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SDG&E</div>
+            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">LADWP</div>
+            <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SoCalREN</div>
+            <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">MCE</div>
+            <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">GoGreen Financing</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Client Proof Strip */}
+      <div className="bg-white py-8 border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-6">
+            <p className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+              Trusted by leading California businesses
+            </p>
+          </div>
+          <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap">
+            <img src={boeingLogo} alt="Boeing" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={dreamworksLogo} alt="DreamWorks" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={edcoLogo} alt="EDCO" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={fenderLogo} alt="Fender" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={howmetLogo} alt="Howmet Aerospace" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={metroLogo} alt="Metro" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={nasaJplLogo} alt="NASA JPL" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={nipponLogo} alt="Nippon Express" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+            <img src={redBullLogo} alt="Red Bull" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+          </div>
+        </div>
+      </div>
 
       <LeadCaptureModal open={leadModalOpen} onOpenChange={setLeadModalOpen} />
       <ProgramDetailsModal 
