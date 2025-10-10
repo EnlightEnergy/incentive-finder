@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Label } from "@/components/ui/label";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import chatbotIconPath from "@assets/Ai ball_1760074582441.png";
+import chatbotIconPath from "@assets/Ai ball_1760114015729.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -365,8 +365,8 @@ export function ChatBot() {
           className="relative h-16 w-16 hover:scale-110 cursor-pointer border-none bg-transparent p-0 transition-all duration-300 hover:drop-shadow-[0_0_20px_rgba(12,85,140,0.8)] animate-pulse-subtle"
         >
           <img src={chatbotIconPath} alt="WattSon AI" className="h-full w-full" />
-          <span className="absolute -top-1 -right-1 h-3 w-3 bg-green-500 rounded-full animate-ping" />
-          <span className="absolute -top-1 -right-1 h-3 w-3 bg-green-500 rounded-full" />
+          <span className="absolute -top-1 -right-1 h-3 w-3 bg-orange-500 rounded-full animate-ping" />
+          <span className="absolute -top-1 -right-1 h-3 w-3 bg-orange-500 rounded-full" />
         </button>
         <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           <div className="bg-slate-900 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap">
