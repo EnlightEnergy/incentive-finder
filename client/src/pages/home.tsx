@@ -465,7 +465,7 @@ export default function Home() {
       />
       </main>
       
-      <footer className="bg-slate-50 border-t border-border">
+      <footer className="bg-[#0c558c] border-t border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -475,15 +475,15 @@ export default function Home() {
                   alt="Enlighting Energy Logo" 
                   className="w-8 h-8"
                 />
-                <span className="text-lg font-semibold text-foreground">Enlighting Energy</span>
+                <span className="text-lg font-semibold text-white">Enlighting Energy</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-white">
                 Over 36 years of combined expertise helping industrial, manufacturing, warehousing, and commercial facilities unlock and secure energy incentives.
               </p>
             </div>
             <div>
-              <h3 className="font-medium text-foreground mb-4">Services</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h3 className="font-medium text-white mb-4">Services</h3>
+              <ul className="space-y-2 text-sm text-white">
                 <li>Locate and Target Incentives</li>
                 <li>Energy Efficiency Audits</li>
                 <li>Engineering Services</li>
@@ -492,8 +492,8 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-foreground mb-4">Resources</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h3 className="font-medium text-white mb-4">Resources</h3>
+              <ul className="space-y-2 text-sm text-white">
                 <li>Documentation</li>
                 <li>API Reference</li>
                 <li>Case Studies</li>
@@ -501,12 +501,12 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-foreground mb-4">Contact</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h3 className="font-medium text-white mb-4">Contact</h3>
+              <ul className="space-y-2 text-sm text-white">
                 <li>
                   <a 
                     href="mailto:hello@enlightingenergy.com" 
-                    className="hover:text-foreground transition-colors"
+                    className="hover:text-white/80 transition-colors"
                     data-testid="link-footer-email"
                   >
                     hello@enlightingenergy.com
@@ -515,7 +515,7 @@ export default function Home() {
                 <li>
                   <a 
                     href="tel:+18057245299" 
-                    className="hover:text-foreground transition-colors"
+                    className="hover:text-white/80 transition-colors"
                     data-testid="link-footer-phone"
                   >
                     805-724-5299
@@ -525,7 +525,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <div className="mt-8 pt-8 border-t border-white/20 text-center text-sm text-white">
             <p>&copy; Enlighting Energy. All rights reserved. Data sourced from DSIRE, OpenEI, utility partners and aggregators.</p>
           </div>
         </div>
