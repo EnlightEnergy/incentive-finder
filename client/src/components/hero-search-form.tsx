@@ -127,72 +127,6 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   return (
     <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Program Category Icons */}
-        <div className="text-center mb-6">
-          <div className="flex justify-center items-center gap-6 lg:gap-8 max-w-5xl mx-auto py-6 flex-wrap">
-            <div 
-              className="flex flex-col items-center gap-2 cursor-pointer" 
-              data-testid="icon-commercial-industry"
-              onClick={() => setMarketSegmentModalOpen(true)}
-            >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Building2 className="w-10 h-10 text-[#0c558c]" />
-              </div>
-              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial Buildings</span>
-            </div>
-            <div 
-              className="flex flex-col items-center gap-2 cursor-pointer" 
-              data-testid="icon-small-commercial"
-              onClick={() => setSmallCommercialModalOpen(true)}
-            >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Store className="w-10 h-10 text-[#0c558c]" />
-              </div>
-              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Small Commercial</span>
-            </div>
-            <div 
-              className="flex flex-col items-center gap-2 cursor-pointer" 
-              data-testid="icon-industrial"
-              onClick={() => setIndustrialModalOpen(true)}
-            >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Factory className="w-10 h-10 text-[#0c558c]" />
-              </div>
-              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Industrial</span>
-            </div>
-            <div 
-              className="flex flex-col items-center gap-2 cursor-pointer" 
-              data-testid="icon-multifamily"
-              onClick={() => setMultifamilyModalOpen(true)}
-            >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Building className="w-10 h-10 text-[#0c558c]" />
-              </div>
-              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Multifamily</span>
-            </div>
-            <div 
-              className="flex flex-col items-center gap-2 cursor-pointer" 
-              data-testid="icon-direct-install"
-              onClick={() => setDirectInstallModalOpen(true)}
-            >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Wrench className="w-10 h-10 text-[#0c558c]" />
-              </div>
-              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Direct Install</span>
-            </div>
-            <div 
-              className="flex flex-col items-center gap-2 cursor-pointer" 
-              data-testid="icon-solar"
-              onClick={() => setSolarModalOpen(true)}
-            >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Sun className="w-10 h-10 text-[#0c558c]" />
-              </div>
-              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Solar</span>
-            </div>
-          </div>
-        </div>
-
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-foreground mb-4">
             Find Your Energy Incentives
@@ -323,6 +257,72 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
             </form>
           </CardContent>
         </Card>
+
+        {/* Program Category Icons - Moved after the form */}
+        <div className="text-center mt-8">
+          <div className="flex justify-center items-center gap-6 lg:gap-8 max-w-5xl mx-auto py-6 flex-wrap">
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-commercial-industry"
+              onClick={() => setMarketSegmentModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Building2 className="w-10 h-10 text-[#0c558c]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial Buildings</span>
+            </div>
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-small-commercial"
+              onClick={() => setSmallCommercialModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Store className="w-10 h-10 text-[#0c558c]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Small Commercial</span>
+            </div>
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-industrial"
+              onClick={() => setIndustrialModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Factory className="w-10 h-10 text-[#0c558c]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Industrial</span>
+            </div>
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-multifamily"
+              onClick={() => setMultifamilyModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Building className="w-10 h-10 text-[#0c558c]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Multifamily</span>
+            </div>
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-direct-install"
+              onClick={() => setDirectInstallModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Wrench className="w-10 h-10 text-[#0c558c]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Direct Install</span>
+            </div>
+            <div 
+              className="flex flex-col items-center gap-2 cursor-pointer" 
+              data-testid="icon-solar"
+              onClick={() => setSolarModalOpen(true)}
+            >
+              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
+                <Sun className="w-10 h-10 text-[#0c558c]" />
+              </div>
+              <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Solar</span>
+            </div>
+          </div>
+        </div>
       </div>
       
       <MarketSegmentModal
