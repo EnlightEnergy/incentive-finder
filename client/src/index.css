@@ -277,7 +277,7 @@
   background: var(--blue-50); 
   padding: 0.5rem 1rem; 
   border-radius: 9999px; 
-  font-size: 3rem; 
+  font-size: 0.875rem; 
   letter-spacing: var(--tracking-tight);
   margin-bottom: 1rem;
 }
