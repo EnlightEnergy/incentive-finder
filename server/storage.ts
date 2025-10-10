@@ -17,7 +17,7 @@ import {
   type ChatConversation
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, ilike, and, or, inArray, sql, desc } from "drizzle-orm";
+import { eq, ilike, and, or, inArray, sql, desc, isNull } from "drizzle-orm";
 import { processChatWithAI } from "./chatbot";
 
 function mapFacilityTypeToSector(facilityType: string): string[] {
@@ -170,18 +170,27 @@ export class DatabaseStorage implements IStorage {
             
             // If multiple utilities serve this zip, show programs from all of them
             // PLUS state-level programs (like federal 179D)
-            const allUtilityConditions = utilities.flatMap(util => {
-              const utilitySearchTerms = mapUtilityToSearchTerms(util.ownerUtility);
-              return utilitySearchTerms.map(term => 
-                ilike(programs.owner, `%${term}%`)
+            
+            // Build conditions to match ONLY detected utilities' programs + state-level programs
+            // Use the mapping function to handle various naming formats (SDGE vs SDG&E, etc.)
+            const utilityAreaConditions = utilities.flatMap(util => {
+              const searchTerms = mapUtilityToSearchTerms(util.ownerUtility);
+              return searchTerms.map(term => 
+                ilike(programGeos.utilityServiceArea, `%${term}%`)
               );
             });
             
-            // Include programs that match utilities OR are state-level (CA)
+            // State-level programs: state='CA' AND utility_service_area IS NULL
+            const stateLevelCondition = and(
+              eq(programGeos.state, "CA"),
+              isNull(programGeos.utilityServiceArea)
+            );
+            
+            // Combine: match utility service area OR state-level (no utility specified)
             conditions.push(
               or(
-                ...allUtilityConditions,
-                eq(programGeos.state, "CA")
+                ...utilityAreaConditions,
+                stateLevelCondition
               )
             );
           }
