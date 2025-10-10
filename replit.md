@@ -11,8 +11,9 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes (October 2025)
 
 ### Homepage UI/UX Enhancements
-- **Hero Section**: Updated title to "Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades." Added white-to-light-slate gradient background. Removed "Get my Incentive Report" CTA button.
+- **Hero Section**: Updated title to "Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades." Replaced gradient background with cityscape image (with dark overlay for text readability). Changed all hero text to white. Removed "Get my Incentive Report" CTA button.
 - **3-Step Process**: Added visual guide under "Find Your Energy Incentives" with Discover, Qualify, and Deliver steps with icons. Simplified description text to focus on program availability.
+- **Turnkey Proposition Block**: Moved "As a licensed turnkey contractor..." text from hero to below the 6 round icons (Commercial Buildings, Small Commercial, Industrial, Multifamily, Direct Install, Solar). Added blue background block (#0c558c) with white text.
 - **Right Rail CTA**: Added sticky CTA card on results page with "Want help implementing?" message and two action buttons (Talk to an Engineer, Email me this report).
 - **Typography**: Updated to Inter font at 17px body, H1 52px, H2 30px with improved line heights and negative letter-spacing.
 - **Layout**: Standardized max-width to 1180px across sections, added proper section spacing (64-80px).
