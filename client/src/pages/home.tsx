@@ -24,8 +24,6 @@ import metroLogo from "@assets/Metro_1758932853743.jpg";
 import nasaJplLogo from "@assets/nasa_jpl_1758932853744.jpg";
 import nipponLogo from "@assets/nippon_1758932853744.jpg";
 import redBullLogo from "@assets/red_bull_1758932853745.jpg";
-import sbAirportLogo from "@assets/SB Airport_1758932853745.jpg";
-import zogsLogo from "@assets/zogs_1758932853746.jpg";
 
 export default function Home() {
   const [searchParams, setSearchParams] = useState<Partial<SearchProgramsParams> | null>(null);
@@ -238,8 +236,6 @@ export default function Home() {
             <img src={nasaJplLogo} alt="NASA JPL" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
             <img src={nipponLogo} alt="Nippon Express" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
             <img src={redBullLogo} alt="Red Bull" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={sbAirportLogo} alt="Santa Barbara Airport" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-            <img src={zogsLogo} alt="Zog's" className="h-8 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
           </div>
         </div>
       </div>
