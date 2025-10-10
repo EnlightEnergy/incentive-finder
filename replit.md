@@ -21,6 +21,9 @@ Preferred communication style: Simple, everyday language.
 - **Modal Text Updates**: 
   - ApplyEnlightingModal: Changed title to "Contact Enlighting for your custom report", removed secondary program name line
   - LeadCaptureModal: Changed title to "Contact Me About Incentives", submit button to "Contact Me", bottom text to "We will be in touch within 48 hours. No Spam."
+- **Copy Updates**:
+  - Footer: Updated copyright to include "and aggregators" in data sources
+  - Right Rail CTA and 3-Step Process: Changed "under one contract" to "in one turnkey proposition" for consistent messaging
 
 ## System Architecture
 
