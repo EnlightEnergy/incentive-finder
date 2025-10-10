@@ -134,6 +134,36 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Search all applicable utility, state, federal, and aggregator programs available to California businesses. Enlighting can help you apply and qualify for these incentives at no cost to you — we simply claim a fractional % of the free money we generate for your efficiency project.
           </p>
+          
+          {/* 3-Step Process */}
+          <div className="mt-8 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+              <div className="flex items-start gap-3">
+                <Search className="h-5 w-5 text-[#0c558c] mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold text-base mb-1">1. Discover</h3>
+                  <p className="text-sm text-slate-600">Scan and find utility, state, federal, and aggregator programs for your address/NAICS.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Building2 className="h-5 w-5 text-[#0c558c] mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold text-base mb-1">2. Qualify</h3>
+                  <p className="text-sm text-slate-600">We can help you with eligibility, savings estimates, and deadlines.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Wrench className="h-5 w-5 text-[#0c558c] mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold text-base mb-1">3. Deliver (optional)</h3>
+                  <p className="text-sm text-slate-600">If you want help, we engineer, install, commission, and file for incentives under one contract.</p>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-slate-500 text-center">
+              <strong>Note:</strong> No obligation. Use your results independently—or let our team execute the upgrade and capture every dollar you qualify for.
+            </p>
+          </div>
         </div>
 
         <Card>

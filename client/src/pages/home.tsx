@@ -9,6 +9,7 @@ import ProgramDetailsModal from "@/components/program-details-modal";
 import ApplyEnlightingModal from "@/components/apply-enlighting-modal";
 import { ChatBot } from "@/components/chatbot";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
@@ -166,7 +167,7 @@ export default function Home() {
       <section className="hero" data-testid="hero-section">
         <div className="hero__inner">
           <div className="hero__kicker">California Commercial Energy Incentives</div>
-          <h1 className="hero__title">Unlock rebates, grants, and 0% financing — and let us handle the entire upgrade.</h1>
+          <h1 className="hero__title">Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades.</h1>
           <p className="hero__sub">
             Stack utility rebates, state grants, and federal tax incentives to cut your project costs by up to 70% — with zero upfront expense and 0% financing options.
             <br /><br />
@@ -203,9 +204,6 @@ export default function Home() {
                     <span className="divider">•</span>
                     <span>Last updated: <span>Sep 2025</span></span>
                   </div>
-                  <p className="summary__note">
-                    <strong>Book a free on-site audit</strong> to verify eligibility and maximize your payout.
-                  </p>
                 </div>
                 <div className="summary__countdown">
                   <div className="countdown" data-testid="countdown-timer">
@@ -223,7 +221,7 @@ export default function Home() {
           </section>
 
           <section className="py-16 bg-slate-50" data-testid="results-section">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1180px' }}>
               {/* Horizontal Filters Bar */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
                 <div className="flex flex-col lg:flex-row gap-4 items-center">
@@ -298,32 +296,18 @@ export default function Home() {
               </div>
 
               {/* Action Bar */}
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground">Available Incentives</h3>
-                  <p className="text-slate-600 mt-1">
-                    California utility, state, and federal energy efficiency programs
-                  </p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <Button 
-                    variant="outline"
-                    onClick={() => setLeadModalOpen(true)}
-                    data-testid="button-email-report"
-                  >
-                    📄 Email Report
-                  </Button>
-                  <Button 
-                    className="bg-[#00a5cb] hover:bg-[#0094b3]"
-                    onClick={() => setLeadModalOpen(true)}
-                    data-testid="button-book-audit"
-                  >
-                    Book Free Energy Audit
-                  </Button>
-                </div>
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-foreground">Available Incentives</h3>
+                <p className="text-slate-600 mt-1">
+                  California utility, state, and federal energy efficiency programs
+                </p>
               </div>
 
-              {/* Results */}
+              {/* 2-Column Layout: Programs + Right Rail Card */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Main Programs Column (left, takes 2/3 of space) */}
+                <div className="lg:col-span-2">
+                  {/* Results */}
               {isLoading ? (
                 <div className="text-center py-12" data-testid="loading-state">
                   <p className="text-slate-600">Searching for programs...</p>
@@ -381,6 +365,37 @@ export default function Home() {
                   ))}
                 </div>
               )}
+                </div>
+                
+                {/* Right Rail CTA Card (right, takes 1/3 of space) */}
+                <div className="lg:col-span-1">
+                  <div className="sticky top-8">
+                    <Card className="bg-white shadow-md rounded-xl p-6" data-testid="right-rail-cta">
+                      <h4 className="font-bold text-lg mb-3 text-slate-900">Want help implementing?</h4>
+                      <p className="text-sm text-slate-600 mb-6">
+                        Our licensed team can design, install, and file for these incentives under one contract.
+                      </p>
+                      <div className="space-y-3">
+                        <Button 
+                          className="w-full bg-[#0c558c] hover:bg-[#0a4876]"
+                          onClick={() => setLeadModalOpen(true)}
+                          data-testid="button-talk-to-engineer"
+                        >
+                          Talk to an Engineer
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          className="w-full border-[#5aafef] border-opacity-28 hover:bg-[#5aafef] hover:bg-opacity-8"
+                          onClick={() => setLeadModalOpen(true)}
+                          data-testid="button-email-report-rail"
+                        >
+                          Email me this report
+                        </Button>
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              </div>
             </div>
         </section>
         </>

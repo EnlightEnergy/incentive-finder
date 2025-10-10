@@ -103,25 +103,27 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 17px;
+    line-height: 1.6;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: -0.02em;
     font-weight: 600;
   }
 
   h1 {
-    font-size: 36px;
+    font-size: 52px;
     font-weight: 700;
     line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   h2 {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 600;
     line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 
   h3 {
@@ -258,12 +260,12 @@
 
 /* ========== HERO STYLES ========== */
 .hero{
-  background: linear-gradient(to bottom, var(--blue-50), #ffffff);
+  background: linear-gradient(to bottom, #ffffff, hsl(215, 25%, 96%));
   border-bottom: 1px solid var(--border);
-  padding: 4rem 0;
+  padding: 5rem 0;
 }
 .hero__inner{
-  max-width: 1100px; 
+  max-width: 1180px; 
   margin: 0 auto; 
   padding: 0 1.25rem;
   text-align: center;
@@ -361,7 +363,7 @@
 }
 
 /* ========== RESULTS STYLES ========== */
-.summary{ max-width:1100px; margin:22px auto 10px; padding:0 20px;}
+.summary{ max-width:1180px; margin:4rem auto 2.5rem; padding:0 1.25rem;}
 .summary__card{
   background:var(--card); border:1px solid #ececec; border-radius:var(--radius); box-shadow:var(--shadow-custom);
   padding:20px;
