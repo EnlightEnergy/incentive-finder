@@ -177,7 +177,7 @@ export default function Home() {
         }}
       >
         <div className="hero__inner">
-          <div className="hero__kicker">California Commercial Energy Incentives</div>
+          <div className="hero__kicker"> California Commercial Energy Incentives </div>
           <h1 className="hero__title">Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades.</h1>
           <p className="hero__sub">
             Stack utility rebates, state grants, and federal tax incentives to cut your project costs by up to 70% — with zero upfront expense and 0% financing options.
