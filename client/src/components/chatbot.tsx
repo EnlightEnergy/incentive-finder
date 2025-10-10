@@ -69,6 +69,7 @@ export function ChatBot() {
 
   useEffect(() => {
     if (scrollRef.current) {
+      // Scroll to show the beginning of the last message at the top
       scrollRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [messages]);
@@ -405,6 +406,7 @@ export function ChatBot() {
           {messages.map((message, idx) => (
             <div
               key={idx}
+              ref={idx === messages.length - 1 ? scrollRef : null}
               data-testid={`message-${message.role}-${idx}`}
               className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
             >
@@ -526,8 +528,6 @@ export function ChatBot() {
               </div>
             </div>
           )}
-          
-          <div ref={scrollRef} />
         </div>
       </ScrollArea>
 
