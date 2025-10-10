@@ -154,12 +154,7 @@ export default function ApplyEnlightingModal({
         <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="apply-enlighting-modal">
           <DialogHeader>
             <DialogTitle className="text-xl font-semibold">
-              Apply with Enlighting
-              {program && (
-                <div className="text-sm font-normal text-muted-foreground mt-1">
-                  For: {program.name}
-                </div>
-              )}
+              Contact Enlighting for your custom report
             </DialogTitle>
           </DialogHeader>
         

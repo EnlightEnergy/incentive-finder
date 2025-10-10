@@ -135,7 +135,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
         aria-labelledby="modal-title"
       >
         <DialogHeader>
-          <DialogTitle id="modal-title">Get Your Incentive Report</DialogTitle>
+          <DialogTitle id="modal-title">Contact Me About Incentives</DialogTitle>
         </DialogHeader>
         <form 
           onSubmit={handleSubmit} 
@@ -258,10 +258,10 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             disabled={createLeadMutation.isPending}
             data-testid="button-submit-lead"
           >
-            {createLeadMutation.isPending ? "Sending..." : "Get My Incentive Report"}
+            {createLeadMutation.isPending ? "Sending..." : "Contact Me"}
           </Button>
           <p className="text-xs text-slate-500 text-center" role="note">
-            We'll send your customized incentive summary. No spam.
+            We will be in touch within 48 hours. No Spam.
           </p>
         </form>
       </DialogContent>

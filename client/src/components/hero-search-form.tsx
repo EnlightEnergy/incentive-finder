@@ -132,7 +132,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
             Find Your Energy Incentives
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Search all applicable utility, state, federal, and aggregator programs available to California businesses. Enlighting can help you apply and qualify for these incentives at no cost to you — we simply claim a fractional % of the free money we generate for your efficiency project.
+            Search all applicable utility, state, federal, and aggregator programs available to California businesses.
           </p>
           
           {/* 3-Step Process */}

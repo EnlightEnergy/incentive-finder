@@ -174,17 +174,7 @@ export default function Home() {
             As a licensed turnkey contractor, Enlighting Energy not only secures the incentives but we can also design, install, and commission the entire project. Our energy engineers manage every step — from audit and application to installation, inspection, and rebate payout.
           </p>
 
-          <div className="hero__ctas">
-            <button 
-              className="btn btn--primary" 
-              onClick={() => setLeadModalOpen(true)}
-              data-testid="button-get-report"
-            >
-              Get My Incentive Report
-            </button>
-          </div>
-
-          {/* Search Form - Positioned right after CTA */}
+          {/* Search Form - Positioned right after hero text */}
           <div id="search-form" className="mt-12">
             <HeroSearchForm onSearch={handleSearch} />
           </div>
