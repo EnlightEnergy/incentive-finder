@@ -184,7 +184,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                   <Label className="text-base font-semibold text-left block">Energy Measures (Select all that apply)</Label>
                   <div className="grid grid-cols-2 gap-2 mt-2" data-testid="measures-checkboxes">
                     {energyMeasures.map((measure) => (
-                      <div key={measure.id} className="flex items-start space-x-2">
+                      <div key={measure.id} className="flex items-center space-x-2">
                         <Checkbox
                           id={measure.id}
                           checked={selectedMeasures.includes(measure.id)}
