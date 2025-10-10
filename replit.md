@@ -37,6 +37,20 @@ Preferred communication style: Simple, everyday language.
 - **Verification**: All test scenarios pass - single-utility ZIPs, multi-utility ZIPs with explicit selection, and chatbot/API endpoints all return complete program lists
 - **Impact**: Users now see comprehensive incentive opportunities including stackable state and federal programs, significantly improving search results quality
 
+### ZIP Code Location Filtering Fix (October 10, 2025)
+- **Critical Issue Resolved**: Fixed ZIP code search returning programs from ALL utilities instead of only the specific utility serving that ZIP plus state/federal programs
+- **Root Cause**: Query was filtering on `programGeos.utilityServiceArea` (joined table) using LEFT JOIN, which didn't properly exclude programs from other utilities
+- **Solution Implemented**:
+  - Changed filtering logic in `server/storage.ts` to filter directly on `programs.owner` (main table) instead of joined table field
+  - This ensures proper filtering at the program level before the LEFT JOIN executes
+  - State/federal programs still correctly identified via program_geos with NULL/empty utility_service_area
+- **Verification**: End-to-end testing confirmed correct behavior:
+  - ZIP 93102 (SCE): Returns only SCE + state/federal programs (11 total)
+  - ZIP 92101 (SDG&E): Returns only SDG&E + state/federal programs (12 total)
+  - ZIP 90001 (LADWP): Returns only LADWP + state/federal programs (4 total)
+  - Programs from unrelated utilities are properly excluded
+- **Impact**: Search results now accurately reflect utility territory boundaries, ensuring users only see programs they're eligible for based on their location
+
 ## System Architecture
 
 ### Frontend Architecture
