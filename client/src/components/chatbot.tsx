@@ -85,7 +85,7 @@ export function ChatBot() {
     if (isOpen && messages.length === 0) {
       const welcomeMessage: Message = {
         role: "assistant",
-        content: "Hello! I'm WattSon Incentive AI. I help California businesses discover energy efficiency incentives. To get started, could you please share your facility's ZIP code?",
+        content: "Hello! I'm Energos Incentive Chat. I help California businesses discover energy efficiency incentives. To get started, could you please share your facility's ZIP code?",
         timestamp: new Date().toISOString(),
       };
       setMessages([welcomeMessage]);
@@ -364,13 +364,13 @@ export function ChatBot() {
           onClick={() => setIsOpen(true)}
           className="relative h-16 w-16 hover:scale-110 cursor-pointer border-none bg-transparent p-0 transition-all duration-300 hover:drop-shadow-[0_0_20px_rgba(12,85,140,0.8)] animate-pulse-subtle"
         >
-          <img src={chatbotIconPath} alt="WattSon AI" className="h-full w-full" />
+          <img src={chatbotIconPath} alt="Energos" className="h-full w-full" />
           <span className="absolute -top-1 -right-1 h-3 w-3 bg-orange-500 rounded-full animate-ping" />
           <span className="absolute -top-1 -right-1 h-3 w-3 bg-orange-500 rounded-full" />
         </button>
         <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           <div className="bg-slate-900 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap">
-            Chat with WattSon AI
+            Chat with Energos
             <div className="absolute top-full right-4 -mt-1 border-4 border-transparent border-t-slate-900" />
           </div>
         </div>
@@ -382,8 +382,8 @@ export function ChatBot() {
     <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-2xl flex flex-col z-50">
       <div className="flex items-center justify-between p-4 border-b bg-[#0c558c] text-white rounded-t-lg">
         <div className="flex items-center gap-2">
-          <img src={chatbotIconPath} alt="WattSon" className="h-8 w-8 rounded-full" />
-          <h3 className="font-semibold" data-testid="text-chat-title">WattSon Incentive AI</h3>
+          <img src={chatbotIconPath} alt="Energos" className="h-8 w-8 rounded-full" />
+          <h3 className="font-semibold" data-testid="text-chat-title">Energos Incentive Chat</h3>
         </div>
         <Button
           data-testid="button-close-chat"
