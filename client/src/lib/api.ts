@@ -1,9 +1,9 @@
 import { apiRequest } from "./queryClient";
-import type { Program, Lead, InsertLead, SearchProgramsParams } from "@shared/schema";
+import type { Program, Lead, InsertLead, SearchProgramsParams, SearchProgramsResponse } from "@shared/schema";
 
 export const api = {
   // Public program search
-  searchPrograms: async (params: Partial<SearchProgramsParams>): Promise<Program[]> => {
+  searchPrograms: async (params: Partial<SearchProgramsParams>): Promise<SearchProgramsResponse> => {
     const searchParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
