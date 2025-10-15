@@ -10,6 +10,24 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 2025)
 
+### Two-Tier Search Results System (October 15, 2025)
+- **Problem Addressed**: Limited database tagging meant searches with specific measures (e.g., Lighting + Heat Pump Water Heaters) returned very few exact matches while missing other relevant programs
+- **Solution Implemented**: Two-tier search results display that shows both exact matches and other available programs
+- **Backend Changes**:
+  - Added `SearchProgramsResponse` type with `exactMatches`, `otherPrograms`, and `allPrograms` arrays
+  - Modified `getPrograms()` to execute two queries when measures are selected:
+    - Query WITH measures filter → `exactMatches`
+    - Query WITHOUT measures filter → all programs, then filter out exact matches → `otherPrograms`
+  - When no measures selected, returns normal `allPrograms` array for backward compatibility
+- **Frontend Changes**:
+  - Displays "Programs matching your criteria" section for exact matches
+  - Displays "Other programs available for your facility" section for additional programs
+  - Shows consultation CTA between sections (only when both tiers exist)
+  - Handles edge cases: single-tier results, empty results, no measures selected
+  - Uses aggregated `totalPrograms` count for accurate empty state detection
+- **UX Benefits**: Users see all relevant programs while highlighting best matches, working around incomplete database tagging
+- **Example**: Industrial + Lighting + HPWH in ZIP 93101 shows 2 exact matches (with Lighting tag) + 5 other programs (without tag) = 7 total
+
 ### Homepage UI/UX Enhancements
 - **Hero Section**: Updated title to "Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades." Replaced gradient background with blue cityscape image (imported via `@assets/Incentive_background_1760128727694.png`) with 35% dark overlay for text readability. Changed all hero text (kicker, title, subtitle) to white. Hero section contains ONLY the text content - search form moved to separate white section below. Removed "Get my Incentive Report" CTA button. Background image properly imported through Vite's asset pipeline for correct serving and caching.
 - **Search Form Section**: Moved outside hero into dedicated white background section below. Contains "Find Your Energy Incentives" heading, 3-step process, search form card, 6 round icons, and blue turnkey proposition block.
