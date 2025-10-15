@@ -205,3 +205,9 @@ export type InsertLead = z.infer<typeof insertLeadSchema>;
 export type SearchProgramsParams = z.infer<typeof searchProgramsSchema>;
 export type UtilityZipCode = typeof utilityZipCodes.$inferSelect;
 export type ChatConversation = typeof chatConversations.$inferSelect;
+
+export interface SearchProgramsResponse {
+  exactMatches?: Program[];
+  otherPrograms?: Program[];
+  allPrograms?: Program[];
+}

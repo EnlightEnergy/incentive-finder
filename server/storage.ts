@@ -13,6 +13,7 @@ import {
   type Lead,
   type InsertLead,
   type SearchProgramsParams,
+  type SearchProgramsResponse,
   type UtilityZipCode,
   type ChatConversation
 } from "@shared/schema";
@@ -90,7 +91,7 @@ function mapUtilityToSearchTerms(utility: string): string[] {
 
 export interface IStorage {
   // Program management
-  getPrograms(params: SearchProgramsParams): Promise<Program[]>;
+  getPrograms(params: SearchProgramsParams): Promise<SearchProgramsResponse>;
   getProgramById(id: number): Promise<Program | undefined>;
   createProgram(program: InsertProgram): Promise<Program>;
   updateProgram(id: number, program: Partial<InsertProgram>): Promise<Program | undefined>;
@@ -111,7 +112,28 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
-  async getPrograms(params: SearchProgramsParams): Promise<Program[]> {
+  async getPrograms(params: SearchProgramsParams): Promise<SearchProgramsResponse> {
+    // If measures are provided, we need to return two sets of results
+    const hasMeasures = params.measures && params.measures.length > 0;
+    
+    if (hasMeasures) {
+      // Execute two queries: one with measures, one without
+      const exactMatches = await this.executeSearchQuery(params, true);
+      const allPrograms = await this.executeSearchQuery(params, false);
+      
+      // Filter out exact matches from all programs to get "other programs"
+      const exactMatchIds = new Set(exactMatches.map(p => p.id));
+      const otherPrograms = allPrograms.filter(p => !exactMatchIds.has(p.id));
+      
+      return { exactMatches, otherPrograms };
+    } else {
+      // No measures - return normal results
+      const allPrograms = await this.executeSearchQuery(params, false);
+      return { allPrograms };
+    }
+  }
+  
+  private async executeSearchQuery(params: SearchProgramsParams, includeMeasures: boolean): Promise<Program[]> {
     let query: any = db.select({
       id: programs.id,
       source: programs.source,
@@ -293,7 +315,8 @@ export class DatabaseStorage implements IStorage {
     }
     
     // Measures filter - check if any of the selected measures are in techTags
-    if (params.measures && params.measures.length > 0) {
+    // Only apply if includeMeasures is true (for exact matches query)
+    if (includeMeasures && params.measures && params.measures.length > 0) {
       const measureConditions = params.measures.map(measure => 
         sql`${programs.techTags}::jsonb @> ${JSON.stringify([measure])}`
       );
@@ -638,7 +661,13 @@ export class DatabaseStorage implements IStorage {
       }
       
       console.log('[ZIP RESET DEBUG] Searching programs with params:', programParams);
-      relevantPrograms = await this.getPrograms(programParams);
+      const searchResponse = await this.getPrograms(programParams);
+      // For chatbot, combine all program results (exact matches + other programs + allPrograms)
+      relevantPrograms = [
+        ...(searchResponse.exactMatches || []),
+        ...(searchResponse.otherPrograms || []),
+        ...(searchResponse.allPrograms || [])
+      ];
     } else {
       console.log('[ZIP RESET DEBUG] Skipping program search - fresh ZIP with no criteria');
     }
