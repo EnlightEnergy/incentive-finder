@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,9 +27,17 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
     utility: "",
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const modalContentRef = useRef<HTMLDivElement>(null);
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Scroll to top when modal opens
+  useEffect(() => {
+    if (open && modalContentRef.current) {
+      modalContentRef.current.scrollTop = 0;
+    }
+  }, [open]);
 
   const createLeadMutation = useMutation({
     mutationFn: api.createLead,
@@ -130,7 +138,8 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent 
-        className="sm:max-w-md" 
+        ref={modalContentRef}
+        className="sm:max-w-md max-h-[90vh] overflow-y-auto" 
         data-testid="lead-capture-modal"
         aria-labelledby="modal-title"
       >
