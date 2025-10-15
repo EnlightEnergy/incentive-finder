@@ -66,6 +66,7 @@ export default function Home() {
   const exactMatches = searchResponse?.exactMatches || [];
   const otherPrograms = searchResponse?.otherPrograms || [];
   const hasTwoTiers = exactMatches.length > 0 && otherPrograms.length > 0;
+  const totalPrograms = exactMatches.length + otherPrograms.length + rawPrograms.length;
 
 
   // Sort programs based on selected sort option (clone array to avoid mutating React Query cache)
@@ -327,7 +328,7 @@ export default function Home() {
                 <div className="text-center py-12" data-testid="loading-state">
                   <p className="text-slate-600">Searching for programs...</p>
                 </div>
-              ) : programs.length === 0 ? (
+              ) : totalPrograms === 0 ? (
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center" data-testid="empty-state">
                   <div className="max-w-md mx-auto">
                     <h3 className="text-lg font-semibold text-slate-900 mb-2">No programs found</h3>
@@ -368,65 +369,71 @@ export default function Home() {
                     </Button>
                   </div>
                 </div>
-              ) : hasTwoTiers ? (
+              ) : (exactMatches.length > 0 || otherPrograms.length > 0) ? (
                 <div className="space-y-8">
                   {/* Exact Matches Section */}
-                  <div data-testid="exact-matches-section">
-                    <div className="mb-4">
-                      <h4 className="text-xl font-bold text-slate-900">
-                        Programs matching your criteria ({exactMatches.length})
-                      </h4>
-                      <p className="text-sm text-slate-600 mt-1">
-                        These programs match your selected measures
-                      </p>
+                  {exactMatches.length > 0 && (
+                    <div data-testid="exact-matches-section">
+                      <div className="mb-4">
+                        <h4 className="text-xl font-bold text-slate-900">
+                          Programs matching your criteria ({exactMatches.length})
+                        </h4>
+                        <p className="text-sm text-slate-600 mt-1">
+                          These programs match your selected measures
+                        </p>
+                      </div>
+                      <div className="space-y-4">
+                        {exactMatches.map((program) => (
+                          <ProgramCard
+                            key={program.id}
+                            program={program}
+                            onViewDetails={handleViewDetails}
+                            onApplyEnlighting={handleApplyEnlighting}
+                          />
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-4">
-                      {exactMatches.map((program) => (
-                        <ProgramCard
-                          key={program.id}
-                          program={program}
-                          onViewDetails={handleViewDetails}
-                          onApplyEnlighting={handleApplyEnlighting}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                  )}
 
-                  {/* Consultation CTA */}
-                  <div className="bg-slate-50 rounded-xl p-6 border border-slate-200" data-testid="consultation-cta">
-                    <p className="text-slate-700 text-sm mb-3">
-                      💡 <strong>Not sure which programs fit your specific project?</strong> Our experts can help you identify all available incentives and maximize your savings.
-                    </p>
-                    <Button 
-                      className="bg-[#0c558c] hover:bg-[#0a4876]"
-                      onClick={() => setLeadModalOpen(true)}
-                      data-testid="button-get-consultation"
-                    >
-                      Get Free Consultation
-                    </Button>
-                  </div>
+                  {/* Consultation CTA - Only show when both tiers exist */}
+                  {hasTwoTiers && (
+                    <div className="bg-slate-50 rounded-xl p-6 border border-slate-200" data-testid="consultation-cta">
+                      <p className="text-slate-700 text-sm mb-3">
+                        💡 <strong>Not sure which programs fit your specific project?</strong> Our experts can help you identify all available incentives and maximize your savings.
+                      </p>
+                      <Button 
+                        className="bg-[#0c558c] hover:bg-[#0a4876]"
+                        onClick={() => setLeadModalOpen(true)}
+                        data-testid="button-get-consultation"
+                      >
+                        Get Free Consultation
+                      </Button>
+                    </div>
+                  )}
 
                   {/* Other Programs Section */}
-                  <div data-testid="other-programs-section">
-                    <div className="mb-4">
-                      <h4 className="text-xl font-bold text-slate-900">
-                        Other programs available for your facility ({otherPrograms.length})
-                      </h4>
-                      <p className="text-sm text-slate-600 mt-1">
-                        Additional programs that may apply based on your location and business type
-                      </p>
+                  {otherPrograms.length > 0 && (
+                    <div data-testid="other-programs-section">
+                      <div className="mb-4">
+                        <h4 className="text-xl font-bold text-slate-900">
+                          Other programs available for your facility ({otherPrograms.length})
+                        </h4>
+                        <p className="text-sm text-slate-600 mt-1">
+                          Additional programs that may apply based on your location and business type
+                        </p>
+                      </div>
+                      <div className="space-y-4">
+                        {otherPrograms.map((program) => (
+                          <ProgramCard
+                            key={program.id}
+                            program={program}
+                            onViewDetails={handleViewDetails}
+                            onApplyEnlighting={handleApplyEnlighting}
+                          />
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-4">
-                      {otherPrograms.map((program) => (
-                        <ProgramCard
-                          key={program.id}
-                          program={program}
-                          onViewDetails={handleViewDetails}
-                          onApplyEnlighting={handleApplyEnlighting}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                  )}
                 </div>
               ) : (
                 <div className="space-y-6" data-testid="programs-list">
