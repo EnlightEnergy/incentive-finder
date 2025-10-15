@@ -135,7 +135,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
         aria-labelledby="modal-title"
       >
         <DialogHeader>
-          <DialogTitle id="modal-title">Contact Me About Incentives</DialogTitle>
+          <DialogTitle id="modal-title">Please Send My Incentive Report</DialogTitle>
         </DialogHeader>
         <form 
           onSubmit={handleSubmit} 
