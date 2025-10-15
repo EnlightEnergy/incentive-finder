@@ -43,10 +43,10 @@ export default function Home() {
   });
   const [sortBy, setSortBy] = useState<string>('relevance');
 
-  const { data: rawPrograms = [], isLoading } = useQuery({
+  const { data: searchResponse, isLoading } = useQuery({
     queryKey: ["/api/programs", searchParams, filters],
-    queryFn: () => {
-      if (!searchParams) return Promise.resolve([]);
+    queryFn: async () => {
+      if (!searchParams) return { allPrograms: [] };
       
       // Combine search params with current filters for the API call
       const combinedParams = {
@@ -60,6 +60,12 @@ export default function Home() {
     },
     enabled: !!searchParams,
   });
+  
+  // Extract programs from the response
+  const rawPrograms = searchResponse?.allPrograms || [];
+  const exactMatches = searchResponse?.exactMatches || [];
+  const otherPrograms = searchResponse?.otherPrograms || [];
+  const hasTwoTiers = exactMatches.length > 0 && otherPrograms.length > 0;
 
 
   // Sort programs based on selected sort option (clone array to avoid mutating React Query cache)
@@ -201,7 +207,7 @@ export default function Home() {
                 <div className="summary__info">
                   <h2 className="summary__title">Programs Found</h2>
                   <div className="summary__meta">
-                    <span>Programs found: <strong>{programs.length}</strong></span>
+                    <span>Programs found: <strong>{hasTwoTiers ? exactMatches.length + otherPrograms.length : programs.length}</strong></span>
                     <span className="divider">•</span>
                     <span>Last updated: <span>Sep 2025</span></span>
                   </div>
@@ -291,7 +297,15 @@ export default function Home() {
                 {/* Live Result Count */}
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   <p className="text-sm text-slate-600" data-testid="text-results-count">
-                    <span className="font-semibold text-slate-900">{programs.length} programs</span> match your criteria
+                    {hasTwoTiers ? (
+                      <>
+                        <span className="font-semibold text-slate-900">{exactMatches.length + otherPrograms.length} programs</span> available ({exactMatches.length} match selected measures)
+                      </>
+                    ) : (
+                      <>
+                        <span className="font-semibold text-slate-900">{programs.length} programs</span> match your criteria
+                      </>
+                    )}
                   </p>
                 </div>
               </div>
@@ -352,6 +366,66 @@ export default function Home() {
                     >
                       Talk to Our Experts
                     </Button>
+                  </div>
+                </div>
+              ) : hasTwoTiers ? (
+                <div className="space-y-8">
+                  {/* Exact Matches Section */}
+                  <div data-testid="exact-matches-section">
+                    <div className="mb-4">
+                      <h4 className="text-xl font-bold text-slate-900">
+                        Programs matching your criteria ({exactMatches.length})
+                      </h4>
+                      <p className="text-sm text-slate-600 mt-1">
+                        These programs match your selected measures
+                      </p>
+                    </div>
+                    <div className="space-y-4">
+                      {exactMatches.map((program) => (
+                        <ProgramCard
+                          key={program.id}
+                          program={program}
+                          onViewDetails={handleViewDetails}
+                          onApplyEnlighting={handleApplyEnlighting}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Consultation CTA */}
+                  <div className="bg-slate-50 rounded-xl p-6 border border-slate-200" data-testid="consultation-cta">
+                    <p className="text-slate-700 text-sm mb-3">
+                      💡 <strong>Not sure which programs fit your specific project?</strong> Our experts can help you identify all available incentives and maximize your savings.
+                    </p>
+                    <Button 
+                      className="bg-[#0c558c] hover:bg-[#0a4876]"
+                      onClick={() => setLeadModalOpen(true)}
+                      data-testid="button-get-consultation"
+                    >
+                      Get Free Consultation
+                    </Button>
+                  </div>
+
+                  {/* Other Programs Section */}
+                  <div data-testid="other-programs-section">
+                    <div className="mb-4">
+                      <h4 className="text-xl font-bold text-slate-900">
+                        Other programs available for your facility ({otherPrograms.length})
+                      </h4>
+                      <p className="text-sm text-slate-600 mt-1">
+                        Additional programs that may apply based on your location and business type
+                      </p>
+                    </div>
+                    <div className="space-y-4">
+                      {otherPrograms.map((program) => (
+                        <ProgramCard
+                          key={program.id}
+                          program={program}
+                          onViewDetails={handleViewDetails}
+                          onApplyEnlighting={handleApplyEnlighting}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               ) : (
