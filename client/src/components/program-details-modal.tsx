@@ -157,13 +157,20 @@ export default function ProgramDetailsModal({ open, onOpenChange, program }: Pro
           {program.url && (
             <div className="pt-4 border-t">
               <Button
+                asChild
                 variant="outline"
                 className="w-full"
-                onClick={() => program.url && window.open(program.url, '_blank')}
                 data-testid="learn-more-link"
               >
-                <ExternalLink className="mr-2 h-4 w-4" />
-                Learn more about this program
+                <a 
+                  href={program.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Learn more about this program
+                </a>
               </Button>
             </div>
           )}
