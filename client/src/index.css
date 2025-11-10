@@ -54,8 +54,8 @@
   --spacing: 0.25rem;
   
   /* Enlighting Brand Colors from Logo */
-  --brand-magenta: #D946A6;
-  --brand-magenta-hover: #C73594;
+  --brand-magenta: #B54BE3;
+  --brand-magenta-hover: #9E3CCD;
   --brand-purple: #5B3A7D;
   --brand-purple-hover: #4A2F66;
   --brand-purple-light: #7B5A9D;
@@ -63,8 +63,8 @@
   /* Legacy blue variables (kept for compatibility) */
   --primary-blue: #5B3A7D;
   --primary-blue-hover: #4A2F66;
-  --search-blue: #D946A6;
-  --search-blue-hover: #C73594;
+  --search-blue: #B54BE3;
+  --search-blue-hover: #9E3CCD;
   --blue-50: #EFF6FF;
   --blue-200: #BFDBFE;
   --slate-600: #475569;
@@ -317,6 +317,94 @@
 }
 .hero--cityscape .hero__sub{
   color: white !important;
+}
+
+/* Energy variant - graphic background representing commercial energy efficiency */
+.hero--energy {
+  position: relative;
+  background: linear-gradient(to bottom, hsl(280, 55%, 97%), hsl(290, 70%, 92%));
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Energy waves pseudo-element - represents energy flow and rebate stacking */
+.hero--energy::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: conic-gradient(
+    from 45deg,
+    transparent 0deg,
+    hsla(285, 70%, 70%, 0.15) 90deg,
+    transparent 180deg,
+    hsla(280, 60%, 75%, 0.1) 270deg,
+    transparent 360deg
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.6;
+  animation: float 20s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* Building geometry pseudo-element - suggests commercial buildings */
+.hero--energy::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, 
+    hsla(285, 65%, 88%, 0.4) 0%, 
+    transparent 100%
+  );
+  mask-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 60px,
+    hsla(0, 0%, 0%, 0.3) 60px,
+    hsla(0, 0%, 0%, 0.3) 80px
+  );
+  opacity: 0.4;
+  z-index: -1;
+}
+
+/* Subtle float animation for energy waves */
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -20px) rotate(2deg);
+  }
+  66% {
+    transform: translate(-20px, 10px) rotate(-1deg);
+  }
+}
+
+/* Mobile responsiveness - simplify on smaller screens */
+@media (max-width: 768px) {
+  .hero--energy::before {
+    width: 400px;
+    height: 400px;
+    top: -30%;
+    right: -20%;
+  }
+  
+  .hero--energy::after {
+    height: 120px;
+  }
+}
+
+/* Reduced motion support - disable animations for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero--energy::before {
+    animation: none;
+  }
 }
 .hero__ctas{ 
   display: flex; 

@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
-import logoPath from "@assets/Enlighting_Logo_F1._website_1762803793162.png";
+import logoPath from "@assets/Enlighting_Logo_F1_1762803948123.jpg";
 
 export default function NavigationHeader() {
   const [location] = useLocation();

@@ -13,11 +13,7 @@ import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
-import logoPath from "@assets/Enlighting_Logo_F1._website_1762803793162.png";
-
-// Hero background imports
-import heroCityscape from "@assets/Incentive_background_1760128727694.png";
-import heroGreenFactory from "@assets/stock_images/bright_modern_green__910a650e.jpg";
+import logoPath from "@assets/Enlighting_Logo_F1_1762803948123.jpg";
 
 // Client logo imports
 import boeingLogo from "@assets/boeing_1758932853739.jpg";
@@ -176,21 +172,16 @@ export default function Home() {
       
       {/* New Hero Section */}
       <section 
-        className="hero hero--green" 
+        className="hero hero--energy" 
         data-testid="hero-section"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${heroGreenFactory})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
       >
         <div className="hero__inner">
           <div className="hero__kicker" style={{ color: '#5B3A7D' }}>Find Energy Savings for Your Facility</div>
           <h1 className="hero__title" style={{ color: '#5B3A7D' }}>
-            We help you discover every incentive your business qualifies for
+            We help you discover every incentive<br />that your business qualifies for
           </h1>
           <p className="hero__sub" style={{ color: '#1e293b' }}>
-            Utility rebates, state grants, and federal tax credits can cover up to 70% of your energy upgrade costs. We make it easy to find them all — and stack them together to maximize your savings.
+            Utility rebates, state grants, and federal tax credits can cover up to 70% of your energy efficiency upgrade. We make it easy to find them all — and stack them together to maximize your savings.
           </p>
         </div>
       </section>
