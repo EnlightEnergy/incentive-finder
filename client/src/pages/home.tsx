@@ -185,7 +185,7 @@ export default function Home() {
         <div 
           className="hero__inner"
           style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.92)',
+            backgroundColor: 'rgba(255, 255, 255, 0.30)',
             padding: '3rem',
             borderRadius: '1rem',
             backdropFilter: 'blur(8px)'
