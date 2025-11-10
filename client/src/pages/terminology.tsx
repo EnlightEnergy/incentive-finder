@@ -3,6 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen } from "lucide-react";
+import NavigationHeader from "@/components/navigation-header";
 import terminologyData from "@shared/terminology-data.json";
 
 interface Term {
@@ -56,15 +57,17 @@ export default function Terminology() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgData) }} />
       
-      <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/5">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+        <NavigationHeader />
+        
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center">
-                <BookOpen className="w-8 h-8 text-[#0c558c]" />
+              <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center">
+                <BookOpen className="w-8 h-8 text-[#5B3A7D]" />
               </div>
             </div>
-            <h1 className="text-4xl font-bold text-foreground mb-4">
+            <h1 className="text-4xl font-bold text-[#5B3A7D] mb-4">
               {terminologyData.title}
             </h1>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -90,7 +93,7 @@ export default function Terminology() {
                     data-testid={`accordion-item-${term.id}`}
                   >
                     <AccordionTrigger 
-                      className="px-6 py-4 hover:bg-slate-50 data-[state=open]:bg-[#0c558c] data-[state=open]:text-white transition-colors"
+                      className="px-6 py-4 hover:bg-purple-50 data-[state=open]:bg-[#5B3A7D] data-[state=open]:text-white transition-colors"
                       data-testid={`accordion-trigger-${term.id}`}
                     >
                       <span className="text-left font-semibold">{term.name}</span>
@@ -98,13 +101,13 @@ export default function Terminology() {
                     <AccordionContent className="px-6 py-4 bg-white">
                       <div className="space-y-4">
                         <div>
-                          <h3 className="text-sm font-medium text-[#0c558c] mb-2">Definition</h3>
+                          <h3 className="text-sm font-medium text-[#5B3A7D] mb-2">Definition</h3>
                           <p className="text-slate-700 leading-relaxed">{term.definition}</p>
                         </div>
                         
                         <div>
-                          <h3 className="text-sm font-medium text-[#0c558c] mb-2">Example</h3>
-                          <p className="text-slate-600 italic bg-slate-50 p-3 rounded border-l-4 border-[#00a5cb]">
+                          <h3 className="text-sm font-medium text-[#5B3A7D] mb-2">Example</h3>
+                          <p className="text-slate-600 italic bg-purple-50 p-3 rounded border-l-4 border-[#B54BE3]">
                             {term.example}
                           </p>
                         </div>
@@ -115,7 +118,7 @@ export default function Terminology() {
                               <Badge 
                                 key={tag} 
                                 variant="secondary" 
-                                className="bg-[#00a5cb]/10 text-[#0c558c] hover:bg-[#00a5cb]/20"
+                                className="bg-[#B54BE3]/10 text-[#5B3A7D] hover:bg-[#B54BE3]/20"
                                 data-testid={`tag-${tag}`}
                               >
                                 {tag}
@@ -134,7 +137,7 @@ export default function Terminology() {
           <div className="mt-8 text-center text-sm text-slate-600">
             <p>Have questions about these terms or need help with your energy efficiency project?</p>
             <p className="mt-2">
-              <a href="/#hero-section" className="text-[#00a5cb] hover:text-[#0c558c] font-medium" data-testid="link-get-report">
+              <a href="/#hero-section" className="text-[#B54BE3] hover:text-[#5B3A7D] font-medium" data-testid="link-get-report">
                 Get your free incentive report
               </a>
             </p>
