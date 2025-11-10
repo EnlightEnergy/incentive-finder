@@ -8,6 +8,28 @@ Enlighting Incentive Finder is a commercial web application designed to assist f
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (November 2025)
+
+### Complete Brand Redesign (November 10, 2025)
+- **Design Philosophy Shift**: Transformed from corporate/government tone to friendly, helpful, benefit-focused approach matching enlightingenergy.com main site
+- **Brand Identity Update**: 
+  - New magenta/purple logo installed and displayed throughout app
+  - Complete color palette swap: replaced all blue colors (#0c558c, #00a5cb) with purple #5B3A7D (primary) and magenta #D946A6 (accent)
+  - Updated navigation header, footer, buttons, hover states, program cards, modals, and all UI elements
+- **Hero Section Transformation**:
+  - Replaced dark cityscape with bright green factory image for visual freshness
+  - Updated hero copy from formal "Unlock utility, state, and federal programs..." to conversational "We help you discover every incentive your business qualifies for"
+  - Changed kicker to "Find Energy Savings for Your Facility"
+- **Lead Capture Simplification**:
+  - Reduced from 7+ required fields to just 3 essentials: name, work email, company (plus optional phone)
+  - Removed required fields: industry type, sqft, utility provider, energy measure
+  - Updated modal title to "Get Your Free Savings Report" with friendly subtitle
+  - Changed button text to "Send My Report" and updated bottom messaging to "You'll hear from us within 48 hours. We'll never spam you or share your info."
+- **Executive Savings Summary**: Added prominent purple/pink gradient card above results showing "Your Facility Could Save Thousands" with plain-speak message about 40-70% typical savings from stacking utility rebates, state grants, and federal incentives
+- **We Serve Section**: Added clear "We Serve" heading above facility type icons with subtext for clarity
+- **Right-Rail CTA Updates**: Updated messaging to "Questions about these programs?" with primary button "Get My Free Savings Report" (magenta) and secondary "Talk to an Engineer"
+- **Protected Elements**: ALL search functionality remains untouched - two-tier results, ZIP filtering, database schema, API endpoints, chatbot logic all preserved without regression
+
 ## Recent Changes (October 2025)
 
 ### Two-Tier Search Results System (October 15, 2025)
