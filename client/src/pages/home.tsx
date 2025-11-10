@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
 import logoPath from "@assets/Enlighting_Logo_F1_1762803948123.jpg";
+import solarBgPath from "@assets/solar background_1762806461396.png";
 
 // Client logo imports
 import boeingLogo from "@assets/boeing_1758932853739.jpg";
@@ -172,8 +173,14 @@ export default function Home() {
       
       {/* New Hero Section */}
       <section 
-        className="hero hero--energy" 
+        className="hero" 
         data-testid="hero-section"
+        style={{
+          backgroundImage: `url(${solarBgPath})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
       >
         <div className="hero__inner">
           <div className="hero__kicker" style={{ color: '#5B3A7D' }}>Find Energy Savings for Your Facility</div>

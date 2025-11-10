@@ -19,7 +19,7 @@ Preferred communication style: Simple, everyday language.
 - **Form Handling**: React Hook Form with Zod validation.
 - **UI/UX Decisions**:
     - **Brand Identity**: Utilizes a purple sunburst logo and a color palette featuring primary purple (#5B3A7D) and accent magenta (#B54BE3).
-    - **Hero Section**: Features a CSS-based light purple gradient design with abstract energy waves and building geometry, replacing photographic backgrounds.
+    - **Hero Section**: Features a solar panel array background image showing commercial energy infrastructure with cover sizing and center positioning.
     - **Lead Capture**: Simplified with reduced required fields (name, work email, company).
     - **Search Results**: Implements a two-tier display showing "Programs matching your criteria" (exact matches) and "Other programs available for your facility" to maximize relevant results.
     - **Typography**: Inter font with defined sizes for body, H1, H2.
