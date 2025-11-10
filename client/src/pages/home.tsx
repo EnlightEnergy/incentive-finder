@@ -15,8 +15,9 @@ import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
 import logoPath from "@assets/Blue Mark_1759082307340.png";
 
-// Hero background import
+// Hero background imports
 import heroCityscape from "@assets/Incentive_background_1760128727694.png";
+import heroGreenFactory from "@assets/stock_images/bright_modern_green__910a650e.jpg";
 
 // Client logo imports
 import boeingLogo from "@assets/boeing_1758932853739.jpg";
@@ -175,19 +176,21 @@ export default function Home() {
       
       {/* New Hero Section */}
       <section 
-        className="hero hero--cityscape" 
+        className="hero hero--green" 
         data-testid="hero-section"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(${heroCityscape})`,
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${heroGreenFactory})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
         <div className="hero__inner">
-          <div className="hero__kicker"> California Commercial Energy Incentives </div>
-          <h1 className="hero__title">Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades.</h1>
-          <p className="hero__sub">
-            Stack utility rebates, state grants, and federal tax incentives to cut your project costs by up to 70% — with zero upfront expense and 0% financing options.
+          <div className="hero__kicker" style={{ color: '#0c558c' }}>Find Energy Savings for Your Facility</div>
+          <h1 className="hero__title" style={{ color: '#0c558c' }}>
+            We help you discover every incentive your business qualifies for
+          </h1>
+          <p className="hero__sub" style={{ color: '#1e293b' }}>
+            Utility rebates, state grants, and federal tax credits can cover up to 70% of your energy upgrade costs. We make it easy to find them all — and stack them together to maximize your savings.
           </p>
         </div>
       </section>
