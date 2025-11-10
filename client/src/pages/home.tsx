@@ -456,9 +456,9 @@ export default function Home() {
                 <div className="lg:col-span-1">
                   <div className="sticky top-8">
                     <Card className="bg-white shadow-md rounded-xl p-6" data-testid="right-rail-cta">
-                      <h4 className="font-bold text-lg mb-3 text-slate-900">Want help implementing?</h4>
+                      <h4 className="font-bold text-lg mb-3 text-slate-900">Questions about these programs?</h4>
                       <p className="text-sm text-slate-600 mb-6">
-                        Our licensed team can design, install, and file for these incentives in one turnkey proposition.
+                        We help you understand which incentives work best for your facility — and handle the entire process from application to installation.
                       </p>
                       <div className="space-y-3">
                         <Button 
@@ -466,7 +466,7 @@ export default function Home() {
                           onClick={() => setLeadModalOpen(true)}
                           data-testid="button-talk-to-engineer"
                         >
-                          Talk to an Engineer
+                          Get My Free Savings Report
                         </Button>
                         <Button 
                           variant="outline"
@@ -474,7 +474,7 @@ export default function Home() {
                           onClick={() => setLeadModalOpen(true)}
                           data-testid="button-email-report-rail"
                         >
-                          Email me this report
+                          Talk to an Engineer
                         </Button>
                       </div>
                     </Card>
