@@ -61,6 +61,31 @@ Preferred communication style: Simple, everyday language.
 - **Development Workflow**: Single command for concurrent frontend/backend serving.
 - **Production**: Optimized builds with static asset serving.
 
+### SEO & Discoverability
+- **Domain**: californiaenergyincentives.com
+- **Dynamic XML Sitemap**: Runtime-generated at `/sitemap.xml` via Express endpoint
+  - Reads `shared/terminology-data.json` dynamically with 60-second TTL cache
+  - Uses `fs.stat` for accurate lastmod dates from source file mtimes
+  - Includes 3 core pages + 14 terminology entries (17 total URLs)
+  - Auto-updates when terminology changes (within cache window)
+  - Exports `clearSitemapCache()` function for immediate cache invalidation
+- **Robots.txt**: Located at `client/public/robots.txt` with sitemap reference
+- **Meta Tag Management**: React Helmet Async for dynamic per-route SEO tags
+- **Structured Data Schemas**: 
+  - Organization, Service, WebSite + SearchAction (sitelinks search)
+  - FAQPage (with visible accordion component), HowTo (3-step process)
+  - BreadcrumbList, DefinedTermSet (terminology glossary)
+  - SpeakableSpecification (voice search optimization)
+- **AI Search Optimization**: 
+  - AI Summary blocks on key pages for LLM extraction
+  - Structured content for ChatGPT, Perplexity, Claude, Google AI Overview
+- **Pages**:
+  - Home (`/`): Full SEO meta tags, Organization/Service/WebSite/FAQPage/HowTo/Speakable schemas, AI summary, visible FAQ
+  - Terminology (`/terminology`): SEO tags, BreadcrumbList, DefinedTermSet, Speakable, AI summary
+  - HTML Sitemap (`/sitemap`): User-friendly navigation page
+- **Marketing Assets**: Logo and solar background in `client/public/` for proper OG/Twitter/schema resolution
+- **Target Keywords**: California energy efficiency rebates, stackable utility state federal incentives, 70% savings, Los Angeles, San Francisco, San Diego, utility territories, Title 24, CARB
+
 ## External Dependencies
 
 - **Database**: PostgreSQL (via Neon serverless connection pooling)
