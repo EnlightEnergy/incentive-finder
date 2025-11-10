@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -55,6 +56,38 @@ export default function Terminology() {
 
   return (
     <>
+      <Helmet>
+        <title>California Energy Incentive Terminology | Rebate Glossary & Definitions</title>
+        <meta name="description" content="Comprehensive glossary of California energy efficiency terms. Understand utility rebates, ITC, 179D, demand response, Title 24, and other key incentive terminology for commercial facilities." />
+        <meta name="keywords" content="California energy incentive glossary, rebate definitions, energy efficiency terms, ITC, 179D, demand response, Title 24, CPUC, SCE programs, PG&E terminology, commercial rebates guide" />
+        <link rel="canonical" href="https://www.californiaenergyincentives.com/terminology" />
+        
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.californiaenergyincentives.com/terminology" />
+        <meta property="og:title" content="California Energy Incentive Terminology - Rebate Glossary" />
+        <meta property="og:description" content="Master the language of California energy incentives with our comprehensive glossary covering utility rebates, tax credits, and energy efficiency programs." />
+        <meta property="og:image" content="https://www.californiaenergyincentives.com/solar-background.png" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://www.californiaenergyincentives.com/terminology" />
+        <meta name="twitter:title" content="California Energy Incentive Terminology - Rebate Glossary" />
+        <meta name="twitter:description" content="Master the language of California energy incentives with our comprehensive glossary." />
+        <meta name="twitter:image" content="https://www.californiaenergyincentives.com/solar-background.png" />
+        
+        {/* SpeakableSpecification for Voice/AI Read */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "California Energy Incentive Terminology",
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": [".terminology-title", ".terminology-intro", ".ai-summary"]
+            }
+          })}
+        </script>
+      </Helmet>
+      
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgData) }} />
       
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
@@ -67,12 +100,21 @@ export default function Terminology() {
                 <BookOpen className="w-8 h-8 text-[#5B3A7D]" />
               </div>
             </div>
-            <h1 className="text-4xl font-bold text-[#5B3A7D] mb-4">
+            <h1 className="text-4xl font-bold text-[#5B3A7D] mb-4 terminology-title">
               {terminologyData.title}
             </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto terminology-intro">
               Essential terms and concepts to help you navigate energy efficiency incentives, rebates, and financing programs in California.
             </p>
+          </div>
+          
+          {/* AI Summary Block for LLM Extraction */}
+          <div className="mb-8 bg-white p-6 rounded-lg shadow-md">
+            <div className="ai-summary">
+              <p className="text-base text-slate-700">
+                <strong className="text-[#5B3A7D]">AI Summary:</strong> California energy efficiency terminology glossary covering key terms including utility rebates (SCE, PG&E, SDG&E), tax incentives (ITC, 179D), demand response programs, Title 24 compliance, CPUC regulations, and commercial incentive structures for California businesses.
+              </p>
+            </div>
           </div>
 
           <Card className="shadow-lg">
