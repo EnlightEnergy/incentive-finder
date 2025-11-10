@@ -8,7 +8,132 @@ import { searchPrograms } from "./search";
 import { searchSync } from "./sync";
 import { z } from "zod";
 
+// Memoized lastmod cache
+let lastmodCache: Map<string, string> | null = null;
+let terminologyCache: any = null;
+let terminologyCacheTime = 0;
+const CACHE_TTL = 60000; // 1 minute cache
+
+async function getLastModDate(filePath: string): Promise<string> {
+  try {
+    const fs = await import('fs/promises');
+    const stats = await fs.stat(filePath);
+    return stats.mtime.toISOString().split('T')[0]; // YYYY-MM-DD format
+  } catch (error) {
+    console.warn(`Failed to get mtime for ${filePath}, using current date:`, error);
+    return new Date().toISOString().split('T')[0];
+  }
+}
+
+async function getLastModDates(): Promise<Map<string, string>> {
+  if (lastmodCache) {
+    return lastmodCache;
+  }
+  
+  const cache = new Map<string, string>();
+  
+  // Get actual mtimes for source files
+  const terminologyDate = await getLastModDate('./shared/terminology-data.json');
+  cache.set('terminology', terminologyDate);
+  
+  const homeDate = await getLastModDate('./client/src/pages/home.tsx');
+  cache.set('home', homeDate);
+  
+  const sitemapDate = await getLastModDate('./client/src/pages/sitemap-page.tsx');
+  cache.set('sitemap', sitemapDate);
+  
+  lastmodCache = cache;
+  return cache;
+}
+
+async function getTerminologyData(): Promise<any> {
+  const now = Date.now();
+  
+  // Return cached data if still fresh
+  if (terminologyCache && (now - terminologyCacheTime) < CACHE_TTL) {
+    return terminologyCache;
+  }
+  
+  try {
+    const fs = await import('fs/promises');
+    const data = await fs.readFile('./shared/terminology-data.json', 'utf-8');
+    terminologyCache = JSON.parse(data);
+    terminologyCacheTime = now;
+    
+    // Invalidate lastmod cache when terminology data changes
+    lastmodCache = null;
+    
+    return terminologyCache;
+  } catch (error) {
+    console.error('Failed to read terminology data:', error);
+    throw new Error('Unable to load terminology data');
+  }
+}
+
+// Clear caches when terminology data is edited (can be called manually or via file watch)
+export function clearSitemapCache() {
+  lastmodCache = null;
+  terminologyCache = null;
+  terminologyCacheTime = 0;
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  
+  // Dynamic sitemap.xml route
+  app.get("/sitemap.xml", async (req, res) => {
+    try {
+      const lastmodDates = await getLastModDates();
+      const terminologyData = await getTerminologyData();
+      
+      const baseUrl = "https://www.californiaenergyincentives.com";
+      
+      // Build sitemap XML
+      let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+      xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+      
+      // Home page
+      xml += '  <url>\n';
+      xml += `    <loc>${baseUrl}/</loc>\n`;
+      xml += `    <lastmod>${lastmodDates.get('home')}</lastmod>\n`;
+      xml += '    <changefreq>weekly</changefreq>\n';
+      xml += '    <priority>1.0</priority>\n';
+      xml += '  </url>\n';
+      
+      // Terminology page
+      xml += '  <url>\n';
+      xml += `    <loc>${baseUrl}/terminology</loc>\n`;
+      xml += `    <lastmod>${lastmodDates.get('terminology')}</lastmod>\n`;
+      xml += '    <changefreq>monthly</changefreq>\n';
+      xml += '    <priority>0.8</priority>\n';
+      xml += '  </url>\n';
+      
+      // HTML Sitemap page
+      xml += '  <url>\n';
+      xml += `    <loc>${baseUrl}/sitemap</loc>\n`;
+      xml += `    <lastmod>${lastmodDates.get('sitemap')}</lastmod>\n`;
+      xml += '    <changefreq>monthly</changefreq>\n';
+      xml += '    <priority>0.5</priority>\n';
+      xml += '  </url>\n';
+      
+      // Add terminology entries dynamically
+      for (const term of terminologyData.terms) {
+        xml += '  <url>\n';
+        xml += `    <loc>${baseUrl}/terminology#${term.id}</loc>\n`;
+        xml += `    <lastmod>${lastmodDates.get('terminology')}</lastmod>\n`;
+        xml += '    <changefreq>monthly</changefreq>\n';
+        xml += '    <priority>0.6</priority>\n';
+        xml += '  </url>\n';
+      }
+      
+      xml += '</urlset>';
+      
+      res.set('Content-Type', 'application/xml');
+      res.send(xml);
+    } catch (error) {
+      console.error("Error generating sitemap:", error);
+      res.status(500).send("Error generating sitemap");
+    }
+  });
   
   // Public API routes
   app.get("/api/programs", async (req, res) => {

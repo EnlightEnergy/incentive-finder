@@ -86,6 +86,28 @@ export default function Terminology() {
             }
           })}
         </script>
+        
+        {/* BreadcrumbList Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.californiaenergyincentives.com"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Terminology",
+                "item": "https://www.californiaenergyincentives.com/terminology"
+              }
+            ]
+          })}
+        </script>
       </Helmet>
       
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgData) }} />

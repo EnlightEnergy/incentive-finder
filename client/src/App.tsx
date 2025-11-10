@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import Admin from "@/pages/admin";
 import Terminology from "@/pages/terminology";
+import SitemapPage from "@/pages/sitemap-page";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/admin" component={Admin} />
       <Route path="/terminology" component={Terminology} />
+      <Route path="/sitemap" component={SitemapPage} />
       <Route component={NotFound} />
     </Switch>
   );
