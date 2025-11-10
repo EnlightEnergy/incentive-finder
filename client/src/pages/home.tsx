@@ -186,7 +186,7 @@ export default function Home() {
           className="hero__inner"
           style={{
             backgroundColor: 'rgba(255, 255, 255, 0.30)',
-            padding: '1.5rem 1rem',
+            padding: '1.5rem',
             borderRadius: '1rem',
             backdropFilter: 'blur(8px)'
           }}
