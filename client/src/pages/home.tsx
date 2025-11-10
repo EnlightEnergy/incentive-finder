@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import NavigationHeader from "@/components/navigation-header";
 import HeroSearchForm from "@/components/hero-search-form";
 import ProgramCard from "@/components/program-card";
@@ -167,6 +168,176 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>California Energy Incentives | Stackable Utility, State & Federal Rebates - Save Up to 70%</title>
+        <meta name="description" content="Find California energy efficiency incentives for your commercial facility. Stack SCE, PG&E, SDG&E utility rebates with state grants and federal tax credits to cover up to 70% of upgrade costs. Instant search across thousands of programs." />
+        <meta name="keywords" content="California energy incentives, utility rebates, SCE rebates, PG&E incentives, SDG&E programs, LADWP rebates, federal tax credits, ITC, energy efficiency, commercial rebates, stackable incentives, Los Angeles, San Francisco, San Diego, Title 24, CARB" />
+        <link rel="canonical" href="https://www.californiaenergyincentives.com/" />
+        
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.californiaenergyincentives.com/" />
+        <meta property="og:title" content="California Energy Incentives - Stack Rebates to Save Up to 70%" />
+        <meta property="og:description" content="Search thousands of California energy efficiency programs. Stack utility rebates, state grants, and federal tax credits for maximum savings on commercial upgrades." />
+        <meta property="og:image" content="https://www.californiaenergyincentives.com/assets/solar-background.png" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://www.californiaenergyincentives.com/" />
+        <meta name="twitter:title" content="California Energy Incentives - Stack Rebates to Save Up to 70%" />
+        <meta name="twitter:description" content="Find and stack California energy efficiency incentives for your commercial facility." />
+        <meta name="twitter:image" content="https://www.californiaenergyincentives.com/assets/solar-background.png" />
+        
+        {/* Organization Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Enlighting Energy",
+            "legalName": "Enlighting Energy Consultants",
+            "url": "https://www.californiaenergyincentives.com",
+            "logo": "https://www.californiaenergyincentives.com/assets/enlighting-logo.png",
+            "description": "California energy efficiency consultants specializing in incentive discovery and stacking for commercial facilities",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "California",
+              "addressCountry": "US"
+            },
+            "areaServed": {
+              "@type": "State",
+              "name": "California"
+            },
+            "sameAs": [
+              "https://www.enlightingenergy.com"
+            ]
+          })}
+        </script>
+        
+        {/* Service Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "Energy Efficiency Incentive Advisory",
+            "provider": {
+              "@type": "Organization",
+              "name": "Enlighting Energy"
+            },
+            "areaServed": {
+              "@type": "State",
+              "name": "California"
+            },
+            "description": "California energy efficiency incentive discovery, qualification, and stacking services for commercial, industrial, and multifamily facilities. We help businesses maximize savings by combining utility rebates, state grants, and federal tax credits.",
+            "offers": {
+              "@type": "Offer",
+              "description": "Stack utility rebates, state grants, and federal tax credits to cover up to 70% of energy efficiency upgrade costs"
+            }
+          })}
+        </script>
+        
+        {/* WebSite + SearchAction Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "California Energy Incentives",
+            "url": "https://www.californiaenergyincentives.com",
+            "description": "Search and discover stackable California energy efficiency incentives",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://www.californiaenergyincentives.com/?search={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+        
+        {/* FAQPage Schema for AI Search */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What California energy incentives are available for commercial facilities?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "California commercial facilities can access utility rebates from SCE, PG&E, SDG&E, and LADWP; state grants and programs; and federal tax credits including the Investment Tax Credit (ITC). These programs can be stacked to cover up to 70% of energy efficiency upgrade costs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does incentive stacking work in California?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Incentive stacking combines multiple funding sources for a single energy efficiency project. You can layer utility rebates (like SCE or PG&E programs), state-level grants, and federal tax credits (ITC, 179D) to maximize total savings. Typical stacking achieves 40-70% project cost coverage."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which California utilities offer energy efficiency rebates?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Southern California Edison (SCE), Pacific Gas & Electric (PG&E), San Diego Gas & Electric (SDG&E), and Los Angeles Department of Water & Power (LADWP) all offer comprehensive energy efficiency rebate programs for commercial customers including prescriptive and performance-based incentives."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the typical timeline for receiving California energy rebates?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "California utility rebates typically process within 60-90 days after project completion and documentation submission. Federal tax credits are claimed on annual tax returns. State grants may have longer processing times depending on the specific program."
+                }
+              }
+            ]
+          })}
+        </script>
+        
+        {/* HowTo Schema for 3-Step Process */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Find and Stack California Energy Efficiency Incentives",
+            "description": "Step-by-step guide to discovering and maximizing California energy efficiency incentives for your commercial facility",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Discover",
+                "text": "Search available utility, state, and federal programs for your California facility address and NAICS code. Our database covers SCE, PG&E, SDG&E, LADWP, state agencies, and federal programs."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Qualify",
+                "text": "Verify eligibility requirements, calculate estimated savings, and review application deadlines. We help with rebate calculations and qualification assessments."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Deliver (Optional)",
+                "text": "If you want turnkey service, we engineer, install, commission, and file for incentives in one complete package, ensuring you capture every available dollar."
+              }
+            ],
+            "totalTime": "PT1H"
+          })}
+        </script>
+        
+        {/* SpeakableSpecification for Voice/AI Read */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "California Energy Incentives Home",
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": [".hero__kicker", ".hero__title", ".hero__sub", ".ai-summary"]
+            }
+          })}
+        </script>
+      </Helmet>
       <NavigationHeader />
       
       <main id="main-content" tabIndex={-1}>
@@ -198,6 +369,17 @@ export default function Home() {
           <p className="hero__sub" style={{ color: '#1e293b' }}>
             Utility rebates, state grants, and federal tax credits can cover up to 70% of your energy efficiency upgrade. We make it easy to find them all — and stack them together to maximize your savings.
           </p>
+        </div>
+      </section>
+      
+      {/* AI Summary Block for LLM Extraction */}
+      <section className="bg-gradient-to-r from-purple-50 to-pink-50 py-8" aria-label="AI Summary">
+        <div className="max-w-[1180px] mx-auto px-4">
+          <div className="ai-summary text-center max-w-3xl mx-auto">
+            <p className="text-lg text-slate-700">
+              <strong className="text-[#5B3A7D]">AI Summary:</strong> California commercial facilities can stack utility rebates (SCE, PG&E, SDG&E, LADWP), state grants, and federal tax credits to cover up to 70% of energy efficiency upgrade costs. Search thousands of programs instantly by ZIP code and facility type.
+            </p>
+          </div>
         </div>
       </section>
 
