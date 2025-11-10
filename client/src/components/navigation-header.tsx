@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
-import logoPath from "@assets/Enlighting_Logo_Blue_1758937776526.png";
+import logoPath from "@assets/Enlighting_Logo_F1._website_1762803793162.png";
 
 export default function NavigationHeader() {
   const [location] = useLocation();
@@ -50,7 +50,7 @@ export default function NavigationHeader() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium transition-colors text-slate-600 hover:text-[#0c558c]"
+                  className="text-sm font-medium transition-colors text-slate-600 hover:text-[#5B3A7D]"
                 >
                   {link.label}
                 </a>
@@ -60,8 +60,8 @@ export default function NavigationHeader() {
                   href={link.href} 
                   className={`text-sm font-medium transition-colors ${
                     location === link.href 
-                      ? 'text-[#0c558c]' 
-                      : 'text-slate-600 hover:text-[#0c558c]'
+                      ? 'text-[#5B3A7D]' 
+                      : 'text-slate-600 hover:text-[#5B3A7D]'
                   }`}
                 >
                   {link.label}
@@ -70,7 +70,7 @@ export default function NavigationHeader() {
             )}
             <Button 
               asChild
-              className="ml-4 bg-[#0c558c] hover:bg-[#0a4876] text-white"
+              className="ml-4 bg-[#5B3A7D] hover:bg-[#4A2F66] text-white"
               data-testid="button-get-report"
             >
               <a href="mailto:hello@enlightingenergy.com">
@@ -96,7 +96,7 @@ export default function NavigationHeader() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-lg font-medium transition-colors text-slate-600 hover:text-[#0c558c]"
+                        className="text-lg font-medium transition-colors text-slate-600 hover:text-[#5B3A7D]"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {link.label}
@@ -107,8 +107,8 @@ export default function NavigationHeader() {
                         href={link.href}
                         className={`text-lg font-medium transition-colors ${
                           location === link.href 
-                            ? 'text-[#0c558c]' 
-                            : 'text-slate-600 hover:text-[#0c558c]'
+                            ? 'text-[#5B3A7D]' 
+                            : 'text-slate-600 hover:text-[#5B3A7D]'
                         }`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
@@ -118,7 +118,7 @@ export default function NavigationHeader() {
                   )}
                   <Button 
                     asChild
-                    className="mt-6 bg-[#0c558c] hover:bg-[#0a4876] text-white justify-start"
+                    className="mt-6 bg-[#5B3A7D] hover:bg-[#4A2F66] text-white justify-start"
                     data-testid="button-get-report-mobile"
                   >
                     <a 

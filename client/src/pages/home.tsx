@@ -13,7 +13,7 @@ import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
-import logoPath from "@assets/Blue Mark_1759082307340.png";
+import logoPath from "@assets/Enlighting_Logo_F1._website_1762803793162.png";
 
 // Hero background imports
 import heroCityscape from "@assets/Incentive_background_1760128727694.png";
@@ -185,8 +185,8 @@ export default function Home() {
         }}
       >
         <div className="hero__inner">
-          <div className="hero__kicker" style={{ color: '#0c558c' }}>Find Energy Savings for Your Facility</div>
-          <h1 className="hero__title" style={{ color: '#0c558c' }}>
+          <div className="hero__kicker" style={{ color: '#5B3A7D' }}>Find Energy Savings for Your Facility</div>
+          <h1 className="hero__title" style={{ color: '#5B3A7D' }}>
             We help you discover every incentive your business qualifies for
           </h1>
           <p className="hero__sub" style={{ color: '#1e293b' }}>
@@ -314,6 +314,36 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Executive Savings Summary */}
+              <div className="mb-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-[#D946A6]/20">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full bg-[#5B3A7D] flex items-center justify-center">
+                      <span className="text-2xl font-bold text-white">$</span>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-[#5B3A7D] mb-2">
+                      Your Facility Could Save Thousands
+                    </h3>
+                    <p className="text-slate-700 text-base leading-relaxed mb-3">
+                      Based on these {hasTwoTiers ? exactMatches.length + otherPrograms.length : programs.length} programs, 
+                      similar California facilities typically save <strong className="text-[#5B3A7D]">40-70% on energy upgrade costs</strong> by 
+                      stacking utility rebates, state grants, and federal tax incentives together.
+                    </p>
+                    <p className="text-sm text-slate-600">
+                      Want to know your specific savings potential? 
+                      <button 
+                        onClick={() => setLeadModalOpen(true)}
+                        className="ml-1 text-[#D946A6] hover:text-[#C73594] font-semibold underline"
+                      >
+                        Get your free personalized report →
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* Action Bar */}
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-foreground">Available Incentives</h3>
@@ -364,7 +394,7 @@ export default function Home() {
                     </div>
 
                     <Button 
-                      className="bg-[#0c558c] hover:bg-[#0a4876]"
+                      className="bg-[#5B3A7D] hover:bg-[#4A2F66]"
                       onClick={() => setLeadModalOpen(true)}
                       data-testid="button-talk-to-experts"
                     >
@@ -462,7 +492,7 @@ export default function Home() {
                       </p>
                       <div className="space-y-3">
                         <Button 
-                          className="w-full bg-[#0c558c] hover:bg-[#0a4876]"
+                          className="w-full bg-[#D946A6] hover:bg-[#C73594]"
                           onClick={() => setLeadModalOpen(true)}
                           data-testid="button-talk-to-engineer"
                         >
@@ -495,13 +525,13 @@ export default function Home() {
             </p>
           </div>
           <div className="flex justify-center items-center gap-8 lg:gap-12 flex-wrap pb-8">
-            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SCE</div>
-            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">PG&E</div>
-            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SDG&E</div>
-            <div className="text-xl font-bold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">LADWP</div>
-            <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">SoCalREN</div>
-            <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">MCE</div>
-            <div className="text-lg font-semibold text-slate-400 hover:text-[#0c558c] transition-colors cursor-default">GoGreen Financing</div>
+            <div className="text-xl font-bold text-slate-400 hover:text-[#5B3A7D] transition-colors cursor-default">SCE</div>
+            <div className="text-xl font-bold text-slate-400 hover:text-[#5B3A7D] transition-colors cursor-default">PG&E</div>
+            <div className="text-xl font-bold text-slate-400 hover:text-[#5B3A7D] transition-colors cursor-default">SDG&E</div>
+            <div className="text-xl font-bold text-slate-400 hover:text-[#5B3A7D] transition-colors cursor-default">LADWP</div>
+            <div className="text-lg font-semibold text-slate-400 hover:text-[#5B3A7D] transition-colors cursor-default">SoCalREN</div>
+            <div className="text-lg font-semibold text-slate-400 hover:text-[#5B3A7D] transition-colors cursor-default">MCE</div>
+            <div className="text-lg font-semibold text-slate-400 hover:text-[#5B3A7D] transition-colors cursor-default">GoGreen Financing</div>
           </div>
         </div>
       </div>
@@ -549,7 +579,7 @@ export default function Home() {
       />
       </main>
       
-      <footer className="bg-[#0c558c] border-t border-white/20">
+      <footer className="bg-[#5B3A7D] border-t border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>

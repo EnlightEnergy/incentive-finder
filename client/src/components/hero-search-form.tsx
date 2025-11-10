@@ -139,21 +139,21 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
           <div className="mt-8 max-w-3xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
               <div className="flex items-start gap-3">
-                <Search className="h-5 w-5 text-[#0c558c] mt-0.5 flex-shrink-0" />
+                <Search className="h-5 w-5 text-[#5B3A7D] mt-0.5 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-base mb-1">1. Discover</h3>
                   <p className="text-sm text-slate-600">Scan and find utility, state, federal, and aggregator programs for your address/NAICS.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Building2 className="h-5 w-5 text-[#0c558c] mt-0.5 flex-shrink-0" />
+                <Building2 className="h-5 w-5 text-[#5B3A7D] mt-0.5 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-base mb-1">2. Qualify</h3>
                   <p className="text-sm text-slate-600">We can help you with eligibility, savings estimates, and deadlines.</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Wrench className="h-5 w-5 text-[#0c558c] mt-0.5 flex-shrink-0" />
+                <Wrench className="h-5 w-5 text-[#5B3A7D] mt-0.5 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-base mb-1">3. Deliver (optional)</h3>
                   <p className="text-sm text-slate-600">If you want help, we engineer, install, commission, and file for incentives in one turnkey proposition.</p>
@@ -234,7 +234,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="px-8 bg-[#00a5cb] hover:bg-[#0094b3] text-white" 
+                  className="px-8 bg-[#D946A6] hover:bg-[#C73594] text-white" 
                   data-testid="button-search"
                 >
                   <Search className="w-5 h-5 mr-2" />
@@ -245,16 +245,18 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
           </CardContent>
         </Card>
 
-        {/* Program Category Icons - Moved after the form */}
-        <div className="text-center mt-8">
+        {/* Program Category Icons - We Serve Section */}
+        <div className="text-center mt-12">
+          <h3 className="text-2xl font-bold text-slate-900 mb-2">We Serve</h3>
+          <p className="text-slate-600 mb-6">Click to learn about programs available for your facility type</p>
           <div className="flex justify-center items-center gap-6 lg:gap-8 max-w-5xl mx-auto py-6 flex-wrap">
             <div 
               className="flex flex-col items-center gap-2 cursor-pointer" 
               data-testid="icon-commercial-industry"
               onClick={() => setMarketSegmentModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Building2 className="w-10 h-10 text-[#0c558c]" />
+              <div className="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center hover:bg-purple-200 transition-all duration-300 hover:scale-105">
+                <Building2 className="w-10 h-10 text-[#5B3A7D]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Commercial Buildings</span>
             </div>
@@ -263,8 +265,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-small-commercial"
               onClick={() => setSmallCommercialModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Store className="w-10 h-10 text-[#0c558c]" />
+              <div className="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center hover:bg-purple-200 transition-all duration-300 hover:scale-105">
+                <Store className="w-10 h-10 text-[#5B3A7D]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Small Commercial</span>
             </div>
@@ -273,8 +275,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-industrial"
               onClick={() => setIndustrialModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Factory className="w-10 h-10 text-[#0c558c]" />
+              <div className="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center hover:bg-purple-200 transition-all duration-300 hover:scale-105">
+                <Factory className="w-10 h-10 text-[#5B3A7D]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Industrial</span>
             </div>
@@ -283,8 +285,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-multifamily"
               onClick={() => setMultifamilyModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Building className="w-10 h-10 text-[#0c558c]" />
+              <div className="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center hover:bg-purple-200 transition-all duration-300 hover:scale-105">
+                <Building className="w-10 h-10 text-[#5B3A7D]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Multifamily</span>
             </div>
@@ -293,8 +295,8 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-direct-install"
               onClick={() => setDirectInstallModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Wrench className="w-10 h-10 text-[#0c558c]" />
+              <div className="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center hover:bg-purple-200 transition-all duration-300 hover:scale-105">
+                <Wrench className="w-10 h-10 text-[#5B3A7D]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Direct Install</span>
             </div>
@@ -303,15 +305,15 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
               data-testid="icon-solar"
               onClick={() => setSolarModalOpen(true)}
             >
-              <div className="w-20 h-20 rounded-full bg-slate-200 flex items-center justify-center hover:bg-slate-300 transition-all duration-300 hover:scale-105">
-                <Sun className="w-10 h-10 text-[#0c558c]" />
+              <div className="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center hover:bg-purple-200 transition-all duration-300 hover:scale-105">
+                <Sun className="w-10 h-10 text-[#5B3A7D]" />
               </div>
               <span className="text-xs text-slate-600 font-medium text-center max-w-[100px]">Solar</span>
             </div>
           </div>
           
           {/* Turnkey Proposition Section */}
-          <div className="mt-8 bg-[#0c558c] rounded-lg p-6 max-w-4xl mx-auto" data-testid="turnkey-proposition-block">
+          <div className="mt-8 bg-[#5B3A7D] rounded-lg p-6 max-w-4xl mx-auto" data-testid="turnkey-proposition-block">
             <p className="text-white text-base leading-relaxed">
               As a licensed turnkey contractor, Enlighting Energy not only secures the incentives but we can also design, install, and commission the entire project. Our energy engineers manage every step — from audit and application to installation, inspection, and rebate payout.
             </p>

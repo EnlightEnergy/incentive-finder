@@ -53,11 +53,18 @@
   --tracking-normal: 0em;
   --spacing: 0.25rem;
   
-  /* New Blue-Forward Design Variables */
-  --primary-blue: #0c558c;
-  --primary-blue-hover: #0a4876;
-  --search-blue: #00a5cb;
-  --search-blue-hover: #0094b3;
+  /* Enlighting Brand Colors from Logo */
+  --brand-magenta: #D946A6;
+  --brand-magenta-hover: #C73594;
+  --brand-purple: #5B3A7D;
+  --brand-purple-hover: #4A2F66;
+  --brand-purple-light: #7B5A9D;
+  
+  /* Legacy blue variables (kept for compatibility) */
+  --primary-blue: #5B3A7D;
+  --primary-blue-hover: #4A2F66;
+  --search-blue: #D946A6;
+  --search-blue-hover: #C73594;
   --blue-50: #EFF6FF;
   --blue-200: #BFDBFE;
   --slate-600: #475569;

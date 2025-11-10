@@ -73,10 +73,10 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.contactName || !formData.email || !formData.company || !formData.industryType || !formData.sqft || !formData.utility || !formData.measure) {
+    if (!formData.contactName || !formData.email || !formData.company) {
       toast({
         title: "Missing Required Fields",
-        description: "Please fill in all required fields except Phone.",
+        description: "Please provide your name, email, and company name.",
         variant: "destructive",
       });
       return;
@@ -112,7 +112,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
         >
           <div className="text-center py-6">
             <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-4" aria-hidden="true">
-              <CheckCircle className="w-6 h-6 text-[#0c558c]" />
+              <CheckCircle className="w-6 h-6 text-[#5B3A7D]" />
             </div>
             <h3 id="success-title" className="text-lg font-semibold text-gray-900 mb-2">Incentive Enquiry Received</h3>
             <p id="success-description" className="text-gray-600 mb-4">
@@ -120,7 +120,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             </p>
             <Button 
               asChild
-              className="bg-[#00a5cb] hover:bg-[#0094b3] text-white"
+              className="bg-[#D946A6] hover:bg-[#C73594] text-white"
               data-testid="button-schedule-audit"
               aria-label="Schedule a free energy audit via email"
             >
@@ -144,7 +144,10 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
         aria-labelledby="modal-title"
       >
         <DialogHeader>
-          <DialogTitle id="modal-title">Please Send My Incentive Report</DialogTitle>
+          <DialogTitle id="modal-title">Get Your Free Savings Report</DialogTitle>
+          <p className="text-sm text-slate-600 mt-2">
+            We'll analyze the best incentives for your facility and send you a personalized report — no obligation.
+          </p>
         </DialogHeader>
         <form 
           onSubmit={handleSubmit} 
@@ -192,64 +195,6 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             />
           </div>
           <div>
-            <Label htmlFor="industryType">Industry Type</Label>
-            <Input
-              id="industryType"
-              name="industryType"
-              value={formData.industryType}
-              onChange={(e) => setFormData({ ...formData, industryType: e.target.value })}
-              placeholder="e.g., Manufacturing, Warehousing, Commercial"
-              data-testid="input-lead-industry-type"
-            />
-          </div>
-          <div>
-            <Label htmlFor="sqft">Building Square Footage</Label>
-            <Input
-              id="sqft"
-              name="sqft"
-              type="number"
-              value={formData.sqft}
-              onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
-              placeholder="e.g., 50000"
-              data-testid="input-lead-sqft"
-            />
-          </div>
-          <div>
-            <Label htmlFor="utility">Utility Provider</Label>
-            <Select value={formData.utility} onValueChange={(value) => setFormData({ ...formData, utility: value })}>
-              <SelectTrigger data-testid="select-utility">
-                <SelectValue placeholder="Select your utility" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Southern California Edison">Southern California Edison (SCE)</SelectItem>
-                <SelectItem value="Pacific Gas & Electric">Pacific Gas & Electric (PG&E)</SelectItem>
-                <SelectItem value="San Diego Gas & Electric">San Diego Gas & Electric (SDG&E)</SelectItem>
-                <SelectItem value="Los Angeles Department of Water & Power">Los Angeles Department of Water & Power (LADWP)</SelectItem>
-                <SelectItem value="Sacramento Municipal Utility District">Sacramento Municipal Utility District (SMUD)</SelectItem>
-                <SelectItem value="Other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Label htmlFor="measure">Energy Efficiency Measure</Label>
-            <Select value={formData.measure} onValueChange={(value) => setFormData({ ...formData, measure: value })}>
-              <SelectTrigger data-testid="select-energy-measure">
-                <SelectValue placeholder="Select all that apply" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Lighting">Lighting</SelectItem>
-                <SelectItem value="HVAC Systems">HVAC Systems</SelectItem>
-                <SelectItem value="Heat Pump Water Heaters">Heat Pump Water Heaters</SelectItem>
-                <SelectItem value="Motors & VFDs">Motors & VFDs</SelectItem>
-                <SelectItem value="Refrigeration">Refrigeration</SelectItem>
-                <SelectItem value="Compressed Air Systems">Compressed Air Systems</SelectItem>
-                <SelectItem value="Building Envelope">Building Envelope</SelectItem>
-                <SelectItem value="Solar Panels">Solar Panels</SelectItem>
-                <SelectItem value="Energy Storage">Energy Storage</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
             <Label htmlFor="phone">Phone <span className="text-slate-500">(optional)</span></Label>
             <Input
               id="phone"
@@ -263,14 +208,14 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
           </div>
           <Button 
             type="submit" 
-            className="w-full bg-[#00a5cb] hover:bg-[#0094b3] text-white" 
+            className="w-full bg-[#D946A6] hover:bg-[#C73594] text-white" 
             disabled={createLeadMutation.isPending}
             data-testid="button-submit-lead"
           >
-            {createLeadMutation.isPending ? "Sending..." : "Contact Me"}
+            {createLeadMutation.isPending ? "Sending..." : "Send My Report"}
           </Button>
           <p className="text-xs text-slate-500 text-center" role="note">
-            We will be in touch within 48 hours. No Spam.
+            You'll hear from us within 48 hours. We'll never spam you or share your info.
           </p>
         </form>
       </DialogContent>
