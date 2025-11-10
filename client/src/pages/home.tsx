@@ -178,13 +178,13 @@ export default function Home() {
         <meta property="og:url" content="https://www.californiaenergyincentives.com/" />
         <meta property="og:title" content="California Energy Incentives - Stack Rebates to Save Up to 70%" />
         <meta property="og:description" content="Search thousands of California energy efficiency programs. Stack utility rebates, state grants, and federal tax credits for maximum savings on commercial upgrades." />
-        <meta property="og:image" content="https://www.californiaenergyincentives.com/assets/solar-background.png" />
+        <meta property="og:image" content="https://www.californiaenergyincentives.com/solar-background.png" />
         
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://www.californiaenergyincentives.com/" />
         <meta name="twitter:title" content="California Energy Incentives - Stack Rebates to Save Up to 70%" />
         <meta name="twitter:description" content="Find and stack California energy efficiency incentives for your commercial facility." />
-        <meta name="twitter:image" content="https://www.californiaenergyincentives.com/assets/solar-background.png" />
+        <meta name="twitter:image" content="https://www.californiaenergyincentives.com/solar-background.png" />
         
         {/* Organization Schema */}
         <script type="application/ld+json">
@@ -194,7 +194,7 @@ export default function Home() {
             "name": "Enlighting Energy",
             "legalName": "Enlighting Energy Consultants",
             "url": "https://www.californiaenergyincentives.com",
-            "logo": "https://www.californiaenergyincentives.com/assets/enlighting-logo.png",
+            "logo": "https://www.californiaenergyincentives.com/enlighting-logo.png",
             "description": "California energy efficiency consultants specializing in incentive discovery and stacking for commercial facilities",
             "address": {
               "@type": "PostalAddress",
