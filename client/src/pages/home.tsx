@@ -182,7 +182,15 @@ export default function Home() {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="hero__inner">
+        <div 
+          className="hero__inner"
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.92)',
+            padding: '3rem',
+            borderRadius: '1rem',
+            backdropFilter: 'blur(8px)'
+          }}
+        >
           <div className="hero__kicker" style={{ color: '#5B3A7D' }}>Find Energy Savings for Your Facility</div>
           <h1 className="hero__title" style={{ color: '#5B3A7D' }}>
             We help you discover every incentive<br />that your business qualifies for
