@@ -12,6 +12,7 @@ import { ChatBot } from "@/components/chatbot";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
 import logoPath from "@assets/Enlighting_Logo_F1_1762803948123.jpg";
@@ -723,6 +724,66 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <section className="bg-white py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-[#5B3A7D] mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-slate-600">
+              Common questions about California energy efficiency incentives
+            </p>
+          </div>
+          
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            <AccordionItem value="faq-1" className="border border-slate-200 rounded-lg overflow-hidden" data-testid="faq-item-1">
+              <AccordionTrigger className="px-6 py-4 hover:bg-purple-50 data-[state=open]:bg-[#5B3A7D] data-[state=open]:text-white transition-colors" data-testid="faq-trigger-1">
+                <span className="text-left font-semibold">What California energy incentives are available for commercial facilities?</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 py-4 bg-white" data-testid="faq-content-1">
+                <p className="text-slate-700 leading-relaxed">
+                  California commercial facilities can access utility rebates from SCE, PG&E, SDG&E, and LADWP; state grants and programs; and federal tax credits including the Investment Tax Credit (ITC). These programs can be stacked to cover up to 70% of energy efficiency upgrade costs.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="faq-2" className="border border-slate-200 rounded-lg overflow-hidden" data-testid="faq-item-2">
+              <AccordionTrigger className="px-6 py-4 hover:bg-purple-50 data-[state=open]:bg-[#5B3A7D] data-[state=open]:text-white transition-colors" data-testid="faq-trigger-2">
+                <span className="text-left font-semibold">How does incentive stacking work in California?</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 py-4 bg-white" data-testid="faq-content-2">
+                <p className="text-slate-700 leading-relaxed">
+                  Incentive stacking combines multiple funding sources for a single energy efficiency project. You can layer utility rebates (like SCE or PG&E programs), state-level grants, and federal tax credits (ITC, 179D) to maximize total savings. Typical stacking achieves 40-70% project cost coverage.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="faq-3" className="border border-slate-200 rounded-lg overflow-hidden" data-testid="faq-item-3">
+              <AccordionTrigger className="px-6 py-4 hover:bg-purple-50 data-[state=open]:bg-[#5B3A7D] data-[state=open]:text-white transition-colors" data-testid="faq-trigger-3">
+                <span className="text-left font-semibold">Which California utilities offer energy efficiency rebates?</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 py-4 bg-white" data-testid="faq-content-3">
+                <p className="text-slate-700 leading-relaxed">
+                  Southern California Edison (SCE), Pacific Gas & Electric (PG&E), San Diego Gas & Electric (SDG&E), and Los Angeles Department of Water & Power (LADWP) all offer comprehensive energy efficiency rebate programs for commercial customers including prescriptive and performance-based incentives.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="faq-4" className="border border-slate-200 rounded-lg overflow-hidden" data-testid="faq-item-4">
+              <AccordionTrigger className="px-6 py-4 hover:bg-purple-50 data-[state=open]:bg-[#5B3A7D] data-[state=open]:text-white transition-colors" data-testid="faq-trigger-4">
+                <span className="text-left font-semibold">What is the typical timeline for receiving California energy rebates?</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 py-4 bg-white" data-testid="faq-content-4">
+                <p className="text-slate-700 leading-relaxed">
+                  California utility rebates typically process within 60-90 days after project completion and documentation submission. Federal tax credits are claimed on annual tax returns. State grants may have longer processing times depending on the specific program.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
 
       {/* Client Proof Strip */}
       <div className="bg-white py-8 border-b border-gray-200">
