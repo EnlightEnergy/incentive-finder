@@ -2,94 +2,11 @@
 
 ## Overview
 
-Enlighting Incentive Finder is a commercial web application designed to assist facility managers in identifying and evaluating stackable energy efficiency incentives from utility, state, and federal sources. The platform offers instant incentive search, automated rebate value estimation, and lead generation for commercial energy efficiency consultants. It aims to streamline the process of discovering and leveraging financial incentives for energy-saving projects, ultimately driving adoption of sustainable practices. The application supports a wide range of programs, including those from third-party implementers, and integrates comprehensive administrative tools for program management.
+Enlighting Incentive Finder is a commercial web application designed to help facility managers identify and evaluate stackable energy efficiency incentives from utility, state, and federal sources. The platform provides instant incentive search, automated rebate value estimation, and lead generation for commercial energy efficiency consultants. Its core purpose is to simplify the discovery and utilization of financial incentives for energy-saving projects, promoting the adoption of sustainable practices. The application supports a wide array of programs, including those from third-party implementers, and includes comprehensive administrative tools for program management. The business vision is to become the leading platform for maximizing energy efficiency savings, tapping into a significant market by streamlining a complex process and offering substantial financial benefits to businesses.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-
-## Recent Changes (November 2025)
-
-### Complete Brand Redesign (November 10, 2025)
-- **Design Philosophy Shift**: Transformed from corporate/government tone to friendly, helpful, benefit-focused approach matching enlightingenergy.com main site
-- **Brand Identity Update**: 
-  - New magenta/purple logo installed and displayed throughout app
-  - Complete color palette swap: replaced all blue colors (#0c558c, #00a5cb) with purple #5B3A7D (primary) and magenta #D946A6 (accent)
-  - Updated navigation header, footer, buttons, hover states, program cards, modals, and all UI elements
-- **Hero Section Transformation**:
-  - Replaced dark cityscape with bright green factory image for visual freshness
-  - Updated hero copy from formal "Unlock utility, state, and federal programs..." to conversational "We help you discover every incentive your business qualifies for"
-  - Changed kicker to "Find Energy Savings for Your Facility"
-- **Lead Capture Simplification**:
-  - Reduced from 7+ required fields to just 3 essentials: name, work email, company (plus optional phone)
-  - Removed required fields: industry type, sqft, utility provider, energy measure
-  - Updated modal title to "Get Your Free Savings Report" with friendly subtitle
-  - Changed button text to "Send My Report" and updated bottom messaging to "You'll hear from us within 48 hours. We'll never spam you or share your info."
-- **Executive Savings Summary**: Added prominent purple/pink gradient card above results showing "Your Facility Could Save Thousands" with plain-speak message about 40-70% typical savings from stacking utility rebates, state grants, and federal incentives
-- **We Serve Section**: Added clear "We Serve" heading above facility type icons with subtext for clarity
-- **Right-Rail CTA Updates**: Updated messaging to "Questions about these programs?" with primary button "Get My Free Savings Report" (magenta) and secondary "Talk to an Engineer"
-- **Protected Elements**: ALL search functionality remains untouched - two-tier results, ZIP filtering, database schema, API endpoints, chatbot logic all preserved without regression
-
-## Recent Changes (October 2025)
-
-### Two-Tier Search Results System (October 15, 2025)
-- **Problem Addressed**: Limited database tagging meant searches with specific measures (e.g., Lighting + Heat Pump Water Heaters) returned very few exact matches while missing other relevant programs
-- **Solution Implemented**: Two-tier search results display that shows both exact matches and other available programs
-- **Backend Changes**:
-  - Added `SearchProgramsResponse` type with `exactMatches`, `otherPrograms`, and `allPrograms` arrays
-  - Modified `getPrograms()` to execute two queries when measures are selected:
-    - Query WITH measures filter → `exactMatches`
-    - Query WITHOUT measures filter → all programs, then filter out exact matches → `otherPrograms`
-  - When no measures selected, returns normal `allPrograms` array for backward compatibility
-- **Frontend Changes**:
-  - Displays "Programs matching your criteria" section for exact matches
-  - Displays "Other programs available for your facility" section for additional programs
-  - Shows consultation CTA between sections (only when both tiers exist)
-  - Handles edge cases: single-tier results, empty results, no measures selected
-  - Uses aggregated `totalPrograms` count for accurate empty state detection
-- **UX Benefits**: Users see all relevant programs while highlighting best matches, working around incomplete database tagging
-- **Example**: Industrial + Lighting + HPWH in ZIP 93101 shows 2 exact matches (with Lighting tag) + 5 other programs (without tag) = 7 total
-
-### Homepage UI/UX Enhancements
-- **Hero Section**: Updated title to "Unlock utility, state, and federal programs your facility can use for energy efficiency upgrades." Replaced gradient background with blue cityscape image (imported via `@assets/Incentive_background_1760128727694.png`) with 35% dark overlay for text readability. Changed all hero text (kicker, title, subtitle) to white. Hero section contains ONLY the text content - search form moved to separate white section below. Removed "Get my Incentive Report" CTA button. Background image properly imported through Vite's asset pipeline for correct serving and caching.
-- **Search Form Section**: Moved outside hero into dedicated white background section below. Contains "Find Your Energy Incentives" heading, 3-step process, search form card, 6 round icons, and blue turnkey proposition block.
-- **3-Step Process**: Added visual guide under "Find Your Energy Incentives" with Discover, Qualify, and Deliver steps with icons. Simplified description text to focus on program availability.
-- **Turnkey Proposition Block**: Moved "As a licensed turnkey contractor..." text from hero to below the 6 round icons (Commercial Buildings, Small Commercial, Industrial, Multifamily, Direct Install, Solar). Added blue background block (#0c558c) with white text.
-- **Right Rail CTA**: Added sticky CTA card on results page with "Want help implementing?" message and two action buttons (Talk to an Engineer, Email me this report).
-- **Typography**: Updated to Inter font at 17px body, H1 52px, H2 30px with improved line heights and negative letter-spacing.
-- **Layout**: Standardized max-width to 1180px across sections, added proper section spacing (64-80px). Hero section isolated from content sections.
-- **Responsive Design**: 2-column desktop layout (programs 65% + CTA rail 35%) that stacks on mobile.
-- **Chatbot Icon**: Replaced with new AI ball design with orange blinking indicator.
-- **Modal Text Updates**: 
-  - ApplyEnlightingModal: Changed title to "Contact Enlighting for your custom report", removed secondary program name line
-  - LeadCaptureModal: Changed title to "Contact Me About Incentives", submit button to "Contact Me", bottom text to "We will be in touch within 48 hours. No Spam."
-- **Copy Updates**:
-  - Footer: Updated copyright to include "and aggregators" in data sources
-  - Right Rail CTA and 3-Step Process: Changed "under one contract" to "in one turnkey proposition" for consistent messaging
-
-### Chatbot Search Fix (October 10, 2025)
-- **Critical Issue Resolved**: Fixed chatbot search returning only 2-5 programs instead of all available programs (11+ for SCE territories)
-- **Root Cause**: Chatbot limited search results to 5 programs and excluded state/federal programs when utility was explicitly selected
-- **Solution Implemented**:
-  - Increased chatbot search limit from 5 to 50 programs to capture all relevant incentives
-  - Modified utility filtering logic to always include state/federal programs (179D, CEITC, SGIP) alongside utility-specific programs
-  - Updated state-level condition to handle both NULL and empty string values in `utility_service_area` field
-- **Verification**: All test scenarios pass - single-utility ZIPs, multi-utility ZIPs with explicit selection, and chatbot/API endpoints all return complete program lists
-- **Impact**: Users now see comprehensive incentive opportunities including stackable state and federal programs, significantly improving search results quality
-
-### ZIP Code Location Filtering Fix (October 10, 2025)
-- **Critical Issue Resolved**: Fixed ZIP code search returning programs from ALL utilities instead of only the specific utility serving that ZIP plus state/federal programs
-- **Root Cause**: Query was filtering on `programGeos.utilityServiceArea` (joined table) using LEFT JOIN, which didn't properly exclude programs from other utilities
-- **Solution Implemented**:
-  - Changed filtering logic in `server/storage.ts` to filter directly on `programs.owner` (main table) instead of joined table field
-  - This ensures proper filtering at the program level before the LEFT JOIN executes
-  - State/federal programs still correctly identified via program_geos with NULL/empty utility_service_area
-- **Verification**: End-to-end testing confirmed correct behavior:
-  - ZIP 93102 (SCE): Returns only SCE + state/federal programs (11 total)
-  - ZIP 92101 (SDG&E): Returns only SDG&E + state/federal programs (12 total)
-  - ZIP 90001 (LADWP): Returns only LADWP + state/federal programs (4 total)
-  - Programs from unrelated utilities are properly excluded
-- **Impact**: Search results now accurately reflect utility territory boundaries, ensuring users only see programs they're eligible for based on their location
 
 ## System Architecture
 
@@ -100,6 +17,13 @@ Preferred communication style: Simple, everyday language.
 - **State Management**: TanStack Query (React Query) for server state.
 - **Routing**: Wouter.
 - **Form Handling**: React Hook Form with Zod validation.
+- **UI/UX Decisions**:
+    - **Brand Identity**: Utilizes a purple sunburst logo and a color palette featuring primary purple (#5B3A7D) and accent magenta (#B54BE3).
+    - **Hero Section**: Features a CSS-based light purple gradient design with abstract energy waves and building geometry, replacing photographic backgrounds.
+    - **Lead Capture**: Simplified with reduced required fields (name, work email, company).
+    - **Search Results**: Implements a two-tier display showing "Programs matching your criteria" (exact matches) and "Other programs available for your facility" to maximize relevant results.
+    - **Typography**: Inter font with defined sizes for body, H1, H2.
+    - **Layout**: Standardized max-width of 1180px with responsive design, including a 2-column desktop layout that stacks on mobile.
 
 ### Backend Architecture
 - **Runtime**: Node.js with Express.js.
@@ -114,8 +38,8 @@ Preferred communication style: Simple, everyday language.
 - **Data Models**: Normalized tables for programs, geographic coverage, eligibility, benefit structures, documentation, leads, and rate caching.
 
 ### Search Architecture
-- **Search Engine**: Hybrid approach using Typesense for advanced search, with PostgreSQL fallback.
-- **Full-Text Search**: Typesense provides instant search, faceted filtering.
+- **Search Engine**: Hybrid approach using Typesense for advanced search, with PostgreSQL fallback for comprehensive results.
+- **Full-Text Search**: Typesense provides instant search and faceted filtering.
 - **Data Sync**: Automatic synchronization from PostgreSQL to Typesense.
 
 ### Authentication & Security
@@ -127,21 +51,10 @@ Preferred communication style: Simple, everyday language.
 - **Architecture**: Full-stack conversational interface for personalized incentive discovery.
 - **Frontend**: Floating chat widget with expandable modal interface (Shadcn UI).
 - **Backend**: Express API endpoints with OpenAI integration and PostgreSQL conversation storage.
-- **Intelligence**: OpenAI GPT-4o-mini for natural language understanding and contextual responses, with an intelligent fallback system for API unavailability. Auto-detects ZIP codes and facility types. Handles unrecognized facility types by prompting for classification (Retail, Commercial, Industrial, Multi-family).
-- **Data Integration**: Utilizes `utility_zip_codes` table for territory identification (2,173 verified California ZIP-to-utility mappings across 15 utilities, including comprehensive PG&E coverage) and `chat_conversations` for persistent history. Real-time program matching based on location and facility type.
-- **User Flow**:
-    1. Collects ZIP code to determine utility territory.
-    2. Detects and confirms utility provider.
-    3. User selects search mode (Measure or Building Type) via UI buttons.
-    4. Gathers specific measure (e.g., LED, HVAC) or facility type (e.g., office, retail).
-    5. For unrecognized facilities, prompts for classification.
-    6. Searches and provides high-level program overviews.
-    7. Triggers inline lead capture form when programs are found and consultation is discussed, submitting to the leads API and saving to PostgreSQL.
-    8. Guides users towards consultation for detailed analysis.
-- **Facility Type Coverage**: Covers Commercial, Industrial, Agricultural, and Multifamily, with a mechanism for classifying unrecognized types.
-- **State Management**: Persistently updates detected values (ZIP, utility, facility, measure) and tracks search mode.
-- **Interactive UI Components**: Includes search mode selector and an inline lead capture form, styled consistently.
-- **Behavior**: Provides helpful information while promoting consultation for detailed technical analysis.
+- **Intelligence**: OpenAI GPT-4o-mini for natural language understanding and contextual responses, with an intelligent fallback system.
+- **Data Integration**: Utilizes `utility_zip_codes` table for territory identification (2,173 verified California ZIP-to-utility mappings) and `chat_conversations` for persistent history.
+- **User Flow**: Collects ZIP code, confirms utility, allows selection of search mode (Measure or Building Type), gathers specifics, classifies unrecognized facilities, searches and provides high-level program overviews, and triggers inline lead capture for consultation.
+- **Facility Type Coverage**: Covers Commercial, Industrial, Agricultural, and Multifamily, with mechanisms for classifying unrecognized types.
 
 ### Build & Deployment
 - **Build System**: Vite for frontend, esbuild for backend.
@@ -154,6 +67,3 @@ Preferred communication style: Simple, everyday language.
 - **AI Chatbot**: OpenAI GPT-4o-mini
 - **Search Engine**: Typesense
 - **Email Service**: SendGrid
-- **Incentive Data Source**: DSIRE API (planned integration)
-- **Utility Rate Data**: OpenEI Utility Rate Database API (planned integration)
-- **Product Eligibility**: ENERGY STAR Rebate Finder (planned integration)
