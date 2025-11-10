@@ -1,0 +1,68 @@
+However, aesthetically, I would make a few moves to this that connect back to this:
+https://www.enlightingenergy.com/
+(which looks great BTW)
+Feels fresh and optimistic.. maybe a more friendly green image instead of that gloomy stock city-scape graphic.
+Simle, bigger, more friendly text..
+What you sent here feels a little somber & boring. Not on brand.
+So I would try to freshen it up so it feels more like your existing brand.
+Same fonts, Same colors etc... bla bla
+
+
+NEXT, and likely more important.
+
+At the end of using the search tool
+(very savvy.. nice work)
+At the bottom of the results, or in that side window that follows down (on desktop) I would try and translate the benefit into an executive summary of sorts that says very clearly what people could save by using these incentives. If you can.
+"Leveraging these incentives could save you $000,000"
+(I know you don't have this number, but you could make up some language based on your previous clients..)
+somehow translate this into REAL savings.
+
+Like you do here:
+"Stack utility rebates, state grants, and federal tax incentives to cut your project costs by up to 70% — with zero upfront expense and 0% financing options."
+(but gets lost up in that banner at the top.)
+Somehow convey that they can do LED lighting upgrades that pay for themselves...
+I don't know..
+I would try adding some kind of plain speak, benefits statement with a clear Call to Action.
+All the kWh stuff is a little abstract for me (of course I don't know the business, perhaps you feel like the people using this will understand.)
+BUT I would still try to summarize the benefits, so it's more clear. More friendly, open, engaging. Again, on brand.
+
+
+LASTLY:
+This section stuck in between the results is a little distracting, confusing, and busy.
+Not sure it should go in between the form and the results.
+
+Is the icon content being populated by the form?
+I guess I just don't understand what is going on with all those icons, and what I'm supposed to do with them.
+I would simplify this, make it more clear what it is, and potentially move to another section..
+OR it needs some kind of instruction or header saying what they are (if they are related to the form content).
+image.png
+
+
+Some more random thoughts:
+
+Does not feel like it's from you guys.
+Feels very official, corporate, boring, almost like a government.
+If that's what you are going for then you achieved it.
+I would question that though..  Does the world need more boring, corporate?
+Can have the same content just arranged and voiced a little differently.
+
+Try harder to convey benefit and more engaging next step CTA (call to action)
+
+This thing is potentially a very helpful tool that you are providing to customers, 
+tell them why you did it, more simple plain language.
+
+Move whatever you can to the bottom of the page to simplify the form and results experience.
+
+"talk to an engineer" / "email me the report" buttons bring up yet another form.
+Might get some drop off there...
+I'd minimize the amount of info you are trying to get there, it feels more like a fishing scheme than a helpful service.
+Also, both buttons do the same thing.
+I would have one of them be more generous, less lead gen.
+
+
+Mostly I would just stay on brand..
+and simplify this page so it's less busy, maybe flow some content down the page instead of jamming it all into the form/results section.
+
+
+Make it more like your main site.
+Friendly, helpful.
