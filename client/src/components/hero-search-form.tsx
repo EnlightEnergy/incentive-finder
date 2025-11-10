@@ -125,7 +125,7 @@ export default function HeroSearchForm({ onSearch }: HeroSearchFormProps) {
   };
 
   return (
-    <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-10">
+    <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-10 rounded-[1rem]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-foreground mb-4">
