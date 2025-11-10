@@ -120,7 +120,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
             </p>
             <Button 
               asChild
-              className="bg-[#D946A6] hover:bg-[#C73594] text-white"
+              className="bg-[#B54BE3] hover:bg-[#9E3CCD] text-white"
               data-testid="button-schedule-audit"
               aria-label="Schedule a free energy audit via email"
             >
@@ -208,7 +208,7 @@ export default function LeadCaptureModal({ open, onOpenChange }: LeadCaptureModa
           </div>
           <Button 
             type="submit" 
-            className="w-full bg-[#D946A6] hover:bg-[#C73594] text-white" 
+            className="w-full bg-[#B54BE3] hover:bg-[#9E3CCD] text-white" 
             disabled={createLeadMutation.isPending}
             data-testid="button-submit-lead"
           >

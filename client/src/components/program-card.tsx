@@ -56,7 +56,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
 
   return (
     <article 
-      className="group bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-lg hover:border-[#D946A6]/30 transition-all duration-300 ease-out" 
+      className="group bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-lg hover:border-[#B54BE3]/30 transition-all duration-300 ease-out" 
       data-testid={`card-program-${program.id}`}
       aria-labelledby={`program-title-${program.id}`}
       aria-describedby={`program-summary-${program.id} program-incentive-${program.id}`}
@@ -80,7 +80,7 @@ export default function ProgramCard({ program, onViewDetails, onApplyEnlighting 
           </div>
           {program.status === 'open' && (
             <span 
-              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#D946A6] text-white"
+              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#B54BE3] text-white"
               aria-label="Application status: Open for submissions"
             >
               Open

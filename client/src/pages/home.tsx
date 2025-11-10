@@ -306,7 +306,7 @@ export default function Home() {
               </div>
 
               {/* Executive Savings Summary */}
-              <div className="mb-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-[#D946A6]/20">
+              <div className="mb-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-[#B54BE3]/20">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 rounded-full bg-[#5B3A7D] flex items-center justify-center">
@@ -326,7 +326,7 @@ export default function Home() {
                       Want to know your specific savings potential? 
                       <button 
                         onClick={() => setLeadModalOpen(true)}
-                        className="ml-1 text-[#D946A6] hover:text-[#C73594] font-semibold underline"
+                        className="ml-1 text-[#B54BE3] hover:text-[#9E3CCD] font-semibold underline"
                       >
                         Get your free personalized report →
                       </button>
@@ -483,7 +483,7 @@ export default function Home() {
                       </p>
                       <div className="space-y-3">
                         <Button 
-                          className="w-full bg-[#D946A6] hover:bg-[#C73594]"
+                          className="w-full bg-[#B54BE3] hover:bg-[#9E3CCD]"
                           onClick={() => setLeadModalOpen(true)}
                           data-testid="button-talk-to-engineer"
                         >
