@@ -123,7 +123,27 @@ export class DatabaseStorage implements IStorage {
       
       // Filter out exact matches from all programs to get "other programs"
       const exactMatchIds = new Set(exactMatches.map(p => p.id));
-      const otherPrograms = allPrograms.filter(p => !exactMatchIds.has(p.id));
+      let otherPrograms = allPrograms.filter(p => !exactMatchIds.has(p.id));
+      
+      // Filter "other programs" to exclude obviously irrelevant categories
+      // when specific measures are selected
+      if (params.measures && params.measures.length > 0) {
+        otherPrograms = otherPrograms.filter(program => {
+          const techTags = program.techTags as string[] || [];
+          
+          // Exclude programs with conflicting tech tags
+          // e.g., if searching for Lighting, exclude Solar, Self-Generation, etc.
+          const conflictingTags = this.getConflictingTechTags(params.measures!);
+          const hasConflictingTag = techTags.some(tag => 
+            conflictingTags.some(conflictTag => 
+              tag.toLowerCase().includes(conflictTag.toLowerCase())
+            )
+          );
+          
+          // Keep programs without conflicting tags OR programs with no tech tags (general programs)
+          return !hasConflictingTag || techTags.length === 0;
+        });
+      }
       
       return { exactMatches, otherPrograms };
     } else {
@@ -131,6 +151,42 @@ export class DatabaseStorage implements IStorage {
       const allPrograms = await this.executeSearchQuery(params, false);
       return { allPrograms };
     }
+  }
+  
+  // Helper to identify conflicting tech tags based on selected measures
+  private getConflictingTechTags(selectedMeasures: string[]): string[] {
+    const conflicts: string[] = [];
+    
+    for (const measure of selectedMeasures) {
+      const measureLower = measure.toLowerCase();
+      
+      // If searching for Lighting, exclude solar/renewable programs
+      if (measureLower.includes('lighting') || measureLower.includes('led')) {
+        conflicts.push('solar', 'photovoltaic', 'pv', 'self-generation', 'renewable', 'battery', 'storage');
+      }
+      
+      // If searching for HVAC, exclude solar/lighting programs
+      if (measureLower.includes('hvac') || measureLower.includes('heating') || measureLower.includes('cooling')) {
+        conflicts.push('solar', 'photovoltaic', 'pv', 'lighting', 'led');
+      }
+      
+      // If searching for Solar, exclude lighting/HVAC programs
+      if (measureLower.includes('solar') || measureLower.includes('photovoltaic')) {
+        conflicts.push('lighting', 'led', 'hvac');
+      }
+      
+      // If searching for Motors, exclude solar/lighting programs
+      if (measureLower.includes('motor')) {
+        conflicts.push('solar', 'photovoltaic', 'pv', 'lighting', 'led');
+      }
+      
+      // If searching for Refrigeration, exclude solar/lighting programs
+      if (measureLower.includes('refrigeration')) {
+        conflicts.push('solar', 'photovoltaic', 'pv', 'lighting', 'led');
+      }
+    }
+    
+    return conflicts;
   }
   
   private async executeSearchQuery(params: SearchProgramsParams, includeMeasures: boolean): Promise<Program[]> {
