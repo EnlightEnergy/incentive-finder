@@ -380,7 +380,7 @@ export function ChatBot() {
 
   return (
     <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-2xl flex flex-col z-50">
-      <div className="flex items-center justify-between p-4 border-b bg-[#0c558c] text-white rounded-t-lg">
+      <div className="flex items-center justify-between p-4 border-b bg-[#5B3A7D] text-white rounded-t-lg">
         <div className="flex items-center gap-2">
           <img src={chatbotIconPath} alt="Energos" className="h-8 w-8 rounded-full" />
           <h3 className="font-semibold" data-testid="text-chat-title">Energos Incentive Chat</h3>
@@ -390,7 +390,7 @@ export function ChatBot() {
           onClick={() => setIsOpen(false)}
           variant="ghost"
           size="icon"
-          className="h-8 w-8 text-white hover:bg-[#00a5cb]"
+          className="h-8 w-8 text-white hover:bg-[#B54BE3]"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -408,7 +408,7 @@ export function ChatBot() {
               <div
                 className={`max-w-[80%] rounded-lg p-3 ${
                   message.role === "user"
-                    ? "bg-[#0c558c] text-white"
+                    ? "bg-[#5B3A7D] text-white"
                     : "bg-slate-100 text-slate-900"
                 }`}
               >
@@ -432,13 +432,13 @@ export function ChatBot() {
           
           {showSearchModePrompt.show && (
             <div className="flex justify-start">
-              <div className="bg-blue-50 border-2 border-[#0c558c] rounded-lg p-4 max-w-[85%]" data-testid="search-mode-selector">
+              <div className="bg-purple-50 border-2 border-[#5B3A7D] rounded-lg p-4 max-w-[85%]" data-testid="search-mode-selector">
                 <p className="text-sm font-semibold mb-3 text-slate-900">How would you like to search for incentives?</p>
                 <div className="flex flex-col gap-2">
                   <Button
                     data-testid="button-search-by-measure"
                     onClick={() => handleSearchModeSelect('measure')}
-                    className="w-full bg-[#0c558c] hover:bg-[#00a5cb] text-white flex items-center gap-2 justify-start"
+                    className="w-full bg-[#5B3A7D] hover:bg-[#B54BE3] text-white flex items-center gap-2 justify-start"
                   >
                     <Lightbulb className="h-4 w-4" />
                     <span>Search by Energy Measure</span>
@@ -446,7 +446,7 @@ export function ChatBot() {
                   <Button
                     data-testid="button-search-by-building"
                     onClick={() => handleSearchModeSelect('buildingType')}
-                    className="w-full bg-[#0c558c] hover:bg-[#00a5cb] text-white flex items-center gap-2 justify-start"
+                    className="w-full bg-[#5B3A7D] hover:bg-[#B54BE3] text-white flex items-center gap-2 justify-start"
                   >
                     <Building2 className="h-4 w-4" />
                     <span>Search by Building Type</span>
@@ -459,7 +459,7 @@ export function ChatBot() {
           
           {showLeadCaptureForm.show && (
             <div className="flex justify-start" ref={leadFormRef}>
-              <div className="bg-blue-50 border-2 border-[#0c558c] rounded-lg p-4 w-full" data-testid="lead-capture-form">
+              <div className="bg-purple-50 border-2 border-[#5B3A7D] rounded-lg p-4 w-full" data-testid="lead-capture-form">
                 <p className="text-sm font-semibold mb-3 text-slate-900">Great! Let's connect you with our experts</p>
                 <form onSubmit={handleLeadFormSubmit} className="space-y-3">
                   <div>
@@ -515,7 +515,7 @@ export function ChatBot() {
                   <Button
                     data-testid="button-submit-lead"
                     type="submit"
-                    className="w-full bg-[#0c558c] hover:bg-[#00a5cb] text-white"
+                    className="w-full bg-[#5B3A7D] hover:bg-[#B54BE3] text-white"
                   >
                     Submit
                   </Button>
@@ -542,7 +542,7 @@ export function ChatBot() {
             onClick={handleSendMessage}
             disabled={!inputMessage.trim() || chatMutation.isPending}
             size="icon"
-            className="bg-[#0c558c] hover:bg-[#00a5cb]"
+            className="bg-[#5B3A7D] hover:bg-[#B54BE3]"
           >
             <Send className="h-4 w-4" />
           </Button>

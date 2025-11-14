@@ -153,40 +153,68 @@ export class DatabaseStorage implements IStorage {
     }
   }
   
+  // Configuration-driven conflict matrix for measure filtering
+  private readonly MEASURE_CONFLICTS = {
+    lighting: {
+      matchers: ['lighting', 'led', 'lamp', 'fixture'],
+      conflicts: ['solar', 'photovoltaic', 'pv', 'self-generation', 'renewable', 'battery', 'storage']
+    },
+    hvac: {
+      matchers: ['hvac', 'heating', 'cooling', 'air conditioning', 'ac', 'furnace', 'boiler', 'chiller'],
+      conflicts: ['solar', 'photovoltaic', 'pv', 'lighting', 'led']
+    },
+    solar: {
+      matchers: ['solar', 'photovoltaic', 'pv', 'self-generation'],
+      conflicts: ['lighting', 'led', 'hvac']
+    },
+    motors: {
+      matchers: ['motor', 'vfd', 'variable frequency drive', 'drive system'],
+      conflicts: ['solar', 'photovoltaic', 'pv', 'lighting', 'led']
+    },
+    refrigeration: {
+      matchers: ['refrigeration', 'refrigerator', 'cooler', 'freezer', 'cold storage'],
+      conflicts: ['solar', 'photovoltaic', 'pv', 'lighting', 'led']
+    },
+    heatPumpWaterHeater: {
+      matchers: ['heat pump water heater', 'hpwh', 'water heater', 'water heating'],
+      conflicts: ['solar', 'photovoltaic', 'pv', 'lighting', 'led']
+    },
+    compressedAir: {
+      matchers: ['compressed air', 'air compressor', 'compressor'],
+      conflicts: ['solar', 'photovoltaic', 'pv', 'lighting', 'led']
+    },
+    buildingEnvelope: {
+      matchers: ['building envelope', 'insulation', 'window', 'glazing', 'weatherization', 'roof'],
+      conflicts: ['solar', 'photovoltaic', 'pv', 'lighting', 'led']
+    },
+    energyStorage: {
+      matchers: ['energy storage', 'battery', 'bess', 'storage system'],
+      conflicts: ['lighting', 'led', 'hvac', 'motor', 'refrigeration']
+    }
+  };
+
   // Helper to identify conflicting tech tags based on selected measures
   private getConflictingTechTags(selectedMeasures: string[]): string[] {
-    const conflicts: string[] = [];
+    const allConflicts = new Set<string>();
     
     for (const measure of selectedMeasures) {
       const measureLower = measure.toLowerCase();
       
-      // If searching for Lighting, exclude solar/renewable programs
-      if (measureLower.includes('lighting') || measureLower.includes('led')) {
-        conflicts.push('solar', 'photovoltaic', 'pv', 'self-generation', 'renewable', 'battery', 'storage');
-      }
-      
-      // If searching for HVAC, exclude solar/lighting programs
-      if (measureLower.includes('hvac') || measureLower.includes('heating') || measureLower.includes('cooling')) {
-        conflicts.push('solar', 'photovoltaic', 'pv', 'lighting', 'led');
-      }
-      
-      // If searching for Solar, exclude lighting/HVAC programs
-      if (measureLower.includes('solar') || measureLower.includes('photovoltaic')) {
-        conflicts.push('lighting', 'led', 'hvac');
-      }
-      
-      // If searching for Motors, exclude solar/lighting programs
-      if (measureLower.includes('motor')) {
-        conflicts.push('solar', 'photovoltaic', 'pv', 'lighting', 'led');
-      }
-      
-      // If searching for Refrigeration, exclude solar/lighting programs
-      if (measureLower.includes('refrigeration')) {
-        conflicts.push('solar', 'photovoltaic', 'pv', 'lighting', 'led');
+      // Find all matching canonical measures using the config
+      for (const [canonicalMeasure, config] of Object.entries(this.MEASURE_CONFLICTS)) {
+        // Check if any matcher pattern matches the selected measure
+        const isMatch = config.matchers.some(matcher => 
+          measureLower.includes(matcher.toLowerCase())
+        );
+        
+        if (isMatch) {
+          // Add all conflicts for this canonical measure
+          config.conflicts.forEach(conflict => allConflicts.add(conflict));
+        }
       }
     }
     
-    return conflicts;
+    return Array.from(allConflicts);
   }
   
   private async executeSearchQuery(params: SearchProgramsParams, includeMeasures: boolean): Promise<Program[]> {

@@ -82,7 +82,7 @@ export default function ProgramDetailsModal({ open, onOpenChange, program }: Pro
               <h3 className="font-medium text-sm text-muted-foreground mb-3">KEY REBATE VALUES</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {extractRebateHighlights(program.incentiveDescription).map((highlight, index) => (
-                  <div key={index} className="p-3 bg-[#00a5cb] border border-[#00a5cb] rounded-lg">
+                  <div key={index} className="p-3 bg-[#B54BE3] border border-[#B54BE3] rounded-lg">
                     <div className="text-lg font-semibold text-white">
                       {highlight.value}
                     </div>

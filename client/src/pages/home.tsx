@@ -688,7 +688,7 @@ export default function Home() {
                         </Button>
                         <Button 
                           variant="outline"
-                          className="w-full border-[#5aafef] border-opacity-28 hover:bg-[#5aafef] hover:bg-opacity-8"
+                          className="w-full border-[#5B3A7D] border-opacity-28 hover:bg-[#B54BE3] hover:bg-opacity-8"
                           onClick={() => setLeadModalOpen(true)}
                           data-testid="button-email-report-rail"
                         >
@@ -833,7 +833,7 @@ export default function Home() {
             <div>
               <div className="mb-4">
                 <img 
-                  src="/enlighting-logo-optimized.png" 
+                  src="/Enlighting_Logo_White_Web_1763150856949.png" 
                   alt="Enlighting Energy Logo" 
                   className="h-12 w-auto"
                 />
