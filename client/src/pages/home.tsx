@@ -688,7 +688,7 @@ export default function Home() {
                         </Button>
                         <Button 
                           variant="outline"
-                          className="w-full border-[#5B3A7D] border-opacity-28 hover:bg-[#B54BE3] hover:bg-opacity-8"
+                          className="w-full border-[#5B3A7D] hover:bg-[#5B3A7D] hover:text-white"
                           onClick={() => setLeadModalOpen(true)}
                           data-testid="button-email-report-rail"
                         >
