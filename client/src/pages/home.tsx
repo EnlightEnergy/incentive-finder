@@ -15,7 +15,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { api } from "@/lib/api";
 import type { SearchProgramsParams, Program } from "@shared/schema";
-import logoPath from "@assets/Enlighting_Logo_F1_1762803948123.jpg";
 import solarBgPath from "@assets/solar background_1762806461396.png";
 
 // Client logo imports
@@ -832,13 +831,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
+              <div className="mb-4">
                 <img 
-                  src={logoPath} 
+                  src="/enlighting-logo-optimized.png" 
                   alt="Enlighting Energy Logo" 
-                  className="w-8 h-8"
+                  className="h-12 w-auto"
                 />
-                <span className="text-lg font-semibold text-white">Enlighting Energy</span>
               </div>
               <p className="text-sm text-white">
                 Over 36 years of combined expertise helping industrial, manufacturing, warehousing, and commercial facilities unlock and secure energy incentives.
