@@ -1,8 +1,11 @@
 // Reference: blueprint:javascript_sendgrid integration
 import { MailService } from '@sendgrid/mail';
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error("SENDGRID_API_KEY environment variable must be set");
+const mailService = new MailService();
+if (process.env.SENDGRID_API_KEY) {
+  mailService.setApiKey(process.env.SENDGRID_API_KEY);
+} else {
+  console.warn("WARNING: SENDGRID_API_KEY not set. Email notifications disabled.");
 }
 
 const mailService = new MailService();
