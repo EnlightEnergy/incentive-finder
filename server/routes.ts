@@ -197,7 +197,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(programs);
     } catch (error) {
       console.error("Error fetching programs:", error);
-      res.status(400).json({ error: "Invalid search parameters" });
+      res.status(500).json({ error: String(error) });
     }
   });
 
