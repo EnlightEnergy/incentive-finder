@@ -1,5 +1,7 @@
 import Typesense from 'typesense';
 
+const TYPESENSE_ENABLED = process.env.TYPESENSE_ENABLED === 'true';
+
 // Typesense configuration
 const typesenseConfig = {
   nodes: [
@@ -13,7 +15,7 @@ const typesenseConfig = {
   connectionTimeoutSeconds: 2
 };
 
-export const typesenseClient = new Typesense.Client(typesenseConfig);
+export const typesenseClient = TYPESENSE_ENABLED ? new Typesense.Client(typesenseConfig) : null as any;
 
 // Program search schema
 export const programSchema = {
