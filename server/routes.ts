@@ -8,6 +8,7 @@ import { searchPrograms } from "./search";
 import { searchSync } from "./sync";
 import { z } from "zod";
 import { generateReport } from '../report-builder/generate-report.js';
+import { matchPrograms } from './matcher';
 
 // Memoized lastmod cache
 let lastmodCache: Map<string, string> | null = null;
@@ -79,6 +80,17 @@ export function clearSitemapCache() {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+
+  // Match facility profile to qualifying programs (returns JSON for chatbot/UI)
+  app.post('/api/match-programs', async (req, res) => {
+    try {
+      const result = await matchPrograms(req.body);
+      res.json(result);
+    } catch (err) {
+      console.error('matchPrograms failed:', err);
+      res.status(500).json({ error: 'Failed to match programs', details: (err as Error).message });
+    }
+  });
 
   // Generate qualifying programs PDF report
   app.post('/api/generate-report', async (req, res) => {
