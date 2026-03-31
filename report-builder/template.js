@@ -69,7 +69,20 @@ export function generateReportHTML(data) {
       </div>`;
   };
 
-  const programCardsHTML = programs.map(group => {
+  const programCardsHTML = // Normalize: accept flat [{name,eligibleMeasures,...}] OR grouped [{measure,entries:[...]}]
+  const groupedPrograms = (programs.length === 0 || programs[0].entries)
+    ? programs
+    : (() => {
+        const g = {};
+        programs.forEach(p => {
+          const m = p.measure || p.eligibleMeasures || 'General Programs';
+          if (!g[m]) g[m] = { measure: m, entries: [] };
+          g[m].entries.push(p);
+        });
+        return Object.values(g);
+      })();
+
+  programs.map(group => {
     const [first, ...rest] = group.entries;
     return `
     <div class="measure-group">
@@ -81,7 +94,7 @@ export function generateReportHTML(data) {
         </div>
         ${renderCard(first)}
       </div>
-      ${rest.map(p => renderCard(p)).join('')}
+      ${restgroupedPrograms.mapnderCard(p)).join('')}
     </div>`;
   }).join('');
 
