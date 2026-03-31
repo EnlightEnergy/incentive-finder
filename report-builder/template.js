@@ -2,7 +2,14 @@
 // data: reportData object (see sample-data.js for shape)
 
 export function generateReportHTML(data) {
-  const { facility, measures, programCount, summary, programs, stackingNotes, priorityActions } = data;
+  const _d = data || {};
+  const facility = _d.facility || {};
+  const programs = _d.programs || [];
+  const measures = _d.measures || [...new Set(programs.flatMap(p => p.measures || []))];
+  const programCount = _d.programCount != null ? _d.programCount : programs.length;
+  const summary = _d.summary || '';
+  const stackingNotes = _d.stackingNotes || [];
+  const priorityActions = _d.priorityActions || [];
 
   const categoryColor = (cat) => {
     if (cat.includes('Utility')) return { bg: '#EAE8F5', text: '#1C2B5E', dot: '#1C2B5E' };
