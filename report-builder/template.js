@@ -82,7 +82,7 @@ export function generateReportHTML(data) {
         return Object.values(g);
       })();
 
-  programs.map(group => {
+  groupedPrograms.map(group => {
     const [first, ...rest] = group.entries;
     return `
     <div class="measure-group">
@@ -94,7 +94,7 @@ export function generateReportHTML(data) {
         </div>
         ${renderCard(first)}
       </div>
-      ${restgroupedPrograms.mapnderCard(p)).join('')}
+      ${restrest.map(p => renderCard(p)).join('')}
     </div>`;
   }).join('');
 
