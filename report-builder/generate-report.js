@@ -6,10 +6,10 @@ import { execSync } from 'child_process';
 function findChromiumPath() {
   const candidates = [
     process.env.PUPPETEER_EXECUTABLE_PATH,
+    '/root/.nix-profile/bin/chromium',
+    '/nix/var/nix/profiles/default/bin/chromium',
     '/usr/bin/chromium',
-    '/usr/bin/chromium-browser',
     '/usr/local/bin/chromium',
-    '/snap/bin/chromium',
   ].filter(Boolean);
 
   const found = candidates.find(p => existsSync(p));
@@ -17,7 +17,7 @@ function findChromiumPath() {
 
   // Last resort: ask the OS
   try {
-    const which = execSync('which chromium 2>/dev/null || which chromium-browser 2>/dev/null').toString().trim();
+    const which = execSync('which chromium 2>/dev/null', { env: { ...process.env, PATH: '/root/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin:' + (process.env.PATH || '') } }).toString().trim();
     if (which && existsSync(which)) return which;
   } catch {}
 
