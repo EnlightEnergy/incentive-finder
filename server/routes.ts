@@ -9,6 +9,7 @@ import { searchSync } from "./sync";
 import { z } from "zod";
 import { generateReport } from '../report-builder/generate-report.js';
 import { matchPrograms } from './matcher';
+import { processConversation, submitLead } from './ai-conversation';
 
 // Memoized lastmod cache
 let lastmodCache: Map<string, string> | null = null;
@@ -82,6 +83,36 @@ export function clearSitemapCache() {
 export async function registerRoutes(app: Express): Promise<Server> {
 
   // Match facility profile to qualifying programs (returns JSON for chatbot/UI)
+
+  // ── AI Chat conversation endpoint ──────────────────────────────────────────
+  app.post('/api/chat', async (req, res) => {
+    try {
+      const { messages } = req.body;
+      if (!messages || !Array.isArray(messages)) {
+        return res.status(400).json({ error: 'messages array is required' });
+      }
+      const result = await processConversation(messages);
+      res.json(result);
+    } catch (err) {
+      console.error('/api/chat error:', err);
+      res.status(500).json({ error: 'Conversation processing failed', details: (err as Error).message });
+    }
+  });
+
+  // ── Lead submission + report generation ────────────────────────────────────
+  app.post('/api/submit-lead', async (req, res) => {
+    try {
+      const { messages, email } = req.body;
+      if (!email) return res.status(400).json({ error: 'email is required' });
+      const { matchResult } = await submitLead(messages, email);
+      // TODO: save lead to DB and send email when Mailgun keys are added
+      res.json({ matchResult });
+    } catch (err) {
+      console.error('/api/submit-lead error:', err);
+      res.status(500).json({ error: 'Lead submission failed', details: (err as Error).message });
+    }
+  });
+
   app.post('/api/match-programs', async (req, res) => {
     try {
       const result = await matchPrograms(req.body);
