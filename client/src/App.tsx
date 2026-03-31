@@ -5,21 +5,23 @@ import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
+import Browse from "@/pages/browse";
+import Chat from "@/pages/chat";
 import Admin from "@/pages/admin";
 import Terminology from "@/pages/terminology";
 import SitemapPage from "@/pages/sitemap-page";
 import NotFound from "@/pages/not-found";
-import FindIncentives from "@/pages/find-incentives";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/chat" component={Chat} />
+      <Route path="/browse" component={Browse} />
       <Route path="/admin" component={Admin} />
       <Route path="/terminology" component={Terminology} />
       <Route path="/sitemap" component={SitemapPage} />
-              <Route path="/find-incentives" component={FindIncentives} />
-<Route component={NotFound} />
+      <Route component={NotFound} />
     </Switch>
   );
 }
