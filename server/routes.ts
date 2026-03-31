@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertLeadSchema, searchProgramsSchema, insertProgramSchema } from "@shared/schema";
-import { sendLeadNotification } from "./email";
+import { sendLeadNotification, sendReportEmail } from "./email";
 import { basicAuth } from "./auth";
 import { searchPrograms } from "./search";
 import { searchSync } from "./sync";
@@ -105,7 +105,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { messages, email } = req.body;
       if (!email) return res.status(400).json({ error: 'email is required' });
       const { matchResult } = await submitLead(messages, email);
-      // TODO: save lead to DB and send email when Mailgun keys are added
+      // Send report email (BCC to hello@enlightingenergy.com)
+      await sendReportEmail({ to: email, matchResult }).catch(err => console.error('[email] send failed:', err));
       res.json({ matchResult });
     } catch (err) {
       console.error('/api/submit-lead error:', err);
