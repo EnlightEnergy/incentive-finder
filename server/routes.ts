@@ -7,6 +7,7 @@ import { basicAuth } from "./auth";
 import { searchPrograms } from "./search";
 import { searchSync } from "./sync";
 import { z } from "zod";
+import { generateReport } from '../report-builder/generate-report.js';
 
 // Memoized lastmod cache
 let lastmodCache: Map<string, string> | null = null;
@@ -78,6 +79,22 @@ export function clearSitemapCache() {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+
+  // Generate qualifying programs PDF report
+  app.post('/api/generate-report', async (req, res) => {
+    try {
+      const pdfBuffer = await generateReport(req.body);
+      res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="qualifying-programs-report.pdf"',
+      });
+      res.send(pdfBuffer);
+    } catch (err) {
+      console.error('Report generation failed:', err);
+      res.status(500).json({ error: 'Failed to generate report', details: (err as Error).message });
+    }
+  });
+
   
   // Dynamic sitemap.xml route
   app.get("/sitemap.xml", async (req, res) => {
