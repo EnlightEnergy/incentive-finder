@@ -1,9 +1,9 @@
 [phases.setup]
-aptPkgs = ["chromium"]
+nixPkgs = ["chromium"]
 
 [phases.install]
 cmds = ["npm install --ignore-scripts"]
 
 [variables]
 PUPPETEER_SKIP_DOWNLOAD = "true"
-PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
+PUPPETEER_EXECUTABLE_PATH = "/root/.nix-profile/bin/chromium"
