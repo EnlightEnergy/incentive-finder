@@ -69,7 +69,7 @@ export function generateReportHTML(data) {
       </div>`;
   };
 
-  const programCardsHTML = // Normalize: accept flat [{name,eligibleMeasures,...}] OR grouped [{measure,entries:[...]}]
+  // Normalize: accept flat [{name,eligibleMeasures,...}] OR grouped [{measure,entries:[...]}]
   const groupedPrograms = (programs.length === 0 || programs[0].entries)
     ? programs
     : (() => {
@@ -82,7 +82,7 @@ export function generateReportHTML(data) {
         return Object.values(g);
       })();
 
-  groupedPrograms.map(group => {
+  const programCardsHTML = groupedPrograms.map(group => {
     const [first, ...rest] = group.entries;
     return `
     <div class="measure-group">
@@ -94,7 +94,7 @@ export function generateReportHTML(data) {
         </div>
         ${renderCard(first)}
       </div>
-      ${restrest.map(p => renderCard(p)).join('')}
+      ${rest.map(p => renderCard(p)).join('')}
     </div>`;
   }).join('');
 
