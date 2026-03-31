@@ -16,7 +16,7 @@
  *   - The --no-sandbox flag is required for Railway/Docker environments.
  */
 
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import { generateReportHTML } from './template.js';
 import { writeFileSync } from 'fs';
 
