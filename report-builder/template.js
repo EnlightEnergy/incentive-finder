@@ -11,7 +11,7 @@ export function generateReportHTML(data) {
   const stackingNotes = _d.stackingNotes || [];
   const priorityActions = _d.priorityActions || [];
 
-  const categoryColor = (cat) => {
+  const categoryColor = (cat = '') => {
     if (cat.includes('Utility')) return { bg: '#EAE8F5', text: '#1C2B5E', dot: '#1C2B5E' };
     if (cat.includes('Federal')) return { bg: '#FFF3E0', text: '#E65100', dot: '#E65100' };
     if (cat.includes('State')) return { bg: '#E8F5E9', text: '#4B3082', dot: '#4B3082' };
@@ -20,6 +20,8 @@ export function generateReportHTML(data) {
   };
 
   const renderCard = (p) => {
+    // Normalize missing fields to safe defaults
+    p = { ...p, category: p.category || '', administrator: p.administrator || '—', eligibleMeasures: p.eligibleMeasures || '', incentiveStructure: p.incentiveStructure || p.incentiveAmount || '', stacksWith: p.stacksWith || '', deadline: p.deadline || 'TBD', timeline: p.timeline || '', nextStep: p.nextStep || '' };
     const colors = categoryColor(p.category);
     return `
       <div class="program-card">
