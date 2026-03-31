@@ -179,8 +179,8 @@ export default function Chat() {
         </a>
       </header>
 
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        <div className="max-w-2xl mx-auto space-y-4">
+      <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col">
+        <div className="max-w-2xl mx-auto w-full flex flex-col min-h-full justify-end space-y-4">
           {messages.map((msg, i) => <MessageBubble key={i} message={msg} />)}
 
           {loading && phase !== "generating" && (
