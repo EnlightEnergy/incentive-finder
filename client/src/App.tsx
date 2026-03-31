@@ -9,6 +9,7 @@ import Admin from "@/pages/admin";
 import Terminology from "@/pages/terminology";
 import SitemapPage from "@/pages/sitemap-page";
 import NotFound from "@/pages/not-found";
+import FindIncentives from "@/pages/find-incentives";
 
 function Router() {
   return (
@@ -17,7 +18,8 @@ function Router() {
       <Route path="/admin" component={Admin} />
       <Route path="/terminology" component={Terminology} />
       <Route path="/sitemap" component={SitemapPage} />
-      <Route component={NotFound} />
+              <Route path="/find-incentives" component={FindIncentives} />
+<Route component={NotFound} />
     </Switch>
   );
 }
