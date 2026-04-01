@@ -161,9 +161,10 @@ ${pdfBuffer ? 'The full formatted report is attached as a PDF.' : ''}
 Happy to walk through any of these programs with you or help you move one forward — just reply here.
 
 Best,
-Derek Doyle
+William Tran
+Vice President, Business Development
 Enlighting Energy
-805-724-5299
+714-853-5416
 enlightingenergy.com`;
 
   // ── HTML version ──────────────────────────────────────────────────────────
@@ -212,7 +213,7 @@ enlightingenergy.com`;
     <!-- Footer -->
     <div style="background:#f0f0f0;padding:16px 32px;border-top:1px solid #e0e0e0;">
       <p style="margin:0;font-size:12px;color:#888;">
-        <strong style="color:#1C2B5E;">Derek Doyle</strong> · Enlighting Energy<br>
+        <strong style="color:#1C2B5E;">William Tran</strong> · Enlighting Energy<br>
         805-724-5299 · <a href="https://enlightingenergy.com" style="color:#C84EC4;">enlightingenergy.com</a>
       </p>
     </div>
