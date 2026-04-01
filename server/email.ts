@@ -131,7 +131,12 @@ export async function sendReportEmail({
   const facilityName = matchResult.facility?.name ?? matchResult.facility?.facilityName ?? 'your facility';
   const count = matchResult.programCount;
   const measures = matchResult.programs?.map((g) => g.measure).join(' and ') ?? 'your projects';
-  const topProgram = matchResult.programs?.[0]?.entries?.[0] ?? null;
+  // Pick the first non-Federal-Tax-Credit program to feature (179D and other post-project
+  // deductions should not be highlighted as the top action item)
+  const allEntries = (matchResult.programs ?? []).flatMap((g) => g.entries);
+  const topProgram = allEntries.find((e) => !e.category?.includes('Federal')) ?? allEntries[0] ?? null;
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const safeAttachmentName = `${facilityName} incentive programs report | Enlighting (${today}).pdf`.replace(/[/\\?%*:|"<>]/g, '-');
 
   const greeting = recipientName ? `Hi ${recipientName},` : 'Hi there,';
   const subject = `Your Qualifying Programs Report — ${count} program${count !== 1 ? 's' : ''} found`;
@@ -142,7 +147,7 @@ export async function sendReportEmail({
   // ── Plain text version ────────────────────────────────────────────────────
   const text = `${greeting}
 
-Your Qualifying Programs Report for ${facilityName} is ready — I found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${
+Your Qualifying Programs Report for ${facilityName} is ready — We found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${
     topProgram
       ? `\n\nThe one to act on first is ${topProgram.name}${topProgram.preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
       : ''
@@ -190,7 +195,7 @@ enlightingenergy.com`;
     <div style="padding:28px 32px;">
       <p style="font-size:15px;color:#333;margin:0 0 12px;">${greeting}</p>
       <p style="font-size:15px;color:#333;margin:0 0 20px;">
-        I found <strong>${count} program${count !== 1 ? 's' : ''}</strong> that apply to your ${measures}.${
+        We found <strong>${count} program${count !== 1 ? 's' : ''}</strong> that apply to your ${measures}.${
     topProgram
       ? ` The one to act on first is <strong>${topProgram.name}</strong>${topProgram.preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
       : ''
@@ -237,7 +242,7 @@ enlightingenergy.com`;
     fd.append(
       'attachment',
       new Blob([pdfBuffer], { type: 'application/pdf' }),
-      'qualifying-programs-report.pdf'
+      safeAttachmentName
     );
 
     const response = await fetch(mailgunUrl, {
