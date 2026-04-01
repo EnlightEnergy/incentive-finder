@@ -10,6 +10,7 @@ import { z } from "zod";
 import { generateReport } from '../report-builder/generate-report.js';
 import { matchPrograms } from './matcher';
 import { processConversation, submitLead } from './ai-conversation';
+import { importPrograms } from '../scripts/import-programs.js';
 
 // Memoized lastmod cache
 let lastmodCache: Map<string, string> | null = null;
@@ -605,6 +606,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  // ── Admin: one-time program import ──────────────────────────────────────────
+  app.post("/api/admin/import-programs", basicAuth, async (req, res) => {
+    try {
+      console.log("[import-programs] Starting import...");
+      const result = await importPrograms();
+      console.log(`[import-programs] Done: ${result.inserted} inserted, ${result.errors.length} errors`);
+      res.json({ success: result.errors.length === 0, inserted: result.inserted, errors: result.errors });
+    } catch (err: any) {
+      console.error("[import-programs] Fatal:", err);
+      res.status(500).json({ error: err.message });
+    }
   });
 
   const httpServer = createServer(app);
