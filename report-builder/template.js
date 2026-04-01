@@ -32,15 +32,24 @@ export function generateReportHTML(data) {
 
   const categoryColor = (cat = '') => {
     if (cat.includes('Utility')) return { bg: '#EAE8F5', text: '#1C2B5E', dot: '#1C2B5E' };
-    if (cat.includes('Federal')) return { bg: '#FFF3E0', text: '#E65100', dot: '#E65100' };
+    if (cat.includes('Federal')) return { bg: '#F5E8F8', text: '#C84EC4', dot: '#C84EC4' };
     if (cat.includes('State')) return { bg: '#E8F5E9', text: '#4B3082', dot: '#4B3082' };
     if (cat.includes('Financing')) return { bg: '#F0EBF8', text: '#4B3082', dot: '#4B3082' };
     return { bg: '#F5F5F7', text: '#424242', dot: '#424242' };
   };
 
+  // Fix common Unicode Mojibake from AI-generated text (en-dash, em-dash, curly quotes)
+  const sanitize = (str = '') => String(str)
+    .replace(/\u2013/g, '&ndash;')
+    .replace(/\u2014/g, '&mdash;')
+    .replace(/â€"/g, '&ndash;')
+    .replace(/â€"/g, '&ndash;')
+    .replace(/\u2018|\u2019/g, "'")
+    .replace(/\u201C|\u201D/g, '"');
+
   const renderCard = (p) => {
     // Normalize missing fields to safe defaults
-    p = { ...p, category: p.category || '', administrator: p.administrator || '&mdash;', eligibleMeasures: p.eligibleMeasures || '', incentiveStructure: p.incentiveStructure || p.incentiveAmount || '', stacksWith: p.stacksWith || '', deadline: p.deadline || 'TBD', timeline: p.timeline || '', nextStep: p.nextStep || '' };
+    p = { ...p, category: p.category || '', administrator: p.administrator || '&mdash;', eligibleMeasures: p.eligibleMeasures || '', incentiveStructure: p.incentiveStructure || p.incentiveAmount || '', stacksWith: p.stacksWith || '', deadline: p.deadline || 'TBD', timeline: sanitize(p.timeline || ''), nextStep: p.nextStep || '' };
     const colors = categoryColor(p.category);
     return `
       <div class="program-card">
@@ -55,7 +64,7 @@ export function generateReportHTML(data) {
             <div class="program-label">Administered by</div>
             <div class="program-value">${p.administrator}</div>
           </div>
-          <div class "program-row alt">
+          <div class="program-row alt">
             <div class="program-label">Eligible Measures</div>
             <div class="program-value">${p.eligibleMeasures}</div>
           </div>
@@ -233,7 +242,7 @@ export function generateReportHTML(data) {
 
   .cover-report-type {
     font-size: 10pt;
-    color: #1C2B5E;
+    color: #C84EC4;
     font-weight: 700;
     margin-top: 2px;
   }
@@ -242,7 +251,8 @@ export function generateReportHTML(data) {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 0.2in;
   }
 
   .cover-eyebrow {
@@ -994,7 +1004,8 @@ export function generateReportHTML(data) {
     body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .cover { page-break-after: always; }
     .page-break-before { page-break-before: always; }
-    .program-card { page-break-inside: avoid; }
+    .program-card { page-break-inside: auto; }
+    .program-row { page-break-inside: avoid; }
     .priority-item { page-break-inside: avoid; }
     .section-anchor { page-break-after: avoid; }
     .measure-header { page-break-after: avoid; }
@@ -1072,7 +1083,7 @@ export function generateReportHTML(data) {
       </div>
       <div class="summary-meta-item">
         <div class="summary-meta-label">Facility Size</div>
-        <div class="summary-meta-value">${facility.sqFt} sq ft</div>
+        <div class="summary-meta-value">${facility.sqFt ? facility.sqFt + ' sq ft' : '&mdash;'}</div>
       </div>
       <div class="summary-meta-item">
         <div class="summary-meta-label">Facility Type</div>
