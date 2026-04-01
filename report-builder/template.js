@@ -55,7 +55,7 @@ export function generateReportHTML(data) {
             <div class="program-label">Administered by</div>
             <div class="program-value">${p.administrator}</div>
           </div>
-          <div class="program-row alt">
+          <div class "program-row alt">
             <div class="program-label">Eligible Measures</div>
             <div class="program-value">${p.eligibleMeasures}</div>
           </div>
@@ -233,8 +233,8 @@ export function generateReportHTML(data) {
 
   .cover-report-type {
     font-size: 10pt;
-    color: #666;
-    font-weight: 400;
+    color: #1C2B5E;
+    font-weight: 700;
     margin-top: 2px;
   }
 
@@ -1100,7 +1100,7 @@ export function generateReportHTML(data) {
 
   <div class="page-footer">
     <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
-    <span>enlightingenergy.com &nbsp;&middot;&nbsp; 714-853-5416 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
+    <span>enlightingenergy.com &nbsp;&middot;&nbsp; 805-724-5299 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
   </div>
 </div>
 
@@ -1165,7 +1165,7 @@ export function generateReportHTML(data) {
 
   <div class="page-footer">
     <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
-    <span>enlightingenergy.com &nbsp;&middot;&nbsp; 714-853-5416 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
+    <span>enlightingenergy.com &nbsp;&middot;&nbsp; 805-724-5299 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
   </div>
 </div>
 
@@ -1239,7 +1239,7 @@ export function generateReportHTML(data) {
       </div>
       <div class="about-cta-contact-item">
         <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#7C3AED"/><path d="M7 6h3l1 3-2 1a7 7 0 003 3l1-2 3 1v3c-5 1-10-4-9-9z" fill="white"/></svg></div>
-        714-853-5416
+        805-724-5299
       </div>
       <div class="about-cta-contact-item">
         <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#7C3AED"/><circle cx="10" cy="10" r="5" stroke="white" stroke-width="1.5"/><path d="M10 5v10M5 10h10" stroke="white" stroke-width="1.5"/></svg></div>
