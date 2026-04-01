@@ -19,10 +19,8 @@ import {
 } from '../shared/schema';
 import { eq, sql } from 'drizzle-orm';
 import { readFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 interface RawProgram {
   name: string;
@@ -112,7 +110,7 @@ function makeSourceId(name: string): string {
 }
 
 export async function importPrograms(): Promise<{ inserted: number; skipped: number; errors: string[] }> {
-  const jsonPath = join(__dirname, 'programs_complete.json');
+  const jsonPath = join(process.cwd(), 'scripts', 'programs_complete.json');
   const rawPrograms: RawProgram[] = JSON.parse(readFileSync(jsonPath, 'utf-8'));
   console.log(`[import] Loaded ${rawPrograms.length} programs from JSON`);
 
