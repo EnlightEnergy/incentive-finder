@@ -219,7 +219,71 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: 'Failed to generate report', details: (err as Error).message });
     }
   });
- n,
+
+  
+  // Dynamic sitemap.xml route
+  app.get("/sitemap.xml", async (req, res) => {
+    try {
+      const lastmodDates = await getLastModDates();
+      const terminologyData = await getTerminologyData();
+      
+      const baseUrl = "https://www.californiaenergyincentives.com";
+      
+      // Build sitemap XML
+      let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+      xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+      
+      // Home page
+      xml += '  <url>\n';
+      xml += `    <loc>${baseUrl}/</loc>\n`;
+      xml += `    <lastmod>${lastmodDates.get('home')}</lastmod>\n`;
+      xml += '    <changefreq>weekly</changefreq>\n';
+      xml += '    <priority>1.0</priority>\n';
+      xml += '  </url>\n';
+      
+      // Terminology page
+      xml += '  <url>\n';
+      xml += `    <loc>${baseUrl}/terminology</loc>\n`;
+      xml += `    <lastmod>${lastmodDates.get('terminology')}</lastmod>\n`;
+      xml += '    <changefreq>monthly</changefreq>\n';
+      xml += '    <priority>0.8</priority>\n';
+      xml += '  </url>\n';
+      
+      // HTML Sitemap page
+      xml += '  <url>\n';
+      xml += `    <loc>${baseUrl}/sitemap</loc>\n`;
+      xml += `    <lastmod>${lastmodDates.get('sitemap')}</lastmod>\n`;
+      xml += '    <changefreq>monthly</changefreq>\n';
+      xml += '    <priority>0.5</priority>\n';
+      xml += '  </url>\n';
+      
+      // Add terminology entries dynamically
+      for (const term of terminologyData.terms) {
+        xml += '  <url>\n';
+        xml += `    <loc>${baseUrl}/terminology#${term.id}</loc>\n`;
+        xml += `    <lastmod>${lastmodDates.get('terminology')}</lastmod>\n`;
+        xml += '    <changefreq>monthly</changefreq>\n';
+        xml += '    <priority>0.6</priority>\n';
+        xml += '  </url>\n';
+      }
+      
+      xml += '</urlset>';
+      
+      res.set('Content-Type', 'application/xml');
+      res.send(xml);
+    } catch (error) {
+      console.error("Error generating sitemap:", error);
+      res.status(500).send("Error generating sitemap");
+    }
+  });
+  
+  // Public API routes
+  app.get("/api/programs", async (req, res) => {
+    try {
+      const params = searchProgramsSchema.parse({
+        q: req.query.q,
+        businessType: req.query.businessType,
+        location: req.query.location,
         utility: req.query.utility,
         measures: req.query.measures ? (Array.isArray(req.query.measures) ? req.query.measures : [req.query.measures]) : undefined,
         sqft: req.query.sqft ? parseInt(req.query.sqft as string) : undefined,
