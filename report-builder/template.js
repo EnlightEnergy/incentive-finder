@@ -21,7 +21,7 @@ export function generateReportHTML(data) {
 
   const renderCard = (p) => {
     // Normalize missing fields to safe defaults
-    p = { ...p, category: p.category || '', administrator: p.administrator || '—', eligibleMeasures: p.eligibleMeasures || '', incentiveStructure: p.incentiveStructure || p.incentiveAmount || '', stacksWith: p.stacksWith || '', deadline: p.deadline || 'TBD', timeline: p.timeline || '', nextStep: p.nextStep || '' };
+    p = { ...p, category: p.category || '', administrator: p.administrator || '&mdash;', eligibleMeasures: p.eligibleMeasures || '', incentiveStructure: p.incentiveStructure || p.incentiveAmount || '', stacksWith: p.stacksWith || '', deadline: p.deadline || 'TBD', timeline: p.timeline || '', nextStep: p.nextStep || '' };
     const colors = categoryColor(p.category);
     return `
       <div class="program-card">
@@ -65,7 +65,7 @@ export function generateReportHTML(data) {
           </div>
           <div class="program-row highlight-blue next-step-row">
             <div class="program-label">Your Next Step</div>
-            <div class="program-value next-step-value">${p.nextStep}</div>
+            <div class="program-value next-step-value">Contact us to discuss your project and rebate eligibility. We handle pre-approval, application, and all rebate filing on your behalf.</div>
           </div>
         </div>
       </div>`;
@@ -103,14 +103,19 @@ export function generateReportHTML(data) {
   const stackingHTML = stackingNotes.map(s => `
     <tr class="stacking-row">
       <td class="stacking-pair">${s.pair}</td>
-      <td class="stacking-can ${s.canStack ? 'can-yes' : 'can-no'}">${s.canStack ? 'â Yes' : 'â No'}</td>
+      <td class="stacking-can ${s.canStack ? 'can-yes' : 'can-no'}">${s.canStack ? 'Yes' : 'No'}</td>
       <td class="stacking-note">${s.note}</td>
     </tr>
   `).join('');
 
-  const priorityHTML = priorityActions.map(a => `
+  const priorityHTML = [
+    { n: '1', urgency: 'Schedule a Call', action: 'Contact Enlighting Energy to explain your project goals, timeline, and budget.', detail: 'Our team will review your facility profile and the programs identified in this report.' },
+    { n: '2', urgency: 'Free Facility Audit', action: 'We visit your facility at no cost to assess your energy systems and baseline usage.', detail: 'This on-site audit confirms eligibility and identifies additional savings opportunities.' },
+    { n: '3', urgency: 'Incentive Stack Plan', action: 'We map out the optimal combination of utility rebates, state grants, and federal tax credits for your project.', detail: 'Our goal is to layer programs so you achieve your upgrade at the lowest possible out-of-pocket cost.' },
+    { n: '4', urgency: 'Installation & Filing', action: 'If the numbers work for you, we install the energy-saving measures and handle every rebate application on your behalf.', detail: 'You get the upgrades and the incentives &mdash; we handle all the paperwork, submissions, and follow-up.' },
+  ].map(a => `
     <div class="priority-item">
-      <div class="priority-number">${a.priority}</div>
+      <div class="priority-number">${a.n}</div>
       <div class="priority-content">
         <div class="priority-urgency">${a.urgency}</div>
         <div class="priority-action">${a.action}</div>
@@ -124,9 +129,9 @@ export function generateReportHTML(data) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qualifying Programs Report â ${facility.name}</title>
+<title>Qualifying Programs Report &mdash; ${facility.name}</title>
 <style>
-  /* âââ Reset & Base âââ */
+  /*  Reset & Base  */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
@@ -137,7 +142,7 @@ export function generateReportHTML(data) {
     line-height: 1.5;
   }
 
-  /* âââ Page Layout âââ */
+  /*  Page Layout  */
   .page {
     width: 8.5in;
     min-height: 11in;
@@ -145,7 +150,7 @@ export function generateReportHTML(data) {
     padding: 0;
   }
 
-  /* âââ Cover Page âââ */
+  /*  Cover Page  */
   .cover {
     width: 8.5in;
     height: 11in;
@@ -331,7 +336,7 @@ export function generateReportHTML(data) {
     text-align: right;
   }
 
-  /* âââ Content Pages âââ */
+  /*  Content Pages  */
   .content-page {
     padding: 0.55in 0.75in 0.45in;
   }
@@ -346,7 +351,7 @@ export function generateReportHTML(data) {
     page-break-after: avoid;
   }
 
-  /* âââ Running Header âââ */
+  /*  Running Header  */
   .running-header {
     display: flex;
     justify-content: space-between;
@@ -370,7 +375,7 @@ export function generateReportHTML(data) {
     color: #888;
   }
 
-  /* âââ Section Titles âââ */
+  /*  Section Titles  */
   .section-title {
     font-size: 18pt;
     font-weight: 800;
@@ -392,7 +397,7 @@ export function generateReportHTML(data) {
     border-radius: 2px;
   }
 
-  /* âââ Summary Page âââ */
+  /*  Summary Page  */
   .summary-header-box {
     background: #1C2B5E;
     color: white;
@@ -500,7 +505,7 @@ export function generateReportHTML(data) {
     line-height: 1.65;
   }
 
-  /* âââ Program Cards âââ */
+  /*  Program Cards  */
   .measure-group {
     margin-bottom: 32px;
   }
@@ -673,7 +678,7 @@ export function generateReportHTML(data) {
     border: 1px solid #FFE69C;
   }
 
-  /* âââ Stacking Table âââ */
+  /*  Stacking Table  */
   .stacking-table {
     width: 100%;
     border-collapse: collapse;
@@ -724,7 +729,7 @@ export function generateReportHTML(data) {
     line-height: 1.5;
   }
 
-  /* âââ Priority Actions âââ */
+  /*  Priority Actions  */
   .priority-item {
     display: flex;
     gap: 0;
@@ -775,7 +780,7 @@ export function generateReportHTML(data) {
     line-height: 1.55;
   }
 
-  /* âââ Limitations Section âââ */
+  /*  Limitations Section  */
   .limitations-box {
     background: #FFFBF0;
     border: 1px solid #FFE69C;
@@ -830,13 +835,15 @@ export function generateReportHTML(data) {
     line-height: 14px;
   }
 
-  /* âââ About Page âââ */
+  /*  About Page  */
   .about-hero {
     background: linear-gradient(135deg, #1C2B5E 0%, #13194A 100%);
     border-radius: 12px;
     padding: 36px 40px;
     color: white;
     margin-bottom: 28px;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .about-hero-label {
@@ -944,7 +951,7 @@ export function generateReportHTML(data) {
     flex-shrink: 0;
   }
 
-  /* âââ Footer âââ */
+  /*  Footer  */
   .page-footer {
     margin-top: 32px;
     padding-top: 12px;
@@ -961,7 +968,7 @@ export function generateReportHTML(data) {
     color: #1C2B5E;
   }
 
-  /* âââ Print / PDF âââ */
+  /*  Print / PDF  */
   @media print {
     body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .cover { page-break-after: always; }
@@ -976,9 +983,9 @@ export function generateReportHTML(data) {
 </head>
 <body>
 
-<!-- âââââââââââââââââââââââââââââââââââââââââââââââ
+<!-- ========================================
      COVER PAGE
-     âââââââââââââââââââââââââââââââââââââââââââââââ -->
+     ======================================== -->
 <div class="cover">
   <div class="cover-top-bar"></div>
   <div class="cover-accent-bar"></div>
@@ -986,7 +993,7 @@ export function generateReportHTML(data) {
   <div class="cover-body">
     <!-- Logo area -->
     <div class="cover-logo-area">
-      <div class="cover-logo-circle">â¡</div>
+      <div class="cover-logo-circle"></div>
       <div>
         <div class="cover-company-name">Enlighting Energy</div>
         <div class="cover-report-type">Qualifying Programs Report</div>
@@ -997,7 +1004,7 @@ export function generateReportHTML(data) {
     <div class="cover-main">
       <div class="cover-eyebrow">Incentive Finder 2.0</div>
       <div class="cover-title">Your Qualifying<br>Programs Report</div>
-      <div class="cover-subtitle">Every utility rebate, state grant, and federal program<br>your facility qualifies for â organized by measure.</div>
+      <div class="cover-subtitle">Every utility rebate, state grant, and federal program<br>your facility qualifies for &mdash; organized by measure.</div>
       <div class="cover-divider"></div>
 
       <div class="cover-facility-box">
@@ -1005,8 +1012,8 @@ export function generateReportHTML(data) {
         <div class="cover-facility-name">${facility.name}</div>
         <div class="cover-facility-meta">
           ${facility.address}, ${facility.city}, ${facility.state} ${facility.zip}<br>
-          ${facility.facilityType} &nbsp;Â·&nbsp; ${facility.sqFt} sq ft &nbsp;Â·&nbsp; ${facility.utility} &nbsp;Â·&nbsp; ${facility.ownership}<br>
-          <span style="color:#888;font-size:9pt;">${facility.contactName} &nbsp;Â·&nbsp; ${facility.contactEmail} &nbsp;Â·&nbsp; ${facility.reportDate}</span>
+          ${facility.facilityType} &nbsp;&middot;&nbsp; ${facility.sqFt} sq ft &nbsp;&middot;&nbsp; ${facility.utility} &nbsp;&middot;&nbsp; ${facility.ownership}<br>
+          <span style="color:#888;font-size:9pt;">${facility.contactName} &nbsp;&middot;&nbsp; ${facility.contactEmail} &nbsp;&middot;&nbsp; ${facility.reportDate}</span>
         </div>
         <div class="cover-measures-row">
           ${measures.map(m => `<span class="cover-measure-chip">${m}</span>`).join('')}
@@ -1021,12 +1028,12 @@ export function generateReportHTML(data) {
 </div>
 
 
-<!-- âââââââââââââââââââââââââââââââââââââââââââââââ
+<!-- ========================================
      PAGE 2: SUMMARY
-     âââââââââââââââââââââââââââââââââââââââââââââââ -->
+     ======================================== -->
 <div class="content-page page-break-before">
   <div class="running-header">
-    <div class="running-header-left">Qualifying Programs Report &nbsp;Â·&nbsp; ${facility.name}</div>
+    <div class="running-header-left">Qualifying Programs Report &nbsp;&middot;&nbsp; ${facility.name}</div>
     <div class="running-header-right">${facility.reportDate}</div>
   </div>
 
@@ -1060,7 +1067,7 @@ export function generateReportHTML(data) {
   </div>
 
   <div class="programs-found-banner">
-    â &nbsp; ${programCount} qualifying programs found across utility, state, and federal sources
+     &nbsp; ${programCount} qualifying programs found across utility, state, and federal sources
   </div>
 
   <!-- AI Summary -->
@@ -1072,18 +1079,18 @@ export function generateReportHTML(data) {
   </div>
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;Â·&nbsp; Qualifying Programs Report</span>
-    <span>enlightingenergy.com &nbsp;Â·&nbsp; 805-724-5299 &nbsp;Â·&nbsp; hello@enlightingenergy.com</span>
+    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
+    <span>enlightingenergy.com &nbsp;&middot;&nbsp; 714-853-5416 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
   </div>
 </div>
 
 
-<!-- âââââââââââââââââââââââââââââââââââââââââââââââ
+<!-- ========================================
      PROGRAMS BY MEASURE
-     âââââââââââââââââââââââââââââââââââââââââââââââ -->
+     ======================================== -->
 <div class="content-page page-break-before">
   <div class="running-header">
-    <div class="running-header-left">Programs By Measure &nbsp;Â·&nbsp; ${facility.name}</div>
+    <div class="running-header-left">Programs By Measure &nbsp;&middot;&nbsp; ${facility.name}</div>
     <div class="running-header-right">${facility.reportDate}</div>
   </div>
 
@@ -1094,18 +1101,18 @@ export function generateReportHTML(data) {
   ${programCardsHTML}
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;Â·&nbsp; Qualifying Programs Report</span>
+    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
     <span>Programs verified as of ${facility.reportDate}. Confirm current terms with program administrator before applying.</span>
   </div>
 </div>
 
 
-<!-- âââââââââââââââââââââââââââââââââââââââââââââââ
+<!-- ========================================
      STACKING + PRIORITY ACTIONS
-     âââââââââââââââââââââââââââââââââââââââââââââââ -->
+     ======================================== -->
 <div class="content-page page-break-before">
   <div class="running-header">
-    <div class="running-header-left">Stacking & Next Steps &nbsp;Â·&nbsp; ${facility.name}</div>
+    <div class="running-header-left">Stacking & Next Steps &nbsp;&middot;&nbsp; ${facility.name}</div>
     <div class="running-header-right">${facility.reportDate}</div>
   </div>
 
@@ -1137,18 +1144,18 @@ export function generateReportHTML(data) {
   ${priorityHTML}
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;Â·&nbsp; Qualifying Programs Report</span>
-    <span>enlightingenergy.com &nbsp;Â·&nbsp; 805-724-5299 &nbsp;Â·&nbsp; hello@enlightingenergy.com</span>
+    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
+    <span>enlightingenergy.com &nbsp;&middot;&nbsp; 714-853-5416 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
   </div>
 </div>
 
 
-<!-- âââââââââââââââââââââââââââââââââââââââââââââââ
+<!-- ========================================
      LIMITATIONS + ABOUT
-     âââââââââââââââââââââââââââââââââââââââââââââââ -->
+     ======================================== -->
 <div class="content-page page-break-before">
   <div class="running-header">
-    <div class="running-header-left">Important Notes &nbsp;Â·&nbsp; ${facility.name}</div>
+    <div class="running-header-left">Important Notes &nbsp;&middot;&nbsp; ${facility.name}</div>
     <div class="running-header-right">${facility.reportDate}</div>
   </div>
 
@@ -1160,7 +1167,7 @@ export function generateReportHTML(data) {
     <div class="limitations-title">Please Read Before Taking Action</div>
     <ul class="limitations-list">
       <li>This report identifies programs for which your facility meets the <strong>general eligibility criteria</strong> based on your profile. Final qualification is confirmed by the program administrator upon application review.</li>
-      <li>Incentive structures shown (per-ton, per-watt, per-fixture, etc.) are drawn from program documentation. <strong>Actual incentive amounts</strong> depend on final equipment specifications, quantities, and project scope â which are determined during project design and confirmed at pre-approval.</li>
+      <li>Incentive structures shown (per-ton, per-watt, per-fixture, etc.) are drawn from program documentation. <strong>Actual incentive amounts</strong> depend on final equipment specifications, quantities, and project scope &mdash; which are determined during project design and confirmed at pre-approval.</li>
       <li>Program availability, incentive rates, and eligibility requirements <strong>change frequently</strong>. This report reflects information as of ${facility.reportDate}. Always verify current terms with the program administrator before submitting applications.</li>
       <li>Several programs in this report require <strong>pre-approval before equipment is purchased or installed</strong>. Retroactive applications are not accepted. See the Priority Action Plan for time-sensitive items.</li>
       <li>Stacking eligibility noted in this report reflects known rules as of the report date. Confirm current stacking rules with program administrators, and consult your accountant regarding any federal tax implications of receiving utility or state incentives.</li>
@@ -1170,7 +1177,7 @@ export function generateReportHTML(data) {
   <div style="margin-bottom: 32px;"></div>
 
   <!-- About -->
-  <div class="section-title">About Enlighting Energy</div>
+  <div style="page-break-before: always;"></div><div class="section-title">About Enlighting Energy</div>
   <div class="section-divider"></div>
 
   <div class="about-hero">
@@ -1181,22 +1188,22 @@ export function generateReportHTML(data) {
 
   <div class="about-services-grid">
     <div class="about-service-card">
-      <div class="about-service-icon">ð¯</div>
+      <div class="about-service-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="18" fill="#1C2B5E"/><path d="M10 18l6 6 10-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="about-service-title">Incentive Pre-Approval</div>
-      <div class="about-service-desc">We handle pre-approval submissions with SCE, PG&E, SDG&E, LADWP, and state agencies â ensuring no deadline is missed and no eligibility is left on the table.</div>
+      <div class="about-service-desc">We handle pre-approval submissions with SCE, PG&E, SDG&E, LADWP, and state agencies &mdash; ensuring no deadline is missed and no eligibility is left on the table.</div>
     </div>
     <div class="about-service-card">
-      <div class="about-service-icon">âï¸</div>
+      <div class="about-service-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="18" fill="#1C2B5E"/><circle cx="18" cy="18" r="6" stroke="white" stroke-width="2"/><path d="M18 8v4M18 24v4M8 18h4M24 18h4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
       <div class="about-service-title">Engineering & Installation</div>
-      <div class="about-service-desc">Licensed engineering and turnkey installation for HVAC, lighting, refrigeration, VFDs, and more â all designed to meet program specifications.</div>
+      <div class="about-service-desc">Licensed engineering and turnkey installation for HVAC, lighting, refrigeration, VFDs, and more &mdash; all designed to meet program specifications.</div>
     </div>
     <div class="about-service-card">
-      <div class="about-service-icon">ð</div>
+      <div class="about-service-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="18" fill="#1C2B5E"/><rect x="13" y="11" width="10" height="14" rx="1" stroke="white" stroke-width="2"/><path d="M15 15h6M15 19h4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
       <div class="about-service-title">Rebate Filing</div>
       <div class="about-service-desc">We prepare and submit all post-installation documentation, inspection coordination, and rebate applications so you receive every dollar you qualified for.</div>
     </div>
     <div class="about-service-card">
-      <div class="about-service-icon">ð</div>
+      <div class="about-service-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="18" fill="#1C2B5E"/><path d="M12 24v-6M16 24v-9M20 24v-5M24 24v-11" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
       <div class="about-service-title">Incentive Stacking Strategy</div>
       <div class="about-service-desc">We identify how to layer utility, state, and federal programs on the same project to maximize total incentive capture without conflicts.</div>
     </div>
@@ -1204,26 +1211,26 @@ export function generateReportHTML(data) {
 
   <div class="about-cta-box">
     <div class="about-cta-title">Want help capturing all of these programs?</div>
-    <div class="about-cta-text">Enlighting handles everything from pre-approval through installation and final rebate filing â one team, one engagement. No obligation to use us after this conversation. Reach out and let's talk about your project.</div>
+    <div class="about-cta-text">Enlighting handles everything from pre-approval through installation and final rebate filing &mdash; one team, one engagement. No obligation to use us after this conversation. Reach out and let's talk about your project.</div>
     <div class="about-cta-contacts">
       <div class="about-cta-contact-item">
-        <div class="contact-icon">â</div>
+        <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#7C3AED"/><path d="M5 7l5 4 5-4M5 7h10v8H5V7z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
         hello@enlightingenergy.com
       </div>
       <div class="about-cta-contact-item">
-        <div class="contact-icon">â</div>
-        805-724-5299
+        <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#7C3AED"/><path d="M7 6h3l1 3-2 1a7 7 0 003 3l1-2 3 1v3c-5 1-10-4-9-9z" fill="white"/></svg></div>
+        714-853-5416
       </div>
       <div class="about-cta-contact-item">
-        <div class="contact-icon">ð</div>
+        <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#7C3AED"/><circle cx="10" cy="10" r="5" stroke="white" stroke-width="1.5"/><path d="M10 5v10M5 10h10" stroke="white" stroke-width="1.5"/></svg></div>
         enlightingenergy.com
       </div>
     </div>
   </div>
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;Â·&nbsp; Qualifying Programs Report &nbsp;Â·&nbsp; ${facility.reportDate}</span>
-    <span>Â© Enlighting Energy. All rights reserved.</span>
+    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report &nbsp;&middot;&nbsp; ${facility.reportDate}</span>
+    <span>&copy; Enlighting Energy. All rights reserved.</span>
   </div>
 </div>
 
