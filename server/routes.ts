@@ -10,7 +10,7 @@ import { z } from "zod";
 import { generateReport } from '../report-builder/generate-report.js';
 import { matchPrograms } from './matcher';
 import { processConversation, submitLead } from './ai-conversation';
-import { importPrograms } from '../scripts/import-programs';
+import { importPrograms } from '../scripts/import-programs.js';
 
 // Memoized lastmod cache
 let lastmodCache: Map<string, string> | null = null;
@@ -101,8 +101,11 @@ function normalizeReportData(matchResult: any) {
 
   const allEntries = programs.flatMap((g: any) => g.entries);
   const urgent = allEntries.filter((e: any) => e.preApprovalRequired);
-  const nonUrgent = allEntries.filter((e: any) => !e.preApprovalRequired);
-  const priorityList = [...urgent, ...nonUrgent].slice(0, 3);
+  // Non-urgent non-federal programs first; Federal Tax Credits (post-project deductions like
+  // 179D) always go to the end since they require no action before the project starts.
+  const nonUrgentNonFederal = allEntries.filter((e: any) => !e.preApprovalRequired && !e.category?.includes('Federal'));
+  const nonUrgentFederal = allEntries.filter((e: any) => !e.preApprovalRequired && e.category?.includes('Federal'));
+  const priorityList = [...urgent, ...nonUrgentNonFederal, ...nonUrgentFederal].slice(0, 3);
 
   const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   return {
@@ -204,8 +207,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         throw new Error('generateReport returned empty buffer');
       }
       console.log('[generate-report] PDF size:', pdfBuffer.length, 'bytes');
+      const facilityName = reportData.facility?.name || 'Facility';
+      const reportDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      const safeFilename = `${facilityName} incentive programs report | Enlighting (${reportDate}).pdf`.replace(/[/\\?%*:|"<>]/g, '-');
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'attachment; filename="qualifying-programs-report.pdf"');
+      res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"`);
       res.setHeader('Content-Length', pdfBuffer.length);
       res.end(pdfBuffer);
     } catch (err) {
@@ -213,71 +219,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: 'Failed to generate report', details: (err as Error).message });
     }
   });
-
-  
-  // Dynamic sitemap.xml route
-  app.get("/sitemap.xml", async (req, res) => {
-    try {
-      const lastmodDates = await getLastModDates();
-      const terminologyData = await getTerminologyData();
-      
-      const baseUrl = "https://www.californiaenergyincentives.com";
-      
-      // Build sitemap XML
-      let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-      xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-      
-      // Home page
-      xml += '  <url>\n';
-      xml += `    <loc>${baseUrl}/</loc>\n`;
-      xml += `    <lastmod>${lastmodDates.get('home')}</lastmod>\n`;
-      xml += '    <changefreq>weekly</changefreq>\n';
-      xml += '    <priority>1.0</priority>\n';
-      xml += '  </url>\n';
-      
-      // Terminology page
-      xml += '  <url>\n';
-      xml += `    <loc>${baseUrl}/terminology</loc>\n`;
-      xml += `    <lastmod>${lastmodDates.get('terminology')}</lastmod>\n`;
-      xml += '    <changefreq>monthly</changefreq>\n';
-      xml += '    <priority>0.8</priority>\n';
-      xml += '  </url>\n';
-      
-      // HTML Sitemap page
-      xml += '  <url>\n';
-      xml += `    <loc>${baseUrl}/sitemap</loc>\n`;
-      xml += `    <lastmod>${lastmodDates.get('sitemap')}</lastmod>\n`;
-      xml += '    <changefreq>monthly</changefreq>\n';
-      xml += '    <priority>0.5</priority>\n';
-      xml += '  </url>\n';
-      
-      // Add terminology entries dynamically
-      for (const term of terminologyData.terms) {
-        xml += '  <url>\n';
-        xml += `    <loc>${baseUrl}/terminology#${term.id}</loc>\n`;
-        xml += `    <lastmod>${lastmodDates.get('terminology')}</lastmod>\n`;
-        xml += '    <changefreq>monthly</changefreq>\n';
-        xml += '    <priority>0.6</priority>\n';
-        xml += '  </url>\n';
-      }
-      
-      xml += '</urlset>';
-      
-      res.set('Content-Type', 'application/xml');
-      res.send(xml);
-    } catch (error) {
-      console.error("Error generating sitemap:", error);
-      res.status(500).send("Error generating sitemap");
-    }
-  });
-  
-  // Public API routes
-  app.get("/api/programs", async (req, res) => {
-    try {
-      const params = searchProgramsSchema.parse({
-        q: req.query.q,
-        businessType: req.query.businessType,
-        location: req.query.location,
+ n,
         utility: req.query.utility,
         measures: req.query.measures ? (Array.isArray(req.query.measures) ? req.query.measures : [req.query.measures]) : undefined,
         sqft: req.query.sqft ? parseInt(req.query.sqft as string) : undefined,
@@ -388,7 +330,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Chatbot API routes
+  // Chatbot API toutes
   app.post("/api/chat/message", async (req, res) => {
     try {
       const { sessionId, message, zipCode, facilityType, utility, unrecognizedFacility, measure, searchMode } = req.body;
@@ -609,14 +551,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // ── Admin: one-time program import ──────────────────────────────────────────
+  // Protected by basic auth (same as /admin pages). Idempotent — safe to re-run.
   app.post("/api/admin/import-programs", basicAuth, async (req, res) => {
     try {
-      console.log("[import-programs] Starting import...");
+      console.log("[import-programs] Starting import of programs_complete.json...");
       const result = await importPrograms();
-      console.log(`[import-programs] Done: ${result.inserted} inserted, ${result.errors.length} errors`);
-      res.json({ success: result.errors.length === 0, inserted: result.inserted, errors: result.errors });
+      console.log(`[import-programs] Done: ${result.inserted} records, ${result.errors.length} errors`);
+      res.json({
+        success: result.errors.length === 0,
+        inserted: result.inserted,
+        errors: result.errors,
+      });
     } catch (err: any) {
-      console.error("[import-programs] Fatal:", err);
+      console.error("[import-programs] Fatal error:", err);
       res.status(500).json({ error: err.message });
     }
   });
