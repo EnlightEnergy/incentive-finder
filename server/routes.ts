@@ -181,9 +181,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Generate qualifying programs PDF report
-`/api/generate-report` endpoint
 
-FIND (the entire existing block):
   app.post('/api/generate-report', async (req, res) => {
     try {
       const pdfBuffer = await generateReport(req.body);
