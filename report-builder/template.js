@@ -1011,9 +1011,9 @@ export function generateReportHTML(data) {
         <div class="cover-facility-label">Prepared For</div>
         <div class="cover-facility-name">${facility.name}</div>
         <div class="cover-facility-meta">
-          ${facility.address}, ${facility.city}, ${facility.state} ${facility.zip}<br>
-          ${facility.facilityType} &nbsp;&middot;&nbsp; ${facility.sqFt} sq ft &nbsp;&middot;&nbsp; ${facility.utility} &nbsp;&middot;&nbsp; ${facility.ownership}<br>
-          <span style="color:#888;font-size:9pt;">${facility.contactName} &nbsp;&middot;&nbsp; ${facility.contactEmail} &nbsp;&middot;&nbsp; ${facility.reportDate}</span>
+          ${[facility.address, facility.city && facility.state ? `${facility.city}, ${facility.state}` : (facility.state || ''), facility.zip].filter(Boolean).join(' ') || `${facility.state || 'CA'} ${facility.zip}`}<br>
+          ${[facility.facilityType, facility.sqFt ? `${facility.sqFt} sq ft` : '', facility.utility, facility.ownership].filter(Boolean).join(' &nbsp;&middot;&nbsp; ')}<br>
+          <span style="color:#888;font-size:9pt;">${[facility.contactName, facility.contactEmail, facility.reportDate].filter(Boolean).join(' &nbsp;&middot;&nbsp; ')}</span>
         </div>
         <div class="cover-measures-row">
           ${measures.map(m => `<span class="cover-measure-chip">${m}</span>`).join('')}
