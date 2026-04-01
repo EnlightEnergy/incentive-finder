@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Enlighting Energy â Find Your California Energy Incentives</title>
+        <title>Enlighting Energy — Find Your California Energy Incentives</title>
         <meta name="description" content="Discover every utility rebate, state grant, and federal incentive your California commercial facility qualifies for. AI-powered matching, instant PDF report." />
       </Helmet>
 
@@ -65,7 +65,7 @@ export default function Home() {
             Find every incentive your facility qualifies for.
           </h1>
           <p className="text-blue-200 text-lg max-w-xl mb-10 leading-relaxed">
-            Describe your facility and what you're upgrading. Our AI matches you to every utility rebate, state grant, and federal program â then generates a full PDF report in under 90 seconds.
+            Describe your facility and what you're upgrading. Our AI matches you to every utility rebate, state grant, and federal program — then generates a full PDF report in under 90 seconds.
           </p>
 
           <form onSubmit={handleSubmit} className="w-full max-w-2xl">
@@ -76,11 +76,11 @@ export default function Home() {
                 onChange={(e) => { setMessage(e.target.value); autoResize(); }}
                 onKeyDown={handleKeyDown}
                 rows={3}
-                placeholder="Tell me about your facility â what it is, where it's located, and what you're looking to upgradeâ¦"
+                placeholder="Tell me about your facility — what it is, where it's located, and what you're looking to upgrade…"
                 className="w-full px-6 pt-5 pb-2 text-gray-800 placeholder-gray-400 resize-none focus:outline-none text-base leading-relaxed"
               />
               <div className="flex items-center justify-between px-6 pb-4 pt-2">
-                <span className="text-xs text-gray-400">Press Enter to start âµ</span>
+                <span className="text-xs text-gray-400">Press Enter to start ↵</span>
                 <button type="submit" disabled={!message.trim()}
                   className="bg-[#C84EC4] hover:bg-[#a83ea5] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2">
                   Find My Programs
@@ -92,7 +92,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-wrap gap-2 justify-center mt-4">
-              {["SCE warehouse, want LED + HVAC", "PG&E office building, 30k sqft", "Cold storage facility in LA"].map((ex) => (
+              {["Warehouse in Fresno, want LED + HVAC", "Office building in Riverside, 30k sqft", "Cold storage facility in Stockton"].map((ex) => (
                 <button key={ex} type="button" onClick={() => { setMessage(ex); textareaRef.current?.focus(); }}
                   className="text-xs text-blue-200 border border-blue-200/30 hover:border-blue-200/60 hover:text-white rounded-full px-3 py-1 transition-colors">
                   {ex}
@@ -113,9 +113,9 @@ export default function Home() {
             <h2 className="text-center text-3xl font-black text-[#1C2B5E] mb-12">From conversation to report in 90 seconds</h2>
             <div className="grid sm:grid-cols-3 gap-8">
               {[
-                { step: "01", title: "Tell us about your facility", desc: "Describe your building and upgrades in plain English. Our AI understands context â no forms, no dropdowns." },
+                { step: "01", title: "Tell us about your facility", desc: "Describe your building and upgrades in plain English. Our AI understands context — no forms, no dropdowns." },
                 { step: "02", title: "We match your programs", desc: "We scan utility rebates, state grants, and federal incentives across SCE, PG&E, SDG&E, LADWP, SMUD, and more." },
-                { step: "03", title: "Receive your report", desc: "Get a full PDF with program details, stacking notes, deadlines, and pre-approval requirements â specific to your facility." },
+                { step: "03", title: "Receive your report", desc: "Get a full PDF with program details, stacking notes, deadlines, and pre-approval requirements — specific to your facility." },
               ].map(({ step, title, desc }) => (
                 <div key={step} className="text-center">
                   <div className="w-12 h-12 rounded-full bg-[#1C2B5E] text-white font-black text-sm flex items-center justify-center mx-auto mb-4">{step}</div>
@@ -127,7 +127,7 @@ export default function Home() {
             <div className="mt-12 text-center">
               <button onClick={() => navigate("/chat")}
                 className="bg-[#1C2B5E] hover:bg-[#2a3d7e] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors">
-                Get My Free Report â
+                Get My Free Report →
               </button>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function Home() {
           <p className="font-medium text-blue-200 mb-1">Enlighting Energy</p>
           <p>
             <a href="mailto:hello@enlightingenergy.com" className="hover:text-white transition-colors">hello@enlightingenergy.com</a>
-            {" Â· "}805-724-5299{" Â· "}Santa Barbara, CA
+            {" · "}805-724-5299{" · "}Santa Barbara, CA
           </p>
           <p className="mt-3 text-xs">
             <a href="/terminology" className="hover:text-white transition-colors">Terminology</a>
