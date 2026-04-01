@@ -1,121 +1,164 @@
-import { MailService } from '@sendgrid/mail';
-
-const mailService = new MailService();
-if (process.env.SENDGRID_API_KEY) {
-  mailService.setApiKey(process.env.SENDGRID_API_KEY);
-} else {
-  console.warn("WARNING: SENDGRID_API_KEY not set. Email notifications disabled.");
-}
-
-interface EmailParams {
-  to: string;
-  from: string;
-  subject: string;
-  text?: string;
-  html?: string;
-}
-
-export async function sendEmail(params: EmailParams): Promise<boolean> {
-  if (!process.env.SENDGRID_API_KEY) {
-    console.warn('Email sending disabled: SENDGRID_API_KEY not set');
-    return false;
-  }
-  try {
-    await mailService.send({
-      to: params.to,
-      from: params.from,
-      subject: params.subject,
-      text: params.text || '',
-      html: params.html || '',
-    });
-    return true;
-  } catch (error) {
-    console.error('SendGrid email error:', error);
-    return false;
-  }
-}
-
-export async function sendLeadNotification(lead: {
-  company: string;
-  contactName: string;
-  email: string;
-  phone?: string;
-  address?: string;
-  utility?: string;
-  measure?: string;
-  sqft?: number;
-  hours?: number;
-  baselineDesc?: string;
-}): Promise<boolean> {
-  const emailHtml = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <div style="background-color: #16a34a; color: white; padding: 20px; text-align: center;">
-        <h1>New Lead Alert - Enlighting Incentive Finder</h1>
-      </div>
-      <div style="padding: 20px; background-color: #f9f9f9;">
-        <h2 style="color: #16a34a;">Lead Information</h2>
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr><td style="padding: 8px; font-weight: bold;">Company:</td><td style="padding: 8px;">${lead.company}</td></tr>
-          <tr><td style="padding: 8px; font-weight: bold;">Contact:</td><td style="padding: 8px;">${lead.contactName}</td></tr>
-          <tr><td style="padding: 8px; font-weight: bold;">Email:</td><td style="padding: 8px;">${lead.email}</td></tr>
-          ${lead.phone ? `<tr><td style="padding: 8px; font-weight: bold;">Phone:</td><td style="padding: 8px;">${lead.phone}</td></tr>` : ''}
-          ${lead.address ? `<tr><td style="padding: 8px; font-weight: bold;">Address:</td><td style="padding: 8px;">${lead.address}</td></tr>` : ''}
-          ${lead.utility ? `<tr><td style="padding: 8px; font-weight: bold;">Utility:</td><td style="padding: 8px;">${lead.utility}</td></tr>` : ''}
-          ${lead.measure ? `<tr><td style="padding: 8px; font-weight: bold;">Measure:</td><td style="padding: 8px;">${lead.measure}</td></tr>` : ''}
-        </table>
-      </div>
-    </div>
-  `;
-
-  return await sendEmail({
-    to: "hello@enlightingenergy.com",
-    from: "noreply@enlightingenergy.com",
-    subject: `New Lead: ${lead.company} - ${lead.contactName}`,
-    text: `New lead from ${lead.company}. Contact: ${lead.contactName}, ${lead.email}`,
-    html: emailHtml,
-  });
-}
-
-
-// ── Report email via Mailgun ────────────────────────────────────────────────
-// Activate by adding MAILGUN_API_KEY and MAILGUN_DOMAIN to Railway variables.
-// BCC to hello@enlightingenergy.com on every send keeps Enlighting in the loop.
+/**
+ * email.ts
+ *
+ * Mailgun-based email delivery for report sending.
+ * Activate by setting MAILGUN_API_KEY and MAILGUN_DOMAIN in Railway variables.
+ *
+ * BCC: hello@enlightingenergy.com is always BCC'd on every report email.
+ */
 
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN ?? 'mg.enlightingenergy.com';
 const ENLIGHTING_BCC = 'hello@enlightingenergy.com';
-const FROM_ADDRESS = 'Derek Doyle <derek@enlightingenergy.com>';
+
+// Display name is the company — not the individual rep
+const FROM_ADDRESS = 'Enlighting Energy <hello@enlightingenergy.com>';
+
+interface ProgramEntry {
+  name: string;
+  category: string;
+  administrator: string;
+  incentiveStructure?: string;
+  deadline?: string;
+  nextStep?: string;
+}
+
+interface ProgramGroup {
+  measure: string;
+  entries: ProgramEntry[];
+}
 
 interface SendReportEmailParams {
   to: string;
   bcc?: string;
+  recipientName?: string | null;
   matchResult: {
     facility?: Record<string, string>;
-    programs?: Array<{ measure: string; entries: any[] }>;
+    programs?: ProgramGroup[];
     programCount: number;
     summary?: string;
   };
+  pdfBuffer?: Buffer; // Attach the PDF when available
 }
 
-export async function sendReportEmail({ to, bcc = ENLIGHTING_BCC, matchResult }: SendReportEmailParams): Promise<void> {
+/**
+ * Build a plain-text program listing for the email body.
+ */
+function buildProgramList(programs: ProgramGroup[]): string {
+  if (!programs || programs.length === 0) return '';
+
+  return programs
+    .map((group) => {
+      const header = `── ${group.measure} ──────────────────────`;
+      const entries = group.entries
+        .map((p) => {
+          const lines = [`  • ${p.name} [${p.category}]`];
+          if (p.administrator) lines.push(`    Administered by: ${p.administrator}`);
+          if (p.incentiveStructure) lines.push(`    Incentive: ${p.incentiveStructure}`);
+          if (p.deadline) lines.push(`    Deadline: ${p.deadline}`);
+          if (p.nextStep) lines.push(`    Next step: ${p.nextStep}`);
+          return lines.join('\n');
+        })
+        .join('\n\n');
+      return `${header}\n\n${entries}`;
+    })
+    .join('\n\n');
+}
+
+/**
+ * Build an HTML version of the program listing.
+ */
+function buildProgramListHTML(programs: ProgramGroup[]): string {
+  if (!programs || programs.length === 0) return '';
+
+  const categoryColor = (cat: string) => {
+    if (cat.includes('Utility')) return '#1C2B5E';
+    if (cat.includes('Federal')) return '#c05c00';
+    if (cat.includes('State')) return '#2d6a4f';
+    if (cat.includes('Financing')) return '#4B3082';
+    return '#555';
+  };
+
+  const rows = programs
+    .map((group) =>
+      `<tr>
+        <td colspan="4" style="padding:12px 16px 6px;font-weight:700;font-size:13px;color:#1C2B5E;background:#f0f4ff;border-top:2px solid #C84EC4;">
+          ${group.measure}
+        </td>
+      </tr>` +
+      group.entries
+        .map(
+          (p) =>
+            `<tr style="border-bottom:1px solid #eee;">
+              <td style="padding:10px 16px;font-weight:600;color:#222;">${p.name}</td>
+              <td style="padding:10px 8px;white-space:nowrap;">
+                <span style="background:#eef;color:${categoryColor(p.category)};padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;">${p.category}</span>
+              </td>
+              <td style="padding:10px 8px;color:#555;font-size:12px;">${p.administrator ?? ''}</td>
+              <td style="padding:10px 8px;color:#555;font-size:12px;">${p.deadline ?? 'Ongoing'}</td>
+            </tr>`
+        )
+        .join('')
+    )
+    .join('');
+
+  return `
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;border:1px solid #dde;border-radius:6px;overflow:hidden;margin:20px 0;">
+      <thead>
+        <tr style="background:#1C2B5E;color:#fff;">
+          <th style="padding:10px 16px;text-align:left;font-size:12px;">Program</th>
+          <th style="padding:10px 8px;text-align:left;font-size:12px;">Type</th>
+          <th style="padding:10px 8px;text-align:left;font-size:12px;">Administrator</th>
+          <th style="padding:10px 8px;text-align:left;font-size:12px;">Deadline</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+export async function sendReportEmail({
+  to,
+  bcc = ENLIGHTING_BCC,
+  recipientName,
+  matchResult,
+  pdfBuffer,
+}: SendReportEmailParams): Promise<void> {
   if (!MAILGUN_API_KEY) {
-    console.warn('[email] MAILGUN_API_KEY not set -- skipping email send');
+    console.warn('[email] MAILGUN_API_KEY not set — skipping email send');
     return;
   }
 
-  const facilityName = matchResult.facility?.name ?? 'your facility';
+  const facilityName = matchResult.facility?.name ?? matchResult.facility?.facilityName ?? 'your facility';
   const count = matchResult.programCount;
-  const topProgram = matchResult.programs?.[0]?.entries?.[0]?.name ?? null;
   const measures = matchResult.programs?.map((g) => g.measure).join(' and ') ?? 'your projects';
+  const topProgram = matchResult.programs?.[0]?.entries?.[0] ?? null;
 
-  const subject = `Your Qualifying Programs Report -- ${count} programs found`;
-  const text = `Hi there,
+  const greeting = recipientName ? `Hi ${recipientName},` : 'Hi there,';
+  const subject = `Your Qualifying Programs Report — ${count} program${count !== 1 ? 's' : ''} found`;
 
-Your Qualifying Programs Report for ${facilityName} is ready -- I found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${topProgram ? `\n\nThe most time-sensitive one is ${topProgram} -- there's a pre-approval step required before your project starts, so it's worth acting on early.` : ''}
+  const programListText = buildProgramList(matchResult.programs ?? []);
+  const programListHTML = buildProgramListHTML(matchResult.programs ?? []);
 
-${matchResult.summary ?? ''}
+  // ── Plain text version ────────────────────────────────────────────────────
+  const text = `${greeting}
 
-Happy to walk through any of this with you or help move one of these programs forward -- just reply here.
+Your Qualifying Programs Report for ${facilityName} is ready — I found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${
+    topProgram
+      ? `\n\nThe one to act on first is ${topProgram.name}${topProgram.preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
+      : ''
+  }
+
+─────────────────────────────────
+YOUR QUALIFYING PROGRAMS
+─────────────────────────────────
+
+${programListText}
+
+─────────────────────────────────
+
+${pdfBuffer ? 'The full formatted report is attached as a PDF.' : ''}
+
+Happy to walk through any of these programs with you or help you move one forward — just reply here.
 
 Best,
 Derek Doyle
@@ -123,25 +166,112 @@ Enlighting Energy
 805-724-5299
 enlightingenergy.com`;
 
-  const formData = new URLSearchParams();
-  formData.append('from', FROM_ADDRESS);
-  formData.append('to', to);
-  formData.append('bcc', bcc);
-  formData.append('subject', subject);
-  formData.append('text', text);
+  // ── HTML version ──────────────────────────────────────────────────────────
+  const html = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:Helvetica Neue,Arial,sans-serif;background:#f8f8f8;">
+  <div style="max-width:640px;margin:32px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
 
-  const response = await fetch(`https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`, {
-    method: 'POST',
-    headers: {
-      Authorization: 'Basic ' + Buffer.from(`api:${MAILGUN_API_KEY}`).toString('base64'),
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: formData.toString(),
-  });
+    <!-- Header -->
+    <div style="background:#1C2B5E;padding:28px 32px;">
+      <div style="font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;">Enlighting Energy</div>
+      <div style="font-size:12px;color:#aac;">California Commercial Incentive Specialists</div>
+    </div>
 
-  if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`Mailgun error: ${err}`);
+    <!-- Stat bar -->
+    <div style="background:#C84EC4;padding:20px 32px;text-align:center;">
+      <div style="font-size:40px;font-weight:900;color:#fff;line-height:1;">${count}</div>
+      <div style="font-size:14px;color:#ffe;margin-top:4px;">Qualifying Programs Found for ${facilityName}</div>
+    </div>
+
+    <!-- Body -->
+    <div style="padding:28px 32px;">
+      <p style="font-size:15px;color:#333;margin:0 0 12px;">${greeting}</p>
+      <p style="font-size:15px;color:#333;margin:0 0 20px;">
+        I found <strong>${count} program${count !== 1 ? 's' : ''}</strong> that apply to your ${measures}.${
+    topProgram
+      ? ` The one to act on first is <strong>${topProgram.name}</strong>${topProgram.preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
+      : ''
+  }
+      </p>
+
+      <h2 style="font-size:14px;text-transform:uppercase;letter-spacing:1px;color:#1C2B5E;margin:24px 0 8px;border-bottom:2px solid #C84EC4;padding-bottom:8px;">
+        Your Qualifying Programs
+      </h2>
+
+      ${programListHTML}
+
+      ${pdfBuffer ? '<p style="font-size:13px;color:#555;margin-top:8px;">The full formatted report is attached as a PDF.</p>' : ''}
+
+      <p style="font-size:14px;color:#333;margin:24px 0 8px;">
+        Happy to walk through any of these with you — just reply to this email.
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="background:#f0f0f0;padding:16px 32px;border-top:1px solid #e0e0e0;">
+      <p style="margin:0;font-size:12px;color:#888;">
+        <strong style="color:#1C2B5E;">Derek Doyle</strong> · Enlighting Energy<br>
+        805-724-5299 · <a href="https://enlightingenergy.com" style="color:#C84EC4;">enlightingenergy.com</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
+
+  const mailgunUrl = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;
+  const authHeader = 'Basic ' + Buffer.from(`api:${MAILGUN_API_KEY}`).toString('base64');
+
+  if (pdfBuffer) {
+    // Multipart with PDF attachment
+    const { Blob } = await import('buffer');
+    const fd = new FormData();
+    fd.append('from', FROM_ADDRESS);
+    fd.append('to', to);
+    fd.append('bcc', bcc);
+    fd.append('subject', subject);
+    fd.append('text', text);
+    fd.append('html', html);
+    fd.append(
+      'attachment',
+      new Blob([pdfBuffer], { type: 'application/pdf' }),
+      'qualifying-programs-report.pdf'
+    );
+
+    const response = await fetch(mailgunUrl, {
+      method: 'POST',
+      headers: { Authorization: authHeader },
+      body: fd,
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Mailgun error: ${err}`);
+    }
+  } else {
+    // No PDF — plain form post
+    const formData = new URLSearchParams();
+    formData.append('from', FROM_ADDRESS);
+    formData.append('to', to);
+    formData.append('bcc', bcc);
+    formData.append('subject', subject);
+    formData.append('text', text);
+    formData.append('html', html);
+
+    const response = await fetch(mailgunUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: authHeader,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData.toString(),
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Mailgun error: ${err}`);
+    }
   }
 
   console.log(`[email] Report sent to ${to} (BCC: ${bcc})`);
