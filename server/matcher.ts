@@ -122,15 +122,16 @@ function isCompetingUtilityProgram(ownerName: string, customerPatterns: string[]
 }
 const MEASURE_TECH_MAP: Record<string, string[]> = {
   'LED Lighting':['Lighting','LED','lighting','lamp','fixture'],
-  'HVAC':['HVAC','Cooling','Heating','Air Conditioning','chiller','rooftop'],
+  'HVAC':['HVAC','Cooling','Heating','Air Conditioning','chiller','rootop'],
   'VFD / Motors':['VFD','Variable Frequency Drive','Motors','Pump','Fan'],
   'Refrigeration':['Refrigeration','Refrigerator','Walk-in','Case'],
-  'Solar / PV':['Solar','Photovoltaic','PV','Net Metering'],
+  'Solar / PV':['Solar','Phototoltaic','PV','Net Metering'],
   'Battery Storage':['Battery','Energy Storage','Storage','BESS'],
   'EV Charging':['EV','Electric Vehicle','EVSE','Charging Station'],
   'Building Envelope':['Envelope','Insulation','Window','Roof','Cool Roof'],
   'Compressed Air':['Compressed Air','Compressor','Air Compressor'],
-  'Boilers / Steam':['Boiler','Steam','Hot Water'],
+  'Boilers / Steam':['Boiler','Steam','Hot Water','Water Heater','Tankless','Domestic Hot Water','DHW'],
+  'Water Heater':['Water Heater','Tankless','Hot Water','DHW','Domestic Hot Water'],
   'Process Equipment':['Process','Industrial','Manufacturing'],
 };
 
