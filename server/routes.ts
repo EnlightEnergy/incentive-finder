@@ -80,6 +80,56 @@ export function clearSitemapCache() {
   terminologyCacheTime = 0;
 }
 
+```typescript
+function normalizeReportData(matchResult: any) {
+  const programs = (matchResult.programs ?? []).map((group: any) => ({
+    measure: group.measure ?? 'Energy Measures',
+    entries: (group.entries ?? []).map((entry: any) => ({
+      name: entry.name ?? 'Program',
+      category: entry.category ?? 'Incentive',
+      administrator: entry.administrator ?? 'N/A',
+      eligibleMeasures: entry.eligibleMeasures ?? group.measure ?? 'N/A',
+      incentiveStructure: entry.incentiveStructure ?? 'Contact administrator for details',
+      stacksWith: entry.stacksWith ?? null,
+      conflicts: entry.conflicts ?? null,
+      preApprovalRequired: entry.preApprovalRequired ?? false,
+      deadline: entry.deadline ?? 'Ongoing — contact administrator',
+      timeline: entry.timeline ?? '4–8 weeks from application',
+      nextStep: entry.nextStep ?? `Contact ${entry.administrator ?? 'the program administrator'} to apply`,
+    })),
+  }));
+
+  const allEntries = programs.flatMap((g: any) => g.entries);
+  const urgent = allEntries.filter((e: any) => e.preApprovalRequired);
+  const nonUrgent = allEntries.filter((e: any) => !e.preApprovalRequired);
+  const priorityList = [...urgent, ...nonUrgent].slice(0, 3);
+
+  return {
+    facility: {
+      name: matchResult.facility?.name ?? matchResult.facility?.facilityName ?? 'Your Facility',
+      zip: matchResult.facility?.zip ?? '',
+      utility: matchResult.facility?.utility ?? '',
+      facilityType: matchResult.facility?.facilityType ?? '',
+      sqFt: matchResult.facility?.sqFt ?? '',
+    },
+    measures: programs.map((g: any) => g.measure),
+    programCount: matchResult.programCount ?? allEntries.length,
+    summary: matchResult.summary ?? `Based on your facility profile, we identified ${matchResult.programCount ?? allEntries.length} qualifying programs.`,
+    programs,
+    stackingNotes: matchResult.stackingNotes ?? (allEntries.length >= 2 ? [{
+      pair: `${allEntries[0].name} + ${allEntries[1].name}`,
+      canStack: true,
+      note: 'These programs can generally be combined. Confirm with each administrator.',
+    }] : []),
+    priorityActions: matchResult.priorityActions ?? priorityList.map((e: any, idx: number) => ({
+      priority: idx + 1,
+      urgency: e.preApprovalRequired ? 'HIGH — Pre-approval required before project start' : 'MEDIUM',
+      action: `Apply to ${e.name}`,
+      detail: e.nextStep ?? `Contact ${e.administrator ?? 'the administrator'} to get started.`,
+    })),
+  };
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
 
   // Match facility profile to qualifying programs (returns JSON for chatbot/UI)
@@ -100,13 +150,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // ── Lead submission + report generation ────────────────────────────────────
-  app.post('/api/submit-lead', async (req, res) => {
+ app.post('/api/submit-lead', async (req, res) => {
     try {
-      const { messages, email } = req.body;
+      const { messages, email, name } = req.body;
       if (!email) return res.status(400).json({ error: 'email is required' });
-      const { matchResult } = await submitLead(messages, email);
-      // Send report email (BCC to hello@enlightingenergy.com)
-      await sendReportEmail({ to: email, matchResult }).catch(err => console.error('[email] send failed:', err));
+      const { matchResult } = await submitLead(messages, email, name);
+
+      // Generate PDF (don't fail the whole request if PDF crashes)
+      let pdfBuffer: Buffer | undefined;
+      try {
+        const reportData = normalizeReportData(matchResult);
+        pdfBuffer = await generateReport(reportData);
+        console.log('[pdf] Generated successfully, size:', pdfBuffer?.length ?? 0);
+      } catch (pdfErr) {
+        console.error('[pdf] Generation failed — will send email without attachment:', pdfErr);
+      }
+
+      // Send report email with optional PDF attachment
+      await sendReportEmail({
+        to: email,
+        recipientName: name ?? null,
+        matchResult,
+        pdfBuffer,
+      }).catch(err => console.error('[email] send failed:', err));
+
       res.json({ matchResult });
     } catch (err) {
       console.error('/api/submit-lead error:', err);
@@ -114,17 +181,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post('/api/match-programs', async (req, res) => {
-    try {
-      const result = await matchPrograms(req.body);
-      res.json(result);
-    } catch (err) {
-      console.error('matchPrograms failed:', err);
-      res.status(500).json({ error: 'Failed to match programs', details: (err as Error).message });
-    }
-  });
-
   // Generate qualifying programs PDF report
+`/api/generate-report` endpoint
+
+FIND (the entire existing block):
+```typescript
   app.post('/api/generate-report', async (req, res) => {
     try {
       const pdfBuffer = await generateReport(req.body);
@@ -133,6 +194,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
         'Content-Disposition': 'attachment; filename="qualifying-programs-report.pdf"',
       });
       res.send(pdfBuffer);
+    } catch (err) {
+      console.error('Report generation failed:', err);
+      res.status(500).json({ error: 'Failed to generate report', details: (err as Error).message });
+    }
+  });
+```
+
+  app.post('/api/generate-report', async (req, res) => {
+    try {
+      const matchResult = req.body;
+      if (!matchResult || !matchResult.programs) {
+        return res.status(400).json({ error: 'matchResult with programs is required' });
+      }
+      const reportData = normalizeReportData(matchResult);
+      console.log('[generate-report] programs:', reportData.programs.length);
+      const pdfBuffer = await generateReport(reportData);
+      if (!pdfBuffer || pdfBuffer.length === 0) {
+        throw new Error('generateReport returned empty buffer');
+      }
+      console.log('[generate-report] PDF size:', pdfBuffer.length, 'bytes');
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'attachment; filename="qualifying-programs-report.pdf"');
+      res.setHeader('Content-Length', pdfBuffer.length);
+      res.end(pdfBuffer);
     } catch (err) {
       console.error('Report generation failed:', err);
       res.status(500).json({ error: 'Failed to generate report', details: (err as Error).message });
