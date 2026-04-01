@@ -42,11 +42,12 @@ export default function Home() {
       <div className="min-h-screen flex flex-col bg-[#1C2B5E]">
         {/* Nav */}
         <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#C84EC4] flex items-center justify-center">
-              <span className="text-white font-black text-sm">E</span>
-            </div>
-            <span className="text-white font-bold text-lg tracking-tight">Enlighting Energy</span>
+          <div className="flex items-center">
+            <img
+              src="https://static.wixstatic.com/media/955908_7cb9f3e08c164754a8cae1cd6a417ef0~mv2.png"
+              alt="Enlighting Energy"
+              className="h-10 w-auto"
+            />
           </div>
           <div className="flex items-center gap-6">
             <a href="https://enlightingenergy.com" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white text-sm transition-colors">About Us</a>
