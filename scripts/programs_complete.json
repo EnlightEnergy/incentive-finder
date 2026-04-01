@@ -1,1 +1,2139 @@
-[{"name":"Commercial Energy Efficiency Program (CEEP)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["VFDs","Water Heating"],"facilityTypes":["All Commercial"],"incentiveStructure":"HPWH 45\u201399 gal: $6k\u2013$8k; HPWH 120 gal: $14k\u2013$25k by building type (CZ15 lower); DCKV: $1,900/HP; ASH Controls: $65/LF; Medium Temp Case Doors: $230/LF; SRM motors: $425/HP","deadline":"Reservation pre\u2011install; post\u2011install due \u226460 days or by 12/01/2025","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":false,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: Active SCE non\u2011res account; equipment must meet CA eTRM; used/rebuilt not eligible. Contact: CEEP@willdan.com | 855\u2011390\u20117348 | willdanefficiency.com/rebates"},{"name":"Measured Savings Program (MSP)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Pop\u2011NMEC: $0.48 per TSB; Site\u2011NMEC: $0.46 per TSB; pre\u2011payment + interim/final true\u2011ups after 12\u2011mo M&V","deadline":"Quarterly cohorts; program 2024\u20132027","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: Active SCE account; NAICS in Appendix A; 12 months AMI; baseline CV(RMSE)<0.50; <10% missing data/mo. Contact: aesc-inc.com/measured-savings-program/"},{"name":"Grid\u2011Responsive Incentive Design \u2013 Market Access Program (GRID\u2011MAP)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Avoided\u2011cost\u2011weighted metered savings; rates vary annually with avoided costs","deadline":"Installations by 12/31/2027 or until funds allocated","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: Active SCE account; PPP surcharge; 12 months AMI; no Rule 24 DR; no onsite gen changes \u00b112 months; no double\u2011dipping. Contact: grid-map-for-sce@mendotagroup.com | Aggregator list"},{"name":"Commercial Energy Reduction Initiative (CERI)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Customized incentives reserved with utility; payout after verified savings","deadline":"Reservation pre\u2011install; per\u2011project timelines","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: Active meter in listed SoCal counties; subsectors listed; case\u2011by\u2011case approval. Contact: info@socalceri.com | 213\u2011654\u20112043"},{"name":"Local Commercial Strategic Energy Management (SEM)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Rebates/incentives tied to SEM actions and metered savings; long\u2011term coaching (up to 6 years)","deadline":"Cohorts since 2024","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":false,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: SCE commercial customers; program enrollment via PEP. Contact: pep.clearesult.com/pep/commercial"},{"name":"Local Industrial & Agricultural SEM","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for capital + O&M savings under SEM with NMEC baselines","deadline":"Launched H2 2024; multi\u2011year cohorts","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":false,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: SCE industrial/ag sites; cohort participation. Contact: pep.clearesult.com/pep/industrial-agriculture"},{"name":"Emergency Load Reduction Program (ELRP)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["EV Charging","Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"$2.00/kWh reduced during events; no penalties for non\u2011performance","deadline":"Seasonal; enroll via SCE or aggregator","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: Ability to curtail during emergencies; baseline/M&V rules apply. Contact: elrp.sce.com"},{"name":"Auto\u2011DR \u2013 Express Control Incentives","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["EV Charging","Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Menu\u2011based incentives for qualified controls/devices to automate DR reductions","deadline":"Rolling, subject to funding","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"SCE_commercial_industrial_programs.csv","notes":"Eligibility: SCE non\u2011res account; device on qualified list; DR enrollment required. Contact: SCE Auto\u2011DR Express page"},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (10 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"250 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR088. Requirements: NAICS ranges 111000\u2013112990, 211120\u2013213115, 311000\u2013339999; feedback control on static pressure/CFM/velocity; no prior/failed VSD; submit \u226460 days."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (15 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"1000 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR089. Requirements: Same as PR088."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (20 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"1500 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR090. Requirements: Same as PR088."}]ourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR091. Requirements: Same as PR088."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (30 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"3000 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR092. Requirements: Same as PR088."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (40 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"3500 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR093. Requirements: Same as PR088."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (50 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"3500 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR094. Requirements: Same as PR088."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (60 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"6000 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR100. Requirements: NAICS 111000\u2013112990, 311000\u2013339999; submit \u226460 days."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (75 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"7500 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR101. Requirements: Same as PR100."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (100 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"10000 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR102. Requirements: Same as PR100."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (125 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"12500 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR103. Requirements: Same as PR100."},{"name":"PG&E Agriculture & Food Processing - Dust Collection Fan VSD (150 hp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"15000 per motor","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR104. Requirements: Same as PR100."},{"name":"PG&E HVAC \u2013 Commercial Ventilation - Variable Frequency Drive for HVAC Fan","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["HVAC","VFDs"],"facilityTypes":["All Commercial"],"incentiveStructure":"80 per hp","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: H148. Requirements: Existing HVAC supply/return/exhaust fan; single-speed motor; remove throttling devices; building types limited; submit \u226460 days."},{"name":"PG&E HVAC \u2013 Advanced Controls - Advanced Rooftop HVAC Controls (various packages)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["HVAC"],"facilityTypes":["All Commercial"],"incentiveStructure":"0 $120\u2013$194 per ton (caps vary)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: HV055/HV056/HV064/HV065/HV061/HV062/HV070/HV071/HV058/HV059/HV067/HV068/SA08/SA09/SA11/SA12. Requirements: Pick correct measure code by pack type (gas pack/HP/AC only); enter AC tons as quantity; see table for $/ton and caps."},{"name":"PG&E Refrigeration - Ultra-Low Temperature (\u201880 \u00b0C) Freezer 15\u2013<24 ft3","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"300 per unit","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: RF006. Requirements: ENERGY STAR; vertical hinges; 15\u201329 ft3 volume; capable to \u201880 \u00b0C; submit \u226460 days."},{"name":"PG&E Refrigeration - Ultra-Low Temperature (\u201880 \u00b0C) Freezer 24\u201329 ft3","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"600 per unit","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: RF007. Requirements: Same as RF006."},{"name":"PG&E Refrigeration - ASH Controls (Medium Temp, Cooler)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["Refrigeration"],"facilityTypes":["All Commercial"],"incentiveStructure":"25 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: R7. Requirements: Humidity-sensing controls reduce or turn off ASH; not combinable with door measures; submit \u226460 days."},{"name":"PG&E Refrigeration - ASH Controls (Low Temp, Freezer)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"25 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: HB31. Requirements: Same as R7."},{"name":"PG&E Refrigeration - New High\u2011Efficiency Low\u2011Temp Display Case Doors","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["Refrigeration"],"facilityTypes":["All Commercial"],"incentiveStructure":"75 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: R87. Requirements: Low-temp only; no door ASH; mullion/frame heater amps limits; building types: restaurant, hotel, grocery, retail; submit \u226460 days."},{"name":"PG&E Refrigeration - Replace Open Multi\u2011Deck with New Case (Low Temp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"175 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: R4. Requirements: New case includes LED, ECMs, double-pane doors; various exclusions & remodel limits; submit \u226460 days."},{"name":"PG&E Refrigeration - Replace Open Multi\u2011Deck with New Case (Medium Temp)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"75 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: R5. Requirements: Same as R4 for medium temp."},{"name":"PG&E Insulation - Pipe insulation \u22641\" pipe, \u226415 psig steam, outdoor (1\" layer)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["Building Envelope"],"facilityTypes":["All Commercial"],"incentiveStructure":"3 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR051. Requirements: Min. pipe dia 0.5\"; retrofit only; Title 24-mandated insulation ineligible; submit \u226460 days."},{"name":"PG&E Insulation - Pipe insulation 1\"<pipe\u22644\", hot water, indoor (1\" layer)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["Water Heating","Building Envelope"],"facilityTypes":["All Commercial"],"incentiveStructure":"3 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR068. Requirements: As above."},{"name":"PG&E Insulation - Fitting insulation 1\"<pipe\u22644\", outdoor, >15 psig steam","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["Building Envelope"],"facilityTypes":["All Commercial"],"incentiveStructure":"3 per fitting","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR085. Requirements: As above."},{"name":"PG&E Insulation - Pipe insulation >4\" pipe, \u226415 psig steam, outdoor (1\" layer)","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["Building Envelope"],"facilityTypes":["All Commercial"],"incentiveStructure":"3 per linear ft","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: PR054. Requirements: As above."},{"name":"PG&E Laundry - Ozone Laundry System","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"39 per lb washer capacity","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: B85. Requirements: Provide washer capacity; spec sheet; hotel apps need occupancy rate evidence; submit \u226460 days."},{"name":"PG&E Pool Heating - Commercial Pool & Spa Heater \u2013 Indoor","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"2 per MBtuh","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: SWRE003B. Requirements: Replace existing; \u226584% TE; on/off switch; no pilot; CEC-qual list; submit \u226460 days."},{"name":"PG&E Pool Heating - Commercial Pool & Spa Heater \u2013 Outdoor","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"2 per MBtuh","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: SWRE003C. Requirements: Same as indoor."},{"name":"PG&E Backup Power - Generator Rebate Program","category":"Utility Rebate","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"300 per qualifying generator","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"pge_business_rebate_catalog_selected_2025.csv","notes":"Code: GEN30. Requirements: HFRA Tier 2/3 or EPSS circuit; \u22652 PSPS events; product on PG&E list; 1 rebate/account; submit within 12 months or by 12/31/2024 (whichever sooner per catalog)."},{"name":"Business Energy Solutions (BES) \u2013 Public K\u201112","category":"Direct Install / Turnkey","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Upgrades provided at no cost to the customer (per 2025 catalog); program-managed audit, installation, and recycling of old equipment.","deadline":"nan","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Eligibility: Only public K\u201112 schools; active SDG&E non\u2011residential electric account; within SDG&E territory.. Requirements: Participating facility must be Public K\u201112; measures must meet program technical specs."},{"name":"Energy Efficiency Business Rebates (EEBR) \u2013 Product Catalog","category":"Prescriptive Rebates","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["LED Lighting","HVAC","Refrigeration"],"facilityTypes":["All Commercial"],"incentiveStructure":"Fixed rebates per qualifying unit; amounts vary by measure; catalog updated periodically.","deadline":"Active 2025 (site states \u00a9 1998\u20132025)","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Eligibility: Non\u2011residential SDG&E customers; measure\u2011 and site\u2011specific rules apply.. Requirements: Equipment must meet catalog specifications and qualifying lists (e.g., CAenergywise for foodservice)."},{"name":"On\u2011Bill Financing (OBF) \u2013 0% Loans for Businesses","category":"Financing","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"0% loan repaid via utility bill; amount and term subject to program guidelines.","deadline":"Active 2025","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Eligibility: Eligible non\u2011residential SDG&E customers; measures must qualify for a rebate/incentive; credit evaluation by SDG&E.. Requirements: Pre\u2011check eligibility; verify measures eligible for rebates; complete application; project must align with rebate/incentive program."},{"name":"Comprehensive Energy Management Solutions (CEMS) \u2013 Large Commercial","category":"Custom/Prescriptive Incentives","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Cash incentives for eligible upgrades; incentive amounts vary by measure and project.","deadline":"Active 2025","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Eligibility: Large commercial SDG&E customers; project\u2011 and measure\u2011specific requirements apply.. Requirements: Pre\u2011approval typically required; equipment must meet technical specs; installation verification."},{"name":"Business Energy Reports (BER)","category":"Behavioral / Analytics","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"No direct cash incentive; behavioral feedback and tips.","deadline":"Active 2025","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Eligibility: Invitation\u2011only subset of SDG&E business customers.. Requirements: Participation by invitation; periodic reports."},{"name":"Small Business Opportunities (SBO)","category":"Direct Install / Grants","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Support and incentives vary by offering; check current intake page for details.","deadline":"Program active; confirm current enrollment status","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Eligibility: Eligible SDG&E business customers; program\u2011specific COVID\u201119 criteria.. Requirements: Application via program page; eligibility verification."},{"name":"Streamlined Savings Pathway (SSP) \u2014 Public Agency","category":"State Grant","administrator":"SoCalREN (County of Los Angeles)","utility":["SCE","SDGE","LADWP"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom incentives based on project","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Regional program covering Southern California","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"socalren_ssp_program_meta.csv","notes":"Sector: Public agencies (local governments, special districts, schools, etc.)"},{"name":"Tech Clean California - Commercial Heat Pump Water Heater","category":"State Grant","administrator":"California Energy Commission","utility":["ALL"],"measures":["Water Heating"],"facilityTypes":["All Commercial"],"incentiveStructure":"Direct rebate for HPWH installation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Statewide program","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"tech_ca_comm_hpwh_meta.csv","notes":"Contact: TECH.info@energy-solution.com. Website: https://techcleanca.com/incentives/commercial/"},{"name":"Custom Incentive Program (CIP)","category":"Custom \u2013 Lighting & Non\u2011Lighting","administrator":"Vernon Public Utilities","utility":["VERNON"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"$0.075 per first\u2011year kWh saved (lighting and non\u2011lighting)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"vernon_vpu_programs_2025.csv","notes":""},{"name":"Commercial Energy Rebate Program (CERP)","category":"Prescriptive \u2013 Deemed Rebates","administrator":"Vernon Public Utilities","utility":["VERNON"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Fixed per\u2011unit rebates (see measures); bonus fuel\u2011substitution rebates require CPUC D.19\u201108\u2011009 criteria","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"vernon_vpu_programs_2025.csv","notes":""},{"name":"Lighting Incentives Program (Performance-Based)","category":"Lighting & Controls","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["LED Lighting"],"facilityTypes":["All Commercial"],"incentiveStructure":"$400 per kW saved OR $0.15 per annual kWh saved (greater of)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Up to $75,000/customer/fiscal year; incentive not to exceed project cost"},{"name":"Air Conditioner Incentive","category":"HVAC \u2013 Packaged AC & PTAC","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"PTAC \u22642.5T: $100/ton if >20% above Title 24 min EER; Pkg AC 2.0\u2013\u22645.3T: $75\u2013$400/ton by efficiency tier; \u22655.4T: $0.10 per annual kWh saved","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Max 25% of project cost or $50,000 (whichever is less)"},{"name":"Motor Incentive Program","category":"Motors & Pumps","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["VFDs"],"facilityTypes":["All Commercial"],"incentiveStructure":"$60 \u2013 $1,400 per unit depending on HP/efficiency","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Maximum incentive per project per program guidelines (not specified on summary)"},{"name":"Heat Pump Incentives Program","category":"Heat Pumps (Space & Water)","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["HVAC","VFDs"],"facilityTypes":["All Commercial"],"incentiveStructure":"Varies by technology (see program page)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Subject to funding; project cost caps may apply"},{"name":"Public Access EV Charger Rebate","category":"Electric Vehicles \u2013 Public Access","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["EV Charging"],"facilityTypes":["All Commercial"],"incentiveStructure":"Up to $3,500 per Level 2 charger (commercial, max $25,000 per site); Up to $7,500 per charger for schools/affordable housing/DCFC (max $40,000)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Per\u2011site maximums: $25,000 (commercial) or $40,000 (schools/affordable/DCFC)"},{"name":"Private Use EV Charger Rebate","category":"Electric Vehicles \u2013 Private Use","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["EV Charging"],"facilityTypes":["All Commercial"],"incentiveStructure":"Up to $300 per Level 2 charger; up to $600 for networked charger on time\u2011based rate","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Subject to fund availability"},{"name":"Small Business Energy & Water Direct Install (DI)","category":"Direct Install","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Allowance up to $3,000 for high\u2011energy measures and up to $1,000 for high\u2011efficiency water measures (limited time)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: First\u2011come, first\u2011served funding; eligibility screening required"},{"name":"Business Air Purifier Rebate","category":"Indoor Air Quality","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"$75 per ENERGY STAR air purifier (limit 4 per business)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Limit 4 units per business"},{"name":"Business UPS (Battery Backup) Rebate","category":"Electronics/IT","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["Battery Storage"],"facilityTypes":["All Commercial"],"incentiveStructure":"Rebate available for ENERGY STAR UPS devices (amount posted on application)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Subject to funding"},{"name":"Customized Energy Incentives (ABEES)","category":"Custom Projects","administrator":"Anaheim Public Utilities","utility":["ANAHEIM"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom incentives for high\u2011efficiency equipment not listed elsewhere (case\u2011by\u2011case)","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"anaheim_business_programs_2025.csv","notes":"Caps: Subject to funding; pre\u2011approval required"},{"name":"Demand Response \u2013 Business Overview","category":"Demand Response","administrator":"Southern California Edison","utility":["SCE"],"measures":["Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for DR participation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies/what-is-demand-response"},{"name":"Capacity Bidding Program Elect (CBP\u2011E) \u2013 Aggregators","category":"Demand Response","administrator":"Southern California Edison","utility":["SCE"],"measures":["Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for DR participation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/capacity-bidding-program-elect-aggregators"},{"name":"Automated Demand Response \u2013 Express Control Incentives","category":"Demand Response","administrator":"Southern California Edison","utility":["SCE"],"measures":["Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for DR participation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/auto-dr-express-control-incentives"},{"name":"Automated Demand Response \u2013 Customized Control Incentives","category":"Demand Response","administrator":"Southern California Edison","utility":["SCE"],"measures":["Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for DR participation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/auto-dr-with-customized-control-incentives"},{"name":"Demand Response Mobile App (Business)","category":"Demand Response","administrator":"Southern California Edison","utility":["SCE"],"measures":["Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for DR participation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/demand-response-mobile-app"},{"name":"Grid-Responsive Incentive Design \u2013 Market Access Program (GRID-MAP)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Avoided-cost-weighted metered savings","deadline":"Installations by 12/31/2027","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_grid_map_meta.csv","notes":""},{"name":"Higher Education Efficiency Performance (HEEP)","category":"Utility Rebate","administrator":"CLEAResult","utility":["PGE","SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom energy efficiency incentives","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"clearesult_pep_programs.csv","notes":"Segment: Higher Education (UC, CSU, CA Community Colleges)"},{"name":"TECH Clean California \u2013 Multifamily Incentives","category":"State Grant","administrator":"California Energy Commission","utility":["ALL"],"measures":["Water Heating"],"facilityTypes":["Multifamily"],"incentiveStructure":"Direct rebate for heat pump water heater installation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Statewide program for multifamily buildings","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"tech_ca_multifamily_meta.csv","notes":"Contact: TECH.info@energy-solution.com. Website: https://techcleanca.com/incentives/multifamily-information/"},{"name":"SCE On-Bill Financing (OBF)","category":"Financing","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency Measures"],"facilityTypes":["All Commercial"],"incentiveStructure":"Financing tool with 0% rates or promotional terms","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be layered on top of any SCE rebate to finance the customer's out-of-pocket cost","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"https://www.sce.com/sites/default/files/custom-files/PDF_Files/Expanded_OBF_Fact_Sheet_08122025.pdf","notes":"Financing tool that stacks with virtually all other SCE programs"},{"name":"SDG&E On-Bill Financing (OBF)","category":"Financing","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["All Energy Efficiency Measures"],"facilityTypes":["All Commercial"],"incentiveStructure":"Zero-interest financing repaid via utility bill","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be combined with EEBR, BES, and other SDG&E rebate programs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Financing tool for qualifying energy efficiency upgrades"},{"name":"CERI \u2013 Implementation Plan (Draft) reference","category":"Utility Rebate","administrator":"Resource Innovations","utility":["SCE","SDGE","LADWP"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom rebates","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"socal_ceri_dataset_2025.csv","notes":""},{"name":"Commercial Energy Reduction Initiative (CERI) \u2014 SCE Directory Entry","category":"Third\u2011party EE program; custom guidance + incentives","administrator":"Southern California Edison (SCE)","utility":["SCE","SDGE","LADWP"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Variable","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"socal_ceri_crawl_dataset.csv","notes":"Implementer: Resource Innovations"},{"name":"BayREN - Bay Area Regional Energy Network","category":"State Grant","administrator":"BayREN","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Regional incentives and technical assistance","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be combined with PG&E rebate programs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"https://www.bayren.org/programs-rebates","notes":"Regional program covering Bay Area (PG&E territory)"},{"name":"Federal Energy Tax Credit (IRS Section 179D)","category":"Federal Tax Credit","administrator":"IRS - Internal Revenue Service","utility":["ALL"],"measures":["HVAC","LED Lighting","Building Envelope","Water Heating"],"facilityTypes":["All Commercial"],"incentiveStructure":"Tax deduction $0.50-$5.00 per sqft depending on energy savings","deadline":"Through December 31, 2032","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be combined with utility rebates","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"IRS.gov","notes":"Federal tax deduction for energy-efficient building property"},{"name":"California Energy Efficiency Rebate (CalEE)","category":"State Grant","administrator":"California Energy Commission","utility":["ALL"],"measures":["HVAC","Water Heating","LED Lighting"],"facilityTypes":["All Commercial"],"incentiveStructure":"Direct rebates for equipment replacement","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Statewide program","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"California Energy Commission","notes":"CEC-administered statewide program"},{"name":"California High Efficiency HVAC Rebate","category":"State Grant","administrator":"California Energy Commission","utility":["ALL"],"measures":["HVAC"],"facilityTypes":["All Commercial"],"incentiveStructure":"Direct rebates for equipment replacement","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Statewide program","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"California Energy Commission","notes":"CEC-administered statewide program"},{"name":"LADWP Commercial Energy Efficiency Program","category":"Utility Rebate","administrator":"Los Angeles Department of Water and Power","utility":["LADWP"],"measures":["HVAC","LED Lighting","Refrigeration","Water Heating"],"facilityTypes":["All Commercial"],"incentiveStructure":"Prescriptive rebates - varies by measure","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"LADWP.com","notes":"Los Angeles service territory"},{"name":"Marin Clean Energy - Commercial Rebates","category":"Utility Rebate","administrator":"Marin Clean Energy","utility":["MCE"],"measures":["HVAC","LED Lighting","Water Heating","Building Envelope"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom incentives","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can combine with PG&E programs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"MCECleanEnergy.org","notes":"Marin County (Marin Clean Energy service territory)"},{"name":"PG&E On-Bill Financing","category":"Financing","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency Measures"],"facilityTypes":["All Commercial"],"incentiveStructure":"Financing tool with promotional rates","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be layered on top of PG&E rebate to finance out-of-pocket costs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"PGE.com","notes":"Financing option for energy efficiency improvements"},{"name":"Vernon Public Utilities - Commercial Energy Rebate Program (CERP)","category":"Utility Rebate","administrator":"Vernon Public Utilities","utility":["VERNON"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Prescriptive rebates by measure","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"vernon_vpu_cerp_measures_2025.csv","notes":"Program includes 16 eligible measures"},{"name":"SoCalREN SSP - LED Lighting","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["LED Lighting"],"facilityTypes":["Commercial","Multifamily"],"incentiveStructure":"Deemed rebates per measure; rates vary by measure type ($29-$38 per LED retrofit)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss LED lighting retrofit opportunities and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"SoCalREN Streamlined Savings Pathway (SSP) provides deemed rebates for pre-qualified equipment. Covers UL Type B LED retrofits for outdoor/decorative fixtures."},{"name":"SoCalREN SSP - HVAC","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["HVAC"],"facilityTypes":["Commercial","Multifamily"],"incentiveStructure":"Deemed rebates per measure; rates vary by HVAC type (boiler $11-$17/kBtu/hr, chillers, VFDs, economizers, etc.)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss HVAC efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"SoCalREN SSP includes 21 HVAC measures: boilers, chillers, VFDs, demand control ventilation, economizers, fan motors, packaged AC units, and more."},{"name":"SoCalREN SSP - Water Heating","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Water Heating"],"facilityTypes":["Commercial","Multifamily"],"incentiveStructure":"Deemed rebates per measure; rates vary by water heater type (HPWH, boilers, tankless, insulation, controls)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss water heating efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers heat pump water heaters, boilers, tankless heaters, pipe/tank insulation, faucet aerators, showerheads, and controls."},{"name":"SoCalREN SSP - Refrigeration","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Refrigeration"],"facilityTypes":["Commercial"],"incentiveStructure":"Deemed rebates per measure; rates vary by refrigeration equipment type","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss commercial refrigeration efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers 14 commercial refrigeration measures including display case doors, anti-sweat controls, compressor retrofits, and insulation."},{"name":"SoCalREN SSP - Food Service Equipment","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Food Service"],"facilityTypes":["Commercial"],"incentiveStructure":"Deemed rebates per measure; rates vary by equipment type (ovens, fryers, steamers, ice machines, dishwashers, etc.)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss food service equipment upgrades and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers 27 food service measures including ovens, fryers, steamers, ice machines, dishwashers, griddles, and toasters."},{"name":"SoCalREN SSP - Process & Compressed Air","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Process","Compressed Air"],"facilityTypes":["Commercial","Industrial"],"incentiveStructure":"Deemed rebates per measure; rates vary by process equipment type","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss process and compressed air efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers process measures (steam traps, boiler economizers, circulating block heaters) and compressed air VFD retrofits."},{"name":"SoCalREN SSP - Water Pumping & Irrigation","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Water Pumping / Irrigation"],"facilityTypes":["Commercial","Agricultural"],"incentiveStructure":"Deemed rebates per measure; rates vary by pump type and VFD application","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss water pumping and irrigation efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers variable frequency drive retrofits for irrigation pumps and pump upgrades."},{"name":"SoCalREN SSP - Appliances & Recreation","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Appliances","Recreation"],"facilityTypes":["Commercial"],"incentiveStructure":"Deemed rebates per measure; rates vary by equipment type","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss specialized equipment upgrades and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers ozone laundry systems, vending machine controllers, gas dryers, pool covers, and pool/spa heaters."},{"name":"LADWP CLIP (Commercial Low-Income Partnership)","category":"Utility Rebate","administrator":"Los Angeles Department of Water & Power","utility":["LADWP"],"measures":["All Energy Efficiency"],"facilityTypes":["Commercial"],"incentiveStructure":"Rebates up to 100% of project costs for eligible low-income commercial facilities; prescriptive rebates for standard measures","deadline":"Ongoing; subject to funding availability","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"May conflict with other LADWP rebate programs; coordinate with administrator","nextStep":"Contact Enlighting Energy to determine eligibility for LADWP CLIP and discuss energy efficiency opportunities.","active":true,"sourceUrl":"LADWP website and program documentation","notes":"CLIP targets low-income commercial facilities in the LADWP service territory. Provides enhanced incentive rates and direct installation support. Requires pre-approval and income verification."},{"name":"AESC Measured Savings Program (MSP)","category":"Utility Rebate","administrator":"Advanced Energy Sustainability Consultants (AESC)","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Payment based on measured and verified energy savings; Portfolio NMEC $0.48/TSB; Site NMEC $0.46/TSB with pre-payment and M&V true-ups","deadline":"Quarterly cohorts through 12/31/2027","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"Standalone custom rebate program","nextStep":"Contact Enlighting Energy to discuss measured savings program eligibility and enrollment.","active":true,"sourceUrl":"aesc_msp_incentive_rates.csv, aesc_msp_naics_full_appendixA.csv","notes":"AESC MSP requires 12 months of baseline AMI data, CV(RMSE)<0.50, <10% missing data per month. Eligible NAICS codes listed in Appendix A. Quarterly enrollment deadlines."}]ogram to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/automated-demand-response/auto-dr-express-control-incentives"},{"name":"Automated Demand Response \u2013 Customized Control Incentives","category":"Demand Response","administrator":"Southern California Edison","utility":["SCE"],"measures":["Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for DR participation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/automated-demand-response/auto-dr-with-customized-control-incentives"},{"name":"Demand Response Mobile App (Business)","category":"Demand Response","administrator":"Southern California Edison","utility":["SCE"],"measures":["Demand Response"],"facilityTypes":["All Commercial"],"incentiveStructure":"Incentives for DR participation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_dr_meta_2025.csv","notes":"URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/demand-response-mobile-app"},{"name":"Grid-Responsive Incentive Design \u2013 Market Access Program (GRID-MAP)","category":"Utility Rebate","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Avoided-cost-weighted metered savings","deadline":"Installations by 12/31/2027","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sce_grid_map_meta.csv","notes":""},{"name":"Higher Education Efficiency Performance (HEEP)","category":"Utility Rebate","administrator":"CLEAResult","utility":["PGE","SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom energy efficiency incentives","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"clearesult_pep_programs.csv","notes":"Segment: Higher Education (UC, CSU, CA Community Colleges)"},{"name":"TECH Clean California \u2013 Multifamily Incentives","category":"State Grant","administrator":"California Energy Commission","utility":["ALL"],"measures":["Water Heating"],"facilityTypes":["Multifamily"],"incentiveStructure":"Direct rebate for heat pump water heater installation","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Statewide program for multifamily buildings","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"tech_ca_multifamily_meta.csv","notes":"Contact: TECH.info@energy-solution.com. Website: https://techcleanca.com/incentives/multifamily-information/"},{"name":"SCE On-Bill Financing (OBF)","category":"Financing","administrator":"Southern California Edison","utility":["SCE"],"measures":["All Energy Efficiency Measures"],"facilityTypes":["All Commercial"],"incentiveStructure":"Financing tool with 0% rates or promotional terms","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be layered on top of any SCE rebate to finance the customer's out-of-pocket cost","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"https://www.sce.com/sites/default/files/custom-files/PDF_Files/Expanded_OBF_Fact_Sheet_08122025.pdf","notes":"Financing tool that stacks with virtually all other SCE programs"},{"name":"SDG&E On-Bill Financing (OBF)","category":"Financing","administrator":"San Diego Gas & Electric","utility":["SDGE"],"measures":["All Energy Efficiency Measures"],"facilityTypes":["All Commercial"],"incentiveStructure":"Zero-interest financing repaid via utility bill","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be combined with EEBR, BES, and other SDG&E rebate programs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"sdge_business_programs_2025.csv","notes":"Financing tool for qualifying energy efficiency upgrades"},{"name":"CERI \u2013 Implementation Plan (Draft) reference","category":"Utility Rebate","administrator":"Resource Innovations","utility":["SCE","SDGE","LADWP"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom rebates","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"socal_ceri_dataset_2025.csv","notes":""},{"name":"Commercial Energy Reduction Initiative (CERI) \u2014 SCE Directory Entry","category":"Third\u2011party EE program; custom guidance + incentives","administrator":"Southern California Edison (SCE)","utility":["SCE","SDGE","LADWP"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Variable","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"socal_ceri_crawl_dataset.csv","notes":"Implementer: Resource Innovations"},{"name":"BayREN - Bay Area Regional Energy Network","category":"State Grant","administrator":"BayREN","utility":["PGE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Regional incentives and technical assistance","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be combined with PG&E rebate programs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"https://www.bayren.org/programs-rebates","notes":"Regional program covering Bay Area (PG&E territory)"},{"name":"Federal Energy Tax Credit (IRS Section 179D)","category":"Federal Tax Credit","administrator":"IRS - Internal Revenue Service","utility":["ALL"],"measures":["HVAC","LED Lighting","Building Envelope","Water Heating"],"facilityTypes":["All Commercial"],"incentiveStructure":"Tax deduction $0.50-$5.00 per sqft depending on energy savings","deadline":"Through December 31, 2032","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be combined with utility rebates","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"IRS.gov","notes":"Federal tax deduction for energy-efficient building property"},{"name":"California Energy Efficiency Rebate (CalEE)","category":"State Grant","administrator":"California Energy Commission","utility":["ALL"],"measures":["HVAC","Water Heating","LED Lighting"],"facilityTypes":["All Commercial"],"incentiveStructure":"Direct rebates for equipment replacement","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Statewide program","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"California Energy Commission","notes":"CEC-administered statewide program"},{"name":"California High Efficiency HVAC Rebate","category":"State Grant","administrator":"California Energy Commission","utility":["ALL"],"measures":["HVAC"],"facilityTypes":["All Commercial"],"incentiveStructure":"Direct rebates for equipment replacement","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Statewide program","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"California Energy Commission","notes":"CEC-administered statewide program"},{"name":"LADWP Commercial Energy Efficiency Program","category":"Utility Rebate","administrator":"Los Angeles Department of Water and Power","utility":["LADWP"],"measures":["HVAC","LED Lighting","Refrigeration","Water Heating"],"facilityTypes":["All Commercial"],"incentiveStructure":"Prescriptive rebates - varies by measure","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"LADWP.com","notes":"Los Angeles service territory"},{"name":"Marin Clean Energy - Commercial Rebates","category":"Utility Rebate","administrator":"Marin Clean Energy","utility":["MCE"],"measures":["HVAC","LED Lighting","Water Heating","Building Envelope"],"facilityTypes":["All Commercial"],"incentiveStructure":"Custom incentives","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can combine with PG&E programs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"MCECleanEnergy.org","notes":"Marin County (Marin Clean Energy service territory)"},{"name":"PG&E On-Bill Financing","category":"Financing","administrator":"Pacific Gas & Electric","utility":["PGE"],"measures":["All Energy Efficiency Measures"],"facilityTypes":["All Commercial"],"incentiveStructure":"Financing tool with promotional rates","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Can be layered on top of PG&E rebate to finance out-of-pocket costs","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"PGE.com","notes":"Financing option for energy efficiency improvements"},{"name":"Vernon Public Utilities - Commercial Energy Rebate Program (CERP)","category":"Utility Rebate","administrator":"Vernon Public Utilities","utility":["VERNON"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Prescriptive rebates by measure","deadline":"Rolling enrollment","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"","nextStep":"Contact Enlighting Energy to discuss how to apply this program to your project.","active":true,"sourceUrl":"vernon_vpu_cerp_measures_2025.csv","notes":"Program includes 16 eligible measures"},{"name":"SoCalREN SSP - LED Lighting","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["LED Lighting"],"facilityTypes":["Commercial","Multifamily"],"incentiveStructure":"Deemed rebates per measure; rates vary by measure type ($29-$38 per LED retrofit)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss LED lighting retrofit opportunities and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"SoCalREN Streamlined Savings Pathway (SSP) provides deemed rebates for pre-qualified equipment. Covers UL Type B LED retrofits for outdoor/decorative fixtures."},{"name":"SoCalREN SSP - HVAC","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["HVAC"],"facilityTypes":["Commercial","Multifamily"],"incentiveStructure":"Deemed rebates per measure; rates vary by HVAC type (boiler $11-$17/kBtu/hr, chillers, VFDs, economizers, etc.)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss HVAC efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"SoCalREN SSP includes 21 HVAC measures: boilers, chillers, VFDs, demand control ventilation, economizers, fan motors, packaged AC units, and more."},{"name":"SoCalREN SSP - Water Heating","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Water Heating"],"facilityTypes":["Commercial","Multifamily"],"incentiveStructure":"Deemed rebates per measure; rates vary by water heater type (HPWH, boilers, tankless, insulation, controls)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss water heating efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers heat pump water heaters, boilers, tankless heaters, pipe/tank insulation, faucet aerators, showerheads, and controls."},{"name":"SoCalREN SSP - Refrigeration","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Refrigeration"],"facilityTypes":["Commercial"],"incentiveStructure":"Deemed rebates per measure; rates vary by refrigeration equipment type","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss commercial refrigeration efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers 14 commercial refrigeration measures including display case doors, anti-sweat controls, compressor retrofits, and insulation."},{"name":"SoCalREN SSP - Food Service Equipment","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Food Service"],"facilityTypes":["Commercial"],"incentiveStructure":"Deemed rebates per measure; rates vary by equipment type (ovens, fryers, steamers, ice machines, dishwashers, etc.)","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss food service equipment upgrades and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers 27 food service measures including ovens, fryers, steamers, ice machines, dishwashers, griddles, and toasters."},{"name":"SoCalREN SSP - Process & Compressed Air","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Process","Compressed Air"],"facilityTypes":["Commercial","Industrial"],"incentiveStructure":"Deemed rebates per measure; rates vary by process equipment type","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss process and compressed air efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers process measures (steam traps, boiler economizers, circulating block heaters) and compressed air VFD retrofits."},{"name":"SoCalREN SSP - Water Pumping & Irrigation","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Water Pumping / Irrigation"],"facilityTypes":["Commercial","Agricultural"],"incentiveStructure":"Deemed rebates per measure; rates vary by pump type and VFD application","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss water pumping and irrigation efficiency improvements and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers variable frequency drive retrofits for irrigation pumps and pump upgrades."},{"name":"SoCalREN SSP - Appliances & Recreation","category":"Utility Rebate","administrator":"Southern California Utility Consortium / SoCalREN","utility":["SCE","SDGE","LADWP"],"measures":["Appliances","Recreation"],"facilityTypes":["Commercial"],"incentiveStructure":"Deemed rebates per measure; rates vary by equipment type","deadline":"Ongoing; SSP offers streamlined rebate pathway through 12/31/2025","minSqft":0,"minKw":0,"stackable":true,"stackNotes":"Stackable with other SoCalREN SSP measures","nextStep":"Contact Enlighting Energy to discuss specialized equipment upgrades and SoCalREN SSP rebates.","active":true,"sourceUrl":"SSP Deemed Measures Directory_07.22.2025.pdf","notes":"Covers ozone laundry systems, vending machine controllers, gas dryers, pool covers, and pool/spa heaters."},{"name":"LADWP CLIP (Commercial Low-Income Partnership)","category":"Utility Rebate","administrator":"Los Angeles Department of Water & Power","utility":["LADWP"],"measures":["All Energy Efficiency"],"facilityTypes":["Commercial"],"incentiveStructure":"Rebates up to 100% of project costs for eligible low-income commercial facilities; prescriptive rebates for standard measures","deadline":"Ongoing; subject to funding availability","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"May conflict with other LADWP rebate programs; coordinate with administrator","nextStep":"Contact Enlighting Energy to determine eligibility for LADWP CLIP and discuss energy efficiency opportunities.","active":true,"sourceUrl":"LADWP website and program documentation","notes":"CLIP targets low-income commercial facilities in the LADWP service territory. Provides enhanced incentive rates and direct installation support. Requires pre-approval and income verification."},{"name":"AESC Measured Savings Program (MSP)","category":"Utility Rebate","administrator":"Advanced Energy Sustainability Consultants (AESC)","utility":["SCE"],"measures":["All Energy Efficiency"],"facilityTypes":["All Commercial"],"incentiveStructure":"Payment based on measured and verified energy savings; Portfolio NMEC $0.48/TSB; Site NMEC $0.46/TSB with pre-payment and M&V true-ups","deadline":"Quarterly cohorts through 12/31/2027","minSqft":0,"minKw":0,"stackable":false,"stackNotes":"Standalone custom rebate program","nextStep":"Contact Enlighting Energy to discuss measured savings program eligibility and enrollment.","active":true,"sourceUrl":"aesc_msp_incentive_rates.csv, aesc_msp_naics_full_appendixA.csv","notes":"AESC MSP requires 12 months of baseline AMI data, CV(RMSE)<0.50, <10% missing data per month. Eligible NAICS codes listed in Appendix A. Quarterly enrollment deadlines."}]
+[
+  {
+    "name": "Commercial Energy Efficiency Program (CEEP)",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "VFDs",
+      "Water Heating"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "HPWH 45\u201399 gal: $6k\u2013$8k; HPWH 120 gal: $14k\u2013$25k by building type (CZ15 lower); DCKV: $1,900/HP; ASH Controls: $65/LF; Medium Temp Case Doors: $230/LF; SRM motors: $425/HP",
+    "deadline": "Reservation pre\u2011install; post\u2011install due \u226460 days or by 12/01/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": false,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: Active SCE non\u2011res account; equipment must meet CA eTRM; used/rebuilt not eligible. Contact: CEEP@willdan.com | 855\u2011390\u20117348 | willdanefficiency.com/rebates"
+  },
+  {
+    "name": "Measured Savings Program (MSP)",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Pop\u2011NMEC: $0.48 per TSB; Site\u2011NMEC: $0.46 per TSB; pre\u2011payment + interim/final true\u2011ups after 12\u2011mo M&V",
+    "deadline": "Quarterly cohorts; program 2024\u20132027",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: Active SCE account; NAICS in Appendix A; 12 months AMI; baseline CV(RMSE)<0.50; <10% missing data/mo. Contact: aesc-inc.com/measured-savings-program/"
+  },
+  {
+    "name": "Grid\u2011Responsive Incentive Design \u2013 Market Access Program (GRID\u2011MAP)",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Avoided\u2011cost\u2011weighted metered savings; rates vary annually with avoided costs",
+    "deadline": "Installations by 12/31/2027 or until funds allocated",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: Active SCE account; PPP surcharge; 12 months AMI; no Rule 24 DR; no onsite gen changes \u00b112 months; no double\u2011dipping. Contact: grid-map-for-sce@mendotagroup.com | Aggregator list"
+  },
+  {
+    "name": "Commercial Energy Reduction Initiative (CERI)",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Customized incentives reserved with utility; payout after verified savings",
+    "deadline": "Reservation pre\u2011install; per\u2011project timelines",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: Active meter in listed SoCal counties; subsectors listed; case\u2011by\u2011case approval. Contact: info@socalceri.com | 213\u2011654\u20112043"
+  },
+  {
+    "name": "Local Commercial Strategic Energy Management (SEM)",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Rebates/incentives tied to SEM actions and metered savings; long\u2011term coaching (up to 6 years)",
+    "deadline": "Cohorts since 2024",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": false,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: SCE commercial customers; program enrollment via PEP. Contact: pep.clearesult.com/pep/commercial"
+  },
+  {
+    "name": "Local Industrial & Agricultural SEM",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Incentives for capital + O&M savings under SEM with NMEC baselines",
+    "deadline": "Launched H2 2024; multi\u2011year cohorts",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": false,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: SCE industrial/ag sites; cohort participation. Contact: pep.clearesult.com/pep/industrial-agriculture"
+  },
+  {
+    "name": "Emergency Load Reduction Program (ELRP)",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "EV Charging",
+      "Demand Response"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "$2.00/kWh reduced during events; no penalties for non\u2011performance",
+    "deadline": "Seasonal; enroll via SCE or aggregator",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: Ability to curtail during emergencies; baseline/M&V rules apply. Contact: elrp.sce.com"
+  },
+  {
+    "name": "Auto\u2011DR \u2013 Express Control Incentives",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "EV Charging",
+      "Demand Response"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Menu\u2011based incentives for qualified controls/devices to automate DR reductions",
+    "deadline": "Rolling, subject to funding",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "SCE_commercial_industrial_programs.csv",
+    "notes": "Eligibility: SCE non\u2011res account; device on qualified list; DR enrollment required. Contact: SCE Auto\u2011DR Express page"
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (10 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "250 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR088. Requirements: NAICS ranges 111000\u2013112990, 211120\u2013213115, 311000\u2013339999; feedback control on static pressure/CFM/velocity; no prior/failed VSD; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (15 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "1000 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR089. Requirements: Same as PR088."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (20 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "1500 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR090. Requirements: Same as PR088."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (25 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3000 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR091. Requirements: Same as PR088."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (30 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3000 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR092. Requirements: Same as PR088."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (40 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3500 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR093. Requirements: Same as PR088."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (50 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3500 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR094. Requirements: Same as PR088."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (60 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "6000 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR100. Requirements: NAICS 111000\u2013112990, 311000\u2013339999; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (75 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "7500 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR101. Requirements: Same as PR100."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (100 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "10000 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR102. Requirements: Same as PR100."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (125 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "12500 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR103. Requirements: Same as PR100."
+  },
+  {
+    "name": "PG&E Agriculture & Food Processing - Dust Collection Fan VSD (150 hp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "15000 per motor",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR104. Requirements: Same as PR100."
+  },
+  {
+    "name": "PG&E HVAC \u2013 Commercial Ventilation - Variable Frequency Drive for HVAC Fan",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "HVAC",
+      "VFDs"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "80 per hp",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: H148. Requirements: Existing HVAC supply/return/exhaust fan; single-speed motor; remove throttling devices; building types limited; submit \u226460 days."
+  },
+  {
+    "name": "PG&E HVAC \u2013 Advanced Controls - Advanced Rooftop HVAC Controls (various packages)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "HVAC"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "0 $120\u2013$194 per ton (caps vary)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: HV055/HV056/HV064/HV065/HV061/HV062/HV070/HV071/HV058/HV059/HV067/HV068/SA08/SA09/SA11/SA12. Requirements: Pick correct measure code by pack type (gas pack/HP/AC only); enter AC tons as quantity; see table for $/ton and caps."
+  },
+  {
+    "name": "PG&E Refrigeration - Ultra-Low Temperature (\u201380 \u00b0C) Freezer 15\u2013<24 ft3",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "300 per unit",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: RF006. Requirements: ENERGY STAR; vertical hinges; 15\u201329 ft3 volume; capable to \u201380 \u00b0C; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Refrigeration - Ultra-Low Temperature (\u201380 \u00b0C) Freezer 24\u201329 ft3",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "600 per unit",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: RF007. Requirements: Same as RF006."
+  },
+  {
+    "name": "PG&E Refrigeration - ASH Controls (Medium Temp, Cooler)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "Refrigeration"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "25 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: R7. Requirements: Humidity-sensing controls reduce or turn off ASH; not combinable with door measures; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Refrigeration - ASH Controls (Low Temp, Freezer)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "25 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: HB31. Requirements: Same as R7."
+  },
+  {
+    "name": "PG&E Refrigeration - New High\u2011Efficiency Low\u2011Temp Display Case Doors",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "Refrigeration"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "75 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: R87. Requirements: Low-temp only; no door ASH; mullion/frame heater amps limits; building types: restaurant, hotel, grocery, retail; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Refrigeration - Replace Open Multi\u2011Deck with New Case (Low Temp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "175 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: R4. Requirements: New case includes LED, ECMs, double-pane doors; various exclusions & remodel limits; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Refrigeration - Replace Open Multi\u2011Deck with New Case (Medium Temp)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "75 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: R5. Requirements: Same as R4 for medium temp."
+  },
+  {
+    "name": "PG&E Insulation - Pipe insulation \u22641\" pipe, \u226415 psig steam, outdoor (1\" layer)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "Building Envelope"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR051. Requirements: Min. pipe dia 0.5\"; retrofit only; Title 24-mandated insulation ineligible; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Insulation - Pipe insulation 1\"<pipe\u22644\", hot water, indoor (1\" layer)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "Water Heating",
+      "Building Envelope"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR068. Requirements: As above."
+  },
+  {
+    "name": "PG&E Insulation - Fitting insulation 1\"<pipe\u22644\", outdoor, >15 psig steam",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "Building Envelope"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3 per fitting",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR085. Requirements: As above."
+  },
+  {
+    "name": "PG&E Insulation - Pipe insulation >4\" pipe, \u226415 psig steam, outdoor (1\" layer)",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "Building Envelope"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "3 per linear ft",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: PR054. Requirements: As above."
+  },
+  {
+    "name": "PG&E Laundry - Ozone Laundry System",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "39 per lb washer capacity",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: B85. Requirements: Provide washer capacity; spec sheet; hotel apps need occupancy rate evidence; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Pool Heating - Commercial Pool & Spa Heater \u2013 Indoor",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "2 per MBtuh",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: SWRE003B. Requirements: Replace existing; \u226584% TE; on/off switch; no pilot; CEC-qual list; submit \u226460 days."
+  },
+  {
+    "name": "PG&E Pool Heating - Commercial Pool & Spa Heater \u2013 Outdoor",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "2 per MBtuh",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: SWRE003C. Requirements: Same as indoor."
+  },
+  {
+    "name": "PG&E Backup Power - Generator Rebate Program",
+    "category": "Utility Rebate",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "300 per qualifying generator",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "pge_business_rebate_catalog_selected_2025.csv",
+    "notes": "Code: GEN30. Requirements: HFRA Tier 2/3 or EPSS circuit; \u22652 PSPS events; product on PG&E list; 1 rebate/account; submit within 12 months or by 12/31/2024 (whichever sooner per catalog)."
+  },
+  {
+    "name": "Business Energy Solutions (BES) \u2013 Public K\u201112",
+    "category": "Direct Install / Turnkey",
+    "administrator": "San Diego Gas & Electric",
+    "utility": [
+      "SDGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Upgrades provided at no cost to the customer (per 2025 catalog); program-managed audit, installation, and recycling of old equipment.",
+    "deadline": "nan",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sdge_business_programs_2025.csv",
+    "notes": "Eligibility: Only public K\u201112 schools; active SDG&E non\u2011residential electric account; within SDG&E territory.. Requirements: Participating facility must be Public K\u201112; measures must meet program technical specs."
+  },
+  {
+    "name": "Energy Efficiency Business Rebates (EEBR) \u2013 Product Catalog",
+    "category": "Prescriptive Rebates",
+    "administrator": "San Diego Gas & Electric",
+    "utility": [
+      "SDGE"
+    ],
+    "measures": [
+      "LED Lighting",
+      "HVAC",
+      "Refrigeration"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Fixed rebates per qualifying unit; amounts vary by measure; catalog updated periodically.",
+    "deadline": "Active 2025 (site states \u00a9 1998\u20132025)",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sdge_business_programs_2025.csv",
+    "notes": "Eligibility: Non\u2011residential SDG&E customers; measure\u2011 and site\u2011specific rules apply.. Requirements: Equipment must meet catalog specifications and qualifying lists (e.g., CAenergywise for foodservice)."
+  },
+  {
+    "name": "On\u2011Bill Financing (OBF) \u2013 0% Loans for Businesses",
+    "category": "Financing",
+    "administrator": "San Diego Gas & Electric",
+    "utility": [
+      "SDGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "0% loan repaid via utility bill; amount and term subject to program guidelines.",
+    "deadline": "Active 2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sdge_business_programs_2025.csv",
+    "notes": "Eligibility: Eligible non\u2011residential SDG&E customers; measures must qualify for a rebate/incentive; credit evaluation by SDG&E.. Requirements: Pre\u2011check eligibility; verify measures eligible for rebates; complete application; project must align with rebate/incentive program."
+  },
+  {
+    "name": "Comprehensive Energy Management Solutions (CEMS) \u2013 Large Commercial",
+    "category": "Custom/Prescriptive Incentives",
+    "administrator": "San Diego Gas & Electric",
+    "utility": [
+      "SDGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Cash incentives for eligible upgrades; incentive amounts vary by measure and project.",
+    "deadline": "Active 2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sdge_business_programs_2025.csv",
+    "notes": "Eligibility: Large commercial SDG&E customers; project\u2011 and measure\u2011specific requirements apply.. Requirements: Pre\u2011approval typically required; equipment must meet technical specs; installation verification."
+  },
+  {
+    "name": "Business Energy Reports (BER)",
+    "category": "Behavioral / Analytics",
+    "administrator": "San Diego Gas & Electric",
+    "utility": [
+      "SDGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "No direct cash incentive; behavioral feedback and tips.",
+    "deadline": "Active 2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sdge_business_programs_2025.csv",
+    "notes": "Eligibility: Invitation\u2011only subset of SDG&E business customers.. Requirements: Participation by invitation; periodic reports."
+  },
+  {
+    "name": "Small Business Opportunities (SBO)",
+    "category": "Direct Install / Grants",
+    "administrator": "San Diego Gas & Electric",
+    "utility": [
+      "SDGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Support and incentives vary by offering; check current intake page for details.",
+    "deadline": "Program active; confirm current enrollment status",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sdge_business_programs_2025.csv",
+    "notes": "Eligibility: Eligible SDG&E business customers; program\u2011specific COVID\u201119 criteria.. Requirements: Application via program page; eligibility verification."
+  },
+  {
+    "name": "Streamlined Savings Pathway (SSP) \u2014 Public Agency",
+    "category": "State Grant",
+    "administrator": "SoCalREN (County of Los Angeles)",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Custom incentives based on project",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Regional program covering Southern California",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "socalren_ssp_program_meta.csv",
+    "notes": "Sector: Public agencies (local governments, special districts, schools, etc.)"
+  },
+  {
+    "name": "Tech Clean California - Commercial Heat Pump Water Heater",
+    "category": "State Grant",
+    "administrator": "California Energy Commission",
+    "utility": [
+      "ALL"
+    ],
+    "measures": [
+      "Water Heating"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Direct rebate for HPWH installation",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Statewide program",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "tech_ca_comm_hpwh_meta.csv",
+    "notes": "Contact: TECH.info@energy-solution.com. Website: https://techcleanca.com/incentives/commercial/"
+  },
+  {
+    "name": "Custom Incentive Program (CIP)",
+    "category": "Custom \u2013 Lighting & Non\u2011Lighting",
+    "administrator": "Vernon Public Utilities",
+    "utility": [
+      "VERNON"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "$0.075 per first\u2011year kWh saved (lighting and non\u2011lighting)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "vernon_vpu_programs_2025.csv",
+    "notes": ""
+  },
+  {
+    "name": "Commercial Energy Rebate Program (CERP)",
+    "category": "Prescriptive \u2013 Deemed Rebates",
+    "administrator": "Vernon Public Utilities",
+    "utility": [
+      "VERNON"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Fixed per\u2011unit rebates (see measures); bonus fuel\u2011substitution rebates require CPUC D.19\u201108\u2011009 criteria",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "vernon_vpu_programs_2025.csv",
+    "notes": ""
+  },
+  {
+    "name": "Lighting Incentives Program (Performance-Based)",
+    "category": "Lighting & Controls",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "LED Lighting"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "$400 per kW saved OR $0.15 per annual kWh saved (greater of)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Up to $75,000/customer/fiscal year; incentive not to exceed project cost"
+  },
+  {
+    "name": "Air Conditioner Incentive",
+    "category": "HVAC \u2013 Packaged AC & PTAC",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "PTAC \u22642.5T: $100/ton if >20% above Title 24 min EER; Pkg AC 2.0\u2013\u22645.3T: $75\u2013$400/ton by efficiency tier; \u22655.4T: $0.10 per annual kWh saved",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Max 25% of project cost or $50,000 (whichever is less)"
+  },
+  {
+    "name": "Motor Incentive Program",
+    "category": "Motors & Pumps",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "VFDs"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "$60 \u2013 $1,400 per unit depending on HP/efficiency",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Maximum incentive per project per program guidelines (not specified on summary)"
+  },
+  {
+    "name": "Heat Pump Incentives Program",
+    "category": "Heat Pumps (Space & Water)",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "HVAC",
+      "VFDs"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Varies by technology (see program page)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Subject to funding; project cost caps may apply"
+  },
+  {
+    "name": "Public Access EV Charger Rebate",
+    "category": "Electric Vehicles \u2013 Public Access",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "EV Charging"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Up to $3,500 per Level 2 charger (commercial, max $25,000 per site); Up to $7,500 per charger for schools/affordable housing/DCFC (max $40,000)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Per\u2011site maximums: $25,000 (commercial) or $40,000 (schools/affordable/DCFC)"
+  },
+  {
+    "name": "Private Use EV Charger Rebate",
+    "category": "Electric Vehicles \u2013 Private Use",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "EV Charging"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Up to $300 per Level 2 charger; up to $600 for networked charger on time\u2011based rate",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Subject to fund availability"
+  },
+  {
+    "name": "Small Business Energy & Water Direct Install (DI)",
+    "category": "Direct Install",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Allowance up to $3,000 for high\u2011energy measures and up to $1,000 for high\u2011efficiency water measures (limited time)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: First\u2011come, first\u2011served funding; eligibility screening required"
+  },
+  {
+    "name": "Business Air Purifier Rebate",
+    "category": "Indoor Air Quality",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "$75 per ENERGY STAR air purifier (limit 4 per business)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Limit 4 units per business"
+  },
+  {
+    "name": "Business UPS (Battery Backup) Rebate",
+    "category": "Electronics/IT",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "Battery Storage"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Rebate available for ENERGY STAR UPS devices (amount posted on application)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Subject to funding"
+  },
+  {
+    "name": "Customized Energy Incentives (ABEES)",
+    "category": "Custom Projects",
+    "administrator": "Anaheim Public Utilities",
+    "utility": [
+      "ANAHEIM"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Custom incentives for high\u2011efficiency equipment not listed elsewhere (case\u2011by\u2011case)",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "anaheim_business_programs_2025.csv",
+    "notes": "Caps: Subject to funding; pre\u2011approval required"
+  },
+  {
+    "name": "Demand Response \u2013 Business Overview",
+    "category": "Demand Response",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "Demand Response"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Incentives for DR participation",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sce_dr_meta_2025.csv",
+    "notes": "URL: https://www.sce.com/business/save-costs-energy/savings-strategies/what-is-demand-response"
+  },
+  {
+    "name": "Capacity Bidding Program Elect (CBP\u2011E) \u2013 Aggregators",
+    "category": "Demand Response",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "Demand Response"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Incentives for DR participation",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sce_dr_meta_2025.csv",
+    "notes": "URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/capacity-bidding-program-elect-aggregators"
+  },
+  {
+    "name": "Automated Demand Response \u2013 Express Control Incentives",
+    "category": "Demand Response",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "Demand Response"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Incentives for DR participation",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sce_dr_meta_2025.csv",
+    "notes": "URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/automated-demand-response/auto-dr-express-control-incentives"
+  },
+  {
+    "name": "Automated Demand Response \u2013 Customized Control Incentives",
+    "category": "Demand Response",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "Demand Response"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Incentives for DR participation",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sce_dr_meta_2025.csv",
+    "notes": "URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/automated-demand-response/auto-dr-with-customized-control-incentives"
+  },
+  {
+    "name": "Demand Response Mobile App (Business)",
+    "category": "Demand Response",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "Demand Response"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Incentives for DR participation",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sce_dr_meta_2025.csv",
+    "notes": "URL: https://www.sce.com/business/save-costs-energy/savings-strategies-for-businesses/what-is-demand-response/demand-response-mobile-app"
+  },
+  {
+    "name": "Grid-Responsive Incentive Design \u2013 Market Access Program (GRID-MAP)",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Avoided-cost-weighted metered savings",
+    "deadline": "Installations by 12/31/2027",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sce_grid_map_meta.csv",
+    "notes": ""
+  },
+  {
+    "name": "Higher Education Efficiency Performance (HEEP)",
+    "category": "Utility Rebate",
+    "administrator": "CLEAResult",
+    "utility": [
+      "PGE",
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Custom energy efficiency incentives",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "clearesult_pep_programs.csv",
+    "notes": "Segment: Higher Education (UC, CSU, CA Community Colleges)"
+  },
+  {
+    "name": "TECH Clean California \u2013 Multifamily Incentives",
+    "category": "State Grant",
+    "administrator": "California Energy Commission",
+    "utility": [
+      "ALL"
+    ],
+    "measures": [
+      "Water Heating"
+    ],
+    "facilityTypes": [
+      "Multifamily"
+    ],
+    "incentiveStructure": "Direct rebate for heat pump water heater installation",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Statewide program for multifamily buildings",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "tech_ca_multifamily_meta.csv",
+    "notes": "Contact: TECH.info@energy-solution.com. Website: https://techcleanca.com/incentives/multifamily-information/"
+  },
+  {
+    "name": "SCE On-Bill Financing (OBF)",
+    "category": "Financing",
+    "administrator": "Southern California Edison",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency Measures"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Financing tool with 0% rates or promotional terms",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Can be layered on top of any SCE rebate to finance the customer's out-of-pocket cost",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "https://www.sce.com/sites/default/files/custom-files/PDF_Files/Expanded_OBF_Fact_Sheet_08122025.pdf",
+    "notes": "Financing tool that stacks with virtually all other SCE programs"
+  },
+  {
+    "name": "SDG&E On-Bill Financing (OBF)",
+    "category": "Financing",
+    "administrator": "San Diego Gas & Electric",
+    "utility": [
+      "SDGE"
+    ],
+    "measures": [
+      "All Energy Efficiency Measures"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Zero-interest financing repaid via utility bill",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Can be combined with EEBR, BES, and other SDG&E rebate programs",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "sdge_business_programs_2025.csv",
+    "notes": "Financing tool for qualifying energy efficiency upgrades"
+  },
+  {
+    "name": "CERI \u2013 Implementation Plan (Draft) reference",
+    "category": "Utility Rebate",
+    "administrator": "Resource Innovations",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Custom rebates",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "socal_ceri_dataset_2025.csv",
+    "notes": ""
+  },
+  {
+    "name": "Commercial Energy Reduction Initiative (CERI) \u2014 SCE Directory Entry",
+    "category": "Third\u2011party EE program; custom guidance + incentives",
+    "administrator": "Southern California Edison (SCE)",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Variable",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "socal_ceri_crawl_dataset.csv",
+    "notes": "Implementer: Resource Innovations"
+  },
+  {
+    "name": "BayREN - Bay Area Regional Energy Network",
+    "category": "State Grant",
+    "administrator": "BayREN",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Regional incentives and technical assistance",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Can be combined with PG&E rebate programs",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "https://www.bayren.org/programs-rebates",
+    "notes": "Regional program covering Bay Area (PG&E territory)"
+  },
+  {
+    "name": "Federal Energy Tax Credit (IRS Section 179D)",
+    "category": "Federal Tax Credit",
+    "administrator": "IRS - Internal Revenue Service",
+    "utility": [
+      "ALL"
+    ],
+    "measures": [
+      "HVAC",
+      "LED Lighting",
+      "Building Envelope",
+      "Water Heating"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Tax deduction $0.50-$5.00 per sqft depending on energy savings",
+    "deadline": "Through December 31, 2032",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Can be combined with utility rebates",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "IRS.gov",
+    "notes": "Federal tax deduction for energy-efficient building property"
+  },
+  {
+    "name": "California Energy Efficiency Rebate (CalEE)",
+    "category": "State Grant",
+    "administrator": "California Energy Commission",
+    "utility": [
+      "ALL"
+    ],
+    "measures": [
+      "HVAC",
+      "Water Heating",
+      "LED Lighting"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Direct rebates for equipment replacement",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Statewide program",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "California Energy Commission",
+    "notes": "CEC-administered statewide program"
+  },
+  {
+    "name": "California High Efficiency HVAC Rebate",
+    "category": "State Grant",
+    "administrator": "California Energy Commission",
+    "utility": [
+      "ALL"
+    ],
+    "measures": [
+      "HVAC"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Direct rebates for equipment replacement",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Statewide program",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "California Energy Commission",
+    "notes": "CEC-administered statewide program"
+  },
+  {
+    "name": "LADWP Commercial Energy Efficiency Program",
+    "category": "Utility Rebate",
+    "administrator": "Los Angeles Department of Water and Power",
+    "utility": [
+      "LADWP"
+    ],
+    "measures": [
+      "HVAC",
+      "LED Lighting",
+      "Refrigeration",
+      "Water Heating"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Prescriptive rebates - varies by measure",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "LADWP.com",
+    "notes": "Los Angeles service territory"
+  },
+  {
+    "name": "Marin Clean Energy - Commercial Rebates",
+    "category": "Utility Rebate",
+    "administrator": "Marin Clean Energy",
+    "utility": [
+      "MCE"
+    ],
+    "measures": [
+      "HVAC",
+      "LED Lighting",
+      "Water Heating",
+      "Building Envelope"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Custom incentives",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Can combine with PG&E programs",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "MCECleanEnergy.org",
+    "notes": "Marin County (Marin Clean Energy service territory)"
+  },
+  {
+    "name": "PG&E On-Bill Financing",
+    "category": "Financing",
+    "administrator": "Pacific Gas & Electric",
+    "utility": [
+      "PGE"
+    ],
+    "measures": [
+      "All Energy Efficiency Measures"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Financing tool with promotional rates",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Can be layered on top of PG&E rebate to finance out-of-pocket costs",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "PGE.com",
+    "notes": "Financing option for energy efficiency improvements"
+  },
+  {
+    "name": "Vernon Public Utilities - Commercial Energy Rebate Program (CERP)",
+    "category": "Utility Rebate",
+    "administrator": "Vernon Public Utilities",
+    "utility": [
+      "VERNON"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Prescriptive rebates by measure",
+    "deadline": "Rolling enrollment",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "",
+    "nextStep": "Contact Enlighting Energy to discuss how to apply this program to your project.",
+    "active": true,
+    "sourceUrl": "vernon_vpu_cerp_measures_2025.csv",
+    "notes": "Program includes 16 eligible measures"
+  },
+  {
+    "name": "SoCalREN SSP - LED Lighting",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "LED Lighting"
+    ],
+    "facilityTypes": [
+      "Commercial",
+      "Multifamily"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by measure type ($29-$38 per LED retrofit)",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss LED lighting retrofit opportunities and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "SoCalREN Streamlined Savings Pathway (SSP) provides deemed rebates for pre-qualified equipment. Covers UL Type B LED retrofits for outdoor/decorative fixtures."
+  },
+  {
+    "name": "SoCalREN SSP - HVAC",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "HVAC"
+    ],
+    "facilityTypes": [
+      "Commercial",
+      "Multifamily"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by HVAC type (boiler $11-$17/kBtu/hr, chillers, VFDs, economizers, etc.)",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss HVAC efficiency improvements and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "SoCalREN SSP includes 21 HVAC measures: boilers, chillers, VFDs, demand control ventilation, economizers, fan motors, packaged AC units, and more."
+  },
+  {
+    "name": "SoCalREN SSP - Water Heating",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "Water Heating"
+    ],
+    "facilityTypes": [
+      "Commercial",
+      "Multifamily"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by water heater type (HPWH, boilers, tankless, insulation, controls)",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss water heating efficiency improvements and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "Covers heat pump water heaters, boilers, tankless heaters, pipe/tank insulation, faucet aerators, showerheads, and controls."
+  },
+  {
+    "name": "SoCalREN SSP - Refrigeration",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "Refrigeration"
+    ],
+    "facilityTypes": [
+      "Commercial"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by refrigeration equipment type",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss commercial refrigeration efficiency improvements and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "Covers 14 commercial refrigeration measures including display case doors, anti-sweat controls, compressor retrofits, and insulation."
+  },
+  {
+    "name": "SoCalREN SSP - Food Service Equipment",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "Food Service"
+    ],
+    "facilityTypes": [
+      "Commercial"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by equipment type (ovens, fryers, steamers, ice machines, dishwashers, etc.)",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss food service equipment upgrades and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "Covers 27 food service measures including ovens, fryers, steamers, ice machines, dishwashers, griddles, and toasters."
+  },
+  {
+    "name": "SoCalREN SSP - Process & Compressed Air",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "Process",
+      "Compressed Air"
+    ],
+    "facilityTypes": [
+      "Commercial",
+      "Industrial"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by process equipment type",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss process and compressed air efficiency improvements and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "Covers process measures (steam traps, boiler economizers, circulating block heaters) and compressed air VFD retrofits."
+  },
+  {
+    "name": "SoCalREN SSP - Water Pumping & Irrigation",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "Water Pumping / Irrigation"
+    ],
+    "facilityTypes": [
+      "Commercial",
+      "Agricultural"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by pump type and VFD application",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss water pumping and irrigation efficiency improvements and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "Covers variable frequency drive retrofits for irrigation pumps and pump upgrades."
+  },
+  {
+    "name": "SoCalREN SSP - Appliances & Recreation",
+    "category": "Utility Rebate",
+    "administrator": "Southern California Utility Consortium / SoCalREN",
+    "utility": [
+      "SCE",
+      "SDGE",
+      "LADWP"
+    ],
+    "measures": [
+      "Appliances",
+      "Recreation"
+    ],
+    "facilityTypes": [
+      "Commercial"
+    ],
+    "incentiveStructure": "Deemed rebates per measure; rates vary by equipment type",
+    "deadline": "Ongoing; SSP offers streamlined rebate pathway through 12/31/2025",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": true,
+    "stackNotes": "Stackable with other SoCalREN SSP measures",
+    "nextStep": "Contact Enlighting Energy to discuss specialized equipment upgrades and SoCalREN SSP rebates.",
+    "active": true,
+    "sourceUrl": "SSP Deemed Measures Directory_07.22.2025.pdf",
+    "notes": "Covers ozone laundry systems, vending machine controllers, gas dryers, pool covers, and pool/spa heaters."
+  },
+  {
+    "name": "LADWP CLIP (Commercial Low-Income Partnership)",
+    "category": "Utility Rebate",
+    "administrator": "Los Angeles Department of Water & Power",
+    "utility": [
+      "LADWP"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "Commercial"
+    ],
+    "incentiveStructure": "Rebates up to 100% of project costs for eligible low-income commercial facilities; prescriptive rebates for standard measures",
+    "deadline": "Ongoing; subject to funding availability",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "May conflict with other LADWP rebate programs; coordinate with administrator",
+    "nextStep": "Contact Enlighting Energy to determine eligibility for LADWP CLIP and discuss energy efficiency opportunities.",
+    "active": true,
+    "sourceUrl": "LADWP website and program documentation",
+    "notes": "CLIP targets low-income commercial facilities in the LADWP service territory. Provides enhanced incentive rates and direct installation support. Requires pre-approval and income verification."
+  },
+  {
+    "name": "AESC Measured Savings Program (MSP)",
+    "category": "Utility Rebate",
+    "administrator": "Advanced Energy Sustainability Consultants (AESC)",
+    "utility": [
+      "SCE"
+    ],
+    "measures": [
+      "All Energy Efficiency"
+    ],
+    "facilityTypes": [
+      "All Commercial"
+    ],
+    "incentiveStructure": "Payment based on measured and verified energy savings; Portfolio NMEC $0.48/TSB; Site NMEC $0.46/TSB with pre-payment and M&V true-ups",
+    "deadline": "Quarterly cohorts through 12/31/2027",
+    "minSqft": 0,
+    "minKw": 0,
+    "stackable": false,
+    "stackNotes": "Standalone custom rebate program",
+    "nextStep": "Contact Enlighting Energy to discuss measured savings program eligibility and enrollment.",
+    "active": true,
+    "sourceUrl": "aesc_msp_incentive_rates.csv, aesc_msp_naics_full_appendixA.csv",
+    "notes": "AESC MSP requires 12 months of baseline AMI data, CV(RMSE)<0.50, <10% missing data per month. Eligible NAICS codes listed in Appendix A. Quarterly enrollment deadlines."
+  }
+]
