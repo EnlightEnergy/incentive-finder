@@ -9,14 +9,14 @@
  * Or directly: npx tsx scripts/import-programs.ts
  */
 
-import { db } from '../server/db.js';
+import { db } from '../server/db';
 import {
   programs,
   programGeos,
   eligibilityRules,
   benefitStructures,
   documentation,
-} from '../shared/schema.js';
+} from '../shared/schema';
 import { eq, sql } from 'drizzle-orm';
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
