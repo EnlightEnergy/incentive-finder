@@ -277,3 +277,93 @@ enlightingenergy.com`;
 
   console.log(`[email] Report sent to ${to} (BCC: ${bcc})`);
 }
+
+export async function sendLeadNotification({
+  company,
+  contactName,
+  email,
+  phone,
+  address,
+  utility,
+  measure,
+  sqft,
+  hours,
+  baselineDesc,
+}: {
+  company: string;
+  contactName: string;
+  email: string;
+  phone?: string;
+  address?: string;
+  utility?: string;
+  measure?: string;
+  sqft?: number;
+  hours?: number;
+  baselineDesc?: string;
+}): Promise<void> {
+  if (!MAILGUN_API_KEY) {
+    console.warn('[email] MAILGUN_API_KEY not set — skipping lead notification');
+    return;
+  }
+
+  const subject = `New Lead: ${company} — ${contactName}`;
+
+  const textBody = [
+    `New lead submitted on californiaenergyincentives.com`,
+    ``,
+    `Company:      ${company}`,
+    `Contact:      ${contactName}`,
+    `Email:        ${email}`,
+    phone      ? `Phone:        ${phone}`      : null,
+    address    ? `Address:      ${address}`    : null,
+    utility    ? `Utility:      ${utility}`    : null,
+    measure    ? `Measure:      ${measure}`    : null,
+    sqft       ? `Sq Ft:        ${sqft}`       : null,
+    hours      ? `Op Hours/Yr:  ${hours}`      : null,
+    baselineDesc ? `Baseline:     ${baselineDesc}` : null,
+  ].filter(Boolean).join('\n');
+
+  const htmlBody = `
+    <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+      <h2 style="color:#1C2B5E;">New Lead: ${company}</h2>
+      <table style="border-collapse:collapse;width:100%;">
+        <tr><td style="padding:6px 12px;font-weight:bold;">Company</td><td style="padding:6px 12px;">${company}</td></tr>
+        <tr style="background:#f5f5f5;"><td style="padding:6px 12px;font-weight:bold;">Contact</td><td style="padding:6px 12px;">${contactName}</td></tr>
+        <tr><td style="padding:6px 12px;font-weight:bold;">Email</td><td style="padding:6px 12px;"><a href="mailto:${email}">${email}</a></td></tr>
+        ${phone      ? `<tr style="background:#f5f5f5;"><td style="padding:6px 12px;font-weight:bold;">Phone</td><td style="padding:6px 12px;">${phone}</td></tr>` : ''}
+        ${address    ? `<tr><td style="padding:6px 12px;font-weight:bold;">Address</td><td style="padding:6px 12px;">${address}</td></tr>` : ''}
+        ${utility    ? `<tr style="background:#f5f5f5;"><td style="padding:6px 12px;font-weight:bold;">Utility</td><td style="padding:6px 12px;">${utility}</td></tr>` : ''}
+        ${measure    ? `<tr><td style="padding:6px 12px;font-weight:bold;">Measure</td><td style="padding:6px 12px;">${measure}</td></tr>` : ''}
+        ${sqft       ? `<tr style="background:#f5f5f5;"><td style="padding:6px 12px;font-weight:bold;">Sq Ft</td><td style="padding:6px 12px;">${sqft}</td></tr>` : ''}
+        ${hours      ? `<tr><td style="padding:6px 12px;font-weight:bold;">Op Hours/Yr</td><td style="padding:6px 12px;">${hours}</td></tr>` : ''}
+        ${baselineDesc ? `<tr style="background:#f5f5f5;"><td style="padding:6px 12px;font-weight:bold;">Baseline</td><td style="padding:6px 12px;">${baselineDesc}</td></tr>` : ''}
+      </table>
+    </div>
+  `;
+
+  const to = 'derek@enlightingenergy.com';
+  const formData = new FormData();
+  formData.append('from', FROM_ADDRESS);
+  formData.append('to', to);
+  formData.append('subject', subject);
+  formData.append('text', textBody);
+  formData.append('html', htmlBody);
+
+  const response = await fetch(
+    `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: 'Basic ' + btoa('api:' + MAILGUN_API_KEY),
+      },
+      body: formData,
+    }
+  );
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`Mailgun error: ${err}`);
+  }
+
+  console.log(`[email] Lead notification sent for ${company} - ${contactName}`);
+}
