@@ -36,13 +36,15 @@ DATA YOU NEED TO COLLECT (in rough order of priority):
 1. Location: ZIP code (required — determines utility territory)
 2. Utility: auto-infer from ZIP if possible (SCE = SoCal, PG&E = NorCal, SDG&E = San Diego, LADWP = LA proper, SMUD = Sacramento)
 3. Facility type: warehouse, office, retail, hotel, cold storage, manufacturing, school, agricultural, multifamily, government
-4. Measures (upgrades being considered): lighting, HVAC, refrigeration, solar/PV, battery storage, EV charging, VFDs/motors, building envelope, compressed air, boilers/steam, process equipment
-5. Square footage (optional but useful)
-6. Company / facility name (optional — ask toward the end, e.g. "And lastly, what's the name of the business?")
+4. Number of units — ONLY if multifamily (ask immediately after confirming facility type is multifamily; required for multifamily programs)
+5. Measures (upgrades being considered): lighting, HVAC, refrigeration, solar/PV, battery storage, EV charging, VFDs/motors, building envelope, compressed air, boilers/steam, water heaters (both heat pump water heaters AND tankless gas-to-gas are eligible under SoCalREN and similar programs), process equipment
+6. Square footage (ask before the facility name question — useful for program sizing)
+7. Company / facility name (ask last, e.g. "And lastly, what's the name of the property or business?")
 
 INTELLIGENCE RULES:
 - If the user says "warehouse in Fresno," infer ZIP area (93700s) and utility (PG&E). Confirm: "That sounds like PG&E territory — is that right?"
 - If the user mentions "food processing" or "cold storage," immediately note refrigeration programs will be relevant.
+- If the user mentions "water heaters," ask whether they're considering heat pump water heaters (HPWH) or tankless gas-to-gas replacements — both qualify for programs (notably SoCalREN covers tankless gas-to-gas). Include both as measures if applicable.
 - If they mention "leased space" or "don't pay utilities," note this limits available programs and adjust.
 - Vague answers are OK. "Old HVAC" -> ask "Roughly pre-2010 or newer?" not "What is the exact model year?"
 - "We might do lighting" counts as a measure.
@@ -74,7 +76,8 @@ const SUBMIT_PROFILE_TOOL: Anthropic.Tool = {
       facilityType: { type: "string", description: "Type of facility: Warehouse/Distribution, Office, Retail, Cold Storage, Industrial/Manufacturing, Hotel/Hospitality, Multifamily, School/Education, Government/Municipal, Agricultural" },
       measures: { type: "array", items: { type: "string" }, description: "List of energy upgrade measures being considered: LED Lighting, HVAC, Refrigeration, Solar/PV, Battery Storage, EV Charging, VFD/Motors, Building Envelope, Compressed Air, Boilers/Steam, Process Equipment" },
       sqFt: { type: "number", description: "Square footage of the facility (optional)" },
-      facilityName: { type: "string", description: "Name of the facility (optional)" },
+      facilityName: { type: "string", description: "Name of the facility or property (optional)" },
+      units: { type: "number", description: "Number of units — for multifamily properties only (optional)" },
     },
     required: ["zip", "utility", "facilityType", "measures"],
   },
