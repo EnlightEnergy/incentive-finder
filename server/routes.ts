@@ -103,6 +103,7 @@ function normalizeReportData(matchResult: any) {
   const nonUrgent = allEntries.filter((e: any) => !e.preApprovalRequired);
   const priorityList = [...urgent, ...nonUrgent].slice(0, 3);
 
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   return {
     facility: {
       name: matchResult.facility?.name ?? matchResult.facility?.facilityName ?? 'Your Facility',
@@ -110,6 +111,13 @@ function normalizeReportData(matchResult: any) {
       utility: matchResult.facility?.utility ?? '',
       facilityType: matchResult.facility?.facilityType ?? '',
       sqFt: matchResult.facility?.sqFt ?? '',
+      address: matchResult.facility?.address ?? '',
+      city: matchResult.facility?.city ?? '',
+      state: matchResult.facility?.state ?? 'CA',
+      ownership: matchResult.facility?.ownership ?? '',
+      contactName: matchResult.facility?.contactName ?? '',
+      contactEmail: matchResult.facility?.contactEmail ?? '',
+      reportDate: matchResult.facility?.reportDate ?? today,
     },
     measures: programs.map((g: any) => g.measure),
     programCount: matchResult.programCount ?? allEntries.length,
@@ -181,20 +189,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Generate qualifying programs PDF report
-
-  app.post('/api/generate-report', async (req, res) => {
-    try {
-      const pdfBuffer = await generateReport(req.body);
-      res.set({
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="qualifying-programs-report.pdf"',
-      });
-      res.send(pdfBuffer);
-    } catch (err) {
-      console.error('Report generation failed:', err);
-      res.status(500).json({ error: 'Failed to generate report', details: (err as Error).message });
-    }
-  });
 
   app.post('/api/generate-report', async (req, res) => {
     try {
