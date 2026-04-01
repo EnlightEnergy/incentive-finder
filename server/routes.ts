@@ -10,7 +10,7 @@ import { z } from "zod";
 import { generateReport } from '../report-builder/generate-report.js';
 import { matchPrograms } from './matcher';
 import { processConversation, submitLead } from './ai-conversation';
-import { importPrograms } from '../scripts/import-programs.js';
+import { importPrograms } from '../scripts/import-programs';
 
 // Memoized lastmod cache
 let lastmodCache: Map<string, string> | null = null;
