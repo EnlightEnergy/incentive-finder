@@ -114,7 +114,7 @@ export default function Chat() {
     try {
       const res = await fetch("/api/generate-report", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(matchResult) });
       if (!res.ok) throw new Error(await res.text());
-      const blob = await res.blob();
+      const blob = new Blob([await res.arrayBuffer()], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a"); a.href = url; a.download = "qualifying-programs-report.pdf";
       document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
