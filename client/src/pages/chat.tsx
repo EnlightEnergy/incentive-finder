@@ -116,7 +116,10 @@ export default function Chat() {
       if (!res.ok) throw new Error(await res.text());
       const blob = new Blob([await res.arrayBuffer()], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement("a"); a.href = url; a.download = "qualifying-programs-report.pdf";
+      const facilityName = matchResult?.facility?.name || "Facility";
+      const today = new Date().toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+      const safeFilename = `${facilityName} incentive programs report | Enlighting (${today}).pdf`.replace(/[/\\?%*:|"<>]/g, "-");
+      const a = document.createElement("a"); a.href = url; a.download = safeFilename;
       document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
     } catch (e: any) { setError("PDF generation failed. Please try again."); }
     setPdfBusy(false);
@@ -125,10 +128,10 @@ export default function Chat() {
   const stepCount = messages.filter((m) => m.role === "user").length;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
       <header className="bg-[#1C2B5E] text-white px-4 py-3 flex items-center gap-3 sticky top-0 z-10 shadow-md">
         <a href="/" className="flex items-center gap-2 mr-auto">
-          <div className="w-7 h-7 rounded-md bg-[#C84EC4] flex items-center justify-center flex-shrink-0"><span className="text-white font-black text-xs">E</span></div>
+          <img src="/Enlighting_Logo_White_Web_1763150856949.png" alt="Enlighting Energy" className="h-7 w-auto max-w-[120px] object-contain flex-shrink-0" />
           <span className="font-bold text-sm hidden sm:inline">Enlighting Energy</span>
         </a>
         {phase === "conversation" && stepCount > 0 && (
@@ -136,7 +139,7 @@ export default function Chat() {
             {stepCount < 3 ? "Getting started…" : stepCount < 5 ? "Almost there…" : "Finalizing…"}
           </div>
         )}
-        <a href="/sample-report.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-200 hover:text-white border border-blue-200/30 hover:border-blue-200/60 rounded-full px-3 py-1 transition-colors whitespace-nowrap">See sample report</a>
+        <a href="https://enlightingenergy.com" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-200 hover:text-white border border-blue-200/30 hover:border-blue-200/60 rounded-full px-3 py-1 transition-colors whitespace-nowrap">About Enlighting</a>
       </header>
 
       <div className="flex-1 overflow-y-auto px-4 py-6">
@@ -190,7 +193,7 @@ export default function Chat() {
                       <div key={i} className={`px-4 py-3 text-xs ${i > 0 ? "border-t border-gray-100" : ""}`}>
                         <div className="flex items-start justify-between gap-2 mb-0.5">
                           <span className="font-semibold text-[#1C2B5E]">{p.name}</span>
-                          <span className={`px-2 py-0.5 rounded-full font-bold flex-shrink-0 ${p.category === "Utility Rebate" ? "bg-blue-100 text-blue-700" : p.category === "State Grant" ? "bg-green-100 text-green-700" : p.category === "Federal Tax Credit" ? "bg-amber-100 text-amber-700" : "bg-purple-100 text-purple-700"}`}>{p.category}</span>
+                          <span className={`px-2 py-0.5 rounded-full font-bold flex-shrink-0 ${p.category === "Utility Rebate" ? "bg-blue-100 text-blue-700" : p.category === "State Grant" ? "bg-cyan-100 text-cyan-700" : p.category === "Federal Tax Credit" ? "bg-orange-100 text-orange-700" : "bg-fuchsia-100 text-fuchsia-700"}`}>{p.category}</span>
                         </div>
                         <p className="text-gray-500">{p.administrator}{p.deadline ? ` · ${p.deadline}` : ""}</p>
                       </div>
@@ -243,7 +246,7 @@ export default function Chat() {
 }
 
 function Avatar() {
-  return <div className="w-8 h-8 rounded-full bg-[#1C2B5E] flex items-center justify-center flex-shrink-0 mt-0.5"><span className="text-white font-black text-xs">E</span></div>;
+  return <img src="/enlighting-logo-optimized.png" alt="Enlighting" className="h-8 w-auto max-w-[80px] object-contain flex-shrink-0 mt-0.5" />;
 }
 
 function MessageBubble({ message }: { message: Message }) {
