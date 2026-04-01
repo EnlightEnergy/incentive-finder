@@ -80,7 +80,6 @@ export function clearSitemapCache() {
   terminologyCacheTime = 0;
 }
 
-```typescript
 function normalizeReportData(matchResult: any) {
   const programs = (matchResult.programs ?? []).map((group: any) => ({
     measure: group.measure ?? 'Energy Measures',
@@ -185,7 +184,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 `/api/generate-report` endpoint
 
 FIND (the entire existing block):
-```typescript
   app.post('/api/generate-report', async (req, res) => {
     try {
       const pdfBuffer = await generateReport(req.body);
@@ -199,7 +197,6 @@ FIND (the entire existing block):
       res.status(500).json({ error: 'Failed to generate report', details: (err as Error).message });
     }
   });
-```
 
   app.post('/api/generate-report', async (req, res) => {
     try {
