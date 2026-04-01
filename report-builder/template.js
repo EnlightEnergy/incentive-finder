@@ -1,6 +1,25 @@
 // Generates the full HTML string for the Qualifying Programs Report
 // data: reportData object (see sample-data.js for shape)
 
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+let _logoDataUri = null;
+function getLogoDataUri() {
+  if (!_logoDataUri) {
+    try {
+      const buf = readFileSync(join(__dirname, '../client/public/enlighting-logo-optimized.png'));
+      _logoDataUri = 'data:image/png;base64,' + buf.toString('base64');
+    } catch {
+      _logoDataUri = '';
+    }
+  }
+  return _logoDataUri;
+}
+
 export function generateReportHTML(data) {
   const _d = data || {};
   const facility = _d.facility || {};
@@ -189,7 +208,7 @@ export function generateReportHTML(data) {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 0.3in;
+    margin-bottom: 0.1in;
   }
 
   .cover-logo-circle {
@@ -761,7 +780,7 @@ export function generateReportHTML(data) {
   .priority-urgency {
     font-size: 8pt;
     font-weight: 700;
-    color: #E65100;
+    color: #C84EC4;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 4px;
@@ -907,6 +926,8 @@ export function generateReportHTML(data) {
     border-radius: 8px;
     padding: 24px 28px;
     margin-bottom: 28px;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .about-cta-title {
@@ -993,10 +1014,9 @@ export function generateReportHTML(data) {
   <div class="cover-body">
     <!-- Logo area -->
     <div class="cover-logo-area">
-      <div class="cover-logo-circle"></div>
+      <img src="${getLogoDataUri()}" alt="Enlighting Energy" style="height:44px;width:auto;object-fit:contain;" />
       <div>
-        <div class="cover-company-name">Enlighting Energy</div>
-        <div class="cover-report-type">Qualifying Programs Report</div>
+        <div class="cover-report-type" style="margin-top:4px;">Qualifying Programs Report</div>
       </div>
     </div>
 
@@ -1215,7 +1235,7 @@ export function generateReportHTML(data) {
     <div class="about-cta-contacts">
       <div class="about-cta-contact-item">
         <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#7C3AED"/><path d="M5 7l5 4 5-4M5 7h10v8H5V7z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        hello@enlightingenergy.com
+        william@enlightingenergy.com
       </div>
       <div class="about-cta-contact-item">
         <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#7C3AED"/><path d="M7 6h3l1 3-2 1a7 7 0 003 3l1-2 3 1v3c-5 1-10-4-9-9z" fill="white"/></svg></div>
