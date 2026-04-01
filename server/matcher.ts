@@ -19,9 +19,9 @@ import {
   benefitStructures,
   documentation,
 } from '../shared/schema';
-import { eq, and, or, ilike, sql } from 'drizzle-orm';
+import { eq, and, or, ilike, sql, isNull, gte } from 'drizzle-orm';
 
-// ── Types ─────────────────────────────────────────────────────────────────────
+// ââ Types âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 export interface FacilityProfile {
   zip: string;
@@ -76,25 +76,35 @@ export interface MatchResult {
   summary: string;
 }
 
-// ── Utility filtering ─────────────────────────────────────────────────────────
+// ââ Utility filtering âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //
 // Maps well-known utility codes/names to the substrings that identify
 // programs administered by that utility.  When a customer is on utility X,
 // any program whose owner matches a DIFFERENT utility in this map is excluded.
 
 const UTILITY_OWNER_PATTERNS: Record<string, string[]> = {
-  'PG&E':   ['pg&e', 'pacific gas', 'pge', 'pacific gas and electric'],
-  'SCE':    ['sce', 'southern california edison', 'so. california edison'],
-  'SDG&E':  ['sdg&e', 'san diego gas', 'sdge'],
-  'LADWP':  ['ladwp', 'los angeles department of water', 'la dept of water'],
-  'SMUD':   ['smud', 'sacramento municipal utility'],
-  'MCE':    ['mce', 'marin clean energy'],
-  'SVCE':   ['svce', 'silicon valley clean energy'],
-  'EBCE':   ['ebce', 'east bay community energy'],
-  'SVPA':   ['svpa', 'silicon valley power'],
-  'BURBANK':['burbank water and power', 'burbank electric'],
+  'PG&E':    ['pg&e', 'pacific gas', 'pge', 'pacific gas and electric'],
+  // SoCalREN is a Southern California consortium â treat as part of SCE/SDG&E territory
+  'SCE':     ['sce', 'southern california edison', 'so. california edison', 'socalren', 'southern california utility consortium', 'socal utility'],
+  'SDG&E':   ['sdg&e', 'san diego gas', 'sdge', 'socalren', 'southern california utility consortium', 'socal utility'],
+  'LADWP':   ['ladwp', 'los angeles department of water', 'la dept of water'],
+  'SMUD':    ['smud', 'sacramento municipal utility'],
+  'MCE':     ['mce', 'marin clean energy'],
+  'SVCE':    ['svce', 'silicon valley clean energy'],
+  'EBCE':    ['ebce', 'east bay community energy'],
+  'SVPA':    ['svpa', 'silicon valley power'],
+  'BURBANK': ['burbank water and power', 'burbank electric'],
   'GLENDALE':['glendale water and power'],
   'PASADENA':['pasadena water and power'],
+  // Municipal utilities â filter when customer is on a different utility
+  'ANAHEIM': ['anaheim public utilities', 'anaheim public util', 'city of anaheim'],
+  'RIVERSIDE':['riverside public utilities', 'riverside electric'],
+  'BANNING': ['banning electric', 'city of banning'],
+  'COLTON':  ['colton electric', 'city of colton'],
+  'LODI':    ['lodi electric', 'city of lodi'],
+  'ROSEVILLE':['roseville electric', 'city of roseville'],
+  'TURLOCK': ['turlock irrigation district', 'tid electric'],
+  'MODESTO': ['modesto irrigation district', 'mid electric'],
 };
 
 function getCustomerUtilityPatterns(utility: string): string[] {
@@ -122,10 +132,10 @@ function isCompetingUtilityProgram(ownerName: string, customerPatterns: string[]
 }
 const MEASURE_TECH_MAP: Record<string, string[]> = {
   'LED Lighting':['Lighting','LED','lighting','lamp','fixture'],
-  'HVAC':['HVAC','Cooling','Heating','Air Conditioning','chiller','rootop'],
+  'HVAC':['HVAC','Cooling','Heating','Air Conditioning','chiller','rooftop'],
   'VFD / Motors':['VFD','Variable Frequency Drive','Motors','Pump','Fan'],
   'Refrigeration':['Refrigeration','Refrigerator','Walk-in','Case'],
-  'Solar / PV':['Solar','Phototoltaic','PV','Net Metering'],
+  'Solar / PV':['Solar','Photovoltaic','PV','Net Metering'],
   'Battery Storage':['Battery','Energy Storage','Storage','BESS'],
   'EV Charging':['EV','Electric Vehicle','EVSE','Charging Station'],
   'Building Envelope':['Envelope','Insulation','Window','Roof','Cool Roof'],
@@ -171,7 +181,7 @@ function rowToEntry(p: typeof programs.$inferSelect, benefit: typeof benefitStru
   if (doc?.preAppLink) nextStep = `Submit pre-approval at: ${doc.preAppLink}`;
   else if (elig?.preApprovalRequired) nextStep = 'Submit pre-approval before ordering or installing equipment';
   else if (p.url) nextStep = `Apply via program website: ${p.url}`;
-  const timeline = elig?.tradeAllyRequired ? '8–14 weeks (trade ally/contractor required)' : '6–10 weeks';
+  const timeline = elig?.tradeAllyRequired ? '8â14 weeks (trade ally/contractor required)' : '6â10 weeks';
   return {name:p.name, category:determineCategory(p.owner,p.incentiveType), administrator:p.owner, eligibleMeasures:(p.techTags as string[])?.join(', ')||bestMeasure, incentiveStructure:incentiveText, stacksWith:'', deadline:deadlineText, timeline, nextStep, preApprovalRequired:elig?.preApprovalRequired??false, url:p.url??undefined};
 }
 export async function matchPrograms(facility: FacilityProfile): Promise<MatchResult> {
@@ -188,6 +198,7 @@ export async function matchPrograms(facility: FacilityProfile): Promise<MatchRes
     .leftJoin(documentation, eq(documentation.programId, programs.id))
     .where(and(
       eq(programs.status, 'open'),
+      or(isNull(programs.endDate), gte(programs.endDate, sql`CURRENT_DATE`)),
       or(
         ilike(programGeos.utilityServiceArea, `%${facility.utility}%`),
         ilike(programs.owner, `%${facility.utility}%`),
@@ -228,12 +239,22 @@ export async function matchPrograms(facility: FacilityProfile): Promise<MatchRes
     grouped.get(bestMeasure)!.push(entry);
   }
 
+  // Deduplicate 179D / Section 179 programs â keep only the highest-value entry per measure group
+  for (const [measure, entries] of grouped.entries()) {
+    const is179D = (name: string) => /179[dD]|section\s*179/i.test(name);
+    const first179D = entries.findIndex(e => is179D(e.name));
+    if (first179D !== -1) {
+      const deduped = entries.filter((e, i) => !is179D(e.name) || i === first179D);
+      grouped.set(measure, deduped);
+    }
+  }
+
   const matchedPrograms: MatchedProgram[] = Array.from(grouped.entries()).map(([measure, entries]) => ({ measure, entries }));
   const totalCount = matchedPrograms.reduce((n, g) => n + g.entries.length, 0);
   const today = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
   const summary = totalCount > 0
     ? `Based on your facility profile, we identified ${totalCount} qualifying program${totalCount!==1?'s':''} across ${matchedPrograms.length} measure area${matchedPrograms.length!==1?'s':''}. Programs span utility rebates, state grants, and federal incentives that can be stacked for maximum savings.`
-    : 'No open programs were found matching your exact profile. Our team can do a manual review — contact us at hello@enlightingenergy.com.';
+    : 'No open programs were found matching your exact profile. Our team can do a manual review â contact us at hello@enlightingenergy.com.';
 
   return {
     facility: {name:facility.facilityName||'Your Facility', address:'', city:'', state, zip:facility.zip, facilityType:facility.facilityType, sqFt:facility.sqFt?facility.sqFt.toLocaleString():'', utility:facility.utility, ownership:'', contactName:facility.contactName||'', contactEmail:facility.contactEmail||'', reportDate:today},
