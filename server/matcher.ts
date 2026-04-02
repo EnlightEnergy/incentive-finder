@@ -21,7 +21,7 @@ import {
 } from '../shared/schema';
 import { eq, and, or, ilike, sql, isNull, gte } from 'drizzle-orm';
 
-// ââ Types âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── Types ─────────────────────────────────────────────────────────────────────
 
 export interface FacilityProfile {
   zip: string;
@@ -76,7 +76,7 @@ export interface MatchResult {
   summary: string;
 }
 
-// ââ Utility filtering âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── Utility filtering ─────────────────────────────────────────────────────────
 //
 // Maps well-known utility codes/names to the substrings that identify
 // programs administered by that utility.  When a customer is on utility X,
@@ -84,7 +84,7 @@ export interface MatchResult {
 
 const UTILITY_OWNER_PATTERNS: Record<string, string[]> = {
   'PG&E':    ['pg&e', 'pacific gas', 'pge', 'pacific gas and electric'],
-  // SoCalREN is a Southern California consortium â treat as part of SCE/SDG&E territory
+  // SoCalREN is a Southern California consortium — treat as part of SCE/SDG&E territory
   'SCE':     ['sce', 'southern california edison', 'so. california edison', 'socalren', 'southern california utility consortium', 'socal utility'],
   'SDG&E':   ['sdg&e', 'san diego gas', 'sdge', 'socalren', 'southern california utility consortium', 'socal utility'],
   'LADWP':   ['ladwp', 'los angeles department of water', 'la dept of water'],
@@ -96,7 +96,7 @@ const UTILITY_OWNER_PATTERNS: Record<string, string[]> = {
   'BURBANK': ['burbank water and power', 'burbank electric'],
   'GLENDALE':['glendale water and power'],
   'PASADENA':['pasadena water and power'],
-  // Municipal utilities â filter when customer is on a different utility
+  // Municipal utilities — filter when customer is on a different utility
   'ANAHEIM': ['anaheim public utilities', 'anaheim public util', 'city of anaheim'],
   'RIVERSIDE':['riverside public utilities', 'riverside electric'],
   'BANNING': ['banning electric', 'city of banning'],
@@ -175,13 +175,13 @@ function determineCategory(owner: string, incentiveType: string): string {
 }
 
 function rowToEntry(p: typeof programs.$inferSelect, benefit: typeof benefitStructures.$inferSelect|null, elig: typeof eligibilityRules.$inferSelect|null, doc: typeof documentation.$inferSelect|null, bestMeasure: string): ProgramEntry {
-  const incentiveText = (benefit?.examplesText||p.incentiveDescription||(benefit?.unit?`Rate: ${benefit.unit}`:'')||p.description?.substring(0,200)||'See program details').substring(0,300);
+  const incentiveText = (benefit?.examplesText||p.incentiveDescription||(benefit?.unit?`Rate: ${benefit.unit}`:'')||p.description?.substring(0,400)||'See program details').substring(0,600);
   const deadlineText = p.endDate ? new Date(p.endDate).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : p.status==='paused' ? 'Currently paused' : 'Rolling enrollment';
   let nextStep = 'Contact program administrator to begin application';
   if (doc?.preAppLink) nextStep = `Submit pre-approval at: ${doc.preAppLink}`;
   else if (elig?.preApprovalRequired) nextStep = 'Submit pre-approval before ordering or installing equipment';
   else if (p.url) nextStep = `Apply via program website: ${p.url}`;
-  const timeline = elig?.tradeAllyRequired ? '8â14 weeks (trade ally/contractor required)' : '6â10 weeks';
+  const timeline = elig?.tradeAllyRequired ? '8–14 weeks (trade ally/contractor required)' : '6–10 weeks';
   return {name:p.name, category:determineCategory(p.owner,p.incentiveType), administrator:p.owner, eligibleMeasures:(p.techTags as string[])?.join(', ')||bestMeasure, incentiveStructure:incentiveText, stacksWith:'', deadline:deadlineText, timeline, nextStep, preApprovalRequired:elig?.preApprovalRequired??false, url:p.url??undefined};
 }
 export async function matchPrograms(facility: FacilityProfile): Promise<MatchResult> {
@@ -239,7 +239,7 @@ export async function matchPrograms(facility: FacilityProfile): Promise<MatchRes
     grouped.get(bestMeasure)!.push(entry);
   }
 
-  // Deduplicate 179D / Section 179 programs â keep only the highest-value entry per measure group
+  // Deduplicate 179D / Section 179 programs — keep only the highest-value entry per measure group
   for (const [measure, entries] of grouped.entries()) {
     const is179D = (name: string) => /179[dD]|section\s*179/i.test(name);
     const first179D = entries.findIndex(e => is179D(e.name));
@@ -254,7 +254,7 @@ export async function matchPrograms(facility: FacilityProfile): Promise<MatchRes
   const today = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
   const summary = totalCount > 0
     ? `Based on your facility profile, we identified ${totalCount} qualifying program${totalCount!==1?'s':''} across ${matchedPrograms.length} measure area${matchedPrograms.length!==1?'s':''}. Programs span utility rebates, state grants, and federal incentives that can be stacked for maximum savings.`
-    : 'No open programs were found matching your exact profile. Our team can do a manual review â contact us at hello@enlightingenergy.com.';
+    : 'No open programs were found matching your exact profile. Our team can do a manual review — contact us at hello@enlightingenergy.com.';
 
   return {
     facility: {name:facility.facilityName||'Your Facility', address:'', city:'', state, zip:facility.zip, facilityType:facility.facilityType, sqFt:facility.sqFt?facility.sqFt.toLocaleString():'', utility:facility.utility, ownership:'', contactName:facility.contactName||'', contactEmail:facility.contactEmail||'', reportDate:today},
