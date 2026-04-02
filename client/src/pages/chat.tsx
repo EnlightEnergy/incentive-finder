@@ -118,7 +118,7 @@ export default function Chat() {
       const url = URL.createObjectURL(blob);
       const facilityName = matchResult?.facility?.name || "Facility";
       const today = new Date().toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
-      const safeFilename = `${facilityName} incentive programs report | Enlighting (${today}).pdf`.replace(/[/\\?%*:|"<>]/g, "-");
+      const safeFilename = `${facilityName} - Incentive Programs Report | Enlighting (${today}).pdf`.replace(/[/\\?%*:|"<>]/g, "-");
       const a = document.createElement("a"); a.href = url; a.download = safeFilename;
       document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
     } catch (e: any) { setError("PDF generation failed. Please try again."); }
