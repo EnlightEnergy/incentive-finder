@@ -52,7 +52,7 @@ export function generateReportHTML(data) {
 
   const renderCard = (p) => {
     // Normalize missing fields to safe defaults
-    p = { ...p, category: p.category || '', administrator: p.administrator || '&mdash;', eligibleMeasures: p.eligibleMeasures || '', incentiveStructure: p.incentiveStructure || p.incentiveAmount || '', stacksWith: p.stacksWith || '', deadline: p.deadline || 'TBD', timeline: sanitize(p.timeline || ''), nextStep: p.nextStep || '' };
+    p = { ...p, category: p.category || '', administrator: p.administrator || '&mdash;', eligibleMeasures: p.eligibleMeasures || '', incentiveStructure: p.incentiveStructure || p.incentiveAmount || '', stacksWith: p.stacksWith || '', deadline: p.deadline || 'TBD', timeline: '2–4 weeks', nextStep: p.nextStep || '' };
     const colors = categoryColor(p.category);
     return `
       <div class="program-card">
@@ -184,8 +184,8 @@ export function generateReportHTML(data) {
   /*  Cover Page  */
   .cover {
     width: 8.5in;
-    height: 11in;
-    max-height: 11in;
+    height: 10.55in;
+    max-height: 10.55in;
     display: flex;
     flex-direction: column;
     page-break-after: always;
@@ -1010,6 +1010,7 @@ export function generateReportHTML(data) {
 
   /*  Print / PDF  */
   @media print {
+    .running-header { display: none !important; }
     body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .cover { page-break-after: always; }
     .page-break-before { page-break-before: always; }
