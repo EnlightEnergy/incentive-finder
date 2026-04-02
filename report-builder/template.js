@@ -42,10 +42,13 @@ export function generateReportHTML(data) {
   const sanitize = (str = '') => String(str)
     .replace(/\u2013/g, '&ndash;')
     .replace(/\u2014/g, '&mdash;')
+    .replace(/\u00e2\u0080\u0093/g, '&ndash;')   // en-dash UTF-8 bytes read as Latin-1
+    .replace(/\u00e2\u0080\u0094/g, '&mdash;')   // em-dash UTF-8 bytes read as Latin-1
     .replace(/â€"/g, '&ndash;')
-    .replace(/â€"/g, '&ndash;')
+    .replace(/â€"/g, '&mdash;')
     .replace(/\u2018|\u2019/g, "'")
-    .replace(/\u201C|\u201D/g, '"');
+    .replace(/\u201C|\u201D/g, '"')
+    .replace(/â[^\x20-\x7E]{1,2}/g, '&ndash;');  // catch remaining â+control-char mojibake
 
   const renderCard = (p) => {
     // Normalize missing fields to safe defaults
@@ -811,9 +814,9 @@ export function generateReportHTML(data) {
 
   /*  Limitations Section  */
   .limitations-box {
-    background: #FFFBF0;
-    border: 1px solid #FFE69C;
-    border-left: 4px solid #F39C12;
+    background: #F5F5F5;
+    border: 1px solid #D0D0D0;
+    border-left: 4px solid #888888;
     border-radius: 0 8px 8px 0;
     padding: 20px 24px;
     margin-bottom: 24px;
@@ -822,7 +825,7 @@ export function generateReportHTML(data) {
   .limitations-title {
     font-size: 10pt;
     font-weight: 700;
-    color: #856404;
+    color: #444444;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 12px;
@@ -840,7 +843,7 @@ export function generateReportHTML(data) {
     padding: 6px 0;
     padding-left: 20px;
     position: relative;
-    border-bottom: 1px solid rgba(243, 156, 18, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .limitations-list li:last-child { border-bottom: none; }
@@ -852,7 +855,7 @@ export function generateReportHTML(data) {
     top: 8px;
     width: 14px;
     height: 14px;
-    background: #F39C12;
+    background: #888888;
     color: white;
     font-size: 9pt;
     font-weight: 800;
@@ -999,15 +1002,23 @@ export function generateReportHTML(data) {
     color: #1C2B5E;
   }
 
+  .footer-left-stack {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+  }
+
   /*  Print / PDF  */
   @media print {
     body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .cover { page-break-after: always; }
     .page-break-before { page-break-before: always; }
-    .program-card { page-break-inside: auto; }
-    .program-row { page-break-inside: avoid; }
-    .priority-item { page-break-inside: avoid; }
+    .content-page { padding-top: 0.65in; }
+    .program-card { page-break-inside: avoid; break-inside: avoid; }
+    .program-row { page-break-inside: avoid; break-inside: avoid; }
+    .priority-item { page-break-inside: avoid; break-inside: avoid; }
     .section-anchor { page-break-after: avoid; }
+    .measure-group { page-break-inside: avoid; break-inside: avoid; }
     .measure-header { page-break-after: avoid; }
     .running-header { page-break-after: avoid; }
   }
@@ -1110,7 +1121,7 @@ export function generateReportHTML(data) {
   </div>
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
+    <span class="footer-left-stack"><span class="footer-brand">Enlighting Energy</span><span>Qualifying Programs Report</span></span>
     <span>enlightingenergy.com &nbsp;&middot;&nbsp; 805-724-5299 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
   </div>
 </div>
@@ -1132,7 +1143,7 @@ export function generateReportHTML(data) {
   ${programCardsHTML}
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
+    <span class="footer-left-stack"><span class="footer-brand">Enlighting Energy</span><span>Qualifying Programs Report</span></span>
     <span>Programs verified as of ${facility.reportDate}. Confirm current terms with program administrator before applying.</span>
   </div>
 </div>
@@ -1175,7 +1186,7 @@ export function generateReportHTML(data) {
   ${priorityHTML}
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report</span>
+    <span class="footer-left-stack"><span class="footer-brand">Enlighting Energy</span><span>Qualifying Programs Report</span></span>
     <span>enlightingenergy.com &nbsp;&middot;&nbsp; 805-724-5299 &nbsp;&middot;&nbsp; hello@enlightingenergy.com</span>
   </div>
 </div>
@@ -1260,7 +1271,7 @@ export function generateReportHTML(data) {
   </div>
 
   <div class="page-footer">
-    <span><span class="footer-brand">Enlighting Energy</span> &nbsp;&middot;&nbsp; Qualifying Programs Report &nbsp;&middot;&nbsp; ${facility.reportDate}</span>
+    <span class="footer-left-stack"><span class="footer-brand">Enlighting Energy</span><span>Qualifying Programs Report</span></span>
     <span>&copy; Enlighting Energy. All rights reserved.</span>
   </div>
 </div>
