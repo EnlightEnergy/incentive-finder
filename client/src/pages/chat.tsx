@@ -60,7 +60,7 @@ export default function Chat() {
       setMessages([userMsg]);
       sendToAPI([userMsg]);
     } else {
-      setMessages([{ role: "assistant", content: "Hi! I'm here to find every incentive program your facility qualifies for.\n\nTell me about your building â where it's located, what type of facility it is, and what upgrades you're considering. You can just describe it naturally." }]);
+      setMessages([{ role: "assistant", content: "Hi! I'm here to find every incentive program your facility qualifies for.\n\nTell me about your building — where it's located, what type of facility it is, and what upgrades you're considering. You can just describe it naturally." }]);
     }
   }, []);
 
@@ -131,147 +131,73 @@ export default function Chat() {
     <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
       <header className="bg-[#1C2B5E] text-white px-4 py-3 flex items-center gap-3 sticky top-0 z-10 shadow-md">
         <a href="/" className="flex items-center gap-2 mr-auto">
-          <img src="/Enlighting_Logo_White_Web_1763150856949.png" alt="Enlighting Energy" className="h-10 w-auto max-w-[140px] object-contain flex-shrink-0" />
+          <img src="/Enlighting_Logo_White_Web_1763150856949.png" alt="Enlighting Energy" className="h-10 w-auto max-w[140px] object-contain flex-shrink-0" />
           <div className="hidden sm:flex flex-col leading-tight">
             <span className="text-xs text-blue-200 mt-0.5">California Energy Incentives</span>
           </div>
         </a>
         {phase === "conversation" && stepCount > 0 && (
           <div className="text-xs text-blue-200 bg-white/10 px-3 py-1 rounded-full">
-            {stepCount < 3 ? "Getting startedâ¦" : stepCount < 5 ? "Almost thereâ¦" : "Finalizingâ¦"}
+            {stepCount < 3 ? "Getting started…" : stepCount < 5 ? "Almost there…" : "Finalizing…"}
           </div>
         )}
-        <a href="https://enlightingenergy.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-blue-200 hover:text-white border border-blue-200/30 hover:border-blue-200/60 rounded-full px-3 py-1 transition-colors whitespace-nowrap">About Enlighting</a>
-      </header>
+        <a href="https://enlightingenergy.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-blue-200 hover:text-white border border-blue-200/30 hover:border-blue-200/60 rounded-full pxL�KLH�[��][ۋX��ܜ��]\�X�K[��ܘ\��X��][�Y�[���O���XY\����]��\�Ә[YOH��^LHݙ\����^KX]]�MKM����]��\�Ә[YOH�X^]�L�^X]]��X�K^KM����Y\��Y�\˛X\
 
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        <div className="max-w-2xl mx-auto space-y-4">
-          {messages.map((msg, i) => <MessageBubble key={i} message={msg} />)}
+\��JHO�Y\��Y�P�X��H�^O^�_HY\��Y�O^�\��Hϊ_B����Y[��	��\�HOOH��[�\�][�Ȉ	��
+�]��\�Ә[YOH��^][\�\�\��\Lȏ�]�]\�ς�]��\�Ә[YOH���]�]H��[�YL���[�Y]\�HMKL��Y��\�H�ܙ\��ܙ\�Yܘ^KLL���]��\�Ә[YOH��^�\LH][\�X�[�\�MH����[��\�Ә[YOH��L�L���[�YY�[��V���
+P�H[�[X]KX��[��H��[O^��[�[X][ۑ[^N��\Ȉ_Hς��[��\�Ә[YOH��L�L���[�YY�[��V���
+P�H[�[X]KX��[��H��[O^��[�[X][ۑ[^N��ML\Ȉ_Hς��[��\�Ә[YOH��L�L���[�YY�[��V���
+P�H[�[X]KX��[��H��[O^��[�[X][ۑ[^N���\Ȉ_Hς��]����]����]���
+_B���\�HOOH��[�\�][�Ȉ	���Y[��	��
+�]��\�Ә[YOH��^][\�\�\��\Lȏ�]�]\�ς�]��\�Ә[YOH���]�]H��[�YL���[�Y]\�HMKM�Y��\�H�ܙ\��ܙ\�Yܘ^KLLX^]�^ȏ��]��\�Ә[YOH��^][\�X�[�\��\L�X�L����]��\�Ә[YOH��MM�ܙ\�L��ܙ\�V���
+P�H�ܙ\�]]�[��\�[���[�YY�[[�[X]K\�[��ς��[��\�Ә[YOH�^\�H�۝[YY][H^V��P̐�QWH���[�[��[�\��\ܝ8�)���[����]����\�Ә[YOH�^^�^Yܘ^KM���\�H[�Y[��[H�H�\\�H[�\�������]����]���
+_B���\�HOOH�[XZ[��]H�\�HOOH��[�\�][�Ȉ\�HOOH���\]H�H	��X]��\�[	��
+�]��\�Ә[YOH��^][\�\�\��\Lȏ�]�]\�ς�]��\�Ә[YOH�X^]�\�H�Y�[�X�K^KLȏ��]��\�Ә[YOH���V��P̐�QWH^]�]H��[�YL���[�Y]\�HMHKM�Y��\�H����\�Ә[YOH�^^�^X�YKL�\\��\�H�X��[��]�Y\��۝\�[ZX��X�LH��[�\�]X[Y�Z[����ܘ[\��\ܝ����\�Ә[YOH�^L��۝X�X��X�LH���X]��\�[���ܘ[P��[�H��ܘ[\���[�����\�Ә[YOH�^^�^X�YKL�XY[��\�[^Y���X]��\�[��[[X\�H�\�Yۈ[�\��X�[]H�ٚ[K�HY[�Y�YY	�X]��\�[���ܘ[P��[�H]X[Y�Z[����ܘ[\�Xܛ���][]H�X�]\��]Hܘ[��[��Y\�[[��[�]�\˘O����\�HOOH���\]H�	��
+��]ۈې�X��^��ۛ�Y�H\�X�Y^���\�_H�\�Ә[YOH�]M�Y�[��V���
+P�Hݙ\����V��N�XMWH\�X�Y��X�]KM�^]�]H�۝X��KL��H��[�Y^^\�H�[��][ۋX��ܜ��^][\�X�[�\��\�Y�KX�[�\��\L�������\�H�
+��[��\�Ә[YOH��MM�ܙ\�L��ܙ\�]�]H�ܙ\�]]�[��\�[���[�YY�[[�[X]K\�[��ϑ�[�\�][����)�ϊH�
+�ݙ��\�Ә[YOH��MM��[H��ۙH��Y]Л�H��������OH��\��[���܈�����U�Y^̟O�]����S[�X�\H���[������S[�Z��[�H���[��H�L�M��]����PL���H���H
+K��H�ZLˍPL���H���H�HN��U�M��SLM��HL�L�M��[L
+ˍHL�M�H
+�U�ȈϏ�ݙϑ�ۛ�Y�[��\ܝϊ_B�؝]ۏ��
+_B��]����X]��\�[���ܘ[\�˛X\
 
-          {loading && phase !== "generating" && (
-            <div className="flex items-start gap-3"><Avatar />
-              <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-gray-100">
-                <div className="flex gap-1 items-center h-5">
-                  <span className="w-2 h-2 rounded-full bg-[#C84EC4] animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="w-2 h-2 rounded-full bg-[#C84EC4] animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-2 h-2 rounded-full bg-[#C84EC4] animate-bounce" style={{ animationDelay: "300ms" }} />
-                </div>
-              </div>
-            </div>
-          )}
+ܛ�\
+HO�
+�]��^O^�ܛ�\�YX\�\�_H�\�Ә[YOH���]�]H��[�Y^�ܙ\��ܙ\�Yܘ^KL��Y��\�Hݙ\����ZY[����]��\�Ә[YOH���V��P̐�QWK�H�ܙ\�X��ܙ\�Yܘ^KLLMKL��^][\�X�[�\��\�Y�KX�]�Y[�����[��\�Ә[YOH�^^��۝X��^V��P̐�QWH���ܛ�\�YX\�\�_O��[����[��\�Ә[YOH�^^�^Yܘ^KM���ܛ�\�[��Y\˛[��H��ܘ[^�ܛ�\�[��Y\˛[��OOHH��Ȉ���O��[����]����ܛ�\�[��Y\˛X\
 
-          {phase === "generating" && loading && (
-            <div className="flex items-start gap-3"><Avatar />
-              <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-4 shadow-sm border border-gray-100 max-w-xs">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-4 h-4 border-2 border-[#C84EC4] border-t-transparent rounded-full animate-spin" />
-                  <span className="text-sm font-medium text-[#1C2B5E]">Sending your reportâ¦</span>
-                </div>
-                <p className="text-xs text-gray-400">Just a moment while we prepare your PDF.</p>
-              </div>
-            </div>
-          )}
-
-          {(phase === "email_gate" || phase === "generating" || phase === "complete") && matchResult && (
-            <div className="flex items-start gap-3"><Avatar />
-              <div className="max-w-sm w-full space-y-3">
-                <div className="bg-[#1C2B5E] text-white rounded-2xl rounded-tl-sm px-5 py-4 shadow-sm">
-                  <p className="text-xs text-blue-200 uppercase tracking-wider font-semibold mb-1">Your Qualifying Programs Report</p>
-                  <p className="text-3xl font-black mb-1">{matchResult.programCount} Programs Found</p>
-                  <p className="text-xs text-blue-200 leading-relaxed">{matchResult.summary || `Based on your facility profile, we identified ${matchResult.programCount} qualifying programs across utility rebates, state grants, and federal incentives.`}</p>
-                  {phase === "complete" && (
-                    <button onClick={downloadPDF} disabled={pdfBusy} className="mt-4 w-full bg-[#C84EC4] hover:bg-[#a83ea5] disabled:opacity-60 text-white font-bold py-2.5 rounded-xl text-sm transition-colors flex items-center justify-center gap-2">
-                      {pdfBusy ? (<><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Generating PDFâ¦</>) : (<><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>Download Full PDF Report</>)}
-                    </button>
-                  )}
-                </div>
-                {matchResult.programs?.map((group) => (
-                  <div key={group.measure} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-                    <div className="bg-[#1C2B5E]/5 border-b border-gray-100 px-4 py-2 flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#1C2B5E]">{group.measure}</span>
-                      <span className="text-xs text-gray-400">{group.entries.length} program{group.entries.length !== 1 ? "s" : ""}</span>
-                    </div>
-                    {group.entries.map((p, i) => (
-                      <div key={i} className={`px-4 py-3 text-xs ${i > 0 ? "border-t border-gray-100" : ""}`}>
-                        <div className="flex items-start justify-between gap-2 mb-0.5">
-                          <span className="font-semibold text-[#1C2B5E]">{p.name}</span>
-                          <span className={`px-2 py-0.5 rounded-full font-bold flex-shrink-0 ${p.category === "Utility Rebate" ? "bg-blue-100 text-blue-700" : p.category === "State Grant" ? "bg-cyan-100 text-cyan-700" : p.category === "Federal Tax Credit" ? "bg-[#C84EC4]/10 text-[#C84EC4]" : "bg-fuchsia-100 text-fuchsia-700"}`}>{p.category}</span>
-                        </div>
-                        <p className="text-gray-500">{p.administrator}{p.deadline ? ` Â· ${p.deadline}` : ""}</p>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {phase === "email_gate" && !loading && (
-            <div className="flex items-start gap-3"><Avatar />
-              <div className="bg-white rounded-2xl rounded-tl-sm px-5 py-4 shadow-sm border border-gray-100 max-w-sm w-full">
-                <p className="text-sm font-semibold text-[#1C2B5E] mb-1">Get the full PDF report in your inbox</p>
-                <p className="text-xs text-gray-500 mb-3">We'll email you the complete breakdown with deadlines, incentive amounts, and next steps â no spam.</p>
-                <form onSubmit={handleEmailSubmit} className="space-y-2">
-                  <input type="text" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C84EC4]" />
-                  <div className="flex gap-2">
-                    <input type="email" required placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#C84EC4]" />
-                    <button type="submit" className="bg-[#C84EC4] hover:bg-[#a83ea5] text-white font-bold px-4 py-2 rounded-lg text-sm transition-colors whitespace-nowrap">Send Report</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )}
-
-          {phase === "complete" && !loading && (
-            <>
-              <div className="flex items-start gap-3">
-                <Avatar />
-                <div className="bg-green-50 border border-green-200 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm w-full flex items-start gap-3">
-                  <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                  <div>
-                    <p className="text-sm font-semibold text-green-800">Report sent!</p>
-                    <p className="text-xs text-green-700 mt-0.5">Check your inbox â your PDF report is on its way to <span className="font-medium">{email}</span>.</p>
-                  </div>
-                </div>
-              </div>
-              <button onClick={() => window.location.href = "/"} className="w-full max-w-sm mx-auto block text-xs text-gray-400 hover:text-gray-600 py-2 text-center transition-colors">â Start a new search</button>
-            </>
-          )}
-
-          {error && <p className="text-red-500 text-sm text-center py-2">{error}</p>}
-
-          {phase === "conversation" && (
-            <div className="pt-2 pb-4">
-              <form onSubmit={handleSend} className="flex gap-2">
-                <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} disabled={loading} placeholder={loading ? "â¦" : "Type your answerâ¦"} className="flex-1 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C84EC4] disabled:opacity-50 bg-white shadow-sm" />
-                <button type="submit" disabled={!input.trim() || loading} className="bg-[#1C2B5E] hover:bg-[#2a3d7e] disabled:opacity-40 text-white font-bold px-5 py-3 rounded-xl text-sm transition-colors flex items-center gap-1.5">
-                  Send
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" /></svg>
-                </button>
-              </form>
-              <p className="text-xs text-gray-300 mt-2">Your information is used only to match and generate your report.</p>
-            </div>
-          )}
-
-          <div ref={messagesEndRef} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Avatar() {
-  return <img src="/enlighting-logo-optimized.png" alt="Enlighting" className="h-8 w-auto max-w-[80px] object-contain flex-shrink-0 mt-0.5" />;
-}
-
-function MessageBubble({ message }: { message: Message }) {
-  const isUser = message.role === "user";
-  return (
-    <div className={`flex items-start gap-3 ${isUser ? "flex-row-reverse" : ""}`}>
-      {!isUser && <Avatar />}
-      <div className={`max-w-[80%] sm:max-w-md px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${isUser ? "bg-[#1C2B5E] text-white rounded-tr-sm ml-auto" : "bg-white text-gray-800 rounded-tl-sm shadow-sm border border-gray-100"}`}>
-        {message.content}
-      </div>
-    </div>
-  );
-}
+JHO�
+�]��^O^�_H�\�Ә[YO^�MKL�^^�	�H����ܙ\�]�ܙ\�Yܘ^KLL����XO��]��\�Ә[YOH��^][\�\�\��\�Y�KX�]�Y[��\L�X�L�H����[��\�Ә[YOH��۝\�[ZX��^V��P̐�QWH�����[Y_O��[����[��\�Ә[YO^�L�KL�H��[�YY�[�۝X���^\��[��L	���]Y�ܞHOOH�][]H�X�]H�����X�YKLL^X�YKM�����]Y�ܞHOOH��]Hܘ[������X�X[�LL^X�X[�M�����]Y�ܞHOOH��Y\�[^ܙY]�����V���
+P�K�L^V���
+P�H�����Y�X��XKLL^Y�X��XKM��XO����]Y�ܞ_O��[����]����\�Ә[YOH�^Yܘ^KML����YZ[�\��]ܟ^��XY[�H�0��	��XY[�_X���O����]���
+J_B��]���
+J_B��]����]���
+_B���\�HOOH�[XZ[��]H�	��[�Y[��	��
+�]��\�Ә[YOH��^][\�\�\��\Lȏ�]�]\�ς�]��\�Ә[YOH���]�]H��[�YL���[�Y]\�HMHKM�Y��\�H�ܙ\��ܙ\�Yܘ^KLLX^]�\�H�Y�[����\�Ә[YOH�^\�H�۝\�[ZX��^V��P̐�QWHX�LH���]H�[��\ܝ[�[�\�[�������\�Ә[YOH�^^�^Yܘ^KMLX�Lȏ��I�[XZ[[�HH��\]H��XZ��ۈ�]XY[�\�[��[�]�H[[�[��[��^�\�8�%���[K�����ܛH۔�X�Z]^�[�Q[XZ[�X�Z]H�\�Ә[YOH��X�K^KL����[�]\OH�^�X�Z�\�H�[�\��[YH��[YO^ۘ[Y_Hې�[��O^�JHO��]�[YJK�\��]��[YJ_H�\�Ә[YOH��Y�[�ܙ\��ܙ\�Yܘ^KL���[�Y[�L�KL�^\�H���\Λ�][�K[�ۙH���\Μ�[��L����\Μ�[��V���
+P�H�ς�]��\�Ә[YOH��^�\L����[�]\OH�[XZ[��\]Z\�YX�Z�\�H�[�P��\[�K���H��[YO^�[XZ[Hې�[��O^�JHO��][XZ[
+K�\��]��[YJ_H�\�Ә[YOH��^LH�ܙ\��ܙ\�Yܘ^KL���[�Y[�L�KL�^\�H���\Λ�][�K[�ۙH���\Μ�[��L����\Μ�[��V���
+P�H�ς��]ۈ\OH��X�Z]��\�Ә[YOH���V���
+P�Hݙ\����V��N�XMWH^]�]H�۝X��MKL���[�Y[�^\�H�[��][ۋX��ܜ��]\�X�K[��ܘ\���[��\ܝ؝]ۏ���]���ٛܛO���]����]���
+_B���\�HOOH���\]H�	��[�Y[��	��
+���]��\�Ә[YOH��^][\�\�\��\Lȏ��]�]\�ς�]��\�Ә[YOH���V���
+P�H�ܙ\��ܙ\�V���
+P�H��[�YL���[�Y]\�HMKL�X^]�\�H�Y�[�^][\�\�\��\Lȏ��ݙ��\�Ә[YOH��MHMH^]�]H�^\��[��L]L�H��[H��ۙH��Y]Л�H��������OH��\��[���܈�����U�Y^̋�_O�]����S[�X�\H���[������S[�Z��[�H���[��H�NHL���HLK��HMHMHK��SL�HL�NHHHKLNHHHN��Ϗ�ݙς�]����\�Ә[YOH�^\�H�۝\�[ZX��^]�]H���\ܝ�[�O����\�Ә[YOH�^^�^]�]K�L]L�H���X��[�\�[���ۘ[YH�	ۘ[Y_X���H8�%[�\���\ܝ\�ۈ]��^H��[��\�Ә[YOH��۝\�[ZX�����[XZ[O��[�������]����]����]����]ۈې�X��^�
+HO��[��˛��][ۋ��Y�H�ȟH�\�Ә[YOH��Y�[X^]�\�H^X]]�����^^�^Yܘ^KMݙ\��^Yܘ^KM�KL�^X�[�\��[��][ۋX��ܜȏ����\�H�]��X\��؝]ۏ��ς�
+_B���\��܈	���\�Ә[YOH�^\�YML^\�H^X�[�\�KL����\��ܟO��B���\�HOOH��۝�\��][ۈ�	��
+�]��\�Ә[YOH�L��M����ܛH۔�X�Z]^�[�T�[�H�\�Ә[YOH��^�\L����[�]�Y�^�[�]�Y�H\OH�^��[YO^�[�]Hې�[��O^�JHO��][�]
+K�\��]��[YJ_H\�X�Y^��Y[��HX�Z�\�^��Y[�����)����\H[�\�[���\��)��H�\�Ә[YOH��^LH�ܙ\��ܙ\�Yܘ^KL���[�Y^MKL�^\�H���\Λ�][�K[�ۙH���\Μ�[��L����\Μ�[��V���
+P�H\�X�Y��X�]KML��]�]H�Y��\�H�ς��]ۈ\OH��X�Z]�\�X�Y^�Z[�]��[J
+H�Y[��H�\�Ә[YOH���V��P̐�QWHݙ\����V�̘L�
+�WH\�X�Y��X�]KM^]�]H�۝X��MHKL���[�Y^^\�H�[��][ۋX��ܜ��^][\�X�[�\��\LK�H����[��ݙ��\�Ә[YOH��LˍHLˍH��[H��ۙH��Y]Л�H��������OH��\��[���܈�����U�Y^̋�_O�]����S[�X�\H���[������S[�Z��[�H���[��H�M�L�ˌ��HˌL�PMNK�͎H
+NK�͎HH�K�
+HL�
+NK�͎
+NK�͎Hˌ����
+�S
+K�NNHL��L
+ˍH�Ϗ�ݙς�؝]ۏ��ٛܛO���\�Ә[YOH�^^�^Yܘ^KL�]L���[�\�[��ܛX][ۈ\�\�YۛH�X]�[��[�\�]H[�\��\ܝ�����]���
+_B��]��Y�^�Y\��Y�\�[��Y�Hς��]����]����]���
+NB���[��[ۈ]�]\�
+H�]\��[Y�ܘ�H��[�Y�[��[���[�[Z^�Y��Ȉ[H�[�Y�[�Ȉ�\�Ә[YOH�N�X]]�X^]�V�Hؚ�X�X�۝Z[��^\��[��L]L�H�ώB���[��[ۈY\��Y�P�X��J�Y\��Y�HN��Y\��Y�N�Y\��Y�HJH�ۜ�\�\�\�HY\��Y�K���HOOH�\�\���]\��
+�]��\�Ә[YO^��^][\�\�\��\L�	�\�\�\����^\���\�]�\��H����XO���Z\�\�\�	��]�]\�ϟB�]��\�Ә[YO^�X^]�V�	WH�N�X^]�[YMKL���[�YL�^\�HXY[��\�[^Y�]\�X�K\�K]ܘ\	�\�\�\�����V��P̐�QWH^]�]H��[�Y]�\�H[X]]Ȉ����]�]H^Yܘ^KN��[�Y]\�H�Y��\�H�ܙ\��ܙ\�Yܘ^KLL�XO���Y\��Y�K��۝[�B��]����]���
+NB
