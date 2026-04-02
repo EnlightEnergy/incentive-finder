@@ -211,7 +211,7 @@ enlightingenergy.com`;
       ${pdfBuffer ? '<p style="font-size:13px;color:#555;margin-top:8px;">The full formatted report is attached as a PDF.</p>' : ''}
 
       <p style="font-size:14px;color:#333;margin:24px 0 8px;">
-        Happy to walk through any of these with you {recipientName ? `, ${recipientName}` : ''}. Just reply to this email.
+        Happy to walk through any of these with you${recipientName ? `, ${recipientName}` : ''}. Just reply to this email.
       </p>
     </div>
 
