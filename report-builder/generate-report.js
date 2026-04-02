@@ -36,7 +36,7 @@ export async function generateReport(reportData) {
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
     await page.emulateMediaType('print');
-    const pdfBuffer = await const facilityName = (reportData && reportData.facility && reportData.facility.name) ? reportData.facility.name.toUpperCase() : 'FACILITY';
+    const facilityName = (reportData && reportData.facility && reportData.facility.name) ? reportData.facility.name.toUpperCase() : 'FACILITY';
     const reportDate = (reportData && reportData.facility && reportData.facility.reportDate) ? reportData.facility.reportDate : '';
     const headerHTML = '<div style="width:100%;box-sizing:border-box;font-size:8pt;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;display:flex;justify-content:space-between;align-items:center;padding:5px 54px;border-bottom:2px solid #1C2B5E;color:#1C2B5E;font-weight:700;text-transform:uppercase;letter-spacing:1px;-webkit-print-color-adjust:exact;print-color-adjust:exact;"><span>' + facilityName + ' &middot; Qualifying Programs Report</span><span style="font-weight:400;color:#888;font-size:8pt;">' + reportDate + '</span></div>';
     const pdfBuffer = await page.pdf({
