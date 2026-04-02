@@ -112,66 +112,66 @@ export default function Terminology() {
       
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgData) }} />
       
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+      <div className="min-h-screen bg-[#1C2B5E]">
         <NavigationHeader />
-        
+
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center">
-                <BookOpen className="w-8 h-8 text-[#5B3A7D]" />
+              <div className="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                <BookOpen className="w-8 h-8 text-[#C84EC4]" />
               </div>
             </div>
-            <h1 className="text-4xl font-bold text-[#5B3A7D] mb-4 terminology-title">
+            <h1 className="text-4xl font-bold text-white mb-4 terminology-title">
               {terminologyData.title}
             </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto terminology-intro">
+            <p className="text-lg text-blue-200 max-w-2xl mx-auto terminology-intro">
               Essential terms and concepts to help you navigate energy efficiency incentives, rebates, and financing programs in California.
             </p>
           </div>
-          
+
           {/* AI Summary Block for LLM Extraction */}
-          <div className="mb-8 bg-white p-6 rounded-lg shadow-md">
+          <div className="mb-8 bg-white/10 border border-white/20 p-6 rounded-lg">
             <div className="ai-summary">
-              <p className="text-base text-slate-700">
-                <strong className="text-[#5B3A7D]">AI Summary:</strong> California energy efficiency terminology glossary covering key terms including utility rebates (SCE, PG&E, SDG&E), tax incentives (ITC, 179D), demand response programs, Title 24 compliance, CPUC regulations, and commercial incentive structures for California businesses.
+              <p className="text-base text-blue-100">
+                <strong className="text-white">AI Summary:</strong> California energy efficiency terminology glossary covering key terms including utility rebates (SCE, PG&E, SDG&E), tax incentives (ITC, 179D), demand response programs, Title 24 compliance, CPUC regulations, and commercial incentive structures for California businesses.
               </p>
             </div>
           </div>
 
-          <Card className="shadow-lg">
+          <Card className="shadow-lg bg-white/5 border border-white/20">
             <CardContent className="p-6">
-              <Accordion 
-                type="single" 
-                collapsible 
+              <Accordion
+                type="single"
+                collapsible
                 className="w-full space-y-2"
                 value={openItem}
                 onValueChange={handleAccordionChange}
               >
                 {terminologyData.terms.map((term: Term) => (
-                  <AccordionItem 
-                    key={term.id} 
+                  <AccordionItem
+                    key={term.id}
                     value={term.id}
                     id={term.id}
-                    className="border border-slate-200 rounded-lg overflow-hidden"
+                    className="border border-white/20 rounded-lg overflow-hidden"
                     data-testid={`accordion-item-${term.id}`}
                   >
-                    <AccordionTrigger 
-                      className="px-6 py-4 hover:bg-purple-50 data-[state=open]:bg-[#5B3A7D] data-[state=open]:text-white transition-colors"
+                    <AccordionTrigger
+                      className="px-6 py-4 text-white hover:bg-white/10 data-[state=open]:bg-[#C84EC4] data-[state=open]:text-white transition-colors"
                       data-testid={`accordion-trigger-${term.id}`}
                     >
                       <span className="text-left font-semibold">{term.name}</span>
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 py-4 bg-white">
+                    <AccordionContent className="px-6 py-4 bg-white/5">
                       <div className="space-y-4">
                         <div>
-                          <h3 className="text-sm font-medium text-[#5B3A7D] mb-2">Definition</h3>
-                          <p className="text-slate-700 leading-relaxed">{term.definition}</p>
+                          <h3 className="text-sm font-medium text-[#C84EC4] mb-2">Definition</h3>
+                          <p className="text-blue-100 leading-relaxed">{term.definition}</p>
                         </div>
-                        
+
                         <div>
-                          <h3 className="text-sm font-medium text-[#5B3A7D] mb-2">Example</h3>
-                          <p className="text-slate-600 italic bg-purple-50 p-3 rounded border-l-4 border-[#B54BE3]">
+                          <h3 className="text-sm font-medium text-[#C84EC4] mb-2">Example</h3>
+                          <p className="text-blue-200 italic bg-white/10 p-3 rounded border-l-4 border-[#C84EC4]">
                             {term.example}
                           </p>
                         </div>
@@ -179,10 +179,10 @@ export default function Terminology() {
                         {term.tags && term.tags.length > 0 && (
                           <div className="flex flex-wrap gap-2 pt-2">
                             {term.tags.map((tag: string) => (
-                              <Badge 
-                                key={tag} 
-                                variant="secondary" 
-                                className="bg-[#B54BE3]/10 text-[#5B3A7D] hover:bg-[#B54BE3]/20"
+                              <Badge
+                                key={tag}
+                                variant="secondary"
+                                className="bg-white/10 text-blue-200 hover:bg-white/20 border border-white/20"
                                 data-testid={`tag-${tag}`}
                               >
                                 {tag}
@@ -198,10 +198,10 @@ export default function Terminology() {
             </CardContent>
           </Card>
 
-          <div className="mt-8 text-center text-sm text-slate-600">
+          <div className="mt-8 text-center text-sm text-blue-200">
             <p>Have questions about these terms or need help with your energy efficiency project?</p>
             <p className="mt-2">
-              <a href="/#hero-section" className="text-[#B54BE3] hover:text-[#5B3A7D] font-medium" data-testid="link-get-report">
+              <a href="/#hero-section" className="text-[#C84EC4] hover:text-white font-medium" data-testid="link-get-report">
                 Get your free incentive report
               </a>
             </p>
