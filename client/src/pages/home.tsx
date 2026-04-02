@@ -44,7 +44,7 @@ export default function Home() {
         <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
           <div className="flex items-center">
             <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgOTAiIHdpZHRoPSIzMjAiIGhlaWdodD0iOTAiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ1LDQ1KSI+CiAgICA8bGluZSB4MT0iMCIgeTE9Ii00MCIgeDI9IjAiIHkyPSItMTgiIHN0cm9rZT0iIzhCMkZDOSIgc3Ryb2tlLXdpZHRoPSI1LjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGxpbmUgeDE9IjQwIiB5MT0iMCIgeDI9IjE4IiB5Mj0iMCIgc3Ryb2tlPSIjOEIyRkM5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8bGluZSB4MT0iMCIgeTE9IjQwIiB4Mj0iMCIgeTI9IjE4IiBzdHJva2U9IiM4QjJGQzkiIHN0cm9rZS13aWR0aD0iNS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxsaW5lIHgxPSItNDAiIHkxPSIwIiB4Mj0iLTE4IiB5Mj0iMCIgc3Ryb2tlPSIjOEIyRkM5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8bGluZSB4MT0iMjguMyIgeTE9Ii0yOC4zIiB4Mj0iMTIuNyIgeTI9Ii0xMi43IiBzdHJva2U9IiM4QjJGQzkiIHN0cm9rZS13aWR0aD0iNS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxsaW5lIHgxPSIyOC4zIiB5MT0iMjguMyIgeDI9IjEyLjciIHkyPSIxMi43IiBzdHJva2U9IiM4QjJGQzkiIHN0cm9rZS13aWR0aD0iNS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxsaW5lIHgxPSItMjguMyIgeTE9IjI4LjMiIHgyPSItMTIuNyIgeTI9IjEyLjciIHN0cm9rZT0iIzhCMkZDOSIgc3Ryb2tlLXdpZHRoPSI1LjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGxpbmUgeDE9Ii0yOC4zIiB5MT0iLTI4LjMiIHgyPSItMTIuNyIgeTI9Ii0xMi43IiBzdHJva2U9IiM4QjJGQzkiIHN0cm9rZS13aWR0aD0iNS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxsaW5lIHgxPSIxNS4zIiB5MT0iLTM2LjkiIHgyPSI3IiB5Mj0iLTE2LjkiIHN0cm9rZT0iIzhCMkZDOSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxsaW5lIHgxPSIzNi45IiB5MT0iLTE1LjMiIHgyPSIxNi45IiB5Mj0iLTciIHN0cm9rZT0iIzhCMkZDOSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxsaW5lIHgxPSIzNi45IiB5MT0iMTUuMyIgeDI9IjE2LjkiIHkyPSI3IiBzdHJva2U9IiM4QjJGQzkiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8bGluZSB4MT0iMTUuMyIgeTE9IjM2LjkiIHgyPSI3IiB5Mj0iMTYuOSIgc3Ryb2tlPSIjOEIyRkM5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGxpbmUgeDE9Ii0xNS4zIiB5MT0iMzYuOSIgeDI9Ii03IiB5Mj0iMTYuOSIgc3Ryb2tlPSIjOEIyRkM5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGxpbmUgeDE9Ii0zNi45IiB5MT0iMTUuMyIgeDI9Ii0xNi45IiB5Mj0iNyIgc3Ryb2tlPSIjOEIyRkM5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGxpbmUgeDE9Ii0zNi45IiB5MT0iLTE1LjMiIHgyPSItMTYuOSIgeTI9Ii03IiBzdHJva2U9IiM4QjJGQzkiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8bGluZSB4MT0iLTE1LjMiIHkxPSItMzYuOSIgeDI9Ii03IiB5Mj0iLTE2LjkiIHN0cm9rZT0iIzhCMkZDOSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI1LjUiIGZpbGw9IiM4QjJGQzkiLz4KICA8L2c+CiAgPHRleHQgeD0iOTciIHk9IjYyIgogICAgZm9udC1mYW1pbHk9IidBcmlhbCBCbGFjaycsICdIZWx2ZXRpY2EgTmV1ZScsIEFyaWFsLCBzYW5zLXNlcmlmIgogICAgZm9udC13ZWlnaHQ9IjkwMCIKICAgIGZvbnQtc2l6ZT0iNDgiCiAgICBmaWxsPSJ3aGl0ZSIKICAgIGxldHRlci1zcGFjaW5nPSItMC41Ij5lbmxpZ2h0aW5nPC90ZXh0Pgo8L3N2Zz49"
+              src="/Enlighting_Logo_Wh.png"
               alt="Enlighting Energy"
               className="h-[60px] w-auto"
             />
@@ -94,7 +94,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-2 justify-center mt-4">
               {["Warehouse in Fresno, want LED + HVAC", "Office building in Riverside, 30k sqft", "Cold storage facility in Stockton"].map((ex) => (
                 <button key={ex} type="button" onClick={() => { setMessage(ex); textareaRef.current?.focus(); }}
-                  className="text-xs text-blue-200 border border-blue-200/30 hover:border-blue-200/60 hover:text-white rounded-full px-3 py-1 transition-colors">
+                  className="text-xs text-white border border-white/30 hover:border-white/60 hover:text-white rounded-full px-3 py-1 transition-colors">
                   {ex}
                 </button>
               ))}
@@ -146,14 +146,14 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-[#1C2B5E] py-8 px-6 text-center text-blue-200/60 text-sm">
-          <p className="font-medium text-blue-200 mb-1">Enlighting Energy</p>
+        <footer className="bg-[#1C2B5E] py-8 px-6 text-center text-white text-base">
+          <p className="font-medium text-white mb-1">Enlighting Energy</p>
           <p>
-            <a href="mailto:hello@enlightingenergy.com" className="hover:text-white transition-colors">hello@enlightingenergy.com</a>
+            <a href="mailto:hello@enlightingenergy.com" className="hover:text-blue-200 transition-colors">hello@enlightingenergy.com</a>
             {" · "}805-724-5299{" · "}Santa Barbara, CA
           </p>
-          <p className="mt-3 text-xs">
-            <a href="/terminology" className="hover:text-white transition-colors">Terminology</a>
+          <p className="mt-3 text-sm">
+            <a href="/terminology" className="hover:text-blue-200 transition-colors">Terminology</a>
           </p>
         </footer>
       </div>
