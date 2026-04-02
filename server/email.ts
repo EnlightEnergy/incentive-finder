@@ -11,7 +11,7 @@ const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN ?? 'mg.enlightingenergy.com';
 const ENLIGHTING_BCC = 'hello@enlightingenergy.com';
 
-// Display name is the company â not the individual rep
+// Display name is the company — not the individual rep
 const FROM_ADDRESS = 'Enlighting Energy <hello@enlightingenergy.com>';
 
 interface ProgramEntry {
@@ -49,10 +49,10 @@ function buildProgramList(programs: ProgramGroup[]): string {
 
   return programs
     .map((group) => {
-      const header = `ââ ${group.measure} ââââââââââââââââââââââ`;
+      const header = `── ${group.measure} ──────────────────────`;
       const entries = group.entries
         .map((p) => {
-          const lines = [`  â¢ ${p.name} [${p.category}]`];
+          const lines = [`  • ${p.name} [${p.category}]`];
           if (p.administrator) lines.push(`    Administered by: ${p.administrator}`);
           if (p.incentiveStructure) lines.push(`    Incentive: ${p.incentiveStructure}`);
           if (p.deadline) lines.push(`    Deadline: ${p.deadline}`);
@@ -124,7 +124,7 @@ export async function sendReportEmail({
   pdfBuffer,
 }: SendReportEmailParams): Promise<void> {
   if (!MAILGUN_API_KEY) {
-    console.warn('[email] MAILGUN_API_KEY not set â skipping email send');
+    console.warn('[email] MAILGUN_API_KEY not set — skipping email send');
     return;
   }
 
@@ -139,31 +139,31 @@ export async function sendReportEmail({
   const safeAttachmentName = `${facilityName} incentive programs report | Enlighting (${today}).pdf`.replace(/[/\\?%*:|"<>]/g, '-');
 
   const greeting = recipientName ? `Hi ${recipientName},` : 'Hi there,';
-  const subject = `Your Qualifying Programs Report â ${count} program${count !== 1 ? 's' : ''} found`;
+  const subject = `Your Qualifying Report for "${facilityName}" - ${count} Program${count !== 1 ? 's' : ''} Found`;
 
   const programListText = buildProgramList(matchResult.programs ?? []);
   const programListHTML = buildProgramListHTML(matchResult.programs ?? []);
 
-  // ââ Plain text version ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Plain text version ────────────────────────────────────────────────────
   const text = `${greeting}
 
-Your Qualifying Programs Report for ${facilityName} is ready â We found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${
+Your Qualifying Programs Report for ${facilityName} is ready — We found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${
     topProgram
-      ? `\n\nThe one to act on first is ${topProgram.name}${topProgram.preApprovalRequired ? ' â it requires pre-approval before your project starts, so timing matters.' : '.'}`
+      ? `\n\nThe one to act on first is ${topProgram.name}${topProgram.preApprovalRequired ? ' &#8212; it requires pre-approval before your project starts, so timing matters.' : '.'}`
       : ''
   }
 
-âââââââââââââââââââââââââââââââââ
+─────────────────────────────────
 YOUR QUALIFYING PROGRAMS
-âââââââââââââââââââââââââââââââââ
+─────────────────────────────────
 
 ${programListText}
 
-âââââââââââââââââââââââââââââââââ
+─────────────────────────────────
 
 ${pdfBuffer ? 'The full formatted report is attached as a PDF.' : ''}
 
-Happy to walk through any of these programs with you or help you move one forward â just reply here.
+Happy to walk through any of these programs with you or help you move one forward — just reply here.
 
 Best,
 William Tran
@@ -172,7 +172,7 @@ Enlighting Energy
 805-724-5299
 enlightingenergy.com`;
 
-  // ââ HTML version ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── HTML version ──────────────────────────────────────────────────────────
   const html = `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
@@ -197,7 +197,7 @@ enlightingenergy.com`;
       <p style="font-size:15px;color:#333;margin:0 0 20px;">
         We found <strong>${count} program${count !== 1 ? 's' : ''}</strong> that apply to your ${measures}.${
     topProgram
-      ? ` The one to act on first is <strong>${topProgram.name}</strong>${topProgram.preApprovalRequired ? ' â it requires pre-approval before your project starts, so timing matters.' : '.'}`
+      ? ` The one to act on first is <strong>${topProgram.name}</strong>${topProgram.preApprovalRequired ? ' &#8212; it requires pre-approval before your project starts, so timing matters.' : '.'}`
       : ''
   }
       </p>
@@ -211,15 +211,17 @@ enlightingenergy.com`;
       ${pdfBuffer ? '<p style="font-size:13px;color:#555;margin-top:8px;">The full formatted report is attached as a PDF.</p>' : ''}
 
       <p style="font-size:14px;color:#333;margin:24px 0 8px;">
-        Happy to walk through any of these with you â just reply to this email.
+        Happy to walk through any of these with you {recipientName ? `, ${recipientName}` : ''}. Just reply to this email.
       </p>
     </div>
 
     <!-- Footer -->
     <div style="background:#f0f0f0;padding:16px 32px;border-top:1px solid #e0e0e0;">
-      <p style="margin:0;font-size:12px;color:#888;">
-        <strong style="color:#1C2B5E;">William Tran</strong> Â· Enlighting Energy<br>
-        805-724-5299 Â· <a href="https://enlightingenergy.com" style="color:#C84EC4;">enlightingenergy.com</a>
+      <p style="margin:0;font-size:12px;color:#888;line-height:1.7;">
+        <strong style="color:#1C2B5E;">William Tran</strong><br>
+        Enlighting Energy<br>
+        805-724-5299<br>
+        <a href="https://enlightingenergy.com" style="color:#C84EC4;">enlightingenergy.com</a>
       </p>
     </div>
   </div>
@@ -257,7 +259,7 @@ enlightingenergy.com`;
       throw new Error(`Mailgun error: ${err}`);
     }
   } else {
-    // No PDF â plain form post
+    // No PDF — plain form post
     const formData = new URLSearchParams();
     formData.append('from', FROM_ADDRESS);
     formData.append('to', to);
@@ -309,11 +311,11 @@ export async function sendLeadNotification({
   baselineDesc?: string;
 }): Promise<void> {
   if (!MAILGUN_API_KEY) {
-    console.warn('[email] MAILGUN_API_KEY not set â skipping lead notification');
+    console.warn('[email] MAILGUN_API_KEY not set — skipping lead notification');
     return;
   }
 
-  const subject = `New Lead: ${company} â ${contactName}`;
+  const subject = `New Lead: ${company} — ${contactName}`;
 
   const textBody = [
     `New lead submitted on californiaenergyincentives.com`,
