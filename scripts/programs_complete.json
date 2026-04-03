@@ -7,8 +7,10 @@
       "SCE"
     ],
     "measures": [
-      "VFDs",
-      "Water Heating"
+      "Refrigeration",
+      "Motors",
+      "Water Heating",
+      "LED Lighting"
     ],
     "facilityTypes": [
       "All Commercial"
