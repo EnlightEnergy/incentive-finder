@@ -15,7 +15,7 @@
     "facilityTypes": [
       "All Commercial"
     ],
-    "incentiveStructure": "HPWH 45\u201399 gal: $6k\u2013$8k; HPWH 120 gal: $14k\u2013$25k by building type (CZ15 lower); DCKV: $1,900/HP; ASH Controls: $65/LF; Medium Temp Case Doors: $230/LF; SRM motors: $425/HP",
+    "incentiveStructure": "LED Lighting: $0.15–$0.25/kWh saved; HPWH 45\u201399 gal: $6k\u2013$8k; HPWH 120 gal: $14k\u2013$25k by building type (CZ15 lower); DCKV: $1,900/HP; ASH Controls: $65/LF; Medium Temp Case Doors: $230/LF; SRM motors: $425/HP",
     "deadline": "Reservation pre\u2011install; post\u2011install due \u226460 days or by 12/01/2025",
     "minSqft": 0,
     "minKw": 0,
