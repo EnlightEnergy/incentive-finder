@@ -54,7 +54,7 @@ QUESTION STRATEGY:
 - Extract everything you can from the user's first message before asking any follow-up.
 - Ask only what you still need, one thing at a time.
 - After collecting location + utility + facility type + at least one measure, call the submit_facility_profile tool.
-- Square footage and facility name are nice-to-have but don't block submission. If you have location + utility + type + measure(s), try to ask one last quick question to get the company name before submitting — unless the conversation is already long.
+- Square footage is nice-to-have but does not block submission. Facility name MUST be collected before calling submit_facility_profile — always ask "And lastly, what's the name of the property or business?" before submitting.
 - Never show all questions at once. Never use numbered lists of questions.
 
 WHAT NOT TO DO:
