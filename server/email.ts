@@ -1,17 +1,24 @@
+
+Email · TS
+
+
+Photo Date Adjustator
+
 /**
  * email.ts
  *
- * SendGrid-based email delivery for report sending.
- * Activate by setting SENDGRID_API_KEY in Railway variables.
+ * Mailgun-based email delivery for report sending.
+ * Activate by setting MAILGUN_API_KEY and MAILGUN_DOMAIN in Railway variables.
  *
  * BCC: hello@enlightingenergy.com is always BCC'd on every report email.
  */
  
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
+const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN ?? 'mg.enlightingenergy.com';
 const ENLIGHTING_BCC = 'hello@enlightingenergy.com';
  
 // Display name is the company — not the individual rep
-const FROM_ADDRESS = { email: 'hello@enlightingenergy.com', name: 'Enlighting Energy' };
+const FROM_ADDRESS = 'Enlighting Energy <hello@enlightingenergy.com>';
  
 interface ProgramEntry {
   name: string;
@@ -122,8 +129,8 @@ export async function sendReportEmail({
   matchResult,
   pdfBuffer,
 }: SendReportEmailParams): Promise<void> {
-  if (!SENDGRID_API_KEY) {
-    console.warn('[email] SENDGRID_API_KEY not set — skipping email send');
+  if (!MAILGUN_API_KEY) {
+    console.warn('[email] MAILGUN_API_KEY not set — skipping email send');
     return;
   }
  
@@ -143,7 +150,7 @@ export async function sendReportEmail({
  
 Your Qualifying Programs Report for ${facilityName} is ready — I found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${
     topProgram
-      ? `\n\nThe one to act on first is ${topProgram.name}${topProgram.preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
+      ? `\n\nThe one to act on first is ${topProgram.name}${(topProgram as any).preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
       : ''
   }
  
@@ -190,7 +197,7 @@ enlightingenergy.com`;
       <p style="font-size:15px;color:#333;margin:0 0 20px;">
         I found <strong>${count} program${count !== 1 ? 's' : ''}</strong> that apply to your ${measures}.${
     topProgram
-      ? ` The one to act on first is <strong>${topProgram.name}</strong>${topProgram.preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
+      ? ` The one to act on first is <strong>${topProgram.name}</strong>${(topProgram as any).preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
       : ''
   }
       </p>
@@ -219,45 +226,58 @@ enlightingenergy.com`;
 </body>
 </html>`;
  
-  // ── SendGrid API v3 ───────────────────────────────────────────────────────
-  const body: Record<string, unknown> = {
-    personalizations: [
-      {
-        to: [{ email: to }],
-        bcc: [{ email: bcc }],
-      },
-    ],
-    from: FROM_ADDRESS,
-    subject,
-    content: [
-      { type: 'text/plain', value: text },
-      { type: 'text/html', value: html },
-    ],
-  };
+  const mailgunUrl = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;
+  const authHeader = 'Basic ' + Buffer.from(`api:${MAILGUN_API_KEY}`).toString('base64');
  
   if (pdfBuffer) {
-    body.attachments = [
-      {
-        content: pdfBuffer.toString('base64'),
-        type: 'application/pdf',
-        filename: 'qualifying-programs-report.pdf',
-        disposition: 'attachment',
+    // Multipart with PDF attachment
+    const { Blob } = await import('buffer');
+    const fd = new FormData();
+    fd.append('from', FROM_ADDRESS);
+    fd.append('to', to);
+    fd.append('bcc', bcc);
+    fd.append('subject', subject);
+    fd.append('text', text);
+    fd.append('html', html);
+    fd.append(
+      'attachment',
+      new Blob([pdfBuffer], { type: 'application/pdf' }),
+      'qualifying-programs-report.pdf'
+    );
+ 
+    const response = await fetch(mailgunUrl, {
+      method: 'POST',
+      headers: { Authorization: authHeader },
+      body: fd,
+    });
+ 
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Mailgun error: ${err}`);
+    }
+  } else {
+    // No PDF — plain form post
+    const formData = new URLSearchParams();
+    formData.append('from', FROM_ADDRESS);
+    formData.append('to', to);
+    formData.append('bcc', bcc);
+    formData.append('subject', subject);
+    formData.append('text', text);
+    formData.append('html', html);
+ 
+    const response = await fetch(mailgunUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: authHeader,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-    ];
-  }
+      body: formData.toString(),
+    });
  
-  const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${SENDGRID_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
- 
-  if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`SendGrid error: ${err}`);
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Mailgun error: ${err}`);
+    }
   }
  
   console.log(`[email] Report sent to ${to} (BCC: ${bcc})`);
@@ -291,8 +311,8 @@ export async function sendLeadNotification({
   squareFootage,
   programCount,
 }: SendLeadNotificationParams): Promise<void> {
-  if (!SENDGRID_API_KEY) {
-    console.warn('[email] SENDGRID_API_KEY not set — skipping lead notification');
+  if (!MAILGUN_API_KEY) {
+    console.warn('[email] MAILGUN_API_KEY not set — skipping lead notification');
     return;
   }
  
@@ -353,29 +373,30 @@ Reply directly to ${email} to follow up.`;
 </body>
 </html>`;
  
-  const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+  const mailgunUrl = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;
+  const authHeader = 'Basic ' + Buffer.from(`api:${MAILGUN_API_KEY}`).toString('base64');
+ 
+  const formData = new URLSearchParams();
+  formData.append('from', FROM_ADDRESS);
+  formData.append('to', ENLIGHTING_BCC);
+  formData.append('h:Reply-To', email);
+  formData.append('subject', subject);
+  formData.append('text', text);
+  formData.append('html', html);
+ 
+  const response = await fetch(mailgunUrl, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${SENDGRID_API_KEY}`,
-      'Content-Type': 'application/json',
+      Authorization: authHeader,
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify({
-      personalizations: [{ to: [{ email: ENLIGHTING_BCC }] }],
-      from: FROM_ADDRESS,
-      reply_to: { email },
-      subject,
-      content: [
-        { type: 'text/plain', value: text },
-        { type: 'text/html', value: html },
-      ],
-    }),
+    body: formData.toString(),
   });
  
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`SendGrid lead notification error: ${err}`);
+    throw new Error(`Mailgun lead notification error: ${err}`);
   }
  
   console.log(`[email] Lead notification sent for ${email}`);
 }
- 
