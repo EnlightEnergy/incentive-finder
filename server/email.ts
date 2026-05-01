@@ -6,14 +6,14 @@
  *
  * BCC: hello@enlightingenergy.com is always BCC'd on every report email.
  */
- 
+
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN ?? 'mg.enlightingenergy.com';
 const ENLIGHTING_BCC = 'hello@enlightingenergy.com';
- 
+
 // Display name is the company — not the individual rep
 const FROM_ADDRESS = 'Enlighting Energy <hello@enlightingenergy.com>';
- 
+
 interface ProgramEntry {
   name: string;
   category: string;
@@ -22,12 +22,12 @@ interface ProgramEntry {
   deadline?: string;
   nextStep?: string;
 }
- 
+
 interface ProgramGroup {
   measure: string;
   entries: ProgramEntry[];
 }
- 
+
 interface SendReportEmailParams {
   to: string;
   bcc?: string;
@@ -40,13 +40,13 @@ interface SendReportEmailParams {
   };
   pdfBuffer?: Buffer; // Attach the PDF when available
 }
- 
+
 /**
  * Build a plain-text program listing for the email body.
  */
 function buildProgramList(programs: ProgramGroup[]): string {
   if (!programs || programs.length === 0) return '';
- 
+
   return programs
     .map((group) => {
       const header = `── ${group.measure} ──────────────────────`;
@@ -64,13 +64,13 @@ function buildProgramList(programs: ProgramGroup[]): string {
     })
     .join('\n\n');
 }
- 
+
 /**
  * Build an HTML version of the program listing.
  */
 function buildProgramListHTML(programs: ProgramGroup[]): string {
   if (!programs || programs.length === 0) return '';
- 
+
   const categoryColor = (cat: string) => {
     if (cat.includes('Utility')) return '#1C2B5E';
     if (cat.includes('Federal')) return '#c05c00';
@@ -78,7 +78,7 @@ function buildProgramListHTML(programs: ProgramGroup[]): string {
     if (cat.includes('Financing')) return '#4B3082';
     return '#555';
   };
- 
+
   const rows = programs
     .map((group) =>
       `<tr>
@@ -101,7 +101,7 @@ function buildProgramListHTML(programs: ProgramGroup[]): string {
         .join('')
     )
     .join('');
- 
+
   return `
     <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;border:1px solid #dde;border-radius:6px;overflow:hidden;margin:20px 0;">
       <thead>
@@ -115,7 +115,7 @@ function buildProgramListHTML(programs: ProgramGroup[]): string {
       <tbody>${rows}</tbody>
     </table>`;
 }
- 
+
 export async function sendReportEmail({
   to,
   bcc = ENLIGHTING_BCC,
@@ -127,64 +127,64 @@ export async function sendReportEmail({
     console.warn('[email] MAILGUN_API_KEY not set — skipping email send');
     return;
   }
- 
+
   const facilityName = matchResult.facility?.name ?? matchResult.facility?.facilityName ?? 'your facility';
   const count = matchResult.programCount;
   const measures = matchResult.programs?.map((g) => g.measure).join(' and ') ?? 'your projects';
   const topProgram = matchResult.programs?.[0]?.entries?.[0] ?? null;
- 
+
   const greeting = recipientName ? `Hi ${recipientName},` : 'Hi there,';
   const subject = `Your Qualifying Programs Report — ${count} program${count !== 1 ? 's' : ''} found`;
- 
+
   const programListText = buildProgramList(matchResult.programs ?? []);
   const programListHTML = buildProgramListHTML(matchResult.programs ?? []);
- 
+
   // ── Plain text version ────────────────────────────────────────────────────
   const text = `${greeting}
- 
+
 Your Qualifying Programs Report for ${facilityName} is ready — I found ${count} program${count !== 1 ? 's' : ''} that apply to your ${measures}.${
     topProgram
       ? `\n\nThe one to act on first is ${topProgram.name}${(topProgram as any).preApprovalRequired ? ' — it requires pre-approval before your project starts, so timing matters.' : '.'}`
       : ''
   }
- 
+
 ─────────────────────────────────
 YOUR QUALIFYING PROGRAMS
 ─────────────────────────────────
- 
+
 ${programListText}
- 
+
 ─────────────────────────────────
- 
+
 ${pdfBuffer ? 'The full formatted report is attached as a PDF.' : ''}
- 
+
 Happy to walk through any of these programs with you or help you move one forward — just reply here.
- 
+
 Best,
 Derek Doyle
 Enlighting Energy
 805-724-5299
 enlightingenergy.com`;
- 
+
   // ── HTML version ──────────────────────────────────────────────────────────
   const html = `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;font-family:Helvetica Neue,Arial,sans-serif;background:#f8f8f8;">
   <div style="max-width:640px;margin:32px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
- 
+
     <!-- Header -->
     <div style="background:#1C2B5E;padding:28px 32px;">
       <div style="font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;">Enlighting Energy</div>
       <div style="font-size:12px;color:#aac;">California Commercial Incentive Specialists</div>
     </div>
- 
+
     <!-- Stat bar -->
     <div style="background:#C84EC4;padding:20px 32px;text-align:center;">
       <div style="font-size:40px;font-weight:900;color:#fff;line-height:1;">${count}</div>
       <div style="font-size:14px;color:#ffe;margin-top:4px;">Qualifying Programs Found for ${facilityName}</div>
     </div>
- 
+
     <!-- Body -->
     <div style="padding:28px 32px;">
       <p style="font-size:15px;color:#333;margin:0 0 12px;">${greeting}</p>
@@ -195,20 +195,20 @@ enlightingenergy.com`;
       : ''
   }
       </p>
- 
+
       <h2 style="font-size:14px;text-transform:uppercase;letter-spacing:1px;color:#1C2B5E;margin:24px 0 8px;border-bottom:2px solid #C84EC4;padding-bottom:8px;">
         Your Qualifying Programs
       </h2>
- 
+
       ${programListHTML}
- 
+
       ${pdfBuffer ? '<p style="font-size:13px;color:#555;margin-top:8px;">The full formatted report is attached as a PDF.</p>' : ''}
- 
+
       <p style="font-size:14px;color:#333;margin:24px 0 8px;">
         Happy to walk through any of these with you — just reply to this email.
       </p>
     </div>
- 
+
     <!-- Footer -->
     <div style="background:#f0f0f0;padding:16px 32px;border-top:1px solid #e0e0e0;">
       <p style="margin:0;font-size:12px;color:#888;">
@@ -219,10 +219,10 @@ enlightingenergy.com`;
   </div>
 </body>
 </html>`;
- 
+
   const mailgunUrl = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;
   const authHeader = 'Basic ' + Buffer.from(`api:${MAILGUN_API_KEY}`).toString('base64');
- 
+
   if (pdfBuffer) {
     // Multipart with PDF attachment
     const { Blob } = await import('buffer');
@@ -238,13 +238,13 @@ enlightingenergy.com`;
       new Blob([pdfBuffer], { type: 'application/pdf' }),
       'qualifying-programs-report.pdf'
     );
- 
+
     const response = await fetch(mailgunUrl, {
       method: 'POST',
       headers: { Authorization: authHeader },
       body: fd,
     });
- 
+
     if (!response.ok) {
       const err = await response.text();
       throw new Error(`Mailgun error: ${err}`);
@@ -258,7 +258,7 @@ enlightingenergy.com`;
     formData.append('subject', subject);
     formData.append('text', text);
     formData.append('html', html);
- 
+
     const response = await fetch(mailgunUrl, {
       method: 'POST',
       headers: {
@@ -267,21 +267,21 @@ enlightingenergy.com`;
       },
       body: formData.toString(),
     });
- 
+
     if (!response.ok) {
       const err = await response.text();
       throw new Error(`Mailgun error: ${err}`);
     }
   }
- 
+
   console.log(`[email] Report sent to ${to} (BCC: ${bcc})`);
 }
- 
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Internal lead notification — sent to hello@enlightingenergy.com whenever
 // a prospect submits their facility profile through the chat.
 // ─────────────────────────────────────────────────────────────────────────────
- 
+
 interface SendLeadNotificationParams {
   email: string;
   contactName?: string | null;
@@ -293,7 +293,7 @@ interface SendLeadNotificationParams {
   squareFootage?: string | number | null;
   programCount?: number | null;
 }
- 
+
 export async function sendLeadNotification({
   email,
   contactName,
@@ -309,17 +309,17 @@ export async function sendLeadNotification({
     console.warn('[email] MAILGUN_API_KEY not set — skipping lead notification');
     return;
   }
- 
+
   const name = contactName ?? 'Unknown';
   const biz = company ?? 'Unknown';
   const measureList = Array.isArray(measures) && measures.length > 0
     ? measures.join(', ')
     : 'Not specified';
- 
+
   const subject = `New Lead: ${name} — ${biz}`;
- 
+
   const text = `New lead submitted via californiaenergyincentives.com
- 
+
 Name:          ${name}
 Email:         ${email}
 Business:      ${biz}
@@ -329,9 +329,9 @@ Utility:       ${utility ?? 'Not specified'}
 Measures:      ${measureList}
 Sq Footage:    ${squareFootage ?? 'Not specified'}
 Programs Found:${programCount != null ? String(programCount) : 'N/A'}
- 
+
 Reply directly to ${email} to follow up.`;
- 
+
   const html = `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
@@ -366,10 +366,10 @@ Reply directly to ${email} to follow up.`;
   </div>
 </body>
 </html>`;
- 
+
   const mailgunUrl = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;
   const authHeader = 'Basic ' + Buffer.from(`api:${MAILGUN_API_KEY}`).toString('base64');
- 
+
   const formData = new URLSearchParams();
   formData.append('from', FROM_ADDRESS);
   formData.append('to', ENLIGHTING_BCC);
@@ -377,7 +377,7 @@ Reply directly to ${email} to follow up.`;
   formData.append('subject', subject);
   formData.append('text', text);
   formData.append('html', html);
- 
+
   const response = await fetch(mailgunUrl, {
     method: 'POST',
     headers: {
@@ -386,11 +386,11 @@ Reply directly to ${email} to follow up.`;
     },
     body: formData.toString(),
   });
- 
+
   if (!response.ok) {
     const err = await response.text();
     throw new Error(`Mailgun lead notification error: ${err}`);
   }
- 
+
   console.log(`[email] Lead notification sent for ${email}`);
 }
