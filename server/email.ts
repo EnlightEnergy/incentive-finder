@@ -1,9 +1,3 @@
-
-Email · TS
-
-
-Photo Date Adjustator
-
 /**
  * email.ts
  *
