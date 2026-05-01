@@ -263,3 +263,119 @@ enlightingenergy.com`;
   console.log(`[email] Report sent to ${to} (BCC: ${bcc})`);
 }
  
+// ─────────────────────────────────────────────────────────────────────────────
+// Internal lead notification — sent to hello@enlightingenergy.com whenever
+// a prospect submits their facility profile through the chat.
+// ─────────────────────────────────────────────────────────────────────────────
+ 
+interface SendLeadNotificationParams {
+  email: string;
+  contactName?: string | null;
+  company?: string | null;
+  facilityType?: string | null;
+  zipCode?: string | null;
+  utility?: string | null;
+  measures?: string[] | null;
+  squareFootage?: string | number | null;
+  programCount?: number | null;
+}
+ 
+export async function sendLeadNotification({
+  email,
+  contactName,
+  company,
+  facilityType,
+  zipCode,
+  utility,
+  measures,
+  squareFootage,
+  programCount,
+}: SendLeadNotificationParams): Promise<void> {
+  if (!SENDGRID_API_KEY) {
+    console.warn('[email] SENDGRID_API_KEY not set — skipping lead notification');
+    return;
+  }
+ 
+  const name = contactName ?? 'Unknown';
+  const biz = company ?? 'Unknown';
+  const measureList = Array.isArray(measures) && measures.length > 0
+    ? measures.join(', ')
+    : 'Not specified';
+ 
+  const subject = `New Lead: ${name} — ${biz}`;
+ 
+  const text = `New lead submitted via californiaenergyincentives.com
+ 
+Name:          ${name}
+Email:         ${email}
+Business:      ${biz}
+Facility Type: ${facilityType ?? 'Not specified'}
+ZIP Code:      ${zipCode ?? 'Not specified'}
+Utility:       ${utility ?? 'Not specified'}
+Measures:      ${measureList}
+Sq Footage:    ${squareFootage ?? 'Not specified'}
+Programs Found:${programCount != null ? String(programCount) : 'N/A'}
+ 
+Reply directly to ${email} to follow up.`;
+ 
+  const html = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:Helvetica Neue,Arial,sans-serif;background:#f8f8f8;">
+  <div style="max-width:560px;margin:32px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+    <div style="background:#1C2B5E;padding:20px 28px;">
+      <div style="font-size:16px;font-weight:900;color:#fff;">New Lead — Enlighting Energy</div>
+      <div style="font-size:12px;color:#aac;margin-top:2px;">Submitted via californiaenergyincentives.com</div>
+    </div>
+    <div style="padding:24px 28px;">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
+        ${[
+          ['Name', name],
+          ['Email', `<a href="mailto:${email}" style="color:#C84EC4;">${email}</a>`],
+          ['Business', biz],
+          ['Facility Type', facilityType ?? '—'],
+          ['ZIP Code', zipCode ?? '—'],
+          ['Utility', utility ?? '—'],
+          ['Measures', measureList],
+          ['Sq Footage', squareFootage != null ? String(squareFootage) : '—'],
+          ['Programs Found', programCount != null ? String(programCount) : '—'],
+        ].map(([label, value]) => `
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:9px 8px 9px 0;font-size:12px;color:#888;white-space:nowrap;width:120px;">${label}</td>
+          <td style="padding:9px 0;font-size:13px;color:#222;font-weight:600;">${value}</td>
+        </tr>`).join('')}
+      </table>
+      <p style="margin:20px 0 0;font-size:13px;color:#555;">
+        <a href="mailto:${email}" style="background:#1C2B5E;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-weight:700;">Reply to ${name}</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
+ 
+  const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${SENDGRID_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      personalizations: [{ to: [{ email: ENLIGHTING_BCC }] }],
+      from: FROM_ADDRESS,
+      reply_to: { email },
+      subject,
+      content: [
+        { type: 'text/plain', value: text },
+        { type: 'text/html', value: html },
+      ],
+    }),
+  });
+ 
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`SendGrid lead notification error: ${err}`);
+  }
+ 
+  console.log(`[email] Lead notification sent for ${email}`);
+}
+ 
