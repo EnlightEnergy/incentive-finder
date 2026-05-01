@@ -162,7 +162,6 @@ export function generateReportHTML(data) {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 0.3in;
   }
 
   .cover-logo-circle {
@@ -964,12 +963,12 @@ export function generateReportHTML(data) {
 
   <div class="cover-body">
     <!-- Logo area -->
-    <div class="cover-logo-area">
-      <div class="cover-logo-circle">⚡</div>
-      <div>
+    <div style="margin-bottom:0.3in;">
+      <div class="cover-logo-area" style="margin-bottom:6px;">
+        <div class="cover-logo-circle">⚡</div>
         <div class="cover-company-name">Enlighting Energy</div>
-        <div class="cover-report-type">Qualifying Programs Report</div>
       </div>
+      <div class="cover-report-type">Qualifying Programs Report</div>
     </div>
 
     <!-- Main content -->
