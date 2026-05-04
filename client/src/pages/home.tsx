@@ -42,13 +42,14 @@ export default function Home() {
       <div className="min-h-screen flex flex-col bg-[#1C2B5E]">
         {/* Nav */}
         <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
-          <div className="flex items-center">
-            <img
-              src="/Enlighting_Logo_Wh.png"
-              alt="Enlighting Energy"
-              className="h-[60px] w-auto"
-            />
-          </div>
+        <div className="flex flex-col items-start">
+  <img
+    src="/Enlighting_Logo_Wh.png"
+    alt="Enlighting Energy"
+    className="h-[60px] w-auto"
+  />
+  <span className="text-white font-bold text-sm tracking-wide mt-1">California Energy Incentives</span>
+</div>
           <div className="flex items-center gap-6">
             <a href="https://enlightingenergy.com" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white text-sm transition-colors">About Us</a>
           </div>
