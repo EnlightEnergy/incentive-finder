@@ -130,7 +130,6 @@ export function generateReportHTML(data) {
     max-height: 11in;
     display: flex;
     flex-direction: column;
-    page-break-after: always;
     position: relative;
     overflow: hidden;
   }
@@ -330,7 +329,7 @@ export function generateReportHTML(data) {
     align-items: center;
     padding-bottom: 10px;
     border-bottom: 3px solid #1C2B5E;
-    margin-bottom: 28px;
+    margin-bottom: 42px;
     page-break-after: avoid;
   }
 
@@ -942,7 +941,6 @@ export function generateReportHTML(data) {
   /* ─── Print / PDF ─── */
   @media print {
     body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .cover { page-break-after: always; }
     .page-break-before { page-break-before: always; }
     .program-card { page-break-inside: avoid; }
     .priority-item { page-break-inside: avoid; }
