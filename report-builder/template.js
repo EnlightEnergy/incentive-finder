@@ -126,8 +126,8 @@ export function generateReportHTML(data) {
   /* ─── Cover Page ─── */
   .cover {
     width: 8.5in;
-    height: 11in;
-    max-height: 11in;
+    height: 10.35in;
+    max-height: 10.35in;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -194,7 +194,8 @@ export function generateReportHTML(data) {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 0.35in;
   }
 
   .cover-eyebrow {
@@ -814,6 +815,7 @@ export function generateReportHTML(data) {
     padding: 36px 40px;
     color: white;
     margin-bottom: 28px;
+    page-break-inside: avoid;
   }
 
   .about-hero-label {
@@ -963,7 +965,28 @@ export function generateReportHTML(data) {
     <!-- Logo area -->
     <div style="margin-bottom:0.3in;">
       <div class="cover-logo-area" style="margin-bottom:6px;">
-        <div class="cover-logo-circle">⚡</div>
+        <div class="cover-logo-circle">
+          <svg viewBox="0 0 90 90" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(45,45)">
+              <line x1="0" y1="-38" x2="0" y2="-17" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="38" y1="0" x2="17" y2="0" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="0" y1="38" x2="0" y2="17" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="-38" y1="0" x2="-17" y2="0" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="26.9" y1="-26.9" x2="12.0" y2="-12.0" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="26.9" y1="26.9" x2="12.0" y2="12.0" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="-26.9" y1="26.9" x2="-12.0" y2="12.0" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="-26.9" y1="-26.9" x2="-12.0" y2="-12.0" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+              <line x1="14.5" y1="-35.1" x2="6.6" y2="-16.1" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="35.1" y1="-14.5" x2="16.1" y2="-6.6" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="35.1" y1="14.5" x2="16.1" y2="6.6" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="14.5" y1="35.1" x2="6.6" y2="16.1" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="-14.5" y1="35.1" x2="-6.6" y2="16.1" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="-35.1" y1="14.5" x2="-16.1" y2="6.6" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="-35.1" y1="-14.5" x2="-16.1" y2="-6.6" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="-14.5" y1="-35.1" x2="-6.6" y2="-16.1" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
         <div class="cover-company-name">Enlighting Energy</div>
       </div>
       <div class="cover-report-type">Qualifying Programs Report</div>
