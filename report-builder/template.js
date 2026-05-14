@@ -755,9 +755,9 @@ export function generateReportHTML(data) {
 
   /* ─── Limitations Section ─── */
   .limitations-box {
-    background: #FFFBF0;
-    border: 1px solid #FFE69C;
-    border-left: 4px solid #F39C12;
+    background: #F5F2FF;
+    border: 1.5px solid #C84EC4;
+    border-left: 4px solid #C84EC4;
     border-radius: 0 8px 8px 0;
     padding: 20px 24px;
     margin-bottom: 24px;
@@ -766,7 +766,7 @@ export function generateReportHTML(data) {
   .limitations-title {
     font-size: 10pt;
     font-weight: 700;
-    color: #856404;
+    color: #4B3082;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 12px;
@@ -784,7 +784,7 @@ export function generateReportHTML(data) {
     padding: 6px 0;
     padding-left: 20px;
     position: relative;
-    border-bottom: 1px solid rgba(243, 156, 18, 0.15);
+    border-bottom: 1px solid rgba(200, 78, 196, 0.15);
   }
 
   .limitations-list li:last-child { border-bottom: none; }
@@ -796,7 +796,7 @@ export function generateReportHTML(data) {
     top: 8px;
     width: 14px;
     height: 14px;
-    background: #F39C12;
+    background: #C84EC4;
     color: white;
     font-size: 9pt;
     font-weight: 800;
