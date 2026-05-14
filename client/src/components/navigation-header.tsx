@@ -4,17 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
 import logoPath from "@assets/Enlighting_Logo_F1_1762803948123.jpg";
-
 export default function NavigationHeader() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const navLinks = [
     { href: "/", label: "Programs" },
     { href: "/terminology", label: "Terminology", external: true },
     { href: "https://www.enlightingenergy.com/about", label: "About", external: true }
   ];
-
   return (
     <>
       {/* Skip Link for Keyboard Navigation */}
@@ -28,19 +25,19 @@ export default function NavigationHeader() {
       
       <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center py-3">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex flex-col items-start">
             <Link href="/">
               <img 
                 src={logoPath} 
                 alt="Enlighting Logo" 
-                className="h-12 w-auto object-contain"
+                className="h-10 w-auto object-contain"
                 data-testid="logo-enlighting"
               />
             </Link>
+            <span className="text-[#5B3A7D] font-bold text-xs tracking-wide mt-0.5">California Energy Incentives</span>
           </div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => 
@@ -78,7 +75,6 @@ export default function NavigationHeader() {
               </a>
             </Button>
           </nav>
-
           {/* Mobile Menu */}
           <div className="md:hidden">
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
