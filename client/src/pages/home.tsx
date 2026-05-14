@@ -4,8 +4,20 @@ import { Helmet } from "react-helmet-async";
 
 const UTILITY_LOGOS = ["PG&E", "SCE", "SDG&E", "LADWP", "SMUD", "MCE"];
 
+const MEASURES = [
+  { label: "LED Lighting", icon: "💡" },
+  { label: "HVAC / Heat Pumps", icon: "❄️" },
+  { label: "Refrigeration", icon: "🧊" },
+  { label: "VFDs & Motors", icon: "⚙️" },
+  { label: "Solar & Battery", icon: "☀️" },
+  { label: "EV Charging", icon: "🚗" },
+  { label: "Building Envelope", icon: "🏗️" },
+  { label: "Compressed Air", icon: "💨" },
+];
+
 export default function Home() {
   const [message, setMessage] = useState("");
+  const [activeMeasure, setActiveMeasure] = useState<string | null>(null);
   const [, navigate] = useLocation();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -32,24 +44,29 @@ export default function Home() {
     }
   }
 
+  function selectMeasure(label: string) {
+    setActiveMeasure(label);
+    setMessage(`I'm looking to upgrade ${label.toLowerCase()} at my facility. `);
+    textareaRef.current?.focus();
+  }
+
   return (
     <>
       <Helmet>
         <title>Enlighting Energy — Find Your California Energy Incentives</title>
         <meta name="description" content="Discover every utility rebate, state grant, and federal incentive your California commercial facility qualifies for. AI-powered matching, instant PDF report." />
       </Helmet>
-
       <div className="min-h-screen flex flex-col bg-[#1C2B5E]">
         {/* Nav */}
         <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
-        <div className="flex flex-col items-start">
-  <img
-    src="/Enlighting_Logo_Wh.png"
-    alt="Enlighting Energy"
-    className="h-[60px] w-auto"
-  />
-  <span className="text-white font-bold text-sm tracking-wide mt-1">California Energy Incentives</span>
-</div>
+          <div className="flex flex-col items-start">
+            <img
+              src="/Enlighting_Logo_Wh.png"
+              alt="Enlighting Energy"
+              className="h-[60px] w-auto"
+            />
+            <span className="text-white font-bold text-sm tracking-wide mt-1">California Energy Incentives</span>
+          </div>
           <div className="flex items-center gap-6">
             <a href="https://enlightingenergy.com" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white text-sm transition-colors">About Us</a>
           </div>
@@ -61,15 +78,39 @@ export default function Home() {
             <span className="w-2 h-2 rounded-full bg-[#C84EC4] animate-pulse" />
             <span className="text-white text-xs font-semibold uppercase tracking-widest">AI-Powered Incentive Matching</span>
           </div>
-
           <h1 className="text-white font-black text-4xl sm:text-5xl lg:text-6xl leading-tight max-w-3xl mb-4">
             Find every incentive your facility qualifies for.
           </h1>
-          <p className="text-blue-200 text-lg max-w-xl mb-10 leading-relaxed">
+          <p className="text-blue-200 text-lg max-w-xl mb-8 leading-relaxed">
             Describe your facility and what you're upgrading. Our AI matches you to every utility rebate, state grant, and federal program — then generates a full PDF report in under 90 seconds.
           </p>
 
-          <form onSubmit={handleSubmit} className="w-full max-w-2xl">
+          {/* Measure chips */}
+          <div className="w-full max-w-2xl mb-4">
+            <p className="text-blue-200/60 text-xs font-semibold uppercase tracking-widest mb-3">What are you upgrading?</p>
+            <div className="flex flex-wrap gap-2 justify-center mb-3">
+              {MEASURES.map(({ label, icon }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => selectMeasure(label)}
+                  className={`flex items-center gap-1.5 text-sm border rounded-full px-4 py-1.5 transition-colors ${
+                    activeMeasure === label
+                      ? "bg-[#C84EC4]/30 border-[#C84EC4] text-white"
+                      : "border-white/25 text-white hover:border-white/60 hover:bg-white/10"
+                  }`}
+                >
+                  <span>{icon}</span>
+                  <span>{label}</span>
+                </button>
+              ))}
+            </div>
+            <p className="text-blue-300/60 text-sm italic">
+              Many programs can be combined — your report shows exactly which ones stack and how.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="w-full max-w-2xl mt-4">
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/10">
               <textarea
                 ref={textareaRef}
@@ -90,15 +131,6 @@ export default function Home() {
                   </svg>
                 </button>
               </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2 justify-center mt-4">
-              {["Warehouse in Fresno, want LED + HVAC", "Office building in Riverside, 30k sqft", "Cold storage facility in Stockton"].map((ex) => (
-                <button key={ex} type="button" onClick={() => { setMessage(ex); textareaRef.current?.focus(); }}
-                  className="text-xs text-white border border-white/30 hover:border-white/60 hover:text-white rounded-full px-3 py-1 transition-colors">
-                  {ex}
-                </button>
-              ))}
             </div>
           </form>
 
